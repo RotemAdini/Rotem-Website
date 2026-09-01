@@ -137,9 +137,11 @@ function addSeriesListings(){
   if(datesRoot){
     datesRoot.replaceChildren();
     dateSeriesAB.forEach(item=>{
-      const card=document.createElement("a");
-      card.href=`date.html?series=date-a-b&item=${item.id}`; card.className="date-card filter-item";
+      const card=document.createElement("article");
+      card.className="date-card filter-item";
       card.dataset.search=`${item.title} סדרת דייטים א ב`; card.dataset.budget="medium"; card.dataset.place="outside"; card.dataset.duration="medium"; card.dataset.series="date-a-b";
+      const link=document.createElement("a");
+      link.className="card-link"; link.href=`date.html?series=date-a-b&item=${item.id}`; link.setAttribute("aria-label",item.title);
       const imageWrap=document.createElement("div"); imageWrap.className="date-card-image"; imageWrap.append(seriesImage(item,"date-image-placeholder"));
       const tag=document.createElement("span"); tag.className="date-tag"; tag.textContent="סדרה"; imageWrap.append(tag);
       const body=document.createElement("div"); body.className="date-card-body";
@@ -148,7 +150,7 @@ function addSeriesListings(){
       const footer=document.createElement("div"); footer.className="date-card-footer";
       const number=document.createElement("span"); number.textContent=`רעיון #${item.id}`;
       const fav=document.createElement("button"); fav.className="mini-heart"; fav.type="button"; fav.dataset.fav=`date-a-b-${item.id}`; fav.textContent="♡";
-      footer.append(number,fav); body.append(heading,description,footer); card.append(imageWrap,body); datesRoot.append(card);
+      footer.append(number,fav); body.append(heading,description,footer); card.append(link,imageWrap,body); datesRoot.append(card);
     });
   }
 }
@@ -167,7 +169,8 @@ function hydrateSeriesDetail(){
   if(crumb)crumb.textContent=item.title;
   const favorite=isRecipe?$(".recipe-main-image [data-fav]"):$(".date-detail-image [data-fav]");
   if(favorite)favorite.dataset.fav=`${series}-${item.id}`;
-  const galleryImages=item.images||[item.image].filter(Boolean);
+  const galleryImages=[item.image,...(item.images||[])].filter(Boolean)
+    .filter((source,index,all)=>all.indexOf(source)===index);
   if(galleryImages.length>1&&image){
     const gallery=document.createElement("div"); gallery.className="series-gallery";
     galleryImages.forEach((source,index)=>{
@@ -198,14 +201,16 @@ function addSeriesFilters(){
 
 addSeriesListings();
 addSeriesFilters();
-syncFavorites();
 hydrateSeriesDetail();
+syncFavorites();
 
 // The original games and gifts cards are prototype catalog entries; neither has a
 // matching project source folder, so retain their grids but remove the invented rows.
 $("#games-list")?.replaceChildren();
 $("#giftResults")?.replaceChildren();
 if($("#giftCount"))$("#giftCount").textContent="0";
+$(".home-recipes")?.replaceChildren();
+$(".date-list")?.replaceChildren();
 $$('img[src*="images.unsplash.com"]').forEach(image=>{image.removeAttribute("src");image.alt=""});
 
 // Recipes filters
@@ -381,6 +386,9 @@ $$("[data-demo-form='checkout']").forEach(form=>form.addEventListener("submit",(
 // Global search
 const globalResults=$("#globalResults");
 if(globalResults){
+  // Search has no source-backed catalog entries yet. Remove its prototype rows,
+  // while keeping the search controls and their empty-state behavior in place.
+  globalResults.replaceChildren();
   const cards=$$(".global-result-card",globalResults);
   let type="all",term="";
   function applyGlobalSearch(){
@@ -397,4 +405,5 @@ if(globalResults){
     $$("[data-global-type]").forEach(b=>b.classList.remove("active"));btn.classList.add("active");
     type=btn.dataset.globalType;applyGlobalSearch();
   }));
+  applyGlobalSearch();
 }
