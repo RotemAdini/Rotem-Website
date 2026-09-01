@@ -1,0 +1,331 @@
+﻿@scope (.game-content) {
+/* ==========================================================================
+   היער הקסום — Immersive forest scene layer
+   Loaded ONLY by forest-game.html. Extends (never overrides) css/styles.css.
+   Every effect here is transform/opacity only and is neutralized under
+   prefers-reduced-motion (both by the sitewide rule in styles.css and by
+   the dedicated block at the bottom of this file).
+   ========================================================================== */
+
+/* ---------- Scene section shell ---------- */
+.forest-scene {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: #12201a; /* fallback while the photo loads */
+}
+
+.forest-scene__bg-wrap {
+  position: absolute;
+  inset: -4% 0 -4% 0; /* small overscan so parallax never reveals an edge */
+  z-index: 0;
+}
+.forest-scene__bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  will-change: transform;
+}
+/* Hero art is the LCP element: no transition/fade so it paints immediately */
+.forest-hero .forest-scene__bg { object-position: center 30%; }
+.forest-scene[data-scene="path"] .forest-scene__bg { object-position: center 38%; }
+.forest-scene[data-scene="folk"] .forest-scene__bg { object-position: center 32%; }
+.forest-scene[data-scene="purchase"] .forest-scene__bg { object-position: center 42%; }
+.forest-scene[data-scene="finale"] .forest-scene__bg { object-position: center 28%; }
+
+/* Darken + unify photo tone so RTL text and cards stay legible over any
+   underlying image without hiding the art */
+.forest-scene__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(10,16,13,.55) 0%, rgba(10,16,13,.30) 30%, rgba(10,16,13,.42) 70%, rgba(10,16,13,.72) 100%);
+}
+/* Smooth hand-off into the page's normal cream sections above/below */
+.forest-scene::before,
+.forest-scene::after {
+  content: "";
+  position: absolute;
+  right: 0; left: 0;
+  height: min(14vh, 130px);
+  z-index: 2;
+  pointer-events: none;
+}
+.forest-scene::before { top: 0; background: linear-gradient(180deg, var(--bg), transparent); }
+.forest-scene::after { bottom: 0; background: linear-gradient(0deg, var(--bg), transparent); }
+.forest-hero::before { display: none; } /* hero is the very top of the page */
+
+.forest-scene__content {
+  position: relative;
+  z-index: 3;
+}
+
+/* ---------- Fog ---------- */
+.forest-fog {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+.forest-fog span {
+  position: absolute;
+  bottom: -10%;
+  width: 140%;
+  height: 55%;
+  border-radius: 50%;
+  filter: blur(28px);
+  background: radial-gradient(ellipse at center, rgba(235, 240, 235, 0.16), transparent 70%);
+  animation: fogDrift 46s ease-in-out infinite;
+}
+.forest-fog span:nth-child(1) { right: -20%; animation-duration: 52s; }
+.forest-fog span:nth-child(2) { right: 30%; bottom: -18%; opacity: .7; animation-duration: 38s; animation-direction: reverse; }
+.forest-fog span:nth-child(3) { right: -35%; bottom: 4%; height: 40%; opacity: .5; animation-duration: 60s; }
+
+@keyframes fogDrift {
+  0%   { transform: translateX(0); }
+  50%  { transform: translateX(-6%); }
+  100% { transform: translateX(0); }
+}
+
+/* ---------- Fireflies ---------- */
+.forest-fireflies {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+.firefly {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffe9b0 0%, rgba(255,215,120,.6) 55%, transparent 75%);
+  box-shadow: 0 0 8px 2px rgba(255, 210, 120, .55);
+  opacity: 0;
+  animation: fireflyFloat 9s ease-in-out infinite;
+}
+.forest-scene[data-scene="folk"] .firefly { background: radial-gradient(circle, #f3e6b8 0%, rgba(230,200,120,.6) 55%, transparent 75%); }
+.forest-scene[data-scene="finale"] .firefly { box-shadow: 0 0 9px 2px rgba(210, 150, 200, .5); }
+
+@keyframes fireflyFloat {
+  0%   { opacity: 0; transform: translate(0, 0); }
+  15%  { opacity: .9; }
+  50%  { opacity: .55; transform: translate(var(--fx, 18px), var(--fy, -26px)); }
+  85%  { opacity: .85; }
+  100% { opacity: 0; transform: translate(calc(var(--fx, 18px) * -0.4), calc(var(--fy, -26px) * 1.6)); }
+}
+
+/* ---------- Drifting leaves ---------- */
+.forest-leaves {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+.forest-leaves svg {
+  position: absolute;
+  top: -8%;
+  width: 16px;
+  height: 16px;
+  opacity: 0;
+  color: var(--terracotta-light, #e0785a);
+  animation: leafFall 15s linear infinite;
+}
+.forest-leaves svg:nth-child(odd) { color: var(--gold, #b07c2c); }
+
+@keyframes leafFall {
+  0%   { opacity: 0; transform: translate(0, 0) rotate(0deg); }
+  8%   { opacity: .8; }
+  92%  { opacity: .7; }
+  100% { opacity: 0; transform: translate(var(--lx, -40px), 128vh) rotate(var(--lr, 220deg)); }
+}
+
+/* ---------- Guide character (שדוניה) ---------- */
+.forest-guide {
+  position: absolute;
+  z-index: 3;
+  bottom: 0;
+  height: min(78%, 560px);
+  width: auto;
+  pointer-events: none;
+  filter: drop-shadow(0 18px 30px rgba(0,0,0,.45));
+  animation: guideBreathe 6s ease-in-out infinite;
+  will-change: transform;
+}
+[dir="rtl"] .forest-guide { left: 4%; }
+.forest-guide__glow {
+  position: absolute;
+  z-index: 3;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,246,214,.85), rgba(255,230,150,.25) 45%, transparent 72%);
+  filter: blur(2px);
+  animation: guideGlowPulse 3.6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes guideBreathe {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-7px) rotate(-0.6deg); }
+}
+@keyframes guideGlowPulse {
+  0%, 100% { opacity: .55; transform: scale(1); }
+  50%      { opacity: .95; transform: scale(1.15); }
+}
+
+/* ---------- Hero-specific text treatment ---------- */
+.forest-hero { padding: var(--space-6) 0 var(--space-7); min-height: min(92vh, 820px); display: flex; align-items: center; }
+.forest-hero .forest-scene__content { width: 100%; }
+
+/* Reusable frosted-glass text panel — a lantern-lit clearing where the
+   copy sits, used by the hero and any other forest-scene section. */
+.forest-panel {
+  max-width: 620px;
+  margin-inline: auto;
+  text-align: center;
+  background: rgba(15, 22, 18, .38);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.5rem, 4vw, 2.75rem);
+}
+.forest-panel h1, .forest-panel h2, .forest-panel h3 { color: #fff; text-shadow: 0 3px 16px rgba(0,0,0,.5); }
+.forest-panel h1 em { color: #eab766; font-style: normal; }
+.forest-panel p { color: rgba(255,255,255,.88); }
+
+/* Hero: panel hugs the right edge (RTL start), leaving the left clear for
+   the guide character. Physical margins on purpose — not logical ones. */
+.forest-hero .forest-panel { margin-right: 0; margin-left: auto; text-align: right; max-width: 620px; }
+.forest-hero .hero-kicker { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.3); color: #fdf6ea; backdrop-filter: blur(3px); }
+.forest-hero .hero-kicker svg { color: var(--gold, #d8a94a); }
+.forest-hero .hero-trust { color: rgba(255,255,255,.82); }
+.forest-hero .hero-trust svg { color: #9fd9ad; }
+
+@media (max-width: 720px) {
+  /* Stack, don't overlap: the panel reads top-to-bottom first (kicker →
+     h1 → CTA), the guide stays a smaller figure anchored at the very
+     bottom of the section instead of centered behind the buttons. */
+  .forest-hero { min-height: min(88vh, 700px); align-items: flex-start; padding-top: var(--space-5); padding-bottom: min(34vh, 240px); }
+  .forest-hero .forest-panel {
+    margin-inline: auto;
+    text-align: center;
+    background: rgba(10, 16, 13, .62); /* stronger than desktop: guaranteed CTA contrast on narrow screens */
+  }
+  .forest-hero .hero-actions,
+  .forest-hero .hero-trust { justify-content: center !important; }
+  .forest-guide { height: min(30vh, 220px); opacity: .92; }
+}
+
+/* ---------- Intro / path section ---------- */
+.forest-scene[data-scene="path"] .forest-panel { max-width: var(--container-narrow); }
+
+/* ---------- Characters / medallions section ---------- */
+.forest-scene[data-scene="folk"] .section-head .eyebrow { background: rgba(255,255,255,.14); color: #fdf6ea; border: 1px solid rgba(255,255,255,.3); }
+.forest-scene[data-scene="folk"] .section-head .section-title { color: #fff; text-shadow: 0 3px 16px rgba(0,0,0,.5); }
+.forest-scene[data-scene="folk"] .section-head .section-lede { color: rgba(255,255,255,.85); }
+
+.forest-folk-grid {
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 2.5rem) 1.25rem;
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 780px;
+  margin: 0 auto;
+}
+@media (min-width: 640px) { .forest-folk-grid { grid-template-columns: repeat(4, 1fr); } }
+
+.forest-folk-item { text-align: center; }
+.character-medallion {
+  position: relative;
+  width: clamp(96px, 20vw, 148px);
+  aspect-ratio: 1;
+  margin: 0 auto 0.4rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #1a2a20;
+  box-shadow:
+    0 0 0 4px rgba(255,255,255,.14),
+    0 14px 28px rgba(0,0,0,.5),
+    0 0 44px 8px var(--medallion-glow, rgba(224,180,110,.4));
+  animation: medallionBob 5.2s ease-in-out infinite;
+}
+.forest-folk-item:nth-child(2) .character-medallion { animation-delay: .3s; }
+.forest-folk-item:nth-child(3) .character-medallion { animation-delay: .6s; }
+.forest-folk-item:nth-child(4) .character-medallion { animation-delay: .9s; }
+
+.character-medallion img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(var(--medallion-zoom, 1.5));
+  object-position: var(--medallion-pos, center 30%);
+}
+.character-medallion--mystery {
+  --medallion-glow: rgba(150, 40, 40, .38);
+  filter: saturate(.82) brightness(.92);
+}
+.character-branch {
+  width: 46px;
+  height: 14px;
+  margin: -6px auto 0;
+  opacity: .8;
+  color: #2b1c12;
+}
+.forest-folk-item h3 { color: #fff; font-size: 1rem; text-shadow: 0 2px 10px rgba(0,0,0,.6); margin-bottom: .25rem; }
+.forest-folk-item p { color: rgba(255,255,255,.8); font-size: .86rem; line-height: 1.5; }
+
+@keyframes medallionBob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-6px) rotate(1deg); }
+}
+
+/* ---------- Purchase backdrop ---------- */
+.forest-scene[data-scene="purchase"] .section-head .eyebrow { background: rgba(255,255,255,.14); color: #fdf6ea; border: 1px solid rgba(255,255,255,.3); }
+.forest-scene[data-scene="purchase"] .section-head .section-title { color: #fff; text-shadow: 0 3px 16px rgba(0,0,0,.5); }
+/* The purchase panel itself stays the exact opaque card from styles.css —
+   only extra ambient depth behind it, never on top of the form. */
+.forest-scene[data-scene="purchase"] .purchase-panel { box-shadow: 0 24px 60px rgba(0,0,0,.5); }
+.forest-scene[data-scene="purchase"] .bundle-nudge { background: rgba(255,255,255,.94); }
+
+/* ---------- Final CTA backdrop ---------- */
+.forest-scene[data-scene="finale"] { padding: var(--space-6) 0; }
+.forest-scene[data-scene="finale"] .final-cta {
+  background: rgba(35, 15, 25, .58);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.14);
+}
+.forest-scene[data-scene="finale"] .final-cta::before { display: none; }
+
+/* ---------- Pause ambient loops while the scene is off-screen ---------- */
+.forest-scene:not(.is-active) .forest-fog span,
+.forest-scene:not(.is-active) .firefly,
+.forest-scene:not(.is-active) .forest-leaves svg,
+.forest-scene:not(.is-active) .forest-guide,
+.forest-scene:not(.is-active) .forest-guide__glow,
+.forest-scene:not(.is-active) .character-medallion {
+  animation-play-state: paused;
+}
+
+/* ---------- Reduced motion: freeze at rest, hide pure decoration ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .forest-fog, .forest-fireflies, .forest-leaves { display: none; }
+  .forest-guide, .forest-guide__glow, .character-medallion {
+    animation: none !important;
+    transform: none !important;
+  }
+  .forest-scene__bg { transform: none !important; }
+}
+
+/* Respect data-saver / small screens: fewer particles rendered at all */
+@media (max-width: 480px) {
+  .forest-leaves svg:nth-child(n+5) { display: none; }
+  .firefly:nth-child(n+7) { display: none; }
+}
+
+}

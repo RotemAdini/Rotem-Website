@@ -1,0 +1,391 @@
+﻿<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>משחק הזיכרון הגדול — משחק זוגי דיגיטלי | רותם עדיני</title>
+<meta name="description" content="משחק הזיכרון הגדול: 40 שאלות שמחזירות אתכם לרגעים ולזיכרונות שכמעט שכחתם, עם ניקוד ותחרות קלילה. ₪48.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%237A2048' d='M12 20s-7.5-4.6-10-9.3C.4 7.4 2 4 5.4 4c2 0 3.4 1.1 4.1 2.2.2.3.6.3.8 0C11.2 5.1 12.6 4 14.6 4 18 4 19.6 7.4 22 10.7 19.5 15.4 12 20 12 20Z'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;600;700&family=Assistant:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/memory-scene.css">
+<link rel="stylesheet" href="css/site-integration.css">
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="css/game-fidelity.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner container">
+    <a href="../index.html" class="brand" aria-label="רותם עדיני - דף הבית"><span class="brand-heart">♡</span><span class="brand-name">רותם עדיני</span></a>
+    <nav class="main-nav" id="mainNav" aria-label="ניווט ראשי">
+      <a href="../index.html">בית</a><a href="../recipes.html">מתכונים</a><a href="../dates.html">דייטים</a><a class="active" href="../games.html">משחקים</a><a href="../gifts.html">מתנות</a><a href="../contact.html">צור קשר</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn account-link" href="../search.html" aria-label="חיפוש באתר" title="חיפוש">⌕</a><a class="icon-btn account-link" href="../favorites.html" aria-label="מועדפים" title="מועדפים">♡</a><a class="icon-btn account-link" href="../account.html" aria-label="חשבון משתמש" title="חשבון משתמש">♙</a>
+      <a class="guest-pill" href="../account.html"><span>שלום, אורחת</span><strong>להתחברות</strong></a><button class="menu-btn" id="menuBtn" aria-label="פתיחת תפריט">☰</button>
+    </div>
+  </div>
+</header>
+<a class="skip-link" href="#main">דלגו לתוכן הראשי</a>
+
+<header class="legacy-game-header site-header">
+  <div class="container nav-row">
+    <a href="../index.html" class="brand">
+      <span class="brand-mark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 20s-7.5-4.6-10-9.3C.4 7.4 2 4 5.4 4c2 0 3.4 1.1 4.1 2.2.2.3.6.3.8 0C11.2 5.1 12.6 4 14.6 4 18 4 19.6 7.4 22 10.7 19.5 15.4 12 20 12 20Z"/></svg></span>
+      <span>משחקי זוגיות<small>רותם עדיני</small></span>
+    </a>
+    <nav class="nav-links" aria-label="ניווט ראשי">
+      <a href="../games.html">המשחקים</a>
+      <a href="bundle.html">החבילה</a>
+      <a href="../games.html#how-it-works">איך זה עובד</a>
+      <a href="#faq">שאלות נפוצות</a>
+      <a href="../contact.html">צור קשר</a>
+    </nav>
+    <a href="bundle.html" class="btn btn-primary nav-cta">לחבילה ב-₪110</a>
+    <button class="nav-toggle" data-nav-toggle type="button" aria-label="פתיחת תפריט" aria-expanded="false" aria-controls="nav-drawer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+<div class="legacy-game-nav nav-scrim" data-nav-scrim></div>
+<aside class="legacy-game-nav nav-drawer" id="nav-drawer" data-nav-drawer aria-label="תפריט ניווט">
+  <button class="nav-drawer-close" data-nav-close type="button" aria-label="סגירת תפריט">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <nav aria-label="ניווט בנייד">
+    <a href="../index.html">בית</a>
+    <a href="forest-game.html">היער הקסום</a>
+    <a href="race-game.html">מירוץ האהבה</a>
+    <a href="memory-game.html" aria-current="page">משחק הזיכרון הגדול</a>
+    <a href="bundle.html">החבילה המלאה</a>
+    <a href="../contact.html">צור קשר</a>
+  </nav>
+  <a href="bundle.html" class="btn btn-primary btn-block">לחבילה ב-₪110</a>
+</aside>
+
+<main id="main" class="game-content">
+
+  <div class="game-site-trail"><div class="container"><a href="../games.html">משחקים לזוג</a><span> / משחק הזיכרון הגדול</span></div></div>
+
+  <section class="mg-scene mg-hero">
+    <div class="container mg-hero-grid">
+      <div class="reveal">
+        <span class="hero-kicker">משחק 3 מתוך 3 · ₪48</span>
+        <h1 style="font-size:clamp(2rem,5.5vw,3.1rem);margin-top:0.9rem;">משחק הזיכרון הגדול</h1>
+        <p class="hero-sub" style="margin-inline-start:0;text-align:right;">המשחק שיזכיר לכם את הזיכרונות שכבר שכחתם. 40 שאלות, ניקוד, ותחרות קלילה שמחזירה את התחושה מהדייטים הראשונים.</p>
+        <div class="hero-actions" style="justify-content:flex-start;">
+          <a href="#purchase" class="btn btn-primary btn-lg" data-sticky-trigger>לרכישה — ₪48</a>
+          <a href="#faq" class="btn btn-outline btn-lg">שאלות נפוצות</a>
+        </div>
+        <ul class="hero-trust" style="justify-content:flex-start;">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 7"/></svg> גישה מיידית במייל</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 7"/></svg> גישה לכל החיים</li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <div class="mg-board" data-mg-board>
+          <div class="mg-hud">
+            <div class="mg-hud-stat">
+              <span class="mg-hud-label">התאמות</span>
+              <span class="mg-hud-value" data-mg-matches>0/4</span>
+            </div>
+            <svg class="mg-ring" viewBox="0 0 46 46" aria-hidden="true">
+              <circle class="mg-ring-track" cx="23" cy="23" r="19"></circle>
+              <circle class="mg-ring-fill" cx="23" cy="23" r="19"></circle>
+            </svg>
+            <div class="mg-hud-stat mg-hud-streak" data-mg-streak-wrap>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c1.2 2.8-2.6 4.3-2.6 7.6a2.6 2.6 0 0 0 5.2 0c0-.8-.3-1.5-.8-2.1.4 1.7 0 2.9-1 3.7a3 3 0 0 1-2.5-3C10.3 6.6 12.3 5.6 12 3Z"/></svg>
+              <span class="mg-hud-label">רצף</span>
+              <span class="mg-hud-value" data-mg-streak>0</span>
+            </div>
+          </div>
+          <div class="mg-particles" data-mg-particles aria-hidden="true"></div>
+          <div class="mg-grid" data-mg-grid>
+            <button type="button" class="mg-card" aria-label="קלף זיכרון להתאמה" aria-pressed="false"><span class="mg-card-inner"><span class="mg-card-face mg-card-back" aria-hidden="true"></span><span class="mg-card-face mg-card-front" aria-hidden="true"></span></span></button>
+            <button type="button" class="mg-card" aria-label="קלף זיכרון להתאמה" aria-pressed="false"><span class="mg-card-inner"><span class="mg-card-face mg-card-back" aria-hidden="true"></span><span class="mg-card-face mg-card-front" aria-hidden="true"></span></span></button>
+            <button type="button" class="mg-card" aria-label="קלף זיכרון להתאמה" aria-pressed="false"><span class="mg-card-inner"><span class="mg-card-face mg-card-back" aria-hidden="true"></span><span class="mg-card-face mg-card-front" aria-hidden="true"></span></span></button>
+            <button type="button" class="mg-card" aria-label="קלף זיכרון להתאמה" aria-pressed="false"><span class="mg-card-inner"><span class="mg-card-face mg-card-back" aria-hidden="true"></span><span class="mg-card-face mg-card-front" aria-hidden="true"></span></span></button>
+            <button type="button" class="mg-card" aria-label="קלף זיכרון להתאמה" aria-pressed="false"><span class="mg-card-inner"><span class="mg-card-face mg-card-back" aria-hidden="true"></span><span class="mg-card-face mg-card-front" aria-hidden="true"></span></span></button>
+            <button type="button" class="mg-card" aria-label="קלף זיכרון להתאמה" aria-pressed="false"><span class="mg-card-inner"><span class="mg-card-face mg-card-back" aria-hidden="true"></span><span class="mg-card-face mg-card-front" aria-hidden="true"></span></span></button>
+            <button type="button" class="mg-card" aria-label="קלף זיכרון להתאמה" aria-pressed="false"><span class="mg-card-inner"><span class="mg-card-face mg-card-back" aria-hidden="true"></span><span class="mg-card-face mg-card-front" aria-hidden="true"></span></span></button>
+            <button type="button" class="mg-card" aria-label="קלף זיכרון להתאמה" aria-pressed="false"><span class="mg-card-inner"><span class="mg-card-face mg-card-back" aria-hidden="true"></span><span class="mg-card-face mg-card-front" aria-hidden="true"></span></span></button>
+          </div>
+          <div class="mg-success" data-mg-success role="status">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 7"/></svg>
+            מצאתם את כל הזוגות! מתחילים סיבוב חדש
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mg-scene mg-scene-alt section-tight">
+    <div class="container container--narrow reveal text-center">
+      <span class="mg-level-badge">שלב 1</span>
+      <h2 class="section-title">נמאס לכם מערבים של "כל אחד בפלאפון שלו"?</h2>
+      <p style="color:var(--ink-soft);margin-bottom:0.9rem;">ברור שיש אהבה — אבל משהו בשגרה שוחק את הקסם. השיחות הפכו קצרות וצפויות, יושבים באותו סלון אבל כל אחד שקוע במסך. איפה הקרבה, ההתרגשות, הרגעים הקטנים של פעם?</p>
+      <p style="color:var(--wine-dark);font-weight:700;">אתם לא לבד — זה קורה לרוב הזוגות. ויש דרך פשוטה להדליק שוב את החיבור.</p>
+    </div>
+  </section>
+
+  <section class="mg-scene">
+    <div class="container container--narrow reveal">
+      <div class="section-head">
+        <span class="mg-level-badge">שלב 2</span><br>
+        <span class="eyebrow">הפתרון</span>
+        <h2 class="section-title">שעה אחת שמחזירה הכל</h2>
+      </div>
+      <ul class="list-check">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 7"/></svg> <strong>שאלות מותאמות אישית</strong> — לא "מה המאכל האהוב עליי", אלא מה שבאמת חשוב</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 7"/></svg> <strong>משחק עם ניקוד ואתגר</strong> — תחרות קלילה שמכניסה עניין וצחוקים</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 7"/></svg> <strong>משימות חושניות במינון עדין</strong> — כי לפעמים צריך גם לגעת, לא רק לדבר</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 7"/></svg> <strong>שעה שלמה של נוכחות אמיתית</strong> — בלי הסחות מסביב</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="mg-scene mg-scene-alt">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="mg-level-badge">שלב 3</span><br>
+        <span class="eyebrow">איך זה עובד בפועל</span>
+        <h2 class="section-title">חמישה צעדים לערב מושלם</h2>
+      </div>
+      <div class="steps reveal-group">
+        <div class="step-card"><div class="step-num">1</div><h3>בוחרים שמות וסמיילי</h3><p>פתיחה קלילה ומצחיקה שמכניסה לאווירה.</p></div>
+        <div class="step-card"><div class="step-num">2</div><h3>קובעים פרס למנצח/ת</h3><p>נשיקה, עיסוי, או מה שתרצו — פתאום זה נהיה מעניין.</p></div>
+        <div class="step-card"><div class="step-num">3</div><h3>עונים על שאלות בקול</h3><p>הראשון/ה שעונה נכון זוכה בנקודה.</p></div>
+        <div class="step-card"><div class="step-num">4</div><h3>צוברים נקודות</h3><p>המשחק סופר אוטומטית ומציג מי מוביל/ה.</p></div>
+      </div>
+      <p class="text-center reveal" style="color:var(--ink-soft);margin-top:1.5rem;max-width:560px;margin-inline:auto;">כל 3 פסילות = משימה חושנית קטנה (אפשר גם לדלג אם לא בא לכם) 🔥</p>
+    </div>
+  </section>
+
+  <section class="mg-scene">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="mg-level-badge">שלב 4</span><br>
+        <span class="eyebrow">דוגמאות מתוך ה-40</span>
+        <h2 class="section-title">איך נראות השאלות?</h2>
+        <p class="section-lede" style="margin-inline:auto;">הקליקו על קלף כדי לחשוף שאלה אמיתית מתוך המשחק.</p>
+      </div>
+      <div class="mg-reveal-grid reveal-group">
+        <button type="button" class="mg-reveal-card" data-mg-reveal aria-pressed="false">
+          <span class="mg-card-inner">
+            <span class="mg-card-face mg-card-back">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"/></svg>
+              <span>זיכרונות קלאסיים</span>
+            </span>
+            <span class="mg-card-face mg-card-front">
+              <p>"איפה היה הדייט הראשון שלכם?"</p>
+            </span>
+          </span>
+        </button>
+        <button type="button" class="mg-reveal-card" data-mg-reveal aria-pressed="false">
+          <span class="mg-card-inner">
+            <span class="mg-card-face mg-card-back">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg>
+              <span>הרגעים של עכשיו</span>
+            </span>
+            <span class="mg-card-face mg-card-front">
+              <p>"מה הייתה ההודעה האחרונה ששלחתם אחד לשני?"</p>
+            </span>
+          </span>
+        </button>
+        <button type="button" class="mg-reveal-card" data-mg-reveal aria-pressed="false">
+          <span class="mg-card-inner">
+            <span class="mg-card-face mg-card-back">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7.5-4.6-10-9.3C.4 7.4 2 4 5.4 4c2 0 3.4 1.1 4.1 2.2.2.3.6.3.8 0C11.2 5.1 12.6 4 14.6 4 18 4 19.6 7.4 22 10.7 19.5 15.4 12 20 12 20Z"/></svg>
+              <span>אירועים זוגיים</span>
+            </span>
+            <span class="mg-card-face mg-card-front">
+              <p>"מתי ואיפה חגגתם בפעם הראשונה יום הולדת יחד?"</p>
+            </span>
+          </span>
+        </button>
+      </div>
+      <p class="text-center reveal" style="margin-top:1.5rem;">ועוד 37 שאלות מחייכות, נוסטלגיות ומפתיעות — כאלה שיגרמו לכם להגיד "וואו, אתה זוכר את זה?!"</p>
+    </div>
+  </section>
+
+  <section id="purchase" class="mg-scene mg-scene-alt">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">מוכנים לערב שיחזיר לכם את החיבור?</span>
+        <h2 class="section-title">הרשמה מהירה, גישה מיידית</h2>
+      </div>
+      <div class="purchase-panel reveal">
+        <div class="purchase-price-row">
+          <span class="purchase-price">₪48</span>
+          <span class="purchase-price-note">תשלום חד־פעמי · גישה לכל החיים</span>
+        </div>
+        <div class="form-status" data-form-status></div>
+        <form action="https://panel.sendmsg.co.il/AddUserFromSite.aspx" method="post" target="_blank" data-lead-form data-track-form="memory-game" data-track-checkout data-track-value="48">
+          <div class="form-field">
+            <label for="mg-name">שם מלא</label>
+            <input id="mg-name" type="text" name="1" required>
+          </div>
+          <div class="form-field">
+            <label for="mg-email">כתובת מייל</label>
+            <input id="mg-email" type="email" name="eMail" required>
+          </div>
+          <label class="form-check">
+            <input type="checkbox" name="confirm" value="1" required>
+            <span>אני מאשר/ת לקבל דיוור מרותם עדיני</span>
+          </label>
+          <input type="hidden" name="form" value="340969__642d66b1-5bdf-4f21-afe0-8b99a09aa529">
+          <button type="submit" class="btn btn-primary btn-lg btn-block">התחילו את הערב המיוחד</button>
+        </form>
+        <ul class="form-note">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> המידע שלכם מאובטח</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg> תמיכה אישית במייל</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg> משלוח מיידי</li>
+        </ul>
+      </div>
+      <div class="bundle-nudge reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="9" width="16" height="11" rx="1.5"/><path d="M4 9h16v3H4z"/><path d="M12 9v11"/><path d="M12 9c-1.5-3.5-6-3.5-6-1 0 1.3 1.3 1 3 1M12 9c1.5-3.5 6-3.5 6-1 0 1.3-1.3 1-3 1"/></svg>
+        <p>רוצים גם את היער הקסום ואת מירוץ האהבה? <a href="bundle.html">קחו את שלושתם בחבילה ב-₪110</a> וחסכו ₪34.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mg-scene">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">כל מה שצריך לדעת</span>
+        <h2 class="section-title">פרטים טכניים לפני שמתחילים</h2>
+      </div>
+      <ul class="list-check reveal-group">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 7"/></svg> <strong>משך המשחק:</strong> כשעה, תלוי בקצב שלכם</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 7"/></svg> <strong>מתאים לכל מכשיר:</strong> טלפון, טאבלט, מחשב וטלוויזיה</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 7"/></svg> <strong>אין צורך להוריד כלום</strong> — משחק דיגיטלי דרך קישור במייל</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 7"/></svg> <strong>אין צורך להדפיס</strong> — כל האינטראקציה אונליין</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 7"/></svg> <strong>ניקוד אוטומטי:</strong> המשחק סופר את הנקודות ומציג מי מוביל בזמן אמת</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="mg-scene mg-scene-alt section-tight">
+    <div class="container container--narrow reveal">
+      <span class="eyebrow">קצת עליי</span>
+      <h2 class="section-title" style="margin-top:0.9rem;">מי אני ולמה יצרתי את המשחק</h2>
+      <p style="color:var(--ink-soft);margin-bottom:1rem;">אני רותם עדיני, בזוגיות כבר כמה שנים. לפני כשנה הרגשתי שהשגרה משתלטת — כל ערב נראה אותו דבר: סרט, טלפון, שיחה פה ושם, אבל לא באמת "יחד".</p>
+      <p style="color:var(--ink-soft);margin-bottom:1rem;">אז יצרנו לנו מסורת: דייט שבועי מושקע. שבוע אני מארגנת, שבוע הוא — כל אחד אחראי להזמנה ולאווירה, והכי חשוב: בלי מסכים ובלי הסחות.</p>
+      <p style="color:var(--ink-soft);">במהלך אחד הדייטים ניסינו להיזכר מה היה הסרט הראשון שראינו יחד — ואף אחד מאיתנו לא זכר. אחר כך הגיעו עוד רגעים כאלה, שאלות פשוטות שלא ידענו לענות עליהן. אז החלטתי לבנות את המשחק הזה.</p>
+      <p class="trust-signature">רותם 💜</p>
+    </div>
+  </section>
+
+  <section id="faq" class="mg-scene">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">שאלות נפוצות</span>
+        <h2 class="section-title">לפני שמתחילים</h2>
+      </div>
+      <div class="faq-list reveal-group">
+        <details class="faq-item">
+          <summary>איך מקבלים את המשחק?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <p>אחרי ההרשמה תקבלו מייל עם קישור לגישה מיידית למשחק — אין צורך להוריד או להדפיס דבר.</p>
+        </details>
+        <details class="faq-item">
+          <summary>לכמה זמן יש גישה?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <p>הגישה היא לכל החיים — תוכלו לחזור למשחק בכל פעם שתרצו.</p>
+        </details>
+        <details class="faq-item">
+          <summary>יש תוכן אינטימי במשחק?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <p>יש משימות חושניות קטנות בעוצמה עדינה שמופיעות בהתאם למהלך המשחק, ותמיד אפשר לדלג עליהן.</p>
+        </details>
+        <details class="faq-item">
+          <summary>מה מדיניות הביטולים וההחזרות?
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </summary>
+          <p>בהתאם לחוק הגנת הצרכן הישראלי, מוצר דיגיטלי המסופק מיידית ואוטומטית אינו ניתן לביטול או להחזר לאחר הרכישה. לפרטים נוספים, <a href="../contact.html" style="color:var(--terracotta-dark);font-weight:700;">צרו קשר</a>.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="mg-scene mg-scene-alt">
+    <div class="container">
+      <div class="final-cta reveal">
+        <h2>מוכנים לערב שיחזיר לכם את החיבור?</h2>
+        <p>40 שאלות, שעה אחת, וזיכרונות שכמעט שכחתם.</p>
+        <div class="final-cta-actions">
+          <a href="#purchase" class="btn btn-primary btn-lg">לרכישה — ₪48</a>
+          <a href="bundle.html" class="btn btn-ghost btn-lg">או לחבילה המלאה ב-₪110</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="sticky-buy" data-sticky-buy>
+  <span class="sticky-buy-price">₪48<small>הזיכרון הגדול · <a href="bundle.html" style="color:inherit;text-decoration:underline;">או החבילה ב-₪110</a></small></span>
+  <a href="#purchase" class="btn btn-primary">לרכישה</a>
+</div>
+
+<footer class="legacy-game-footer site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <span class="brand-mark"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 20s-7.5-4.6-10-9.3C.4 7.4 2 4 5.4 4c2 0 3.4 1.1 4.1 2.2.2.3.6.3.8 0C11.2 5.1 12.6 4 14.6 4 18 4 19.6 7.4 22 10.7 19.5 15.4 12 20 12 20Z"/></svg></span>
+          משחקי זוגיות
+        </div>
+        <p class="footer-p">משחקים זוגיים דיגיטליים שיצרה רותם עדיני — להחזיר צחוק, קרבה ושיחות אמיתיות לכל זוגיות, ישר מהסלון.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/rotem_adini?igsh=MTFrd3VlOXdqdDVubQ%3D%3D&utm_source=qr" target="_blank" rel="noopener" aria-label="אינסטגרם"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17" cy="7" r="1"/></svg></a>
+          <a href="https://www.facebook.com/share/16WJDMpdpV/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="פייסבוק"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 21v-7h2.5l.5-3H14V9c0-.9.3-1.5 1.7-1.5H17V4.8c-.3 0-1.3-.1-2.4-.1-2.4 0-4.1 1.5-4.1 4.2V11H8v3h2.5v7h3.5Z"/></svg></a>
+          <a href="https://www.tiktok.com/@rotem_adini?_t=ZS-8xCVScFHbYF&_r=1" target="_blank" rel="noopener" aria-label="טיקטוק"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.2a3.3 3.3 0 1 1-3-3.28"/><path d="M14 4c.4 2.2 2 3.8 4.2 4.1"/></svg></a>
+          <a href="https://www.youtube.com/@rotemadini" target="_blank" rel="noopener" aria-label="יוטיוב"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="3" y="6.5" width="18" height="11" rx="3.5"/><path d="M10.5 9.5l5 2.5-5 2.5v-5Z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>המשחקים</h4>
+        <ul>
+          <li><a href="forest-game.html">היער הקסום</a></li>
+          <li><a href="race-game.html">מירוץ האהבה</a></li>
+          <li><a href="memory-game.html">משחק הזיכרון הגדול</a></li>
+          <li><a href="bundle.html">החבילה המלאה</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>מידע</h4>
+        <ul>
+          <li><a href="../contact.html">צור קשר</a></li>
+          <li><a href="../contact.html">מדיניות פרטיות</a></li>
+          <li><a href="../contact.html">תקנון ותנאי שימוש</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 רותם עדיני — משחקי זוגיות. כל הזכויות שמורות.</span>
+      <span>rotemadini@gmail.com</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/memory-scene.js"></script>
+<footer class="site-footer current-site-footer" id="contact-footer">
+  <div class="footer-inner container">
+    <div class="footer-brand"><div class="brand footer-logo"><span class="brand-heart">♡</span><span class="brand-name">רותם עדיני</span></div><p>מתכונים, דייטים, משחקים ורעיונות שעושים קצת יותר כיף ביומיום.</p></div>
+    <div class="footer-col"><h3>ניווט מהיר</h3><a href="../index.html">דף הבית</a><a href="../recipes.html">כל המתכונים</a><a href="../dates.html">רעיונות לדייטים</a><a href="../games.html">משחקים לזוג</a><a href="../gifts.html">מתנות</a></div>
+    <div class="footer-col"><h3>עוד באתר</h3><a href="../about.html">קצת עליי</a><a href="../account.html">החשבון שלי</a></div>
+    <div class="footer-col"><h3>בואו נדבר</h3><a href="../contact.html">צור קשר</a><a href="mailto:hello@rotemadini.com">hello@rotemadini.com ✉</a><span>ישראל ♡</span></div>
+  </div>
+  <div class="copyright">© 2026 רותם עדיני. כל הזכויות שמורות.</div>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="../script.js"></script>
+</body>
+</html>

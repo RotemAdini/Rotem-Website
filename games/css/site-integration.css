@@ -1,0 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&display=swap");
+
+/* Current-site bridge: loaded after the game design system so the game worlds
+   keep their visual identity while their shared shell matches Rotem-Website. */
+:root {
+  --site-pink: #df6d79;
+  --site-pink-dark: #c95060;
+}
+
+body { font-family: "Heebo", "Assistant", Arial, sans-serif; }
+.site-header {
+  background: rgba(255, 252, 249, .94);
+  border-bottom-color: #f0e0da;
+  box-shadow: 0 4px 18px rgba(94, 58, 50, .05);
+}
+.site-header .brand { color: #7f444b; }
+.site-header .brand-mark { color: var(--site-pink); }
+.site-header .nav-links a:hover,
+.site-header .nav-links a[aria-current="page"] { color: var(--site-pink-dark); }
+.site-header .btn-primary,
+.sticky-buy .btn-primary { background: linear-gradient(135deg, #e47781, #da5e6c); }
+.site-footer { border-top-color: #f0e0da; }
+.legacy-game-header,
+.legacy-game-footer,
+.legacy-game-nav { display: none !important; }
+
+/* A lightweight, clearly visible route back into the parent site. */
+.game-site-trail {
+  background: #fff8f4;
+  border-bottom: 1px solid #f0e0da;
+  color: #7b706b;
+  font-size: .9rem;
+}
+.game-site-trail .container { padding-block: .6rem; }
+.game-site-trail a { color: var(--site-pink-dark); font-weight: 700; }
+
+@media (max-width: 700px) {
+  .site-header { position: sticky; }
+  .game-site-trail .container { padding-inline: 1.1rem; }
+}

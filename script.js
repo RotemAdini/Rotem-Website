@@ -184,6 +184,39 @@ function hydrateSeriesDetail(){
   document.title=`${item.title} | רותם עדיני`;
 }
 
+// The homepage "latest recipes" / "date ideas" panels used to show hardcoded
+// demo cards. They now preview real, source-backed series items instead of
+// sitting empty — reusing the same data and detail pages as the rest of the site.
+function addHomeHighlights(){
+  const homeRecipes=$(".home-recipes");
+  if(homeRecipes){
+    homeRecipes.replaceChildren();
+    biscuitCakeSeries.filter(item=>item.image).slice(0,5).forEach(item=>{
+      const card=document.createElement("a");
+      card.className="recipe-card"; card.href=`recipe.html?series=biscuit-cake&item=${item.id}`;
+      const fav=document.createElement("button");
+      fav.className="fav-btn"; fav.type="button"; fav.dataset.fav=`biscuit-cake-${item.id}`; fav.setAttribute("aria-label","הוספה למועדפים"); fav.textContent="♡";
+      const body=document.createElement("div"); body.className="recipe-body";
+      const heading=document.createElement("h3"); heading.textContent=item.title;
+      const meta=document.createElement("div"); meta.className="recipe-meta"; meta.innerHTML=`<span>סדרה #${item.id}</span><span>עוגות</span>`;
+      body.append(heading,meta); card.append(fav,seriesImage(item,"recipe-image-placeholder"),body); homeRecipes.append(card);
+    });
+  }
+  const dateList=$(".date-list");
+  if(dateList){
+    dateList.replaceChildren();
+    dateSeriesAB.filter(item=>item.image).slice(0,3).forEach(item=>{
+      const card=document.createElement("a");
+      card.className="date-item"; card.href=`date.html?series=date-a-b&item=${item.id}`;
+      const body=document.createElement("div");
+      const heading=document.createElement("h3"); heading.textContent=item.title;
+      const desc=document.createElement("p"); desc.textContent="מסדרת הדייטים א׳-ב׳";
+      const heart=document.createElement("span"); heart.textContent="♡";
+      body.append(heading,desc,heart); card.append(seriesImage(item,"date-image-placeholder"),body); dateList.append(card);
+    });
+  }
+}
+
 function addSeriesFilters(){
   const recipeFilters=$("#recipeResults")?.closest(".filter-layout")?.querySelector("aside");
   if(recipeFilters){
@@ -201,16 +234,14 @@ function addSeriesFilters(){
 
 addSeriesListings();
 addSeriesFilters();
+addHomeHighlights();
 hydrateSeriesDetail();
 syncFavorites();
 
-// The original games and gifts cards are prototype catalog entries; neither has a
-// matching project source folder, so retain their grids but remove the invented rows.
-$("#games-list")?.replaceChildren();
+// The games catalog is source-backed: its cards link directly to the migrated
+// product landing pages in /games. Gift prototypes remain intentionally hidden.
 $("#giftResults")?.replaceChildren();
 if($("#giftCount"))$("#giftCount").textContent="0";
-$(".home-recipes")?.replaceChildren();
-$(".date-list")?.replaceChildren();
 $$('img[src*="images.unsplash.com"]').forEach(image=>{image.removeAttribute("src");image.alt=""});
 
 // Recipes filters
@@ -294,6 +325,7 @@ if(dateResults){
   $("#dateDuration")?.addEventListener("change",e=>{state.duration=e.target.value;apply()});
   $("#dateSearch")?.addEventListener("input",e=>{state.search=e.target.value.trim();apply()});
   $$('[data-series-filter="dates"]').forEach(btn=>btn.addEventListener("click",()=>{state.series=state.series===btn.dataset.value?"all":btn.dataset.value;btn.classList.toggle("active",state.series===btn.dataset.value);apply()}));
+  apply();
 }
 
 // Games
@@ -311,6 +343,7 @@ if(giftResults){
   function apply(){let visible=0;cards.forEach(c=>{const show=(state.occasion==="all"||c.dataset.occasion===state.occasion)&&(state.budget==="all"||c.dataset.budget===state.budget);c.classList.toggle("is-hidden",!show);if(show)visible++});$("#giftCount").textContent=visible;$("#giftEmpty").hidden=visible!==0}
   $$("[data-gift-filter]").forEach(btn=>btn.addEventListener("click",()=>{$$("[data-gift-filter]").forEach(b=>b.classList.remove("active"));btn.classList.add("active");state.occasion=btn.dataset.value;apply()}));
   $("#giftBudget")?.addEventListener("change",e=>{state.budget=e.target.value;apply()});
+  apply();
 }
 
 
