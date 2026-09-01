@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=20260901a" />
 </head>
 <body data-page="gifts">
 
@@ -55,7 +55,7 @@
   </section>
 
   <section class="container shop-intro gift-toolbar">
-    <div><span class="section-kicker">בואו נמצא משהו מתאים</span><h2><span id="giftCount">6</span> רעיונות</h2></div>
+    <div><span class="section-kicker">בואו נמצא משהו מתאים</span><h2><span id="giftCount">0</span> רעיונות</h2></div>
     <div class="filter-stack">
       <div class="chips">
         <button class="chip active" data-gift-filter="occasion" data-value="all">הכל</button>
@@ -73,31 +73,7 @@
     </div>
   </section>
 
-  <section class="container gifts-shop-grid" id="giftResults">
-    <article class="gift-shop-card filter-item" data-occasion="couple" data-budget="mid">
-      <div class="gift-image"><img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=800&q=85" alt="מארז ערב זוגי"><button class="mini-heart" data-fav="gift-1" type="button">♡</button></div>
-      <div class="gift-shop-body"><span class="section-kicker">לזוג</span><h3>מארז ערב זוגי</h3><div class="gift-row"><strong>₪159</strong><button class="text-button demo-buy" type="button">לפרטים ←</button></div></div>
-    </article>
-    <article class="gift-shop-card filter-item" data-occasion="small" data-budget="low">
-      <div class="gift-image"><img src="https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=800&q=85" alt="ספל לב מינימליסטי"><button class="mini-heart" data-fav="gift-2" type="button">♡</button></div>
-      <div class="gift-shop-body"><span class="section-kicker">קטנה ומתוקה</span><h3>ספל לב מינימליסטי</h3><div class="gift-row"><strong>₪69</strong><button class="text-button demo-buy" type="button">לפרטים ←</button></div></div>
-    </article>
-    <article class="gift-shop-card filter-item" data-occasion="couple" data-budget="low">
-      <div class="gift-image"><img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=85" alt="מחברת זיכרונות זוגית"><button class="mini-heart" data-fav="gift-3" type="button">♡</button></div>
-      <div class="gift-shop-body"><span class="section-kicker">לזוג</span><h3>מחברת זיכרונות זוגית</h3><div class="gift-row"><strong>₪79</strong><button class="text-button demo-buy" type="button">לפרטים ←</button></div></div>
-    </article>
-    <article class="gift-shop-card filter-item" data-occasion="experience" data-budget="high">
-      <div class="gift-image"><img src="https://images.unsplash.com/photo-1472653431158-6364773b2a56?auto=format&fit=crop&w=800&q=85" alt="ערכת פיקניק"><button class="mini-heart" data-fav="gift-4" type="button">♡</button></div>
-      <div class="gift-shop-body"><span class="section-kicker">חוויה</span><h3>ערכת פיקניק</h3><div class="gift-row"><strong>₪249</strong><button class="text-button demo-buy" type="button">לפרטים ←</button></div></div>
-    </article>
-    <article class="gift-shop-card filter-item" data-occasion="small" data-budget="low">
-      <div class="gift-image"><img src="https://images.unsplash.com/photo-1602874801006-8bc2e4535b73?auto=format&fit=crop&w=800&q=85" alt="נר ריחני לבית"><button class="mini-heart" data-fav="gift-5" type="button">♡</button></div>
-      <div class="gift-shop-body"><span class="section-kicker">קטנה ומתוקה</span><h3>נר ריחני לבית</h3><div class="gift-row"><strong>₪89</strong><button class="text-button demo-buy" type="button">לפרטים ←</button></div></div>
-    </article>
-    <article class="gift-shop-card filter-item" data-occasion="hosting" data-budget="mid">
-      <div class="gift-image"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=85" alt="מארז קפה וקינוחים"><button class="mini-heart" data-fav="gift-6" type="button">♡</button></div>
-      <div class="gift-shop-body"><span class="section-kicker">אירוח</span><h3>מארז קפה וקינוחים</h3><div class="gift-row"><strong>₪189</strong><button class="text-button demo-buy" type="button">לפרטים ←</button></div></div>
-    </article></section>
+  <section class="container gifts-shop-grid" id="giftResults"></section>
   <div class="empty-state container" id="giftEmpty" hidden><span>♡</span><h3>אין התאמה לפילטר הזה</h3><p>נסו תקציב או סוג מתנה אחר.</p></div>
 
   <section class="container disclosure-box">
@@ -113,10 +89,10 @@
       <div class="brand footer-logo"><span class="brand-heart">♡</span><span class="brand-name">רותם עדיני</span></div>
       <p>מתכונים, דייטים, משחקים ורעיונות שעושים קצת יותר כיף ביומיום.</p>
       <div class="social-row">
-        <a href="#" aria-label="Instagram">◎</a>
-        <a href="#" aria-label="TikTok">♪</a>
-        <a href="#" aria-label="YouTube">▶</a>
-        <a href="#" aria-label="Pinterest">P</a>
+        <a href="https://www.instagram.com/rotem_adini?igsh=MTFrd3VlOXdqdDVubQ%3D%3D&utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram">◎</a>
+        <a href="https://www.facebook.com/share/16WJDMpdpV/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+        <a href="https://www.tiktok.com/@rotem_adini?_t=ZS-8xCVScFHbYF&_r=1" target="_blank" rel="noopener" aria-label="TikTok">♪</a>
+        <a href="https://www.youtube.com/@rotemadini" target="_blank" rel="noopener" aria-label="YouTube">▶</a>
       </div>
     </div>
 
@@ -150,6 +126,6 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="script.js"></script>
+<script src="script.js?v=20260901a"></script>
 </body>
 </html>

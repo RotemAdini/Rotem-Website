@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>עוגת ביסקוויטים לימון | רותם עדיני</title>
+  <title>מתכון | רותם עדיני</title>
   <meta name="description" content="רותם עדיני — מתכונים, דייטים, משחקים ומתנות." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=20260901a" />
 </head>
 <body data-page="recipes">
 
@@ -46,78 +46,18 @@
   <section class="recipe-detail-hero container">
     <div class="recipe-main-image">
       <img src="" alt="">
-      <button class="fav-btn large-fav" data-fav="recipe-lemon-biscuit" type="button" aria-label="שמירה למועדפים">♡</button>
+      <button class="fav-btn large-fav" data-fav="" type="button" aria-label="שמירה למועדפים">♡</button>
     </div>
 
     <div class="recipe-intro">
-      <div class="breadcrumbs"><a href="recipes.html">מתכונים</a><span>›</span><span>עוגות וקינוחים</span></div>
-      <span class="eyebrow">קלילה, קרמית ומרשימה</span>
-      <h1>עוגת ביסקוויטים לימון <span>♡</span></h1>
-      <p>עוגה קרמית עם טעם לימוני מרענן, שכבות ביסקוויטים ורכות מושלמת. מתכון נוח להכנה שאפשר להכין מראש ולשלוף מהמקרר כשמגיעים האורחים.</p>
-
-      <div class="recipe-stats">
-        <div><strong>30</strong><span>דקות עבודה</span></div>
-        <div><strong>6+</strong><span>שעות קירור</span></div>
-        <div><strong>קל</strong><span>רמת קושי</span></div>
-        <div><strong>12</strong><span>מנות</span></div>
-      </div>
+      <div class="breadcrumbs"><a href="recipes.html">מתכונים</a><span>›</span><span id="recipeCrumb">מתכון</span></div>
+      <h1 id="recipeTitle">המתכון לא נמצא <span>♡</span></h1>
+      <p id="recipeNotFoundText">אולי הקישור לא מדויק. אפשר לחזור לכל המתכונים ולמצוא משהו טעים.</p>
 
       <div class="recipe-actions">
-        <a href="#ingredients" class="btn btn-primary">למצרכים ↓</a>
+        <a class="btn btn-primary" href="recipes.html">לכל המתכונים</a>
         <button class="btn btn-secondary" id="copyRecipeLink" type="button">העתקת קישור</button>
       </div>
-    </div>
-  </section>
-
-  <section class="container recipe-content-grid">
-    <aside class="ingredients-card panel" id="ingredients">
-      <div class="sticky-card">
-        <span class="section-kicker">מה צריך?</span>
-        <h2>מצרכים</h2>
-        <p class="muted">סמנו תוך כדי עבודה כדי לא לאבד את המקום.</p>
-
-        <h3>לקרם</h3>
-        <label class="ingredient-check"><input type="checkbox"><span>500 מ״ל שמנת מתוקה</span></label>
-        <label class="ingredient-check"><input type="checkbox"><span>250 גרם גבינת שמנת</span></label>
-        <label class="ingredient-check"><input type="checkbox"><span>80 גרם אבקת סוכר</span></label>
-        <label class="ingredient-check"><input type="checkbox"><span>קליפה מגוררת מלימון אחד</span></label>
-        <label class="ingredient-check"><input type="checkbox"><span>3 כפות מיץ לימון</span></label>
-
-        <h3>לשכבות</h3>
-        <label class="ingredient-check"><input type="checkbox"><span>2 חבילות ביסקוויטים</span></label>
-        <label class="ingredient-check"><input type="checkbox"><span>¾ כוס חלב לטבילה</span></label>
-
-        <h3>לקישוט</h3>
-        <label class="ingredient-check"><input type="checkbox"><span>פירות טריים / גרידת לימון</span></label>
-      </div>
-    </aside>
-
-    <article class="instructions-card panel">
-      <span class="section-kicker">שלב אחר שלב</span>
-      <h2>אופן ההכנה</h2>
-
-      <ol class="steps-list">
-        <li><span class="step-number">1</span><div><h3>מכינים את הקרם</h3><p>מקציפים שמנת מתוקה ואבקת סוכר לקרם יציב. מוסיפים גבינת שמנת, גרידת לימון ומיץ לימון ומערבבים רק עד לאיחוד.</p></div></li>
-        <li><span class="step-number">2</span><div><h3>מסדרים שכבה ראשונה</h3><p>טובלים כל ביסקוויט לשנייה בחלב ומסדרים בתחתית התבנית בשכבה צפופה.</p></div></li>
-        <li><span class="step-number">3</span><div><h3>בונים את העוגה</h3><p>מורחים שכבת קרם, ממשיכים לעוד שכבת ביסקוויטים וחוזרים על הפעולה עד שמסיימים בקרם.</p></div></li>
-        <li><span class="step-number">4</span><div><h3>מקררים</h3><p>מכסים ומעבירים למקרר לפחות ל-6 שעות, ועדיף ללילה שלם כדי שהשכבות יתייצבו.</p></div></li>
-        <li><span class="step-number">5</span><div><h3>מקשטים ומגישים</h3><p>לפני ההגשה מקשטים בפירות, גרידת לימון או פירורי ביסקוויטים. מגישים קר.</p></div></li>
-      </ol>
-
-      <div class="tip-box"><strong>הטיפ שלי ♡</strong><p>העוגה אפילו טעימה יותר יום אחרי ההכנה, אז זו אחלה אופציה לאירוח שאפשר לסגור מראש.</p></div>
-    </article>
-  </section>
-
-
-  <section class="container recipe-evening panel">
-    <div class="recipe-evening-copy">
-      <span class="section-kicker">הופכים את זה לדייט?</span>
-      <h2>תבנו סביב המתכון ערב שלם ♡</h2>
-      <p>הכינו יחד, שימו מוזיקה, ואחרי האוכל עברו למשחק זוגי קצר. ככה מתכון אחד הופך לחוויה שלמה.</p>
-    </div>
-    <div class="recipe-evening-actions">
-      <a class="mini-feature" href="date.html"><span>♡</span><div><strong>דייט בישול זוגי</strong><small>רעיון מלא לערב</small></div></a>
-      <a class="mini-feature" href="game.html"><span>🎲</span><div><strong>דיבורים מהלב</strong><small>משחק שמתאים לסיום הערב</small></div></a>
     </div>
   </section>
 
@@ -126,11 +66,7 @@
       <div><span class="section-kicker">אולי תאהבו גם</span><h2>עוד מתכונים מתוקים ♡</h2></div>
       <a href="recipes.html" class="small-pill">לכל המתכונים</a>
     </div>
-    <div class="recipe-grid related-grid">
-      <a class="recipe-card" href="recipe.html"><img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=600&q=85" alt="עוגיות"><div class="recipe-body"><h3>עוגיות שוקולד צ׳יפס</h3><div class="recipe-meta"><span>25 דק׳</span><span>קל</span></div></div></a>
-      <a class="recipe-card" href="recipe.html"><img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=85" alt="בראוניז"><div class="recipe-body"><h3>בראוניז שוקולדיים</h3><div class="recipe-meta"><span>35 דק׳</span><span>קל</span></div></div></a>
-      <a class="recipe-card" href="recipe.html"><img src="https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=600&q=85" alt="עוגת גבינה"><div class="recipe-body"><h3>עוגת גבינה אפויה</h3><div class="recipe-meta"><span>70 דק׳</span><span>בינוני</span></div></div></a>
-    </div>
+    <div class="recipe-grid related-grid" id="relatedRecipes"></div>
   </section>
 </main>
 
@@ -141,10 +77,10 @@
       <div class="brand footer-logo"><span class="brand-heart">♡</span><span class="brand-name">רותם עדיני</span></div>
       <p>מתכונים, דייטים, משחקים ורעיונות שעושים קצת יותר כיף ביומיום.</p>
       <div class="social-row">
-        <a href="#" aria-label="Instagram">◎</a>
-        <a href="#" aria-label="TikTok">♪</a>
-        <a href="#" aria-label="YouTube">▶</a>
-        <a href="#" aria-label="Pinterest">P</a>
+        <a href="https://www.instagram.com/rotem_adini?igsh=MTFrd3VlOXdqdDVubQ%3D%3D&utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram">◎</a>
+        <a href="https://www.facebook.com/share/16WJDMpdpV/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+        <a href="https://www.tiktok.com/@rotem_adini?_t=ZS-8xCVScFHbYF&_r=1" target="_blank" rel="noopener" aria-label="TikTok">♪</a>
+        <a href="https://www.youtube.com/@rotemadini" target="_blank" rel="noopener" aria-label="YouTube">▶</a>
       </div>
     </div>
 
@@ -178,6 +114,6 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="script.js"></script>
+<script src="script.js?v=20260901a"></script>
 </body>
 </html>

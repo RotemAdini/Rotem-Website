@@ -144,9 +144,23 @@
 
   function initForms() {
     document.querySelectorAll('[data-lead-form]').forEach(function (form) {
-      var status = form.querySelector('[data-form-status]');
+      // The status message lives as a sibling right before the form, not
+      // inside it — fall back to the shared parent so lookup finds it either way.
+      var status = form.querySelector('[data-form-status]') || (form.parentElement && form.parentElement.querySelector('[data-form-status]'));
       var submitBtn = form.querySelector('[type="submit"]');
       form.addEventListener('submit', function (e) {
+        // Guard against an unfilled SendMsg form-id placeholder (e.g. the bundle
+        // form before its real id is wired in) so we never silently POST to a
+        // broken endpoint — surface a clear message instead.
+        var formIdField = form.querySelector('[name="form"]');
+        if (formIdField && /^REPLACE_WITH/.test(formIdField.value)) {
+          e.preventDefault();
+          if (status) {
+            status.textContent = 'הרכישה הזו עדיין לא מחוברת. אפשר לפנות אלינו ישירות דרך עמוד יצירת הקשר.';
+            status.className = 'form-status is-error';
+          }
+          return;
+        }
         var required = form.querySelectorAll('[required]');
         var missing = false;
         required.forEach(function (field) {

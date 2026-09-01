@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>פיקניק שקיעה | רותם עדיני</title>
+  <title>רעיון לדייט | רותם עדיני</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=20260901a" />
 </head>
 <body data-page="dates">
 <header class="site-header">
@@ -43,55 +43,25 @@
   <section class="date-detail container">
     <div class="date-detail-image">
       <img src="" alt="">
-      <button class="fav-btn large-fav" data-fav="date-1" type="button">♡</button>
+      <button class="fav-btn large-fav" data-fav="" type="button">♡</button>
     </div>
 
     <div class="date-detail-copy">
-      <div class="breadcrumbs"><a href="dates.html">דייטים</a><span>›</span><span>פיקניק שקיעה</span></div>
-      <span class="eyebrow">פשוט, רומנטי ולא דורש הפקה</span>
-      <h1>פיקניק שקיעה <span>♡</span></h1>
-      <p>אחד הדייטים שהכי קל להרים ועדיין מרגישים בהם שיצאתם מהשגרה. קחו שמיכה, משהו טעים, מוזיקה טובה ונקודה יפה.</p>
-
-      <div class="recipe-stats">
-        <div><strong>₪</strong><span>תקציב נמוך</span></div>
-        <div><strong>2–3</strong><span>שעות</span></div>
-        <div><strong>בחוץ</strong><span>מיקום</span></div>
-        <div><strong>קל</strong><span>להרים</span></div>
+      <div class="breadcrumbs"><a href="dates.html">דייטים</a><span>›</span><span id="dateCrumb">רעיון לדייט</span></div>
+      <h1 id="dateTitle">הרעיון לא נמצא <span>♡</span></h1>
+      <p id="dateNotFoundText">אולי הקישור לא מדויק. אפשר לחזור לכל הרעיונות ולמצוא משהו מתאים.</p>
+      <div class="recipe-actions">
+        <a class="btn btn-primary" href="dates.html">לכל הרעיונות</a>
       </div>
     </div>
   </section>
 
-  <section class="container date-plan-grid">
-    <article class="panel date-plan-card">
-      <span class="section-kicker">מה עושים?</span>
-      <h2>התוכנית לערב</h2>
-      <ol class="steps-list compact-steps">
-        <li><span class="step-number">1</span><div><h3>בוחרים נקודה</h3><p>חוף, פארק, תצפית או אפילו גינה שקטה קרוב לבית.</p></div></li>
-        <li><span class="step-number">2</span><div><h3>אורזים משהו טעים</h3><p>לא צריך ארוחה ענקית — נשנושים, קינוח ומשקה שאתם אוהבים מספיקים.</p></div></li>
-        <li><span class="step-number">3</span><div><h3>משאירים מקום לשיחה</h3><p>שעה אחת בלי מסכים עושה את כל ההבדל.</p></div></li>
-      </ol>
-    </article>
-
-    <aside class="panel date-kit-card">
-      <span class="section-kicker">מה להביא?</span>
-      <h2>צ׳קליסט קטן</h2>
-      <label class="ingredient-check"><input type="checkbox"><span>שמיכה</span></label>
-      <label class="ingredient-check"><input type="checkbox"><span>שתייה</span></label>
-      <label class="ingredient-check"><input type="checkbox"><span>משהו מתוק</span></label>
-      <label class="ingredient-check"><input type="checkbox"><span>רמקול קטן</span></label>
-      <label class="ingredient-check"><input type="checkbox"><span>משחק / קלפים</span></label>
-    </aside>
-  </section>
-
-  <section class="container date-complete panel">
-    <div>
-      <span class="section-kicker">משלימים את הערב</span>
-      <h2>מה אוכלים ומה משחקים? ♡</h2>
+  <section class="container related-section">
+    <div class="section-head">
+      <div><span class="section-kicker">אולי תאהבו גם</span><h2>עוד רעיונות מהסדרה ♡</h2></div>
+      <a href="dates.html" class="small-pill">לכל הדייטים</a>
     </div>
-    <div class="date-complete-grid">
-      <a href="recipe.html" class="mini-feature"><span>🍰</span><div><strong>עוגת ביסקוויטים לימון</strong><small>קינוח שקל לקחת</small></div></a>
-      <a href="game.html" class="mini-feature"><span>🎲</span><div><strong>דיבורים מהלב</strong><small>לפתוח שיחה אחרת</small></div></a>
-    </div>
+    <div class="dates-grid" id="relatedDates"></div>
   </section>
 </main>
 
@@ -101,10 +71,10 @@
       <div class="brand footer-logo"><span class="brand-heart">♡</span><span class="brand-name">רותם עדיני</span></div>
       <p>מתכונים, דייטים, משחקים ורעיונות שעושים קצת יותר כיף ביומיום.</p>
       <div class="social-row">
-        <a href="#" aria-label="Instagram">◎</a>
-        <a href="#" aria-label="TikTok">♪</a>
-        <a href="#" aria-label="YouTube">▶</a>
-        <a href="#" aria-label="Pinterest">P</a>
+        <a href="https://www.instagram.com/rotem_adini?igsh=MTFrd3VlOXdqdDVubQ%3D%3D&utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram">◎</a>
+        <a href="https://www.facebook.com/share/16WJDMpdpV/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+        <a href="https://www.tiktok.com/@rotem_adini?_t=ZS-8xCVScFHbYF&_r=1" target="_blank" rel="noopener" aria-label="TikTok">♪</a>
+        <a href="https://www.youtube.com/@rotemadini" target="_blank" rel="noopener" aria-label="YouTube">▶</a>
       </div>
     </div>
 
@@ -137,6 +107,6 @@
 </footer>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="script.js"></script>
+<script src="script.js?v=20260901a"></script>
 </body>
 </html>

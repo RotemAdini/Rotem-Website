@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=20260901a" />
 </head>
 <body data-page="dashboard">
 <header class="site-header">
@@ -43,8 +43,8 @@
   <section class="container dashboard-header">
     <div>
       <span class="eyebrow">החשבון שלי</span>
-      <h1>בוקר טוב, רותם <span>♡</span></h1>
-      <p>כל מה ששמרת ורכשת נמצא כאן.</p>
+      <h1>שלום, אורחת <span>♡</span></h1>
+      <p>כל מה שתשמרי ותרכשי יופיע כאן.</p>
     </div>
     <a class="btn btn-secondary" href="account.html">יציאה מהחשבון</a>
   </section>
@@ -60,17 +60,20 @@
     <div class="dashboard-content">
       <section class="panel dashboard-section" id="saved">
         <div class="section-head"><div><span class="section-kicker">שמורים</span><h2>המועדפים שלי</h2></div><a href="favorites.html" class="small-pill">לכל המועדפים</a></div>
-        <div class="dashboard-cards">
-          <a href="recipe.html"><img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=500&q=80" alt=""><strong>עוגת ביסקוויטים לימון</strong><span>מתכון</span></a>
-          <a href="date.html"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=500&q=80" alt=""><strong>פיקניק שקיעה</strong><span>דייט</span></a>
+        <div class="empty-state">
+          <span>♡</span>
+          <h3>עוד לא שמרת כלום</h3>
+          <p>לחצי על הלב ליד מתכון, דייט או משחק — והם יחכו לך כאן.</p>
         </div>
       </section>
 
       <section class="panel dashboard-section" id="purchases">
         <div class="section-head"><div><span class="section-kicker">המשחקים שלי</span><h2>גישה למשחקים שרכשת</h2></div></div>
-        <div class="owned-game">
-          <div class="owned-game-cover">דיבורים<br>מהלב ♡</div>
-          <div><h3>דיבורים מהלב</h3><p>80+ שאלות ומשימות לזוג.</p><a class="btn btn-primary compact" href="play.html">להתחיל לשחק</a></div>
+        <div class="empty-state">
+          <span>🎲</span>
+          <h3>עוד לא רכשת משחק</h3>
+          <p>אחרי רכישה דרך אחד מעמודי המשחקים, הגישה שלך תופיע כאן.</p>
+          <a class="btn btn-primary compact" href="games.html">לקטלוג המשחקים</a>
         </div>
       </section>
 
@@ -79,7 +82,11 @@
         <h2>היסטוריית רכישות</h2>
         <div class="orders-table">
           <div class="order-row order-head"><span>תאריך</span><span>מוצר</span><span>סכום</span><span>סטטוס</span></div>
-          <div class="order-row"><span>01.09.2026</span><span>דיבורים מהלב</span><span>₪49</span><span class="status-pill">הושלם</span></div>
+        </div>
+        <div class="empty-state">
+          <span>🧾</span>
+          <h3>אין עדיין רכישות</h3>
+          <p>ההזמנות שלך יופיעו כאן אחרי הרכישה הראשונה.</p>
         </div>
       </section>
     </div>
@@ -92,10 +99,10 @@
       <div class="brand footer-logo"><span class="brand-heart">♡</span><span class="brand-name">רותם עדיני</span></div>
       <p>מתכונים, דייטים, משחקים ורעיונות שעושים קצת יותר כיף ביומיום.</p>
       <div class="social-row">
-        <a href="#" aria-label="Instagram">◎</a>
-        <a href="#" aria-label="TikTok">♪</a>
-        <a href="#" aria-label="YouTube">▶</a>
-        <a href="#" aria-label="Pinterest">P</a>
+        <a href="https://www.instagram.com/rotem_adini?igsh=MTFrd3VlOXdqdDVubQ%3D%3D&utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram">◎</a>
+        <a href="https://www.facebook.com/share/16WJDMpdpV/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+        <a href="https://www.tiktok.com/@rotem_adini?_t=ZS-8xCVScFHbYF&_r=1" target="_blank" rel="noopener" aria-label="TikTok">♪</a>
+        <a href="https://www.youtube.com/@rotemadini" target="_blank" rel="noopener" aria-label="YouTube">▶</a>
       </div>
     </div>
 
@@ -128,6 +135,6 @@
 </footer>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="script.js"></script>
+<script src="script.js?v=20260901a"></script>
 </body>
 </html>

@@ -20,9 +20,6 @@ body { font-family: "Heebo", "Assistant", Arial, sans-serif; }
 .site-header .btn-primary,
 .sticky-buy .btn-primary { background: linear-gradient(135deg, #e47781, #da5e6c); }
 .site-footer { border-top-color: #f0e0da; }
-.legacy-game-header,
-.legacy-game-footer,
-.legacy-game-nav { display: none !important; }
 
 /* A lightweight, clearly visible route back into the parent site. */
 .game-site-trail {
