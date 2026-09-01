@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>חיפוש | רותם עדיני</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="search">
+<header class="site-header">
+  <div class="header-inner container">
+    <a href="index.html" class="brand" aria-label="רותם עדיני - דף הבית">
+      <span class="brand-heart">♡</span>
+      <span class="brand-name">רותם עדיני</span>
+    </a>
+
+    <nav class="main-nav" id="mainNav" aria-label="ניווט ראשי">
+      <a class="active" href="index.html">בית</a>
+<a class="" href="recipes.html">מתכונים</a>
+<a class="" href="dates.html">דייטים</a>
+<a class="" href="games.html">משחקים</a>
+<a class="" href="gifts.html">מתנות</a>
+<a class="" href="contact.html">צור קשר</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="icon-btn account-link" href="search.html" aria-label="חיפוש באתר" title="חיפוש">⌕</a>
+      <a class="icon-btn account-link" href="favorites.html" aria-label="מועדפים" title="מועדפים">♡</a>
+      <a class="icon-btn account-link" href="dashboard.html" aria-label="חשבון משתמש" title="חשבון משתמש">♙</a>
+      <a class="guest-pill" href="account.html">
+        <span>שלום, אורחת</span>
+        <strong>להתחברות</strong>
+      </a>
+      <button class="menu-btn" id="menuBtn" aria-label="פתיחת תפריט">☰</button>
+    </div>
+  </div>
+</header>
+
+<main class="page-main">
+  <section class="page-hero search-hero">
+    <div class="container simple-hero">
+      <span class="eyebrow">חפשו בכל האתר</span>
+      <h1>מה בא לכם למצוא? <span>⌕</span></h1>
+      <label class="global-search-box">
+        <span>⌕</span>
+        <input id="globalSearchInput" type="search" placeholder="למשל: שוקולד, פיקניק, משחק זוגי..." autofocus>
+      </label>
+    </div>
+  </section>
+
+  <section class="container global-results">
+    <div class="results-toolbar">
+      <div><span class="section-kicker">תוצאות</span><h2><span id="globalResultCount">8</span> פריטים</h2></div>
+      <div class="chips">
+        <button class="chip active" data-global-type="all">הכל</button>
+        <button class="chip" data-global-type="recipe">מתכונים</button>
+        <button class="chip" data-global-type="date">דייטים</button>
+        <button class="chip" data-global-type="game">משחקים</button>
+        <button class="chip" data-global-type="gift">מתנות</button>
+      </div>
+    </div>
+
+    <div class="global-results-grid" id="globalResults">
+      <a class="global-result-card" data-type="recipe" data-search="שוקולד עוגיות מתוק" href="recipe.html"><span class="result-type">מתכון</span><img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=500&q=80" alt=""><div><h3>עוגיות שוקולד צ׳יפס</h3><p>25 דקות · קל</p></div></a>
+      <a class="global-result-card" data-type="recipe" data-search="בראוניז שוקולד קינוח" href="recipe.html"><span class="result-type">מתכון</span><img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=500&q=80" alt=""><div><h3>בראוניז שוקולדיים</h3><p>35 דקות · קל</p></div></a>
+      <a class="global-result-card" data-type="date" data-search="פיקניק שקיעה בחוץ רומנטי" href="date.html"><span class="result-type">דייט</span><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=500&q=80" alt=""><div><h3>פיקניק שקיעה</h3><p>תקציב נמוך · בחוץ</p></div></a>
+      <a class="global-result-card" data-type="date" data-search="בישול זוגי אוכל בבית" href="date.html"><span class="result-type">דייט</span><img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=500&q=80" alt=""><div><h3>ערב בישול זוגי</h3><p>בבית · בינוני</p></div></a>
+      <a class="global-result-card" data-type="game" data-search="דיבורים מהלב שאלות עומק זוגיות" href="game.html"><span class="result-type">משחק</span><div class="result-placeholder">♡</div><div><h3>דיבורים מהלב</h3><p>שאלות עומק · ₪49</p></div></a>
+      <a class="global-result-card" data-type="game" data-search="מי מכיר יותר תחרות משחק" href="games.html"><span class="result-type">משחק</span><div class="result-placeholder">🎲</div><div><h3>מי מכיר יותר?</h3><p>תחרות · ₪39</p></div></a>
+      <a class="global-result-card" data-type="gift" data-search="מארז זוגי מתנה" href="gifts.html"><span class="result-type">מתנה</span><img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=500&q=80" alt=""><div><h3>מארז ערב זוגי</h3><p>₪159</p></div></a>
+      <a class="global-result-card" data-type="gift" data-search="ספל לב מתנה קטנה" href="gifts.html"><span class="result-type">מתנה</span><img src="https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=500&q=80" alt=""><div><h3>ספל לב מינימליסטי</h3><p>₪69</p></div></a>
+    </div>
+
+    <div class="empty-state" id="globalEmpty" hidden><span>⌕</span><h3>לא מצאתי משהו מתאים</h3><p>נסו מילה אחרת או עברו לקטגוריה אחרת.</p></div>
+  </section>
+</main>
+
+<footer class="site-footer" id="contact-footer">
+  <div class="footer-inner container">
+    <div class="footer-brand">
+      <div class="brand footer-logo"><span class="brand-heart">♡</span><span class="brand-name">רותם עדיני</span></div>
+      <p>מתכונים, דייטים, משחקים ורעיונות שעושים קצת יותר כיף ביומיום.</p>
+      <div class="social-row">
+        <a href="#" aria-label="Instagram">◎</a>
+        <a href="#" aria-label="TikTok">♪</a>
+        <a href="#" aria-label="YouTube">▶</a>
+        <a href="#" aria-label="Pinterest">P</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h3>ניווט מהיר</h3>
+      <a href="index.html">דף הבית</a>
+      <a href="recipes.html">כל המתכונים</a>
+      <a href="dates.html">רעיונות לדייטים</a>
+      <a href="games.html">משחקים לזוג</a>
+      <a href="gifts.html">מתנות</a>
+    </div>
+
+    <div class="footer-col">
+      <h3>עוד באתר</h3>
+      <a href="about.html">קצת עליי</a>
+      <a href="account.html">החשבון שלי</a>
+      <a href="#">שאלות ותשובות</a>
+      <a href="#">מדיניות פרטיות</a>
+      <a href="#">תנאי שימוש</a>
+    </div>
+
+    <div class="footer-col">
+      <h3>בואו נדבר</h3>
+      <a href="contact.html">צור קשר</a>
+      <a href="mailto:hello@rotemadini.com">hello@rotemadini.com ✉</a>
+      <span>ישראל ♡</span>
+    </div>
+  </div>
+  <div class="copyright">© 2026 רותם עדיני. כל הזכויות שמורות.</div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="script.js"></script>
+</body>
+</html>

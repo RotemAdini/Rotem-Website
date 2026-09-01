@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>מתכונים | רותם עדיני</title>
+  <meta name="description" content="רותם עדיני — מתכונים, דייטים, משחקים ומתנות." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="recipes">
+
+<header class="site-header">
+  <div class="header-inner container">
+    <a href="index.html" class="brand" aria-label="רותם עדיני - דף הבית">
+      <span class="brand-heart">♡</span>
+      <span class="brand-name">רותם עדיני</span>
+    </a>
+
+    <nav class="main-nav" id="mainNav" aria-label="ניווט ראשי">
+      <a class="" href="index.html">בית</a>
+<a class="active" href="recipes.html">מתכונים</a>
+<a class="" href="dates.html">דייטים</a>
+<a class="" href="games.html">משחקים</a>
+<a class="" href="gifts.html">מתנות</a>
+<a class="" href="contact.html">צור קשר</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="icon-btn account-link" href="search.html" aria-label="חיפוש באתר" title="חיפוש">⌕</a>
+      <a class="icon-btn account-link" href="favorites.html" aria-label="מועדפים" title="מועדפים">♡</a>
+      <a class="icon-btn account-link" href="account.html" aria-label="חשבון משתמש" title="חשבון משתמש">♙</a>
+      <a class="guest-pill" href="account.html">
+        <span>שלום, אורחת</span>
+        <strong>להתחברות</strong>
+      </a>
+      <button class="menu-btn" id="menuBtn" aria-label="פתיחת תפריט">☰</button>
+    </div>
+  </div>
+</header>
+
+
+<main class="page-main">
+  <section class="page-hero compact-hero">
+    <div class="container page-hero-grid">
+      <div>
+        <span class="eyebrow">כל מה שטעים במקום אחד</span>
+        <h1>המתכונים שלי <span>♡</span></h1>
+        <p>מחפשים משהו מתוק, מהיר, בלי אפייה או פשוט רעיון לארוחת ערב? כאן אפשר לסנן עד שתמצאו בדיוק מה שמתאים.</p>
+      </div>
+      <div class="page-hero-art recipe-art">
+        <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=1000&q=85" alt="שולחן עם אוכל">
+      </div>
+    </div>
+  </section>
+
+  <section class="container filter-layout">
+    <aside class="filters-panel panel" id="recipeFilters">
+      <div class="filter-title-row">
+        <div><span class="section-kicker">סינון וחיפוש</span><h2>מה בא לכם?</h2></div>
+        <button class="text-button" data-reset-filters>נקה הכל</button>
+      </div>
+
+      <label class="search-box">
+        <span>⌕</span>
+        <input id="recipeSearch" type="search" placeholder="חפשו מתכון או מילת מפתח...">
+      </label>
+
+      <div class="filter-group">
+        <h3>סוג</h3>
+        <div class="chips">
+          <button class="chip active" data-filter="type" data-value="all">הכל</button>
+          <button class="chip" data-filter="type" data-value="sweet">מתוק</button>
+          <button class="chip" data-filter="type" data-value="savory">מלוח</button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <h3>זמן הכנה</h3>
+        <div class="chips">
+          <button class="chip active" data-filter="time" data-value="all">הכל</button>
+          <button class="chip" data-filter="time" data-value="15">עד 15 דק׳</button>
+          <button class="chip" data-filter="time" data-value="30">עד 30 דק׳</button>
+          <button class="chip" data-filter="time" data-value="60">עד שעה</button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <h3>אופן הכנה</h3>
+        <div class="chips">
+          <button class="chip active" data-filter="bake" data-value="all">הכל</button>
+          <button class="chip" data-filter="bake" data-value="no-bake">ללא אפייה</button>
+          <button class="chip" data-filter="bake" data-value="regular">אפייה / בישול</button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <h3>רמת קושי</h3>
+        <select id="difficultyFilter">
+          <option value="all">הכל</option>
+          <option value="easy">קל</option>
+          <option value="medium">בינוני</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <h3>קטגוריה</h3>
+        <select id="categoryFilter">
+          <option value="all">כל הקטגוריות</option>
+          <option value="cakes">עוגות וקינוחים</option>
+          <option value="cookies">עוגיות</option>
+          <option value="pasta">פסטות</option>
+          <option value="drinks">משקאות</option>
+          <option value="bread">לחמים ומאפים</option>
+          <option value="light">ארוחות קלות</option>
+          <option value="brunch">בראנץ׳</option>
+          <option value="salads">סלטים</option>
+        </select>
+      </div>
+    </aside>
+
+    <div class="results-panel">
+      <div class="results-toolbar">
+        <div>
+          <span class="section-kicker">מתכונים</span>
+          <h2><span id="recipeCount">12</span> תוצאות</h2>
+        </div>
+        <select id="sortRecipes" class="sort-select" aria-label="מיון מתכונים">
+          <option value="default">החדשים ביותר</option>
+          <option value="time-asc">זמן הכנה: מהיר לארוך</option>
+          <option value="name">לפי א׳-ב׳</option>
+        </select>
+      </div>
+
+      <div class="recipe-grid recipes-page-grid" id="recipeResults">
+        
+    <article class="recipe-card filter-item"
+      data-search="עוגת ביסקוויטים לימון" data-category="cakes" data-type="sweet" data-bake="no-bake" data-difficulty="easy" data-time="30">
+      <a href="recipe.html" class="card-link" aria-label="עוגת ביסקוויטים לימון"></a>
+      <button class="fav-btn" data-fav="recipe-lemon-biscuit" type="button" aria-label="הוספה למועדפים">♡</button>
+      <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=700&q=85" alt="עוגת ביסקוויטים לימון">
+      <div class="recipe-body">
+        <h3>עוגת ביסקוויטים לימון</h3>
+        <div class="recipe-meta"><span>◷ 30 דק׳</span><span>עוגות</span></div>
+      </div>
+    </article>
+    <article class="recipe-card filter-item"
+      data-search="עוגיות שוקולד צ׳יפס" data-category="cookies" data-type="sweet" data-bake="regular" data-difficulty="easy" data-time="25">
+      <a href="recipe.html" class="card-link" aria-label="עוגיות שוקולד צ׳יפס"></a>
+      <button class="fav-btn" data-fav="recipe-cookies" type="button" aria-label="הוספה למועדפים">♡</button>
+      <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=700&q=85" alt="עוגיות שוקולד צ׳יפס">
+      <div class="recipe-body">
+        <h3>עוגיות שוקולד צ׳יפס</h3>
+        <div class="recipe-meta"><span>◷ 25 דק׳</span><span>עוגיות</span></div>
+      </div>
+    </article>
+    <article class="recipe-card filter-item"
+      data-search="פסטה רוזה קרמית" data-category="pasta" data-type="savory" data-bake="regular" data-difficulty="easy" data-time="20">
+      <a href="recipe.html" class="card-link" aria-label="פסטה רוזה קרמית"></a>
+      <button class="fav-btn" data-fav="recipe-pasta" type="button" aria-label="הוספה למועדפים">♡</button>
+      <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=700&q=85" alt="פסטה רוזה קרמית">
+      <div class="recipe-body">
+        <h3>פסטה רוזה קרמית</h3>
+        <div class="recipe-meta"><span>◷ 20 דק׳</span><span>פסטות</span></div>
+      </div>
+    </article>
+    <article class="recipe-card filter-item"
+      data-search="עוגת גבינה אפויה" data-category="cakes" data-type="sweet" data-bake="regular" data-difficulty="medium" data-time="70">
+      <a href="recipe.html" class="card-link" aria-label="עוגת גבינה אפויה"></a>
+      <button class="fav-btn" data-fav="recipe-cheesecake" type="button" aria-label="הוספה למועדפים">♡</button>
+      <img src="https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=700&q=85" alt="עוגת גבינה אפויה">
+      <div class="recipe-body">
+        <h3>עוגת גבינה אפויה</h3>
+        <div class="recipe-meta"><span>◷ 70 דק׳</span><span>עוגות</span></div>
+      </div>
+    </article>
+    <article class="recipe-card filter-item"
+      data-search="שקשוקה ביתית" data-category="light" data-type="savory" data-bake="regular" data-difficulty="easy" data-time="20">
+      <a href="recipe.html" class="card-link" aria-label="שקשוקה ביתית"></a>
+      <button class="fav-btn" data-fav="recipe-shakshuka" type="button" aria-label="הוספה למועדפים">♡</button>
+      <img src="https://images.unsplash.com/photo-1590412200988-a436970781fa?auto=format&fit=crop&w=700&q=85" alt="שקשוקה ביתית">
+      <div class="recipe-body">
+        <h3>שקשוקה ביתית</h3>
+        <div class="recipe-meta"><span>◷ 20 דק׳</span><span>ארוחה קלה</span></div>
+      </div>
+    </article>
+    <article class="recipe-card filter-item"
+      data-search="טוסט אבוקדו וביצה" data-category="brunch" data-type="savory" data-bake="regular" data-difficulty="easy" data-time="10">
+      <a href="recipe.html" class="card-link" aria-label="טוסט אבוקדו וביצה"></a>
+      <button class="fav-btn" data-fav="recipe-avocado" type="button" aria-label="הוספה למועדפים">♡</button>
+      <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=700&q=85" alt="טוסט אבוקדו וביצה">
+      <div class="recipe-body">
+        <h3>טוסט אבוקדו וביצה</h3>
+        <div class="recipe-meta"><span>◷ 10 דק׳</span><span>בראנץ׳</span></div>
+      </div>
+    </article>
+    <article class="recipe-card filter-item"
+      data-search="בראוניז שוקולדיים" data-category="cakes" data-type="sweet" data-bake="regular" data-difficulty="easy" data-time="35">
+      <a href="recipe.html" class="card-link" aria-label="בראוניז שוקולדיים"></a>
+      <button class="fav-btn" data-fav="recipe-brownie" type="button" aria-label="הוספה למועדפים">♡</button>
+      <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=700&q=85" alt="בראוניז שוקולדיים">
+      <div class="recipe-body">
+        <h3>בראוניז שוקולדיים</h3>
+        <div class="recipe-meta"><span>◷ 35 דק׳</span><span>עוגות</span></div>
+      </div>
+    </article>
+    <article class="recipe-card filter-item"
+      data-search="יוגורט גרנולה ופירות" data-category="light" data-type="sweet" data-bake="no-bake" data-difficulty="easy" data-time="5">
+      <a href="recipe.html" class="card-link" aria-label="יוגורט גרנולה ופירות"></a>
+      <button class="fav-btn" data-fav="recipe-granola" type="button" aria-label="הוספה למועדפים">♡</button>
+      <img src="https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?auto=format&fit=crop&w=700&q=85" alt="יוגורט גרנולה ופירות">
+      <div class="recipe-body">
+        <h3>יוגורט גרנולה ופירות</h3>
+        <div class="recipe-meta"><span>◷ 5 דק׳</span><span>ארוחה קלה</span></div>
+      </div>
+    </article>
+    <article class="recipe-card filter-item"
+      data-search="לחם חלה רך" data-category="bread" data-type="savory" data-bake="regular" data-difficulty="medium" data-time="90">
+      <a href="recipe.html" class="card-link" aria-label="לחם חלה רך"></a>
+      <button class="fav-btn" data-fav="recipe-bread" type="button" aria-label="הוספה למועדפים">♡</button>
+      <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=700&q=85" alt="לחם חלה רך">
+      <div class="recipe-body">
+        <h3>לחם חלה רך</h3>
+        <div class="recipe-meta"><span>◷ 90 דק׳</span><span>מאפים</span></div>
+      </div>
+    </article>
+    <article class="recipe-card filter-item"
+      data-search="סלט קראנצ׳י צבעוני" data-category="salads" data-type="savory" data-bake="no-bake" data-difficulty="easy" data-time="15">
+      <a href="recipe.html" class="card-link" aria-label="סלט קראנצ׳י צבעוני"></a>
+      <button class="fav-btn" data-fav="recipe-salad" type="button" aria-label="הוספה למועדפים">♡</button>
+      <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=700&q=85" alt="סלט קראנצ׳י צבעוני">
+      <div class="recipe-body">
+        <h3>סלט קראנצ׳י צבעוני</h3>
+        <div class="recipe-meta"><span>◷ 15 דק׳</span><span>סלטים</span></div>
+      </div>
+    </article>
+    <article class="recipe-card filter-item"
+      data-search="אייס קפה וניל" data-category="drinks" data-type="sweet" data-bake="no-bake" data-difficulty="easy" data-time="5">
+      <a href="recipe.html" class="card-link" aria-label="אייס קפה וניל"></a>
+      <button class="fav-btn" data-fav="recipe-ice-coffee" type="button" aria-label="הוספה למועדפים">♡</button>
+      <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=700&q=85" alt="אייס קפה וניל">
+      <div class="recipe-body">
+        <h3>אייס קפה וניל</h3>
+        <div class="recipe-meta"><span>◷ 5 דק׳</span><span>משקאות</span></div>
+      </div>
+    </article>
+    <article class="recipe-card filter-item"
+      data-search="פנקייקים אווריריים" data-category="brunch" data-type="sweet" data-bake="regular" data-difficulty="easy" data-time="20">
+      <a href="recipe.html" class="card-link" aria-label="פנקייקים אווריריים"></a>
+      <button class="fav-btn" data-fav="recipe-pancakes" type="button" aria-label="הוספה למועדפים">♡</button>
+      <img src="https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&w=700&q=85" alt="פנקייקים אווריריים">
+      <div class="recipe-body">
+        <h3>פנקייקים אווריריים</h3>
+        <div class="recipe-meta"><span>◷ 20 דק׳</span><span>בראנץ׳</span></div>
+      </div>
+    </article>
+      </div>
+
+      <div class="empty-state" id="recipeEmpty" hidden>
+        <span>♡</span>
+        <h3>לא מצאתי בדיוק את זה</h3>
+        <p>נסו לשנות אחד מהפילטרים או לחפש משהו אחר.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+<footer class="site-footer" id="contact-footer">
+  <div class="footer-inner container">
+    <div class="footer-brand">
+      <div class="brand footer-logo"><span class="brand-heart">♡</span><span class="brand-name">רותם עדיני</span></div>
+      <p>מתכונים, דייטים, משחקים ורעיונות שעושים קצת יותר כיף ביומיום.</p>
+      <div class="social-row">
+        <a href="#" aria-label="Instagram">◎</a>
+        <a href="#" aria-label="TikTok">♪</a>
+        <a href="#" aria-label="YouTube">▶</a>
+        <a href="#" aria-label="Pinterest">P</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h3>ניווט מהיר</h3>
+      <a href="index.html">דף הבית</a>
+      <a href="recipes.html">כל המתכונים</a>
+      <a href="dates.html">רעיונות לדייטים</a>
+      <a href="games.html">משחקים לזוג</a>
+      <a href="gifts.html">מתנות</a>
+    </div>
+
+    <div class="footer-col">
+      <h3>עוד באתר</h3>
+      <a href="about.html">קצת עליי</a>
+      <a href="account.html">החשבון שלי</a>
+      <a href="#">שאלות ותשובות</a>
+      <a href="#">מדיניות פרטיות</a>
+      <a href="#">תנאי שימוש</a>
+    </div>
+
+    <div class="footer-col">
+      <h3>בואו נדבר</h3>
+      <a href="contact.html">צור קשר</a>
+      <a href="mailto:hello@rotemadini.com">hello@rotemadini.com ✉</a>
+      <span>ישראל ♡</span>
+    </div>
+  </div>
+  <div class="copyright">© 2026 רותם עדיני. כל הזכויות שמורות.</div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

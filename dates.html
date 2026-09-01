@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>רעיונות לדייטים | רותם עדיני</title>
+  <meta name="description" content="רותם עדיני — מתכונים, דייטים, משחקים ומתנות." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="dates">
+
+<header class="site-header">
+  <div class="header-inner container">
+    <a href="index.html" class="brand" aria-label="רותם עדיני - דף הבית">
+      <span class="brand-heart">♡</span>
+      <span class="brand-name">רותם עדיני</span>
+    </a>
+
+    <nav class="main-nav" id="mainNav" aria-label="ניווט ראשי">
+      <a class="" href="index.html">בית</a>
+<a class="" href="recipes.html">מתכונים</a>
+<a class="active" href="dates.html">דייטים</a>
+<a class="" href="games.html">משחקים</a>
+<a class="" href="gifts.html">מתנות</a>
+<a class="" href="contact.html">צור קשר</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="icon-btn account-link" href="search.html" aria-label="חיפוש באתר" title="חיפוש">⌕</a>
+      <a class="icon-btn account-link" href="favorites.html" aria-label="מועדפים" title="מועדפים">♡</a>
+      <a class="icon-btn account-link" href="account.html" aria-label="חשבון משתמש" title="חשבון משתמש">♙</a>
+      <a class="guest-pill" href="account.html">
+        <span>שלום, אורחת</span>
+        <strong>להתחברות</strong>
+      </a>
+      <button class="menu-btn" id="menuBtn" aria-label="פתיחת תפריט">☰</button>
+    </div>
+  </div>
+</header>
+
+
+<main class="page-main">
+  <section class="page-hero date-hero">
+    <div class="container page-hero-grid">
+      <div>
+        <span class="eyebrow">זמן ביחד בלי לחשוב שעה מה עושים</span>
+        <h1>רעיונות לדייטים <span>♡</span></h1>
+        <p>דייט בבית, בחוץ, בתקציב קטן או ערב מושקע — בחרו לפי מצב הרוח ותנו לי לחשוב בשבילכם.</p>
+      </div>
+      <div class="date-hero-collage">
+        <img class="collage-a" src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=700&q=85" alt="">
+        <img class="collage-b" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=700&q=85" alt="">
+        <span class="collage-heart">♡</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="container discovery-filter panel">
+    <div class="discovery-search">
+      <span>⌕</span>
+      <input id="dateSearch" type="search" placeholder="חפשו רעיון לדייט...">
+    </div>
+    <div class="filter-group inline-filter">
+      <span>תקציב</span>
+      <div class="chips">
+        <button class="chip active" data-date-filter="budget" data-value="all">הכל</button>
+        <button class="chip" data-date-filter="budget" data-value="low">עד ₪100</button>
+        <button class="chip" data-date-filter="budget" data-value="medium">בינוני</button>
+        <button class="chip" data-date-filter="budget" data-value="high">מושקע</button>
+      </div>
+    </div>
+    <div class="filter-group inline-filter">
+      <span>איפה</span>
+      <div class="chips">
+        <button class="chip active" data-date-filter="place" data-value="all">הכל</button>
+        <button class="chip" data-date-filter="place" data-value="home">בבית</button>
+        <button class="chip" data-date-filter="place" data-value="outside">בחוץ</button>
+      </div>
+    </div>
+    <div class="filter-group inline-filter">
+      <span>כמה זמן</span>
+      <select id="dateDuration">
+        <option value="all">לא משנה</option>
+        <option value="short">עד שעתיים</option>
+        <option value="medium">חצי יום</option>
+        <option value="long">יום שלם</option>
+      </select>
+    </div>
+  </section>
+
+  <section class="container listing-section">
+    <div class="results-toolbar">
+      <div><span class="section-kicker">תבחרו מה מרגיש נכון היום</span><h2><span id="dateCount">8</span> רעיונות לדייט</h2></div>
+      <a href="games.html" class="small-pill">מחפשים ערב בבית? נסו משחק זוגי</a>
+    </div>
+    <div class="dates-grid" id="dateResults">
+    <a href="date.html" class="date-card filter-item" data-search="פיקניק שקיעה שמיכה, משהו טעים, פלייליסט ושעה בלי טלפונים." data-budget="low" data-place="home" data-duration="short">
+      <div class="date-card-image"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=800&q=85" alt="פיקניק שקיעה"><span class="date-tag">ביתי</span></div>
+      <div class="date-card-body"><h3>פיקניק שקיעה</h3><p>שמיכה, משהו טעים, פלייליסט ושעה בלי טלפונים.</p><div class="date-card-footer"><span>רעיון #01</span><button class="mini-heart" data-fav="date-1" type="button">♡</button></div></div>
+    </a>
+    <a href="date.html" class="date-card filter-item" data-search="ערב בישול לפי מדינה בוחרים מדינה, מכינים יחד ארוחה ומרימים ערב עם קונספט." data-budget="medium" data-place="home" data-duration="medium">
+      <div class="date-card-image"><img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=800&q=85" alt="ערב בישול לפי מדינה"><span class="date-tag">ביתי</span></div>
+      <div class="date-card-body"><h3>ערב בישול לפי מדינה</h3><p>בוחרים מדינה, מכינים יחד ארוחה ומרימים ערב עם קונספט.</p><div class="date-card-footer"><span>רעיון #02</span><button class="mini-heart" data-fav="date-2" type="button">♡</button></div></div>
+    </a>
+    <a href="date.html" class="date-card filter-item" data-search="דייט זריחה בטבע קפה לדרך, משהו חם ללבוש ונקודה יפה לראות ממנה את הבוקר." data-budget="low" data-place="outside" data-duration="medium">
+      <div class="date-card-image"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=85" alt="דייט זריחה בטבע"><span class="date-tag">בחוץ</span></div>
+      <div class="date-card-body"><h3>דייט זריחה בטבע</h3><p>קפה לדרך, משהו חם ללבוש ונקודה יפה לראות ממנה את הבוקר.</p><div class="date-card-footer"><span>רעיון #03</span><button class="mini-heart" data-fav="date-3" type="button">♡</button></div></div>
+    </a>
+    <a href="date.html" class="date-card filter-item" data-search="ערב משחק זוגי משחק טוב, נשנושים וקצת תחרות ידידותית." data-budget="low" data-place="home" data-duration="short">
+      <div class="date-card-image"><img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=800&q=85" alt="ערב משחק זוגי"><span class="date-tag">ביתי</span></div>
+      <div class="date-card-body"><h3>ערב משחק זוגי</h3><p>משחק טוב, נשנושים וקצת תחרות ידידותית.</p><div class="date-card-footer"><span>רעיון #04</span><button class="mini-heart" data-fav="date-4" type="button">♡</button></div></div>
+    </a>
+    <a href="date.html" class="date-card filter-item" data-search="קפה וקינוח בעיר חדשה נוסעים לשכונה או עיר שלא מסתובבים בה בדרך כלל ובוחרים מקום במקרה." data-budget="medium" data-place="outside" data-duration="short">
+      <div class="date-card-image"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=85" alt="קפה וקינוח בעיר חדשה"><span class="date-tag">בחוץ</span></div>
+      <div class="date-card-body"><h3>קפה וקינוח בעיר חדשה</h3><p>נוסעים לשכונה או עיר שלא מסתובבים בה בדרך כלל ובוחרים מקום במקרה.</p><div class="date-card-footer"><span>רעיון #05</span><button class="mini-heart" data-fav="date-5" type="button">♡</button></div></div>
+    </a>
+    <a href="date.html" class="date-card filter-item" data-search="סדנת קרמיקה זוגית דייט שהוא גם חוויה וגם מזכרת שאפשר לקחת הביתה." data-budget="high" data-place="outside" data-duration="long">
+      <div class="date-card-image"><img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=800&q=85" alt="סדנת קרמיקה זוגית"><span class="date-tag">יצירתי</span></div>
+      <div class="date-card-body"><h3>סדנת קרמיקה זוגית</h3><p>דייט שהוא גם חוויה וגם מזכרת שאפשר לקחת הביתה.</p><div class="date-card-footer"><span>רעיון #06</span><button class="mini-heart" data-fav="date-6" type="button">♡</button></div></div>
+    </a>
+    <a href="date.html" class="date-card filter-item" data-search="לילה של שאלות עמוקות יין או תה, תאורה נעימה ושאלות שלא תמיד מגיעים אליהן ביומיום." data-budget="low" data-place="home" data-duration="medium">
+      <div class="date-card-image"><img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=800&q=85" alt="לילה של שאלות עמוקות"><span class="date-tag">ביתי</span></div>
+      <div class="date-card-body"><h3>לילה של שאלות עמוקות</h3><p>יין או תה, תאורה נעימה ושאלות שלא תמיד מגיעים אליהן ביומיום.</p><div class="date-card-footer"><span>רעיון #07</span><button class="mini-heart" data-fav="date-7" type="button">♡</button></div></div>
+    </a>
+    <a href="date.html" class="date-card filter-item" data-search="יום בלי תכנון קובעים רק נקודת התחלה ונותנים לכל החלטה להיקבע בהטלת מטבע." data-budget="medium" data-place="outside" data-duration="long">
+      <div class="date-card-image"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=85" alt="יום בלי תכנון"><span class="date-tag">בחוץ</span></div>
+      <div class="date-card-body"><h3>יום בלי תכנון</h3><p>קובעים רק נקודת התחלה ונותנים לכל החלטה להיקבע בהטלת מטבע.</p><div class="date-card-footer"><span>רעיון #08</span><button class="mini-heart" data-fav="date-8" type="button">♡</button></div></div>
+    </a></div>
+    <div class="empty-state" id="dateEmpty" hidden><span>♡</span><h3>אין כרגע התאמה מדויקת</h3><p>שנו פילטר אחד ונמצא משהו אחר.</p></div>
+  </section>
+</main>
+
+
+<footer class="site-footer" id="contact-footer">
+  <div class="footer-inner container">
+    <div class="footer-brand">
+      <div class="brand footer-logo"><span class="brand-heart">♡</span><span class="brand-name">רותם עדיני</span></div>
+      <p>מתכונים, דייטים, משחקים ורעיונות שעושים קצת יותר כיף ביומיום.</p>
+      <div class="social-row">
+        <a href="#" aria-label="Instagram">◎</a>
+        <a href="#" aria-label="TikTok">♪</a>
+        <a href="#" aria-label="YouTube">▶</a>
+        <a href="#" aria-label="Pinterest">P</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h3>ניווט מהיר</h3>
+      <a href="index.html">דף הבית</a>
+      <a href="recipes.html">כל המתכונים</a>
+      <a href="dates.html">רעיונות לדייטים</a>
+      <a href="games.html">משחקים לזוג</a>
+      <a href="gifts.html">מתנות</a>
+    </div>
+
+    <div class="footer-col">
+      <h3>עוד באתר</h3>
+      <a href="about.html">קצת עליי</a>
+      <a href="account.html">החשבון שלי</a>
+      <a href="#">שאלות ותשובות</a>
+      <a href="#">מדיניות פרטיות</a>
+      <a href="#">תנאי שימוש</a>
+    </div>
+
+    <div class="footer-col">
+      <h3>בואו נדבר</h3>
+      <a href="contact.html">צור קשר</a>
+      <a href="mailto:hello@rotemadini.com">hello@rotemadini.com ✉</a>
+      <span>ישראל ♡</span>
+    </div>
+  </div>
+  <div class="copyright">© 2026 רותם עדיני. כל הזכויות שמורות.</div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>מתנות מומלצות | רותם עדיני</title>
+  <meta name="description" content="רותם עדיני — מתכונים, דייטים, משחקים ומתנות." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="gifts">
+
+<header class="site-header">
+  <div class="header-inner container">
+    <a href="index.html" class="brand" aria-label="רותם עדיני - דף הבית">
+      <span class="brand-heart">♡</span>
+      <span class="brand-name">רותם עדיני</span>
+    </a>
+
+    <nav class="main-nav" id="mainNav" aria-label="ניווט ראשי">
+      <a class="" href="index.html">בית</a>
+<a class="" href="recipes.html">מתכונים</a>
+<a class="" href="dates.html">דייטים</a>
+<a class="" href="games.html">משחקים</a>
+<a class="active" href="gifts.html">מתנות</a>
+<a class="" href="contact.html">צור קשר</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="icon-btn account-link" href="search.html" aria-label="חיפוש באתר" title="חיפוש">⌕</a>
+      <a class="icon-btn account-link" href="favorites.html" aria-label="מועדפים" title="מועדפים">♡</a>
+      <a class="icon-btn account-link" href="account.html" aria-label="חשבון משתמש" title="חשבון משתמש">♙</a>
+      <a class="guest-pill" href="account.html">
+        <span>שלום, אורחת</span>
+        <strong>להתחברות</strong>
+      </a>
+      <button class="menu-btn" id="menuBtn" aria-label="פתיחת תפריט">☰</button>
+    </div>
+  </div>
+</header>
+
+
+<main class="page-main">
+  <section class="page-hero gifts-hero">
+    <div class="container page-hero-grid">
+      <div>
+        <span class="eyebrow">כשלא יודעים מה לקנות</span>
+        <h1>מתנות מומלצות <span>♡</span></h1>
+        <p>ריכזתי רעיונות למתנות קטנות, זוגיות וחווייתיות שאפשר לסנן לפי תקציב ולפי למי קונים.</p>
+      </div>
+      <div class="page-hero-art gift-art"><img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=1100&q=85" alt="מתנות עטופות"></div>
+    </div>
+  </section>
+
+  <section class="container shop-intro gift-toolbar">
+    <div><span class="section-kicker">בואו נמצא משהו מתאים</span><h2><span id="giftCount">6</span> רעיונות</h2></div>
+    <div class="filter-stack">
+      <div class="chips">
+        <button class="chip active" data-gift-filter="occasion" data-value="all">הכל</button>
+        <button class="chip" data-gift-filter="occasion" data-value="couple">לזוג</button>
+        <button class="chip" data-gift-filter="occasion" data-value="small">קטנה ומתוקה</button>
+        <button class="chip" data-gift-filter="occasion" data-value="experience">חוויה</button>
+        <button class="chip" data-gift-filter="occasion" data-value="hosting">אירוח</button>
+      </div>
+      <select id="giftBudget">
+        <option value="all">כל התקציבים</option>
+        <option value="low">עד ₪100</option>
+        <option value="mid">₪100–₪200</option>
+        <option value="high">₪200+</option>
+      </select>
+    </div>
+  </section>
+
+  <section class="container gifts-shop-grid" id="giftResults">
+    <article class="gift-shop-card filter-item" data-occasion="couple" data-budget="mid">
+      <div class="gift-image"><img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=800&q=85" alt="מארז ערב זוגי"><button class="mini-heart" data-fav="gift-1" type="button">♡</button></div>
+      <div class="gift-shop-body"><span class="section-kicker">לזוג</span><h3>מארז ערב זוגי</h3><div class="gift-row"><strong>₪159</strong><button class="text-button demo-buy" type="button">לפרטים ←</button></div></div>
+    </article>
+    <article class="gift-shop-card filter-item" data-occasion="small" data-budget="low">
+      <div class="gift-image"><img src="https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=800&q=85" alt="ספל לב מינימליסטי"><button class="mini-heart" data-fav="gift-2" type="button">♡</button></div>
+      <div class="gift-shop-body"><span class="section-kicker">קטנה ומתוקה</span><h3>ספל לב מינימליסטי</h3><div class="gift-row"><strong>₪69</strong><button class="text-button demo-buy" type="button">לפרטים ←</button></div></div>
+    </article>
+    <article class="gift-shop-card filter-item" data-occasion="couple" data-budget="low">
+      <div class="gift-image"><img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=85" alt="מחברת זיכרונות זוגית"><button class="mini-heart" data-fav="gift-3" type="button">♡</button></div>
+      <div class="gift-shop-body"><span class="section-kicker">לזוג</span><h3>מחברת זיכרונות זוגית</h3><div class="gift-row"><strong>₪79</strong><button class="text-button demo-buy" type="button">לפרטים ←</button></div></div>
+    </article>
+    <article class="gift-shop-card filter-item" data-occasion="experience" data-budget="high">
+      <div class="gift-image"><img src="https://images.unsplash.com/photo-1472653431158-6364773b2a56?auto=format&fit=crop&w=800&q=85" alt="ערכת פיקניק"><button class="mini-heart" data-fav="gift-4" type="button">♡</button></div>
+      <div class="gift-shop-body"><span class="section-kicker">חוויה</span><h3>ערכת פיקניק</h3><div class="gift-row"><strong>₪249</strong><button class="text-button demo-buy" type="button">לפרטים ←</button></div></div>
+    </article>
+    <article class="gift-shop-card filter-item" data-occasion="small" data-budget="low">
+      <div class="gift-image"><img src="https://images.unsplash.com/photo-1602874801006-8bc2e4535b73?auto=format&fit=crop&w=800&q=85" alt="נר ריחני לבית"><button class="mini-heart" data-fav="gift-5" type="button">♡</button></div>
+      <div class="gift-shop-body"><span class="section-kicker">קטנה ומתוקה</span><h3>נר ריחני לבית</h3><div class="gift-row"><strong>₪89</strong><button class="text-button demo-buy" type="button">לפרטים ←</button></div></div>
+    </article>
+    <article class="gift-shop-card filter-item" data-occasion="hosting" data-budget="mid">
+      <div class="gift-image"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=85" alt="מארז קפה וקינוחים"><button class="mini-heart" data-fav="gift-6" type="button">♡</button></div>
+      <div class="gift-shop-body"><span class="section-kicker">אירוח</span><h3>מארז קפה וקינוחים</h3><div class="gift-row"><strong>₪189</strong><button class="text-button demo-buy" type="button">לפרטים ←</button></div></div>
+    </article></section>
+  <div class="empty-state container" id="giftEmpty" hidden><span>♡</span><h3>אין התאמה לפילטר הזה</h3><p>נסו תקציב או סוג מתנה אחר.</p></div>
+
+  <section class="container disclosure-box">
+    <strong>שקיפות קטנה ♡</strong>
+    <p>אם בעתיד חלק מהקישורים יהיו קישורי שותפים, אפשר לציין כאן בצורה ברורה שרכישה דרכם עשויה להעניק עמלה ללא תוספת מחיר ללקוח.</p>
+  </section>
+</main>
+
+
+<footer class="site-footer" id="contact-footer">
+  <div class="footer-inner container">
+    <div class="footer-brand">
+      <div class="brand footer-logo"><span class="brand-heart">♡</span><span class="brand-name">רותם עדיני</span></div>
+      <p>מתכונים, דייטים, משחקים ורעיונות שעושים קצת יותר כיף ביומיום.</p>
+      <div class="social-row">
+        <a href="#" aria-label="Instagram">◎</a>
+        <a href="#" aria-label="TikTok">♪</a>
+        <a href="#" aria-label="YouTube">▶</a>
+        <a href="#" aria-label="Pinterest">P</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h3>ניווט מהיר</h3>
+      <a href="index.html">דף הבית</a>
+      <a href="recipes.html">כל המתכונים</a>
+      <a href="dates.html">רעיונות לדייטים</a>
+      <a href="games.html">משחקים לזוג</a>
+      <a href="gifts.html">מתנות</a>
+    </div>
+
+    <div class="footer-col">
+      <h3>עוד באתר</h3>
+      <a href="about.html">קצת עליי</a>
+      <a href="account.html">החשבון שלי</a>
+      <a href="#">שאלות ותשובות</a>
+      <a href="#">מדיניות פרטיות</a>
+      <a href="#">תנאי שימוש</a>
+    </div>
+
+    <div class="footer-col">
+      <h3>בואו נדבר</h3>
+      <a href="contact.html">צור קשר</a>
+      <a href="mailto:hello@rotemadini.com">hello@rotemadini.com ✉</a>
+      <span>ישראל ♡</span>
+    </div>
+  </div>
+  <div class="copyright">© 2026 רותם עדיני. כל הזכויות שמורות.</div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

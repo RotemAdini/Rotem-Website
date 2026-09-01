@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>משחקים לזוג | רותם עדיני</title>
+  <meta name="description" content="רותם עדיני — מתכונים, דייטים, משחקים ומתנות." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="games">
+
+<header class="site-header">
+  <div class="header-inner container">
+    <a href="index.html" class="brand" aria-label="רותם עדיני - דף הבית">
+      <span class="brand-heart">♡</span>
+      <span class="brand-name">רותם עדיני</span>
+    </a>
+
+    <nav class="main-nav" id="mainNav" aria-label="ניווט ראשי">
+      <a class="" href="index.html">בית</a>
+<a class="" href="recipes.html">מתכונים</a>
+<a class="" href="dates.html">דייטים</a>
+<a class="active" href="games.html">משחקים</a>
+<a class="" href="gifts.html">מתנות</a>
+<a class="" href="contact.html">צור קשר</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="icon-btn account-link" href="search.html" aria-label="חיפוש באתר" title="חיפוש">⌕</a>
+      <a class="icon-btn account-link" href="favorites.html" aria-label="מועדפים" title="מועדפים">♡</a>
+      <a class="icon-btn account-link" href="account.html" aria-label="חשבון משתמש" title="חשבון משתמש">♙</a>
+      <a class="guest-pill" href="account.html">
+        <span>שלום, אורחת</span>
+        <strong>להתחברות</strong>
+      </a>
+      <button class="menu-btn" id="menuBtn" aria-label="פתיחת תפריט">☰</button>
+    </div>
+  </div>
+</header>
+
+
+<main class="page-main">
+  <section class="page-hero games-hero">
+    <div class="container page-hero-grid">
+      <div>
+        <span class="eyebrow">לא עוד "אז מה עושים הערב?"</span>
+        <h1>משחקים לזוג <span>♡</span></h1>
+        <p>משחקים דיגיטליים שנועדו להצחיק, להתחרות, לפתוח שיחה או פשוט להעביר ערב אחר ביחד.</p>
+        <div class="hero-buttons"><a class="btn btn-primary" href="#games-list">לכל המשחקים</a><a class="btn btn-secondary" href="dates.html">רעיונות לדייטים</a></div>
+      </div>
+      <div class="games-hero-art">
+        <div class="floating-card card-one"><small>קלף 01</small><strong>מה הדבר הכי מצחיק שעשינו יחד?</strong><span>♡</span></div>
+        <div class="floating-card card-two"><small>משימה</small><strong>בחרו מי מתחיל — בלי לדבר</strong><span>→</span></div>
+        <div class="floating-card card-three"><small>בונוס</small><strong>המפסיד מכין קינוח</strong><span>🍰</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container shop-intro">
+    <div><span class="section-kicker">בחרו לפי מצב הרוח</span><h2>איזה ערב בא לכם?</h2></div>
+    <div class="chips shop-filter">
+      <button class="chip active" data-game-filter="all">הכל</button>
+      <button class="chip" data-game-filter="competition">תחרות</button>
+      <button class="chip" data-game-filter="deep">שאלות עומק</button>
+      <button class="chip" data-game-filter="fun">צחוק</button>
+      <button class="chip" data-game-filter="romance">רומנטי</button>
+    </div>
+  </section>
+
+  <section class="container shop-grid" id="games-list">
+    <article class="shop-card" data-kind="deep">
+      <a class="shop-card-image" href="game.html"><img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=800&q=85" alt="דיבורים מהלב"><span class="shop-badge">דיגיטלי</span></a>
+      <div class="shop-card-body">
+        <span class="section-kicker">שאלות עומק</span>
+        <h3><a href="game.html">דיבורים מהלב</a></h3>
+        <p>ערב של שאלות שלא תמיד מגיעים אליהן בשיחה רגילה.</p>
+        <div class="shop-card-footer"><strong>₪49</strong><button class="btn btn-primary compact demo-buy" type="button">לפרטים</button></div>
+      </div>
+    </article>
+    <article class="shop-card" data-kind="competition">
+      <a class="shop-card-image" href="game.html"><img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=800&q=85" alt="מי מכיר יותר?"><span class="shop-badge">דיגיטלי</span></a>
+      <div class="shop-card-body">
+        <span class="section-kicker">תחרות</span>
+        <h3><a href="game.html">מי מכיר יותר?</a></h3>
+        <p>תחרות קלילה ומצחיקה שתבדוק מי באמת זוכר יותר.</p>
+        <div class="shop-card-footer"><strong>₪39</strong><button class="btn btn-primary compact demo-buy" type="button">לפרטים</button></div>
+      </div>
+    </article>
+    <article class="shop-card" data-kind="fun">
+      <a class="shop-card-image" href="game.html"><img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=800&q=85" alt="משימה סמויה"><span class="shop-badge">דיגיטלי</span></a>
+      <div class="shop-card-body">
+        <span class="section-kicker">צחוק</span>
+        <h3><a href="game.html">משימה סמויה</a></h3>
+        <p>משימות סודיות, בלופים והרבה רגעים מצחיקים.</p>
+        <div class="shop-card-footer"><strong>₪39</strong><button class="btn btn-primary compact demo-buy" type="button">לפרטים</button></div>
+      </div>
+    </article>
+    <article class="shop-card" data-kind="romance">
+      <a class="shop-card-image" href="game.html"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=800&q=85" alt="שאלות של אהבה"><span class="shop-badge">דיגיטלי</span></a>
+      <div class="shop-card-body">
+        <span class="section-kicker">רומנטי</span>
+        <h3><a href="game.html">שאלות של אהבה</a></h3>
+        <p>שאלות וזיכרונות שמחזירים לרגעים שאתם אוהבים.</p>
+        <div class="shop-card-footer"><strong>₪49</strong><button class="btn btn-primary compact demo-buy" type="button">לפרטים</button></div>
+      </div>
+    </article></section>
+
+  <section class="container how-it-works">
+    <div class="section-head"><div><span class="section-kicker">פשוט להתחיל לשחק</span><h2>איך זה עובד?</h2></div></div>
+    <div class="how-grid">
+      <div><span>01</span><h3>בוחרים משחק</h3><p>לפי האווירה שמתאימה לכם הערב.</p></div>
+      <div><span>02</span><h3>רוכשים אונליין</h3><p>בגרסה האמיתית התשלום יחובר לסליקה.</p></div>
+      <div><span>03</span><h3>מקבלים גישה</h3><p>פותחים בטלפון או במחשב ומתחילים מיד.</p></div>
+    </div>
+  </section>
+</main>
+
+
+<footer class="site-footer" id="contact-footer">
+  <div class="footer-inner container">
+    <div class="footer-brand">
+      <div class="brand footer-logo"><span class="brand-heart">♡</span><span class="brand-name">רותם עדיני</span></div>
+      <p>מתכונים, דייטים, משחקים ורעיונות שעושים קצת יותר כיף ביומיום.</p>
+      <div class="social-row">
+        <a href="#" aria-label="Instagram">◎</a>
+        <a href="#" aria-label="TikTok">♪</a>
+        <a href="#" aria-label="YouTube">▶</a>
+        <a href="#" aria-label="Pinterest">P</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h3>ניווט מהיר</h3>
+      <a href="index.html">דף הבית</a>
+      <a href="recipes.html">כל המתכונים</a>
+      <a href="dates.html">רעיונות לדייטים</a>
+      <a href="games.html">משחקים לזוג</a>
+      <a href="gifts.html">מתנות</a>
+    </div>
+
+    <div class="footer-col">
+      <h3>עוד באתר</h3>
+      <a href="about.html">קצת עליי</a>
+      <a href="account.html">החשבון שלי</a>
+      <a href="#">שאלות ותשובות</a>
+      <a href="#">מדיניות פרטיות</a>
+      <a href="#">תנאי שימוש</a>
+    </div>
+
+    <div class="footer-col">
+      <h3>בואו נדבר</h3>
+      <a href="contact.html">צור קשר</a>
+      <a href="mailto:hello@rotemadini.com">hello@rotemadini.com ✉</a>
+      <span>ישראל ♡</span>
+    </div>
+  </div>
+  <div class="copyright">© 2026 רותם עדיני. כל הזכויות שמורות.</div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
