@@ -67,10 +67,151 @@ $$("[data-auth-tab]").forEach(btn=>btn.addEventListener("click",()=>{
   $$("[data-auth-panel]").forEach(p=>p.classList.toggle("active",p.dataset.authPanel===btn.dataset.authTab));
 }));
 
+// Source-backed editorial series. The page templates stay shared; query parameters
+// supply the title and image for each series item without duplicating their layouts.
+const biscuitCakeSeries=[
+  {id:"01",title:"עוגת ביסקוויטים פיסטוק",image:"images/biscuit-cakes/01-pistachio/IMG_5024.PNG"},
+  {id:"02",title:"עוגת ביסקוויטים קרמבו",image:"images/biscuit-cakes/02-krembo/IMG_5008.JPEG"},
+  {id:"03",title:"עוגת ביסקוויטים מוקה",image:"images/biscuit-cakes/03-mocha/IMG_5176.JPEG"},
+  {id:"04",title:"עוגת ביסקוויטים קראנץ׳ נוטלה",image:null},
+  {id:"05",title:"עוגת ביסקוויטים לימון ונענע",image:null},
+  {id:"06",title:"עוגת ביסקוויטים קרפ",image:"images/biscuit-cakes/06-crepe/IMG_7314.JPEG"},
+  {id:"07",title:"פירמידת ביסקוויטים כשרה לפסח",image:null},
+  {id:"08",title:"עוגת ביסקוויטים אלפחורס",image:"images/biscuit-cakes/08-alfajores/IMG_3516.JPEG",images:["images/biscuit-cakes/08-alfajores/IMG_3516.JPEG","images/biscuit-cakes/08-alfajores/IMG_7727.JPEG"]},
+  {id:"09",title:"כדורי ביסקוויטים",image:"images/biscuit-cakes/09-biscuit-balls/IMG_3511.JPEG",images:["images/biscuit-cakes/09-biscuit-balls/IMG_3511.JPEG","images/biscuit-cakes/09-biscuit-balls/IMG_3514.JPEG"]},
+  {id:"10",title:"עוגת ביסקוויטים טריפל שוקולד",image:"images/biscuit-cakes/10-triple-chocolate/IMG_3512.JPEG",images:["images/biscuit-cakes/10-triple-chocolate/IMG_3512.JPEG","images/biscuit-cakes/10-triple-chocolate/IMG_3513.JPEG"]},
+  {id:"11",title:"פצצת אוראו וביסקוויטים",image:"images/biscuit-cakes/11-oreo-bomb/IMG_9366.JPEG",images:["images/biscuit-cakes/11-oreo-bomb/IMG_9366.JPEG","images/biscuit-cakes/11-oreo-bomb/IMG_9387.JPEG"]},
+  {id:"12",title:"עוגת ביסקוויטים פקאן סיני",image:null},
+  {id:"13",title:"עוגת ביסקוויטים פירות יער",image:"images/biscuit-cakes/13-berries/IMG_3515.JPEG"},
+  {id:"14",title:"עוגת ביסקוויטים באונטי",image:null}
+];
+const dateSeriesAB=[
+  {id:"01",title:"דייט אוכל איטלקי",image:"images/date-series-a-b/01-italian-food/IMG_2453.JPEG",images:["images/date-series-a-b/01-italian-food/IMG_2453.JPEG","images/date-series-a-b/01-italian-food/IMG_2630.JPEG"]},
+  {id:"02",title:"דייט ביר פונג",image:"images/date-series-a-b/02-beer-pong/IMG_2640.PNG",images:["images/date-series-a-b/02-beer-pong/IMG_2640.PNG","images/date-series-a-b/02-beer-pong/IMG_2641.JPEG"]},
+  {id:"03",title:"ערב טעימות גבינות",image:"images/date-series-a-b/03-cheese-1/IMG_2645.PNG"},
+  {id:"04",title:"ערב גבינות ויין",image:"images/date-series-a-b/04-cheese-2/IMG_2648.PNG",images:["images/date-series-a-b/04-cheese-2/IMG_2648.PNG","images/date-series-a-b/04-cheese-2/IMG_2651.JPEG"]},
+  {id:"05",title:"דייט דגים",image:null},
+  {id:"06",title:"דייט המבורגר",image:"images/date-series-a-b/06-burger/IMG_5367.PNG",images:["images/date-series-a-b/06-burger/IMG_2652.JPEG","images/date-series-a-b/06-burger/IMG_5367.PNG","images/date-series-a-b/06-burger/IMG_5423.JPEG"]},
+  {id:"07",title:"ערב משחקי וידאו",image:"images/date-series-a-b/07-video-games/IMG_2656.JPEG",images:["images/date-series-a-b/07-video-games/IMG_2656.JPEG","images/date-series-a-b/07-video-games/IMG_2657.PNG"]},
+  {id:"08",title:"דייט זריחה",image:"images/date-series-a-b/08-sunrise/IMG_3518.JPEG",images:["images/date-series-a-b/08-sunrise/IMG_3518.JPEG","images/date-series-a-b/08-sunrise/IMG_4482.JPEG"]},
+  {id:"09",title:"סדנת חימר זוגית",image:"images/date-series-a-b/09-clay/IMG_2684.JPEG",images:["images/date-series-a-b/09-clay/IMG_2684.JPEG","images/date-series-a-b/09-clay/IMG_2689.JPEG"]},
+  {id:"10",title:"דייט טניס",image:"images/date-series-a-b/10-tennis/IMG_2779.JPEG",images:["images/date-series-a-b/10-tennis/IMG_2779.JPEG","images/date-series-a-b/10-tennis/IMG_2780.JPEG"]},
+  {id:"11",title:"ערב יצירה ויין",image:"images/date-series-a-b/11-crafts-and-wine/IMG_2658.JPEG"},
+  {id:"12",title:"דייט צפייה בכוכבים",image:"images/date-series-a-b/12-stargazing/IMG_2799.JPEG",images:["images/date-series-a-b/12-stargazing/IMG_2799.JPEG","images/date-series-a-b/12-stargazing/IMG_2802.JPEG","images/date-series-a-b/12-stargazing/IMG_2831.JPEG"]},
+  {id:"13",title:"דייט לגו זוגי",image:null}
+];
+
+function seriesImage(item,placeholderClass){
+  if(item.image){
+    const image=document.createElement("img");
+    image.src=item.image; image.alt=item.title; image.loading="lazy";
+    return image;
+  }
+  const placeholder=document.createElement("div");
+  placeholder.className=placeholderClass;
+  placeholder.setAttribute("role","img");
+  placeholder.setAttribute("aria-label",item.title);
+  return placeholder;
+}
+
+function addSeriesListings(){
+  const recipesRoot=$("#recipeResults");
+  if(recipesRoot){
+    recipesRoot.replaceChildren();
+    biscuitCakeSeries.forEach(item=>{
+      const card=document.createElement("article");
+      card.className="recipe-card filter-item";
+      card.dataset.search=`${item.title} עוגת ביסקוויטים`;
+      card.dataset.category="cakes"; card.dataset.type="sweet"; card.dataset.bake="no-bake"; card.dataset.difficulty="easy"; card.dataset.time="30"; card.dataset.series="biscuit-cakes";
+      const link=document.createElement("a");
+      link.className="card-link"; link.href=`recipe.html?series=biscuit-cake&item=${item.id}`; link.setAttribute("aria-label",item.title);
+      const fav=document.createElement("button");
+      fav.className="fav-btn"; fav.type="button"; fav.dataset.fav=`biscuit-cake-${item.id}`; fav.setAttribute("aria-label","הוספה למועדפים"); fav.textContent="♡";
+      const body=document.createElement("div"); body.className="recipe-body";
+      const heading=document.createElement("h3"); heading.textContent=item.title;
+      const meta=document.createElement("div"); meta.className="recipe-meta"; meta.innerHTML=`<span>סדרה #${item.id}</span><span>עוגות</span>`;
+      body.append(heading,meta); card.append(link,fav,seriesImage(item,"recipe-image-placeholder"),body); recipesRoot.append(card);
+    });
+  }
+  const datesRoot=$("#dateResults");
+  if(datesRoot){
+    datesRoot.replaceChildren();
+    dateSeriesAB.forEach(item=>{
+      const card=document.createElement("a");
+      card.href=`date.html?series=date-a-b&item=${item.id}`; card.className="date-card filter-item";
+      card.dataset.search=`${item.title} סדרת דייטים א ב`; card.dataset.budget="medium"; card.dataset.place="outside"; card.dataset.duration="medium"; card.dataset.series="date-a-b";
+      const imageWrap=document.createElement("div"); imageWrap.className="date-card-image"; imageWrap.append(seriesImage(item,"date-image-placeholder"));
+      const tag=document.createElement("span"); tag.className="date-tag"; tag.textContent="סדרה"; imageWrap.append(tag);
+      const body=document.createElement("div"); body.className="date-card-body";
+      const heading=document.createElement("h3"); heading.textContent=item.title;
+      const description=document.createElement("p"); description.textContent="מסדרת הדייטים א׳-ב׳";
+      const footer=document.createElement("div"); footer.className="date-card-footer";
+      const number=document.createElement("span"); number.textContent=`רעיון #${item.id}`;
+      const fav=document.createElement("button"); fav.className="mini-heart"; fav.type="button"; fav.dataset.fav=`date-a-b-${item.id}`; fav.textContent="♡";
+      footer.append(number,fav); body.append(heading,description,footer); card.append(imageWrap,body); datesRoot.append(card);
+    });
+  }
+}
+
+function hydrateSeriesDetail(){
+  const params=new URLSearchParams(location.search);
+  const series=params.get("series"), id=params.get("item");
+  const isRecipe=series==="biscuit-cake", isDate=series==="date-a-b";
+  const item=(isRecipe?biscuitCakeSeries:isDate?dateSeriesAB:[]).find(row=>row.id===id);
+  if(!item)return;
+  const image=isRecipe?$(".recipe-main-image img"):$(".date-detail-image img");
+  const title=isRecipe?$(".recipe-intro h1"):$(".date-detail-copy h1");
+  const crumb=isRecipe?$(".recipe-intro .breadcrumbs span:last-child"):$(".date-detail-copy .breadcrumbs span:last-child");
+  if(item.image&&image){image.src=item.image;image.alt=item.title}
+  if(title){title.firstChild.textContent=`${item.title} `}
+  if(crumb)crumb.textContent=item.title;
+  const favorite=isRecipe?$(".recipe-main-image [data-fav]"):$(".date-detail-image [data-fav]");
+  if(favorite)favorite.dataset.fav=`${series}-${item.id}`;
+  const galleryImages=item.images||[item.image].filter(Boolean);
+  if(galleryImages.length>1&&image){
+    const gallery=document.createElement("div"); gallery.className="series-gallery";
+    galleryImages.forEach((source,index)=>{
+      const thumb=document.createElement("button"); thumb.type="button"; thumb.className="series-gallery-thumb";
+      const thumbnail=document.createElement("img"); thumbnail.src=source; thumbnail.alt=`${item.title} – תמונה ${index+1}`;
+      thumb.append(thumbnail); thumb.addEventListener("click",()=>{image.src=source;image.alt=item.title;gallery.querySelectorAll("button").forEach(button=>button.classList.remove("active"));thumb.classList.add("active")});
+      if(index===0)thumb.classList.add("active"); gallery.append(thumb);
+    });
+    image.parentElement.append(gallery);
+  }
+  document.title=`${item.title} | רותם עדיני`;
+}
+
+function addSeriesFilters(){
+  const recipeFilters=$("#recipeResults")?.closest(".filter-layout")?.querySelector("aside");
+  if(recipeFilters){
+    const group=document.createElement("div"); group.className="filter-group series-filter";
+    group.innerHTML='<h3>סדרות</h3><div class="chips"><button class="chip" data-series-filter="recipes" data-value="biscuit-cakes">סדרת עוגות ביסקוויטים</button></div>';
+    recipeFilters.append(group);
+  }
+  const dateFilters=$("#dateResults")?.closest("main")?.querySelector(".discovery-filter");
+  if(dateFilters){
+    const group=document.createElement("div"); group.className="filter-group inline-filter series-filter";
+    group.innerHTML='<span>סדרות</span><div class="chips"><button class="chip" data-series-filter="dates" data-value="date-a-b">סדרת הא-ב</button></div>';
+    dateFilters.append(group);
+  }
+}
+
+addSeriesListings();
+addSeriesFilters();
+syncFavorites();
+hydrateSeriesDetail();
+
+// The original games and gifts cards are prototype catalog entries; neither has a
+// matching project source folder, so retain their grids but remove the invented rows.
+$("#games-list")?.replaceChildren();
+$("#giftResults")?.replaceChildren();
+if($("#giftCount"))$("#giftCount").textContent="0";
+$$('img[src*="images.unsplash.com"]').forEach(image=>{image.removeAttribute("src");image.alt=""});
+
 // Recipes filters
 const recipeResults=$("#recipeResults");
 if(recipeResults){
-  const state={type:"all",time:"all",bake:"all",difficulty:"all",category:"all",search:""};
+  const state={type:"all",time:"all",bake:"all",difficulty:"all",category:"all",series:"all",search:""};
   const cards=$$(".recipe-card.filter-item",recipeResults);
   function applyRecipeFilters(){
     let visible=0;
@@ -81,7 +222,8 @@ if(recipeResults){
       const matchesDiff=state.difficulty==="all"||card.dataset.difficulty===state.difficulty;
       const matchesCat=state.category==="all"||card.dataset.category===state.category;
       const matchesTime=state.time==="all"||Number(card.dataset.time)<=Number(state.time);
-      const show=matchesSearch&&matchesType&&matchesBake&&matchesDiff&&matchesCat&&matchesTime;
+      const matchesSeries=state.series==="all"||card.dataset.series===state.series;
+      const show=matchesSearch&&matchesType&&matchesBake&&matchesDiff&&matchesCat&&matchesTime&&matchesSeries;
       card.classList.toggle("is-hidden",!show); if(show)visible++;
     });
     $("#recipeCount").textContent=visible;
@@ -95,10 +237,12 @@ if(recipeResults){
   $("#recipeSearch")?.addEventListener("input",e=>{state.search=e.target.value.trim();applyRecipeFilters()});
   $("#difficultyFilter")?.addEventListener("change",e=>{state.difficulty=e.target.value;applyRecipeFilters()});
   $("#categoryFilter")?.addEventListener("change",e=>{state.category=e.target.value;applyRecipeFilters()});
+  $$('[data-series-filter="recipes"]').forEach(btn=>btn.addEventListener("click",()=>{state.series=state.series===btn.dataset.value?"all":btn.dataset.value;btn.classList.toggle("active",state.series===btn.dataset.value);applyRecipeFilters()}));
   $("[data-reset-filters]")?.addEventListener("click",()=>{
-    Object.assign(state,{type:"all",time:"all",bake:"all",difficulty:"all",category:"all",search:""});
+    Object.assign(state,{type:"all",time:"all",bake:"all",difficulty:"all",category:"all",series:"all",search:""});
     $("#recipeSearch").value="";$("#difficultyFilter").value="all";$("#categoryFilter").value="all";
     $$("[data-filter]").forEach(b=>b.classList.toggle("active",b.dataset.value==="all"));
+    $$('[data-series-filter="recipes"]').forEach(b=>b.classList.remove("active"));
     applyRecipeFilters();
   });
   $("#sortRecipes")?.addEventListener("change",e=>{
@@ -123,7 +267,7 @@ if(recipeResults){
 // Dates filters
 const dateResults=$("#dateResults");
 if(dateResults){
-  const state={budget:"all",place:"all",duration:"all",search:""};
+  const state={budget:"all",place:"all",duration:"all",series:"all",search:""};
   const cards=$$(".date-card",dateResults);
   function apply(){
     let visible=0;
@@ -131,7 +275,8 @@ if(dateResults){
       const show=(state.budget==="all"||c.dataset.budget===state.budget)
         &&(state.place==="all"||c.dataset.place===state.place)
         &&(state.duration==="all"||c.dataset.duration===state.duration)
-        &&(!state.search||c.dataset.search.includes(state.search));
+        &&(!state.search||c.dataset.search.includes(state.search))
+        &&(state.series==="all"||c.dataset.series===state.series);
       c.classList.toggle("is-hidden",!show); if(show)visible++;
     });
     $("#dateCount").textContent=visible;$("#dateEmpty").hidden=visible!==0;
@@ -143,6 +288,7 @@ if(dateResults){
   }));
   $("#dateDuration")?.addEventListener("change",e=>{state.duration=e.target.value;apply()});
   $("#dateSearch")?.addEventListener("input",e=>{state.search=e.target.value.trim();apply()});
+  $$('[data-series-filter="dates"]').forEach(btn=>btn.addEventListener("click",()=>{state.series=state.series===btn.dataset.value?"all":btn.dataset.value;btn.classList.toggle("active",state.series===btn.dataset.value);apply()}));
 }
 
 // Games
@@ -164,16 +310,10 @@ if(giftResults){
 
 
 // ===== V3 additions =====
-const favoriteCatalog = {
-  "recipe-lemon-biscuit": {type:"recipe", title:"עוגת ביסקוויטים לימון", meta:"מתכון · 30 דק׳", href:"recipe.html", image:"https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80"},
-  "recipe-cookie": {type:"recipe", title:"עוגיות שוקולד צ׳יפס", meta:"מתכון · 25 דק׳", href:"recipe.html", image:"https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=600&q=80"},
-  "recipe-pasta": {type:"recipe", title:"פסטה רוזה מושלמת", meta:"מתכון · 20 דק׳", href:"recipe.html", image:"https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=600&q=80"},
-  "recipe-cheesecake": {type:"recipe", title:"עוגת גבינה אפויה", meta:"מתכון · 70 דק׳", href:"recipe.html", image:"https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=600&q=80"},
-  "recipe-shakshuka": {type:"recipe", title:"שקשוקה ביתית", meta:"מתכון · 20 דק׳", href:"recipe.html", image:"https://images.unsplash.com/photo-1590412200988-a436970781fa?auto=format&fit=crop&w=600&q=80"},
-  "date-1": {type:"date", title:"פיקניק שקיעה", meta:"דייט · תקציב נמוך", href:"date.html", image:"https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=600&q=80"},
-  "gift-1": {type:"gift", title:"מארז ערב זוגי", meta:"מתנה · ₪159", href:"gifts.html", image:"https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=600&q=80"},
-  "game-heart": {type:"game", title:"דיבורים מהלב", meta:"משחק · ₪49", href:"game.html", icon:"🎲"}
-};
+const favoriteCatalog=Object.fromEntries([
+  ...biscuitCakeSeries.map(item=>[`biscuit-cake-${item.id}`,{type:"recipe",title:item.title,meta:`סדרת עוגות ביסקוויטים · #${item.id}`,href:`recipe.html?series=biscuit-cake&item=${item.id}`,image:item.image}]),
+  ...dateSeriesAB.map(item=>[`date-a-b-${item.id}`,{type:"date",title:item.title,meta:`סדרת הא-ב · #${item.id}`,href:`date.html?series=date-a-b&item=${item.id}`,image:item.image}])
+]);
 
 const favoritesGrid = $("#favoritesGrid");
 if(favoritesGrid){
