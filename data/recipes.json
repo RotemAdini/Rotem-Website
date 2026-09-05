@@ -14962,6 +14962,461 @@
         "MISSING_MAIN_IMAGE",
         "MISSING_HERO_IMAGE"
       ]
+    },
+    {
+      "id": "instagram-11",
+      "slug": "instagram-11",
+      "sequenceId": 11,
+      "publishedDate": "24/05/2023",
+      "contentCategory": "FOOD",
+      "title": "פסטה ברוטב קוטג'",
+      "sourceUrl": "https://www.instagram.com/reel/CsnxjMxMOBS/",
+      "foodType": "פסטה",
+      "ingredientsText": "",
+      "instructionsText": "",
+      "ingredients": [],
+      "instructions": [],
+      "images": {
+        "thumbnail": null,
+        "main": null,
+        "hero": null,
+        "new": []
+      },
+      "imageMatch": {
+        "confidence": "NONE",
+        "method": null,
+        "imageKey": null
+      },
+      "sourceFiles": [
+        {
+          "path": "data/content-review-batches/02_rows_011-020.xlsx",
+          "type": "xlsx",
+          "row": 2
+        }
+      ],
+      "status": "NEEDS_REVIEW",
+      "issues": [
+        "MISSING_INGREDIENTS",
+        "MISSING_INSTRUCTIONS"
+      ],
+      "notes": "שורה ריקה לגמרי באקסל הסקירה — לא נמצא טקסט מצרכים או הוראות בשום שדה."
+    },
+    {
+      "id": "instagram-13",
+      "slug": "instagram-13",
+      "sequenceId": 13,
+      "publishedDate": "31/05/2023",
+      "contentCategory": "FOOD",
+      "title": "בורקס פיצה",
+      "sourceUrl": "https://www.instagram.com/reel/Cs6XNLSqTsc/",
+      "foodType": "מאפה",
+      "ingredientsText": "",
+      "instructionsText": "",
+      "ingredients": [],
+      "instructions": [],
+      "images": {
+        "thumbnail": null,
+        "main": null,
+        "hero": null,
+        "new": []
+      },
+      "imageMatch": {
+        "confidence": "NONE",
+        "method": null,
+        "imageKey": null
+      },
+      "sourceFiles": [
+        {
+          "path": "data/content-review-batches/02_rows_011-020.xlsx",
+          "type": "xlsx",
+          "row": 3
+        }
+      ],
+      "status": "NEEDS_REVIEW",
+      "issues": [
+        "MISSING_INGREDIENTS",
+        "MISSING_INSTRUCTIONS"
+      ],
+      "notes": "שורה ריקה לגמרי באקסל הסקירה — לא נמצא טקסט מצרכים או הוראות בשום שדה."
+    },
+    {
+      "id": "instagram-17",
+      "slug": "instagram-17",
+      "sequenceId": 17,
+      "publishedDate": "11/06/2023",
+      "contentCategory": "FOOD",
+      "title": "עוגיות טיגריס",
+      "sourceUrl": "https://www.instagram.com/reel/CtWuDObqE7i/",
+      "foodType": "עוגיות",
+      "ingredientsText": "",
+      "instructionsText": "",
+      "ingredients": [],
+      "instructions": [],
+      "images": {
+        "thumbnail": null,
+        "main": null,
+        "hero": null,
+        "new": []
+      },
+      "imageMatch": {
+        "confidence": "NONE",
+        "method": null,
+        "imageKey": null
+      },
+      "sourceFiles": [
+        {
+          "path": "data/content-review-batches/02_rows_011-020.xlsx",
+          "type": "xlsx",
+          "row": 7
+        }
+      ],
+      "status": "NEEDS_REVIEW",
+      "issues": [
+        "MISSING_INGREDIENTS",
+        "MISSING_INSTRUCTIONS"
+      ],
+      "notes": "שורה ריקה לגמרי באקסל הסקירה — לא נמצא טקסט מצרכים או הוראות בשום שדה."
+    },
+    {
+      "id": "instagram-18",
+      "slug": "instagram-18",
+      "sequenceId": 18,
+      "publishedDate": "12/06/2023",
+      "contentCategory": "FOOD",
+      "title": "פלאפל",
+      "sourceUrl": "https://www.instagram.com/reel/CtZUrNRodw1/",
+      "foodType": "תוספות",
+      "ingredientsText": "",
+      "instructionsText": "",
+      "ingredients": [],
+      "instructions": [],
+      "images": {
+        "thumbnail": null,
+        "main": null,
+        "hero": null,
+        "new": []
+      },
+      "imageMatch": {
+        "confidence": "NONE",
+        "method": null,
+        "imageKey": null
+      },
+      "sourceFiles": [
+        {
+          "path": "data/content-review-batches/02_rows_011-020.xlsx",
+          "type": "xlsx",
+          "row": 8
+        }
+      ],
+      "status": "NEEDS_REVIEW",
+      "issues": [
+        "MISSING_INGREDIENTS",
+        "MISSING_INSTRUCTIONS"
+      ],
+      "notes": "שורה ריקה לגמרי באקסל הסקירה — לא נמצא טקסט מצרכים או הוראות בשום שדה."
+    },
+    {
+      "id": "instagram-19",
+      "slug": "instagram-19",
+      "sequenceId": 19,
+      "publishedDate": "19/06/2023",
+      "contentCategory": "FOOD",
+      "title": "פסטו",
+      "sourceUrl": "https://www.instagram.com/reel/CtrTtnrovuq/",
+      "foodType": "מנות ראשונות",
+      "ingredientsText": "",
+      "instructionsText": "",
+      "ingredients": [],
+      "instructions": [],
+      "images": {
+        "thumbnail": null,
+        "main": null,
+        "hero": null,
+        "new": []
+      },
+      "imageMatch": {
+        "confidence": "NONE",
+        "method": null,
+        "imageKey": null
+      },
+      "sourceFiles": [
+        {
+          "path": "data/content-review-batches/02_rows_011-020.xlsx",
+          "type": "xlsx",
+          "row": 9
+        }
+      ],
+      "status": "NEEDS_REVIEW",
+      "issues": [
+        "MISSING_INGREDIENTS",
+        "MISSING_INSTRUCTIONS"
+      ],
+      "notes": "שורה ריקה לגמרי באקסל הסקירה — לא נמצא טקסט מצרכים או הוראות בשום שדה."
+    },
+    {
+      "id": "instagram-23",
+      "slug": "instagram-23",
+      "sequenceId": 23,
+      "publishedDate": "03/07/2023",
+      "contentCategory": "FOOD",
+      "title": "קראנץ' שמרים מלוח עם פסטו וגבינות",
+      "sourceUrl": "https://www.instagram.com/reel/CuPX77UqXCD/",
+      "foodType": "מאפה",
+      "ingredientsText": "",
+      "instructionsText": "",
+      "ingredients": [],
+      "instructions": [],
+      "images": {
+        "thumbnail": null,
+        "main": null,
+        "hero": null,
+        "new": []
+      },
+      "imageMatch": {
+        "confidence": "NONE",
+        "method": null,
+        "imageKey": null
+      },
+      "sourceFiles": [
+        {
+          "path": "data/content-review-batches/03_rows_021-030.xlsx",
+          "type": "xlsx",
+          "row": 4
+        }
+      ],
+      "status": "NEEDS_REVIEW",
+      "issues": [
+        "MISSING_INGREDIENTS",
+        "MISSING_INSTRUCTIONS"
+      ],
+      "notes": "שורה ריקה לגמרי באקסל הסקירה — לא נמצא טקסט מצרכים או הוראות בשום שדה."
+    },
+    {
+      "id": "instagram-29",
+      "slug": "instagram-29",
+      "sequenceId": 29,
+      "publishedDate": "14/08/2023",
+      "contentCategory": "FOOD",
+      "title": "גלילות חצילים ממולאות בטאבולה",
+      "sourceUrl": "https://www.instagram.com/reel/Cv6yrN1Kqk4/",
+      "foodType": "אחר",
+      "ingredientsText": "",
+      "instructionsText": "",
+      "ingredients": [],
+      "instructions": [],
+      "images": {
+        "thumbnail": null,
+        "main": null,
+        "hero": null,
+        "new": []
+      },
+      "imageMatch": {
+        "confidence": "NONE",
+        "method": null,
+        "imageKey": null
+      },
+      "sourceFiles": [
+        {
+          "path": "data/content-review-batches/03_rows_021-030.xlsx",
+          "type": "xlsx",
+          "row": 10
+        }
+      ],
+      "status": "NEEDS_REVIEW",
+      "issues": [
+        "MISSING_INGREDIENTS",
+        "MISSING_INSTRUCTIONS"
+      ],
+      "notes": "שורה ריקה לגמרי באקסל הסקירה — לא נמצא טקסט מצרכים או הוראות בשום שדה."
+    },
+    {
+      "id": "instagram-39",
+      "slug": "instagram-39",
+      "sequenceId": 39,
+      "publishedDate": "19/09/2023",
+      "contentCategory": "FOOD",
+      "title": "פתיתים רוזה ברוטב קוטג'",
+      "sourceUrl": "https://www.instagram.com/reel/CxXi6k-qvvY/",
+      "foodType": "אחר",
+      "ingredientsText": "",
+      "instructionsText": "",
+      "ingredients": [],
+      "instructions": [],
+      "images": {
+        "thumbnail": null,
+        "main": null,
+        "hero": null,
+        "new": []
+      },
+      "imageMatch": {
+        "confidence": "NONE",
+        "method": null,
+        "imageKey": null
+      },
+      "sourceFiles": [
+        {
+          "path": "data/content-review-batches/04_rows_031-040.xlsx",
+          "type": "xlsx",
+          "row": 10
+        }
+      ],
+      "status": "NEEDS_REVIEW",
+      "issues": [
+        "MISSING_INGREDIENTS",
+        "MISSING_INSTRUCTIONS"
+      ],
+      "notes": "שורה ריקה לגמרי באקסל הסקירה — לא נמצא טקסט מצרכים או הוראות בשום שדה."
+    },
+    {
+      "id": "instagram-42",
+      "slug": "instagram-42",
+      "sequenceId": 42,
+      "publishedDate": "03/10/2023",
+      "contentCategory": "FOOD",
+      "title": "סביח מדפי אורז",
+      "sourceUrl": "https://www.instagram.com/reel/Cx8IGr7o82o/",
+      "foodType": "אורז",
+      "ingredientsText": "",
+      "instructionsText": "",
+      "ingredients": [],
+      "instructions": [],
+      "images": {
+        "thumbnail": null,
+        "main": null,
+        "hero": null,
+        "new": []
+      },
+      "imageMatch": {
+        "confidence": "NONE",
+        "method": null,
+        "imageKey": null
+      },
+      "sourceFiles": [
+        {
+          "path": "data/content-review-batches/05_rows_041-050.xlsx",
+          "type": "xlsx",
+          "row": 3
+        }
+      ],
+      "status": "NEEDS_REVIEW",
+      "issues": [
+        "MISSING_INGREDIENTS",
+        "MISSING_INSTRUCTIONS"
+      ],
+      "notes": "שורה ריקה לגמרי באקסל הסקירה — לא נמצא טקסט מצרכים או הוראות בשום שדה."
+    },
+    {
+      "id": "instagram-49",
+      "slug": "instagram-49",
+      "sequenceId": 49,
+      "publishedDate": "10/11/2023",
+      "contentCategory": "FOOD",
+      "title": "עוגת שמרים דאבל שוקולד",
+      "sourceUrl": "https://www.instagram.com/reel/CzdY6LiIN3y/",
+      "foodType": "עוגה",
+      "ingredientsText": "לבצק-\n500 גרם קמח לחם\n10 גרם שמרים יבשים\n100 גרם סוכר\nביצה\n100 גרם חמאה קרה חתוכה לקוביות\n200 גרם שמנת חמוצה\n50 גרם חלב\n5 גרם (כפית) מלח\n\nמילוי-\n200 גרם סוכר\n100 גרם קקאו\n100 גרם חמאה\n200 גרם שוקולד מריר\n\nלנוטלה-\nצנצנת קטנה של נוטלה 350 גרם\n\nלמי סוכר-\n40 גרם סוכר\n40 גרם מים רותחים",
+      "instructionsText": "הכנה:\nמתכון ל2 רולדות- \n\nמצרכים: \nלבצק- \n500 גרם קמח לחם \n10 גרם שמרים יבשים \n100 גרם סוכר \nביצה \n100 גרם חמאה קרה חתוכה לקוביות \n200 גרם שמנת חמוצה \n50 גרם חלב \n5 גרם (כפית) מלח \n\nמילוי- \n200 גרם סוכר \n100 גרם קקאו \n100 גרם חמאה \n200 גרם שוקולד מריר \n\nלנוטלה- \nצנצנת קטנה של נוטלה 350 גרם \n\nלמי סוכר- \n40 גרם סוכר \n40 גרם מים רותחים \n\nאופן הכנת הבצק: \nבקערת מיקסר נשים קמח שמרים וסוכר ונערבב דקה (אפשר גם לערבב עם כף) \nאחר כך נוסיף את הביצה, השמנת והחלב \nונלוש 5 דקות \nאחרי שנראה שהבצק מתאחד נוסיף בהדרגה את החמאה \n(נחתוך את החמאה לקוביות קטנות וכל כמה שניות נוסיף קוביית חמאה) \n\nאחרי שכל החמאה נטמעה בבצק (בין 4-5 דקות) \nנוסיף את המלח ונלוש עוד 3 דקות. \nשימו לב- \nזמן הלישה משתנה בין מיקסר למיקסר כי לפעמים יש מיקסרים פחות חזקים \n\n3 דקות אחרי שהוספתם את המלח כדי לבדוק אם הבצק סיים את הלישה תבדקו האם יש בבצק רשת גלוטן (בהייליט טיפים אצלי בעמוד אני מראה איך בודקים)\n\nאם אתם לא בטוחים עדיף ללוש את הבצק עוד קצת. \n\nאחרי שהבצק סיים את הלישה שלו נניח אותו בקערה משומנת. \nעכשיו יש 2 אופציות \nאופציה 1- לשים את הבצק בהתפחה של לילה במקרר ואז למחרת שעה לפני שרוצים לעבוד איתו להוציא אותו לטמפרטורת החדר ורק אז לעבוד איתו \nזאת האופציה העדיפה כי ככה הבצק תופח יותר טוב ויותר נוח לעבוד איתו \nאופציה 2- \nאם אין לכם זמן להתפחת לילה תתפיחו בחוץ שעה- שעה וחצי עד שהבצק מכפיל את עצמו \n\nבנתיים נכין את המילוי- \nנמיס במיקרו את השוקולד המריר ואת החמאה בפולסים של חצי דקה \nאחרי שהכל נמס נוסיף את הקקאו (עדיף לנפות אותו) ואת הסוכר ונערבב לאיחוד \n\nהמשך בתגובות 🫶🏼",
+      "ingredients": [],
+      "instructions": [],
+      "images": {
+        "thumbnail": null,
+        "main": null,
+        "hero": null,
+        "new": []
+      },
+      "imageMatch": {
+        "confidence": "NONE",
+        "method": null,
+        "imageKey": null
+      },
+      "sourceFiles": [
+        {
+          "path": "data/content-review-batches/05_rows_041-050.xlsx",
+          "type": "xlsx",
+          "row": 10
+        }
+      ],
+      "status": "NEEDS_REVIEW",
+      "issues": [
+        "MISSING_INSTRUCTIONS"
+      ],
+      "notes": "המצרכים נמצאים במלואם (חולצו מתוך שדה ההוראות שבו הם הופיעו בטעות). ההוראות עצמן נעצרות באמצע הכנת המילוי — הפוסט המקורי מציין \"המשך בתגובות\", וההמשך לא קיים בנתונים האלה. חסר: אופן עיצוב הרולדות, האפייה, והשימוש בנוטלה ובמי הסוכר."
+    },
+    {
+      "id": "instagram-57",
+      "slug": "instagram-57",
+      "sequenceId": 57,
+      "publishedDate": "30/11/2023",
+      "contentCategory": "FOOD",
+      "title": "ספגטי מוקרם בתנור",
+      "sourceUrl": "https://www.instagram.com/reel/C0RYCzEI8eS/",
+      "foodType": "פסטה",
+      "ingredientsText": "",
+      "instructionsText": "",
+      "ingredients": [],
+      "instructions": [],
+      "images": {
+        "thumbnail": null,
+        "main": null,
+        "hero": null,
+        "new": []
+      },
+      "imageMatch": {
+        "confidence": "NONE",
+        "method": null,
+        "imageKey": null
+      },
+      "sourceFiles": [
+        {
+          "path": "data/content-review-batches/06_rows_051-060.xlsx",
+          "type": "xlsx",
+          "row": 8
+        }
+      ],
+      "status": "NEEDS_REVIEW",
+      "issues": [
+        "MISSING_INGREDIENTS",
+        "MISSING_INSTRUCTIONS"
+      ],
+      "notes": "שורה ריקה לגמרי באקסל הסקירה — לא נמצא טקסט מצרכים או הוראות בשום שדה."
+    },
+    {
+      "id": "instagram-58",
+      "slug": "instagram-58",
+      "sequenceId": 58,
+      "publishedDate": "04/12/2023",
+      "contentCategory": "FOOD",
+      "title": "סופגניות פאי לימון",
+      "sourceUrl": "https://www.instagram.com/reel/C0b39Czo9sq/",
+      "foodType": "קינוח",
+      "ingredientsText": "למילוי:\n100 גרם סוכר\n100 גרם חמאה\n2 ביצים\n100 מל מיץ לימון (בערך מ-2 לימונים)\nגרידת לימון מלימון שלם\n\nלמרנג:\n80 גרם חלבונים (בערך 2 חלבונים)\n120 גרם סוכר",
+      "instructionsText": "אופן ההכנה נמצאים כמה רילסים אחורה \nבמידה ולא מצאתם תרשמו לי ואשלח לכם \n\nמצרכים למילוי: \n100 גרם סוכר \n100 גרם חמאה \n2 ביצים \n100 מל לימון (מיץ בערך מ2 לימונים) \nגרידת לימון מלימון שלם \n\nלמרנג: \n80 גרם חלבונים (בערך 2 חלבונים) \n120 סוכר \n\nאופן הכנת המילוי: \nבסיר קטן נערבב על אש נמוכה- בינונית \nאת כל המצרכים עד למרקם סמיך \nשימו לב לוקח לזה כמה דקות עד שזה קורה אל תפסיקו לערבב לרגע כי אז הביצה תהפוך לחביתה. \nברגע שזה נהיה סמיך תורידו את הסיר מאש ותעטפו אותו בניילון נצמד ותשימו אותו במקרר לשעה. \n•כשאתם עוטפים את הניילון נצמד תצמידו אותו טוב טוב לבלילה. \n\nהכנת המרנג: \nבקערת מיקסר נשים את החלבונים והסוכר. \nנשים את הקערה על באן מארי ונערבב טוב עד שכל הסוכר נמס. \nאחרי שהסוכר נמס נקציף את המרנג על מהירות גבוהה למשך 8 דקות \n\nאחרי שעה נוציא מהמקרר את המילוי לימון. \nנעשה חורים בעזרת סכין בסופגניות \nנמלא כל סופגנייה במילוי לימון ומלמעלה נמרח את המרנג \nבעזרת ברנר נשרוף את המרנג \nוזהו מוכן!! \n\nבתיאבון 😍\nמחכה לשמוע איך יצא לכם 🫶🏼\n\nכמה דגשים: \n•את המרנג להכין עשר דקות בערך לפני שמוציאים את בלילת הלימון מהמקרר כי אנחנו לא רוצים שהמרנג יחכה הרבה זמן בחוץ. \n•מומלץ לאכול את הסופגניות קרוב למועד ההכנה \n•הסופגניות בסרטון הן כבר אחרי שמרחתי עליהן חמאה מומסת\n•המילוי יוצא חמוץ כי זה לימון אם אתם מעדיפים אותו יותר מתוק תוסיפו עוד קצת סוכר \n\nבמידה ויש לכם שאלות מוזמנים לפנות אליי 🥰",
+      "ingredients": [],
+      "instructions": [],
+      "images": {
+        "thumbnail": null,
+        "main": null,
+        "hero": null,
+        "new": []
+      },
+      "imageMatch": {
+        "confidence": "NONE",
+        "method": null,
+        "imageKey": null
+      },
+      "sourceFiles": [
+        {
+          "path": "data/content-review-batches/06_rows_051-060.xlsx",
+          "type": "xlsx",
+          "row": 9
+        }
+      ],
+      "status": "NEEDS_REVIEW",
+      "issues": [
+        "MISSING_INGREDIENTS",
+        "MISSING_INSTRUCTIONS"
+      ],
+      "notes": "הפוסט המקורי מפנה במפורש ל\"רילסים אחורה\" (סרטון קודם) לגבי הכנת הסופגניות עצמן — מתכון הבסיס לא נכלל בנתונים האלה כלל. יש כאן רק את מילוי הלימון והמרנג."
     }
   ],
   "unmatchedImages": [
