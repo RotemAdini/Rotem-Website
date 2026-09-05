@@ -98,3 +98,4 @@ img{display:block;max-width:100%} a{color:inherit;text-decoration:none} button,i
    hero photo left almost nothing else visible on a phone screen without
    scrolling first — same fix already applied to .recipe-main-image img. */
 @media(max-width:640px){.date-detail-image>img{height:min(300px,48vh)}}
+#datePlanSection .recipe-stats{grid-template-columns:repeat(3,1fr)}
