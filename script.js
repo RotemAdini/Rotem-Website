@@ -73,7 +73,7 @@ const biscuitCakeSeries=[
   {id:"01",title:"עוגת ביסקוויטים פיסטוק",image:"images/biscuit-cakes/01-pistachio/IMG_5024-web.PNG"},
   {id:"02",title:"עוגת ביסקוויטים קרמבו",image:"images/biscuit-cakes/02-krembo/IMG_5008-web.JPEG"},
   {id:"03",title:"עוגת ביסקוויטים מוקה",image:"images/biscuit-cakes/03-mocha/IMG_5176-web.JPEG"},
-  {id:"04",title:"עוגת ביסקוויטים קראנץ׳ נוטלה",image:null},
+  {id:"04",title:"עוגת ביסקוויטים קראנץ׳ נוטלה",image:"images/biscuit-cakes/04-nutella-crunch/IMG_3692.JPEG"},
   {id:"05",title:"עוגת ביסקוויטים לימון ונענע",image:null},
   {id:"06",title:"עוגת ביסקוויטים קרפ",image:"images/biscuit-cakes/06-crepe/IMG_7314-web.JPEG"},
   {id:"07",title:"פירמידת ביסקוויטים כשרה לפסח",image:null},
@@ -81,9 +81,9 @@ const biscuitCakeSeries=[
   {id:"09",title:"כדורי ביסקוויטים",image:"images/biscuit-cakes/09-biscuit-balls/IMG_3511-web.JPEG",images:["images/biscuit-cakes/09-biscuit-balls/IMG_3511-web.JPEG","images/biscuit-cakes/09-biscuit-balls/IMG_3514-web.JPEG"]},
   {id:"10",title:"עוגת ביסקוויטים טריפל שוקולד",image:"images/biscuit-cakes/10-triple-chocolate/IMG_3512-web.JPEG",images:["images/biscuit-cakes/10-triple-chocolate/IMG_3512-web.JPEG","images/biscuit-cakes/10-triple-chocolate/IMG_3513-web.JPEG"]},
   {id:"11",title:"פצצת אוראו וביסקוויטים",image:"images/biscuit-cakes/11-oreo-bomb/IMG_9366-web.JPEG",images:["images/biscuit-cakes/11-oreo-bomb/IMG_9366-web.JPEG","images/biscuit-cakes/11-oreo-bomb/IMG_9387-web.JPEG"]},
-  {id:"12",title:"עוגת ביסקוויטים פקאן סיני",image:null},
+  {id:"12",title:"עוגת ביסקוויטים פקאן סיני",image:"images/biscuit-cakes/12-chinese-pecan/IMG_3691.JPEG"},
   {id:"13",title:"עוגת ביסקוויטים פירות יער",image:"images/biscuit-cakes/13-berries/IMG_3515-web.JPEG"},
-  {id:"14",title:"עוגת ביסקוויטים באונטי",image:null}
+  {id:"14",title:"עוגת ביסקוויטים באונטי",image:"images/biscuit-cakes/14-bounty/IMG_3690.JPEG"}
 ];
 // place/budget below are an estimate inferred from each title (e.g. "video
 // games night" -> home, "tennis date" -> outside/low cost) — not data from
@@ -95,7 +95,7 @@ const dateSeriesAB=[
   {id:"02",title:"דייט ביר פונג",image:"images/date-series-a-b/02-beer-pong/IMG_2640-web.PNG",images:["images/date-series-a-b/02-beer-pong/IMG_2640-web.PNG","images/date-series-a-b/02-beer-pong/IMG_2641-web.JPEG"],place:"home",budget:"low"},
   {id:"03",title:"ערב טעימות גבינות",image:"images/date-series-a-b/03-cheese-1/IMG_2645-web.PNG",place:"home",budget:"medium"},
   {id:"04",title:"ערב גבינות ויין",image:"images/date-series-a-b/04-cheese-2/IMG_2648-web.PNG",images:["images/date-series-a-b/04-cheese-2/IMG_2648-web.PNG","images/date-series-a-b/04-cheese-2/IMG_2651-web.JPEG"],place:"home",budget:"high"},
-  {id:"05",title:"דייט דגים",image:null,place:"outside",budget:"medium"},
+  {id:"05",title:"דייט דגים",image:"images/date-series-a-b/05-fish/IMG_2153-web.JPEG",images:["images/date-series-a-b/05-fish/IMG_2153-web.JPEG","images/date-series-a-b/05-fish/IMG_2156-web.JPEG","images/date-series-a-b/05-fish/IMG_2160-web.JPEG","images/date-series-a-b/05-fish/IMG_2165-web.JPEG","images/date-series-a-b/05-fish/IMG_5332-web.JPEG"],place:"outside",budget:"medium"},
   {id:"06",title:"דייט המבורגר",image:"images/date-series-a-b/06-burger/IMG_5367-web.PNG",images:["images/date-series-a-b/06-burger/IMG_2652-web.JPEG","images/date-series-a-b/06-burger/IMG_5367-web.PNG","images/date-series-a-b/06-burger/IMG_5423-web.JPEG"],place:"outside",budget:"medium"},
   {id:"07",title:"ערב משחקי וידאו",image:"images/date-series-a-b/07-video-games/IMG_2656-web.JPEG",images:["images/date-series-a-b/07-video-games/IMG_2656-web.JPEG","images/date-series-a-b/07-video-games/IMG_2657-web.PNG"],place:"home",budget:"low"},
   {id:"08",title:"דייט זריחה",image:"images/date-series-a-b/08-sunrise/IMG_3518-web.JPEG",images:["images/date-series-a-b/08-sunrise/IMG_3518-web.JPEG","images/date-series-a-b/08-sunrise/IMG_4482-web.JPEG"],place:"outside",budget:"low"},
@@ -103,7 +103,7 @@ const dateSeriesAB=[
   {id:"10",title:"דייט טניס",image:"images/date-series-a-b/10-tennis/IMG_2779-web.JPEG",images:["images/date-series-a-b/10-tennis/IMG_2779-web.JPEG","images/date-series-a-b/10-tennis/IMG_2780-web.JPEG"],place:"outside",budget:"low"},
   {id:"11",title:"ערב יצירה ויין",image:"images/date-series-a-b/11-crafts-and-wine/IMG_2658-web.JPEG",place:"home",budget:"medium"},
   {id:"12",title:"דייט צפייה בכוכבים",image:"images/date-series-a-b/12-stargazing/IMG_2799-web.JPEG",images:["images/date-series-a-b/12-stargazing/IMG_2799-web.JPEG","images/date-series-a-b/12-stargazing/IMG_2802-web.JPEG","images/date-series-a-b/12-stargazing/IMG_2831-web.JPEG"],place:"outside",budget:"low"},
-  {id:"13",title:"דייט לגו זוגי",image:null,place:"home",budget:"low"}
+  {id:"13",title:"דייט לגו זוגי",image:"images/date-series-a-b/13-lego/IMG_3640-web.JPEG",images:["images/date-series-a-b/13-lego/IMG_3640-web.JPEG","images/date-series-a-b/13-lego/IMG_3647-web.JPEG"],place:"home",budget:"low"}
 ];
 
 function seriesImage(item,placeholderClass){
