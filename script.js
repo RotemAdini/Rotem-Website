@@ -296,6 +296,50 @@ addHomeHighlights();
 hydrateSeriesDetail();
 syncFavorites();
 
+// Reviewed spreadsheet imports live in the same recipes.json catalog as the
+// existing inventory. Only records marked with a sequenceId are rendered here;
+// this keeps the older inventory available without turning unreviewed rows into
+// public recipe cards.
+function escapeHtml(value){return String(value??"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[char]))}
+function reviewedRecipeCard(recipe){
+  const card=document.createElement("article");
+  card.className="recipe-card filter-item recipe-card-no-image";
+  card.dataset.search=`${recipe.title} ${recipe.foodType||""}`;
+  card.dataset.category=recipe.categorySlug||"all";
+  card.dataset.type=recipe.siteCategory==="עוגות וקינוחים"?"sweet":"savory";
+  card.dataset.bake="regular";
+  card.dataset.difficulty=recipe.difficultySlug||"all";
+  card.dataset.time=String(recipe.prepTimeMinutes||0);
+  card.dataset.series="";
+  const link=document.createElement("a");link.className="card-link";link.href=`recipe.html?recipe=${encodeURIComponent(recipe.id)}`;link.setAttribute("aria-label",recipe.title);
+  const body=document.createElement("div");body.className="recipe-body";
+  const heading=document.createElement("h3");heading.textContent=recipe.title;
+  const meta=document.createElement("div");meta.className="recipe-meta";
+  const category=document.createElement("span");category.textContent=recipe.siteCategory||recipe.foodType||"";
+  const timing=document.createElement("span");timing.textContent=recipe.prepTimeMinutes?`${recipe.prepTimeMinutes} דק׳`:"";
+  meta.append(category,timing);body.append(heading,meta);card.append(link,body);return card;
+}
+function renderReviewedRecipeDetail(recipe){
+  const main=document.querySelector("main.page-main");if(!main)return;
+  const ingredients=(recipe.ingredients||[]).map(item=>`<label class="ingredient-check"><input type="checkbox"><span>${escapeHtml(item)}</span></label>`).join("");
+  const instructions=(recipe.instructions||[]).map((item,index)=>`<li><span class="step-number">${index+1}</span><div><h3>שלב ${index+1}</h3><p>${escapeHtml(item)}</p></div></li>`).join("");
+  main.innerHTML=`<section class="recipe-detail-hero container reviewed-recipe-hero"><div class="recipe-intro"><div class="breadcrumbs"><a href="recipes.html">מתכונים</a><span>›</span><span>${escapeHtml(recipe.siteCategory||recipe.foodType||"מתכון")}</span></div><h1>${escapeHtml(recipe.title)}</h1><p>${escapeHtml(recipe.foodType||"")}</p><div class="recipe-stats"><div><strong>${escapeHtml(recipe.siteCategory||"—")}</strong><span>קטגוריה</span></div><div><strong>${escapeHtml(recipe.difficulty||"—")}</strong><span>רמת קושי</span></div><div><strong>${recipe.prepTimeMinutes?`${recipe.prepTimeMinutes} דק׳`:"—"}</strong><span>זמן הכנה</span></div><div><strong>${escapeHtml(recipe.publishedDate||"—")}</strong><span>פורסם</span></div></div><div class="recipe-actions"><a class="btn btn-primary" href="${escapeHtml(recipe.sourceUrl)}" target="_blank" rel="noopener">לצפייה בפוסט באינסטגרם</a><a class="btn btn-secondary" href="recipes.html">לכל המתכונים</a></div></div></section><section class="container recipe-content-grid reviewed-recipe-content"><aside class="ingredients-card panel"><span class="section-kicker">מצרכים</span><h2>מה צריך?</h2>${ingredients||"<p>אין רשימת מצרכים זמינה.</p>"}</aside><article class="instructions-card panel"><span class="section-kicker">אופן הכנה</span><h2>איך מכינים?</h2><ol class="steps-list">${instructions||"<li><div><p>אין הוראות הכנה זמינות.</p></div></li>"}</ol></article></section>`;
+  document.title=`${recipe.title} | רותם עדיני`;
+}
+async function loadReviewedRecipes(){
+  try{
+    const response=await fetch("data/recipes.json");if(!response.ok)return;
+    const catalog=await response.json();const reviewed=(catalog.recipes||[]).filter(recipe=>Number.isInteger(recipe.sequenceId)&&recipe.status==="COMPLETE"&&recipe.ingredients?.length&&recipe.instructions?.length);
+    const results=$("#recipeResults");if(results&&reviewed.length){
+      reviewed.sort((a,b)=>a.sequenceId-b.sequenceId).forEach(recipe=>results.append(reviewedRecipeCard(recipe)));
+      $("#recipeSearch")?.dispatchEvent(new Event("input"));
+    }
+    const recipeId=new URLSearchParams(location.search).get("recipe");
+    const recipe=reviewed.find(item=>item.id===recipeId);if(recipe)renderReviewedRecipeDetail(recipe);
+  }catch{ /* A static preview can still show the existing catalog if data is unavailable. */ }
+}
+loadReviewedRecipes();
+
 // The games catalog is source-backed: its cards link directly to the migrated
 // product landing pages in /games. Gift prototypes remain intentionally hidden.
 $("#giftResults")?.replaceChildren();
@@ -306,10 +350,10 @@ $$('img[src*="images.unsplash.com"]').forEach(image=>{image.removeAttribute("src
 const recipeResults=$("#recipeResults");
 if(recipeResults){
   const state={type:"all",time:"all",bake:"all",difficulty:"all",category:"all",series:"all",search:""};
-  const cards=$$(".recipe-card.filter-item",recipeResults);
+  const cards=()=>$$(".recipe-card.filter-item",recipeResults);
   function applyRecipeFilters(){
     let visible=0;
-    cards.forEach(card=>{
+    cards().forEach(card=>{
       const matchesSearch=!state.search||card.dataset.search.includes(state.search);
       const matchesType=state.type==="all"||card.dataset.type===state.type;
       const matchesBake=state.bake==="all"||card.dataset.bake===state.bake;
@@ -341,7 +385,7 @@ if(recipeResults){
   });
   $("#sortRecipes")?.addEventListener("change",e=>{
     const mode=e.target.value;
-    const sorted=[...cards].sort((a,b)=>{
+    const sorted=[...cards()].sort((a,b)=>{
       if(mode==="time-asc")return Number(a.dataset.time)-Number(b.dataset.time);
       if(mode==="name")return a.dataset.search.localeCompare(b.dataset.search,"he");
       return 0;
