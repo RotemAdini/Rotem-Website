@@ -134,7 +134,7 @@ function buildRecipeCard(item,{filterable=false}={}){
   fav.className="fav-btn"; fav.type="button"; fav.dataset.fav=`biscuit-cake-${item.id}`; fav.setAttribute("aria-label","הוספה למועדפים"); fav.textContent="♡";
   const body=document.createElement("div"); body.className="recipe-body";
   const heading=document.createElement("h3"); heading.textContent=item.title;
-  const meta=document.createElement("div"); meta.className="recipe-meta"; meta.innerHTML=`<span>סדרה #${item.id}</span><span>עוגות</span>`;
+  const meta=document.createElement("div"); meta.className="recipe-meta"; meta.innerHTML=`<span>פרק ${parseInt(item.id,10)} בסדרת עוגות הביסקוויטים</span><span>עוגות</span>`;
   body.append(heading,meta); card.append(fav,seriesImage(item,"recipe-image-placeholder"),body);
   return card;
 }
@@ -301,56 +301,168 @@ syncFavorites();
 // this keeps the older inventory available without turning unreviewed rows into
 // public recipe cards.
 function escapeHtml(value){return String(value??"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[char]))}
-function reviewedRecipeImage(recipe){
+// Cards use the small, web-optimized thumbnail first (falling back to the
+// original photo if one isn't available); the detail page prefers the
+// original full-resolution photo for its large hero image.
+function reviewedRecipeCardImage(recipe){
+  return recipe.images?.thumbnail||recipe.images?.main||recipe.images?.hero||null;
+}
+function reviewedRecipeHeroImage(recipe){
   return recipe.images?.main||recipe.images?.hero||recipe.images?.thumbnail||null;
+}
+// The Excel "series" column currently only ever names one grouping. Mapping it
+// to the same slug the legacy biscuit-cake cards use lets the existing "סדרת
+// עוגות ביסקוויטים" filter chip match these catalog records too.
+const RECIPE_SERIES_SLUGS={"עוגות ביסקוויטים":"biscuit-cakes"};
+function reviewedRecipeSeriesSlug(recipe){
+  return RECIPE_SERIES_SLUGS[recipe.series]||"";
+}
+// Every recipe card keeps the same shape — link, media area, body — whether or
+// not it has a photo, so cards without an image still reserve the same space
+// and rows stay aligned instead of collapsing.
+function reviewedRecipeMedia(recipe){
+  const imageSrc=reviewedRecipeCardImage(recipe);
+  if(imageSrc){
+    const image=document.createElement("img");
+    image.src=imageSrc;image.alt=recipe.title;image.loading="lazy";
+    return image;
+  }
+  const placeholder=document.createElement("div");
+  placeholder.className="recipe-image-placeholder";
+  placeholder.setAttribute("role","img");
+  placeholder.setAttribute("aria-label",recipe.title);
+  return placeholder;
 }
 function reviewedRecipeCard(recipe){
   const card=document.createElement("article");
-  card.className="recipe-card filter-item recipe-card-no-image";
+  card.className="recipe-card filter-item";
   card.dataset.search=`${recipe.title} ${recipe.foodType||""}`;
   card.dataset.category=recipe.categorySlug||"all";
   card.dataset.type=recipe.siteCategory==="עוגות וקינוחים"?"sweet":"savory";
   card.dataset.bake="regular";
   card.dataset.difficulty=recipe.difficultySlug||"all";
   card.dataset.time=String(recipe.prepTimeMinutes||0);
-  card.dataset.series="";
+  card.dataset.series=reviewedRecipeSeriesSlug(recipe);
+  card.dataset.tags=(recipe.tags||[]).join(" ");
   const link=document.createElement("a");link.className="card-link";link.href=`recipe.html?recipe=${encodeURIComponent(recipe.id)}`;link.setAttribute("aria-label",recipe.title);
   const body=document.createElement("div");body.className="recipe-body";
   const heading=document.createElement("h3");heading.textContent=recipe.title;
   const meta=document.createElement("div");meta.className="recipe-meta";
   const category=document.createElement("span");category.textContent=recipe.siteCategory||recipe.foodType||"";
   const timing=document.createElement("span");timing.textContent=recipe.prepTimeMinutes?`${recipe.prepTimeMinutes} דק׳`:"";
-  const imageSrc=reviewedRecipeImage(recipe);
   meta.append(category,timing);body.append(heading,meta);
-  if(imageSrc){
-    const image=document.createElement("img");
-    image.src=imageSrc;image.alt=recipe.title;image.loading="lazy";
-    card.classList.remove("recipe-card-no-image");card.append(link,image,body);
-  }else card.append(link,body);
+  card.append(link,reviewedRecipeMedia(recipe),body);
   return card;
 }
 function renderReviewedRecipeDetail(recipe){
   const main=document.querySelector("main.page-main");if(!main)return;
   const ingredients=(recipe.ingredients||[]).map(item=>`<label class="ingredient-check"><input type="checkbox"><span>${escapeHtml(item)}</span></label>`).join("");
   const instructions=(recipe.instructions||[]).map((item,index)=>`<li><span class="step-number">${index+1}</span><div><h3>שלב ${index+1}</h3><p>${escapeHtml(item)}</p></div></li>`).join("");
-  const imageSrc=reviewedRecipeImage(recipe);
+  const imageSrc=reviewedRecipeHeroImage(recipe);
   const visual=imageSrc?`<div class="recipe-main-image"><img src="${escapeHtml(imageSrc)}" alt="${escapeHtml(recipe.title)}"></div>`:"";
-  main.innerHTML=`<section class="recipe-detail-hero container reviewed-recipe-hero ${imageSrc?"has-recipe-image":"no-recipe-image"}">${visual}<div class="recipe-intro"><div class="breadcrumbs"><a href="recipes.html">מתכונים</a><span>›</span><span>${escapeHtml(recipe.siteCategory||recipe.foodType||"מתכון")}</span></div><h1>${escapeHtml(recipe.title)}</h1><p>${escapeHtml(recipe.foodType||"")}</p><div class="recipe-stats"><div><strong>${escapeHtml(recipe.siteCategory||"—")}</strong><span>קטגוריה</span></div><div><strong>${escapeHtml(recipe.difficulty||"—")}</strong><span>רמת קושי</span></div><div><strong>${recipe.prepTimeMinutes?`${recipe.prepTimeMinutes} דק׳`:"—"}</strong><span>זמן הכנה</span></div><div><strong>${escapeHtml(recipe.publishedDate||"—")}</strong><span>פורסם</span></div></div><div class="recipe-actions"><a class="btn btn-primary" href="${escapeHtml(recipe.sourceUrl)}" target="_blank" rel="noopener">לצפייה בפוסט באינסטגרם</a><a class="btn btn-secondary" href="recipes.html">לכל המתכונים</a></div></div></section><section class="container recipe-content-grid reviewed-recipe-content"><aside class="ingredients-card panel"><span class="section-kicker">מצרכים</span><h2>מה צריך?</h2>${ingredients||"<p>אין רשימת מצרכים זמינה.</p>"}</aside><article class="instructions-card panel"><span class="section-kicker">אופן הכנה</span><h2>איך מכינים?</h2><ol class="steps-list">${instructions||"<li><div><p>אין הוראות הכנה זמינות.</p></div></li>"}</ol></article></section>`;
+  const note=recipe.notes?`<div class="tip-box"><strong>שימו לב</strong><p>${escapeHtml(recipe.notes)}</p></div>`:"";
+  main.innerHTML=`<section class="recipe-detail-hero container reviewed-recipe-hero ${imageSrc?"has-recipe-image":"no-recipe-image"}"><a class="recipe-back-link" href="recipes.html" aria-label="חזרה לכל המתכונים"><span aria-hidden="true">→</span> לכל המתכונים</a>${visual}<div class="recipe-intro"><div class="breadcrumbs"><a href="recipes.html">מתכונים</a><span>›</span><span>${escapeHtml(recipe.siteCategory||recipe.foodType||"מתכון")}</span></div><h1>${escapeHtml(recipe.title)}</h1><p>${escapeHtml(recipe.foodType||"")}</p><div class="recipe-stats"><div><strong>${escapeHtml(recipe.siteCategory||"—")}</strong><span>קטגוריה</span></div><div><strong>${escapeHtml(recipe.difficulty||"—")}</strong><span>רמת קושי</span></div><div><strong>${recipe.prepTimeMinutes?`${recipe.prepTimeMinutes} דק׳`:"—"}</strong><span>זמן הכנה</span></div><div><strong>${escapeHtml(recipe.publishedDate||"—")}</strong><span>פורסם</span></div></div>${note}<div class="recipe-actions"><a class="btn btn-primary" href="${escapeHtml(recipe.sourceUrl)}" target="_blank" rel="noopener">לצפייה בפוסט באינסטגרם</a><a class="btn btn-secondary" href="recipes.html">לכל המתכונים</a></div></div></section><section class="container recipe-content-grid reviewed-recipe-content"><aside class="ingredients-card panel"><span class="section-kicker">מצרכים</span><h2>מה צריך?</h2>${ingredients||"<p>אין רשימת מצרכים זמינה.</p>"}</aside><article class="instructions-card panel"><span class="section-kicker">אופן הכנה</span><h2>איך מכינים?</h2><ol class="steps-list">${instructions||"<li><div><p>אין הוראות הכנה זמינות.</p></div></li>"}</ol></article></section>`;
   document.title=`${recipe.title} | רותם עדיני`;
+}
+// Source dates are DD/MM/YYYY. Anything unparseable sorts to the very end
+// (oldest) rather than breaking the newest-first order of everything else.
+function parseIsraeliDate(value){
+  const m=/^(\d{2})\/(\d{2})\/(\d{4})$/.exec((value||"").trim());
+  if(!m)return null;
+  return new Date(Number(m[3]),Number(m[2])-1,Number(m[1])).getTime();
+}
+function biscuitSeriesFolderId(path){
+  const m=/images\/biscuit-cakes\/(\d+)-/.exec(path||"");
+  return m?m[1]:null;
+}
+// A few legacy "biscuit cake series" stand-ins don't have a photo yet, so they
+// can't be matched by image path — but their catalog record's title confirms
+// they're the same recipe (just a slightly different title/word order once the
+// real content arrived), so they're still deduplicated by title here.
+const BISCUIT_SERIES_TITLE_MATCH={
+  "עוגת קראנץ׳ נוטלה":"04",
+  "עוגת ביסקוויטים לימונענע":"05",
+  "עוגת ביסקוויטים באונטי":"14"
+};
+// Populates the (data-driven, never invented) tag filter chips once the
+// catalog is loaded and we know which tags actually occur in the data.
+function addTagFilters(items){
+  const tags=[...new Set(items.flatMap(r=>r.tags||[]))];
+  const panel=$("#recipeResults")?.closest(".filter-layout")?.querySelector("aside");
+  if(!tags.length||!panel||panel.querySelector(".tag-filter"))return;
+  const group=document.createElement("div");group.className="filter-group tag-filter";
+  const chipsHtml=tags.map(tag=>`<button class="chip" data-tag-filter="${escapeHtml(tag)}">${escapeHtml(tag)}</button>`).join("");
+  group.innerHTML=`<h3>תגיות</h3><div class="chips"><button class="chip active" data-tag-filter="all">הכל</button>${chipsHtml}</div>`;
+  panel.append(group);
+  group.querySelectorAll("[data-tag-filter]").forEach(btn=>btn.addEventListener("click",()=>{
+    group.querySelectorAll("[data-tag-filter]").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    window.__recipeFilters?.setTag(btn.dataset.tagFilter);
+  }));
 }
 async function loadReviewedRecipes(){
   try{
     const response=await fetch("data/recipes.json");if(!response.ok)return;
     const catalog=await response.json();const reviewed=(catalog.recipes||[]).filter(recipe=>Number.isInteger(recipe.sequenceId)&&recipe.status==="COMPLETE"&&recipe.ingredients?.length&&recipe.instructions?.length);
-    const results=$("#recipeResults");if(results&&reviewed.length){
-      reviewed.sort((a,b)=>a.sequenceId-b.sequenceId).forEach(recipe=>results.append(reviewedRecipeCard(recipe)));
+    const results=$("#recipeResults");
+    if(results){
+      // A few launch recipes are the exact same photo as a legacy "biscuit cake
+      // series" stand-in card already rendered by addSeriesListings(). Now that
+      // the fuller catalog record for that photo exists, drop the stand-in so
+      // the recipe shows once instead of twice.
+      const coveredBiscuitIds=new Set(reviewed.map(r=>biscuitSeriesFolderId(r.images?.thumbnail)||biscuitSeriesFolderId(r.images?.main)||biscuitSeriesFolderId(r.images?.hero)||BISCUIT_SERIES_TITLE_MATCH[r.title]).filter(Boolean));
+      $$('.recipe-card[data-series="biscuit-cakes"]',results).forEach(card=>{
+        const href=card.querySelector("a")?.getAttribute("href")||"";
+        const match=/item=(\d+)/.exec(href);
+        if(match&&coveredBiscuitIds.has(match[1]))card.remove();
+      });
+      // A couple of catalog records are the same recipe posted to Instagram
+      // twice; only the more complete one renders as a card (see the
+      // DUPLICATE_OF_* issue tags) — the other keeps its data and URL, it just
+      // isn't shown a second time.
+      const listItems=reviewed.filter(recipe=>!(recipe.issues||[]).some(issue=>issue.startsWith("DUPLICATE_OF")));
+      listItems.sort((a,b)=>(parseIsraeliDate(b.publishedDate)||0)-(parseIsraeliDate(a.publishedDate)||0));
+      // Remaining legacy cards (no catalog record yet) have no publish date, so
+      // they sink to the end, after every dated recipe, newest to oldest.
+      const remainingLegacyCards=$$(".recipe-card",results);
+      listItems.forEach(recipe=>results.append(reviewedRecipeCard(recipe)));
+      remainingLegacyCards.forEach(card=>results.append(card));
+      addTagFilters(listItems);
       $("#recipeSearch")?.dispatchEvent(new Event("input"));
     }
     const recipeId=new URLSearchParams(location.search).get("recipe");
     const recipe=reviewed.find(item=>item.id===recipeId);if(recipe)renderReviewedRecipeDetail(recipe);
   }catch{ /* A static preview can still show the existing catalog if data is unavailable. */ }
 }
-loadReviewedRecipes();
+// The reviewed catalog is only ever rendered on the recipes board or a recipe
+// detail page — skip the ~500KB fetch everywhere else (dates, games...).
+if(document.body.dataset.page==="recipes")loadReviewedRecipes();
+
+// Homepage category strip: each category's photo is the most recently
+// published FOOD recipe in that category that actually has a photo yet
+// (skipping newer recipes in the same category that don't have one).
+async function loadHomeCategoryImages(){
+  const categoryLinks=$$(".category");
+  if(!categoryLinks.length)return;
+  try{
+    const response=await fetch("data/recipes.json");if(!response.ok)return;
+    const catalog=await response.json();
+    const reviewed=(catalog.recipes||[]).filter(recipe=>Number.isInteger(recipe.sequenceId)&&recipe.status==="COMPLETE"&&recipe.ingredients?.length&&recipe.instructions?.length&&!(recipe.issues||[]).some(issue=>issue.startsWith("DUPLICATE_OF")));
+    categoryLinks.forEach(link=>{
+      const params=new URLSearchParams((link.getAttribute("href")||"").split("?")[1]);
+      const categorySlug=params.get("category");if(!categorySlug)return;
+      const inCategory=reviewed.filter(recipe=>recipe.categorySlug===categorySlug).sort((a,b)=>(parseIsraeliDate(b.publishedDate)||0)-(parseIsraeliDate(a.publishedDate)||0));
+      const latestWithImage=inCategory.find(recipe=>reviewedRecipeCardImage(recipe));
+      // No recipe (or none with a photo yet) in this category: leave the
+      // image as the shared "no photo" state rather than inventing one.
+      if(!latestWithImage)return;
+      const image=link.querySelector("img");if(!image)return;
+      image.src=reviewedRecipeCardImage(latestWithImage);
+      image.alt=link.querySelector("span")?.textContent||latestWithImage.title;
+    });
+  }catch{ /* Category thumbnails simply stay off rather than showing a broken image. */ }
+}
+if(document.body.dataset.page==="home")loadHomeCategoryImages();
 
 // The games catalog is source-backed: its cards link directly to the migrated
 // product landing pages in /games. Gift prototypes remain intentionally hidden.
@@ -361,7 +473,7 @@ $$('img[src*="images.unsplash.com"]').forEach(image=>{image.removeAttribute("src
 // Recipes filters
 const recipeResults=$("#recipeResults");
 if(recipeResults){
-  const state={type:"all",time:"all",bake:"all",difficulty:"all",category:"all",series:"all",search:""};
+  const state={type:"all",time:"all",bake:"all",difficulty:"all",category:"all",series:"all",tag:"all",search:""};
   const cards=()=>$$(".recipe-card.filter-item",recipeResults);
   function applyRecipeFilters(){
     let visible=0;
@@ -373,12 +485,16 @@ if(recipeResults){
       const matchesCat=state.category==="all"||card.dataset.category===state.category;
       const matchesTime=state.time==="all"||Number(card.dataset.time)<=Number(state.time);
       const matchesSeries=state.series==="all"||card.dataset.series===state.series;
-      const show=matchesSearch&&matchesType&&matchesBake&&matchesDiff&&matchesCat&&matchesTime&&matchesSeries;
+      const matchesTag=state.tag==="all"||(card.dataset.tags||"").split(" ").includes(state.tag);
+      const show=matchesSearch&&matchesType&&matchesBake&&matchesDiff&&matchesCat&&matchesTime&&matchesSeries&&matchesTag;
       card.classList.toggle("is-hidden",!show); if(show)visible++;
     });
     $("#recipeCount").textContent=visible;
     $("#recipeEmpty").hidden=visible!==0;
   }
+  // Small bridge so the tag chips — created later, once the catalog has
+  // loaded and we know which tags exist — can reach this filter state.
+  window.__recipeFilters={setTag(value){state.tag=value;applyRecipeFilters()}};
   $$("[data-filter]").forEach(btn=>btn.addEventListener("click",()=>{
     const key=btn.dataset.filter;
     $$(`[data-filter="${key}"]`).forEach(b=>b.classList.remove("active"));
@@ -389,10 +505,11 @@ if(recipeResults){
   $("#categoryFilter")?.addEventListener("change",e=>{state.category=e.target.value;applyRecipeFilters()});
   $$('[data-series-filter="recipes"]').forEach(btn=>btn.addEventListener("click",()=>{state.series=state.series===btn.dataset.value?"all":btn.dataset.value;btn.classList.toggle("active",state.series===btn.dataset.value);applyRecipeFilters()}));
   $("[data-reset-filters]")?.addEventListener("click",()=>{
-    Object.assign(state,{type:"all",time:"all",bake:"all",difficulty:"all",category:"all",series:"all",search:""});
+    Object.assign(state,{type:"all",time:"all",bake:"all",difficulty:"all",category:"all",series:"all",tag:"all",search:""});
     $("#recipeSearch").value="";$("#difficultyFilter").value="all";$("#categoryFilter").value="all";
     $$("[data-filter]").forEach(b=>b.classList.toggle("active",b.dataset.value==="all"));
     $$('[data-series-filter="recipes"]').forEach(b=>b.classList.remove("active"));
+    $$("[data-tag-filter]").forEach(b=>b.classList.toggle("active",b.dataset.tagFilter==="all"));
     applyRecipeFilters();
   });
   $("#sortRecipes")?.addEventListener("change",e=>{
