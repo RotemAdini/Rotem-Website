@@ -77,10 +77,10 @@ const biscuitCakeSeries=[
   {id:"05",title:"עוגת ביסקוויטים לימון ונענע",image:null},
   {id:"06",title:"עוגת ביסקוויטים קרפ",image:"images/biscuit-cakes/06-crepe/IMG_7314-web.JPEG"},
   {id:"07",title:"פירמידת ביסקוויטים כשרה לפסח",image:null},
-  {id:"08",title:"עוגת ביסקוויטים אלפחורס",image:"images/biscuit-cakes/08-alfajores/IMG_3516-web.JPEG",images:["images/biscuit-cakes/08-alfajores/IMG_3516-web.JPEG","images/biscuit-cakes/08-alfajores/IMG_7727-web.JPEG"]},
-  {id:"09",title:"כדורי ביסקוויטים",image:"images/biscuit-cakes/09-biscuit-balls/IMG_3511-web.JPEG",images:["images/biscuit-cakes/09-biscuit-balls/IMG_3511-web.JPEG","images/biscuit-cakes/09-biscuit-balls/IMG_3514-web.JPEG"]},
-  {id:"10",title:"עוגת ביסקוויטים טריפל שוקולד",image:"images/biscuit-cakes/10-triple-chocolate/IMG_3512-web.JPEG",images:["images/biscuit-cakes/10-triple-chocolate/IMG_3512-web.JPEG","images/biscuit-cakes/10-triple-chocolate/IMG_3513-web.JPEG"]},
-  {id:"11",title:"פצצת אוראו וביסקוויטים",image:"images/biscuit-cakes/11-oreo-bomb/IMG_9366-web.JPEG",images:["images/biscuit-cakes/11-oreo-bomb/IMG_9366-web.JPEG","images/biscuit-cakes/11-oreo-bomb/IMG_9387-web.JPEG"]},
+  {id:"08",title:"עוגת ביסקוויטים אלפחורס",image:"images/biscuit-cakes/08-alfajores/08-alfajores-1-web.JPEG",images:["images/biscuit-cakes/08-alfajores/08-alfajores-1-web.JPEG","images/biscuit-cakes/08-alfajores/08-alfajores-2-web.JPEG"]},
+  {id:"09",title:"כדורי ביסקוויטים",image:"images/biscuit-cakes/09-biscuit-balls/09-biscuit-balls-1-web.JPEG",images:["images/biscuit-cakes/09-biscuit-balls/09-biscuit-balls-1-web.JPEG","images/biscuit-cakes/09-biscuit-balls/09-biscuit-balls-2-web.JPEG"]},
+  {id:"10",title:"עוגת ביסקוויטים טריפל שוקולד",image:"images/biscuit-cakes/10-triple-chocolate/10-triple-chocolate-1-web.JPEG",images:["images/biscuit-cakes/10-triple-chocolate/10-triple-chocolate-1-web.JPEG","images/biscuit-cakes/10-triple-chocolate/10-triple-chocolate-2-web.JPEG"]},
+  {id:"11",title:"פצצת אוראו וביסקוויטים",image:"images/biscuit-cakes/11-oreo-bomb/11-oreo-bomb-1-web.JPEG",images:["images/biscuit-cakes/11-oreo-bomb/11-oreo-bomb-1-web.JPEG","images/biscuit-cakes/11-oreo-bomb/11-oreo-bomb-2-web.JPEG"]},
   {id:"12",title:"עוגת ביסקוויטים פקאן סיני",image:"images/biscuit-cakes/12-chinese-pecan/IMG_3691.JPEG"},
   {id:"13",title:"עוגת ביסקוויטים פירות יער",image:"images/biscuit-cakes/13-berries/IMG_3515-web.JPEG"},
   {id:"14",title:"עוגת ביסקוויטים באונטי",image:"images/biscuit-cakes/14-bounty/IMG_3690.JPEG"}
@@ -92,13 +92,13 @@ const biscuitCakeSeries=[
 // so their plan/place/budget are Claude's best-effort fill-in, flagged to
 // her as such, not a real account of what happened.
 const dateSeriesAB=[
-  {id:"01",title:"דייט אוכל איטלקי",image:"images/date-series-a-b/01-italian-food/IMG_2453-web.JPEG",images:["images/date-series-a-b/01-italian-food/IMG_2453-web.JPEG","images/date-series-a-b/01-italian-food/IMG_2630-web.JPEG"],place:"outside",budget:"high",
+  {id:"01",title:"דייט אוכל איטלקי",image:"images/date-series-a-b/01-italian-food/01-italian-food-1-web.JPEG",images:["images/date-series-a-b/01-italian-food/01-italian-food-1-web.JPEG","images/date-series-a-b/01-italian-food/01-italian-food-2-web.JPEG"],place:"outside",budget:"high",
     plan:{cost:"כ־700 ₪",duration:"כ־3.5 שעות",effort:3,
       needed:["להזמין מראש סדנת בישול איטלקי זוגית","להגיע למקום הסדנה"],
       prepAhead:["כמעט כלום — הסדנה עצמה מאורגנת ומספקת את המצרכים והציוד"],
       whatYouDo:"מגיעים לסדנת בישול זוגית, לומדים להכין יחד מנות איטלקיות ואז אוכלים את מה שהכנתם.",
       note:"סדנה סופר כיפית, לומדים דברים שבאמת אפשר אחר כך להכין בבית. מומלץ מאוד 🥰"}},
-  {id:"02",title:"דייט ביר פונג",image:"images/date-series-a-b/02-beer-pong/IMG_2640-web.PNG",images:["images/date-series-a-b/02-beer-pong/IMG_2640-web.PNG","images/date-series-a-b/02-beer-pong/IMG_2641-web.JPEG"],place:"home",budget:"low",
+  {id:"02",title:"דייט ביר פונג",image:"images/date-series-a-b/02-beer-pong/02-beer-pong-1-web.PNG",images:["images/date-series-a-b/02-beer-pong/02-beer-pong-1-web.PNG","images/date-series-a-b/02-beer-pong/02-beer-pong-2-web.JPEG"],place:"home",budget:"low",
     plan:{cost:"פחות מ־50 ₪",duration:"שעה+",effort:5,
       needed:["כוסות חד־פעמיות","כדורי פינג פונג","בירה / משקה אחר","שולחן"],
       prepAhead:["לסדר כוסות בשני צדי השולחן","למלא אותן במשקה","אפשר להכין מראש שאלות או משימות"],
@@ -110,41 +110,41 @@ const dateSeriesAB=[
       prepAhead:["לקנות את כל חומרי הגלם","לבחור מתכון לגבינה ולהכין את הציוד"],
       whatYouDo:"מכינים יחד בפעם הראשונה גבינה מאפס. חלק א׳ של דייט דו-יומי — חלק ב׳ הוא \"ערב גבינות ויין\", יום אחרי.",
       note:"החלק הקשה הוא שצריך לחכות 24 שעות לתוצאה 😭"}},
-  {id:"04",title:"ערב גבינות ויין",image:"images/date-series-a-b/04-cheese-2/IMG_2648-web.PNG",images:["images/date-series-a-b/04-cheese-2/IMG_2648-web.PNG","images/date-series-a-b/04-cheese-2/IMG_2651-web.JPEG"],place:"home",budget:"low",
+  {id:"04",title:"ערב גבינות ויין",image:"images/date-series-a-b/04-cheese-2/04-cheese-2-1-web.PNG",images:["images/date-series-a-b/04-cheese-2/04-cheese-2-1-web.PNG","images/date-series-a-b/04-cheese-2/04-cheese-2-2-web.JPEG"],place:"home",budget:"low",
     plan:{cost:"כ־60 ₪ (כ־120 ₪ בסך הכול לשני החלקים)",duration:"כ־3 שעות",effort:5,
       needed:["הגבינה שהכנתם יום קודם","שמיכה/מחצלת","סל או מגש פיקניק","לחם/קרקרים","פירות","ירקות","ממרחים ותוספות","שתייה"],
       prepAhead:["מרכיבים סלסלת פיקניק סביב הגבינה שהכנתם, מוסיפים עוד כמה דברים טעימים ויוצאים למקום נחמד"],
       whatYouDo:"24 שעות אחרי הכנת הגבינה אורזים אותה עם עוד דברים טעימים ויוצאים לפיקניק 🧺. חלק ב׳ של הדייט הדו-יומי שמתחיל ב\"ערב טעימות גבינות\"."}},
-  {id:"05",title:"דייט דגים",image:"images/date-series-a-b/05-fish/IMG_2153-web.JPEG",images:["images/date-series-a-b/05-fish/IMG_2153-web.JPEG","images/date-series-a-b/05-fish/IMG_2156-web.JPEG","images/date-series-a-b/05-fish/IMG_2160-web.JPEG","images/date-series-a-b/05-fish/IMG_2165-web.JPEG","images/date-series-a-b/05-fish/IMG_5332-web.JPEG"],place:"home",budget:"high",
+  {id:"05",title:"דייט דגים",image:"images/date-series-a-b/05-fish/05-fish-1-web.JPEG",images:["images/date-series-a-b/05-fish/05-fish-1-web.JPEG","images/date-series-a-b/05-fish/05-fish-2-web.JPEG","images/date-series-a-b/05-fish/05-fish-3-web.JPEG","images/date-series-a-b/05-fish/05-fish-4-web.JPEG","images/date-series-a-b/05-fish/05-fish-5-web.JPEG"],place:"home",budget:"high",
     plan:{cost:"כ־250 ₪",duration:"כ־3.5 שעות",effort:8,
       needed:["דגים","חומרי גלם למנות שתבחרו","יין/שתייה","עריכת שולחן יפה","נרות/אווירה"],
       prepAhead:["לבחור תפריט שכולו סביב דגים","לקנות את חומרי הגלם","לסדר שולחן מושקע","אפשר להחליט שכל אחד אחראי על מנה אחרת"],
       whatYouDo:"ערב מסעדה ביתית: מכינים יחד כמה מנות דגים, עורכים שולחן ויושבים לארוחה זוגית מושקעת.",
       note:"העלות והזמן כאן ממש תלויים בכמה שתבחרו להכין 🌊. הפעם הראשונה שהשקעתם ככה עם דגים — יצאה ארוחה מושקעת בטירוף 😍"}},
-  {id:"06",title:"דייט המבורגר",image:"images/date-series-a-b/06-burger/IMG_5367-web.PNG",images:["images/date-series-a-b/06-burger/IMG_2652-web.JPEG","images/date-series-a-b/06-burger/IMG_5367-web.PNG","images/date-series-a-b/06-burger/IMG_5423-web.JPEG"],place:"home",budget:"low",
+  {id:"06",title:"דייט המבורגר",image:"images/date-series-a-b/06-burger/06-burger-1-web.PNG",images:["images/date-series-a-b/06-burger/06-burger-1-web.PNG","images/date-series-a-b/06-burger/06-burger-2-web.JPEG","images/date-series-a-b/06-burger/06-burger-3-web.JPEG"],place:"home",budget:"low",
     plan:{cost:"כ־80 ₪",duration:"כ־2.5 שעות",effort:8,
       needed:["לחמניות","המבורגרים","גבינות/תוספות לפי הטעם","ירקות","רטבים","תוספות כמו צ׳יפס/תפוחי אדמה","שתייה"],
       prepAhead:["להכין את האוכל","להכין תפריט","לסדר שולחן","אפשר להכין אריזות/ניירות הגשה בסגנון דיינר"],
       whatYouDo:"כאן הקטע הוא לא רק להכין המבורגר — אלא להפוך את הבית למסעדת המבורגרים: מכינים את כל האוכל יחד, מסדרים בבית אווירת מסעדת המבורגרים ואז יושבים לאכול.",
       note:"דייט מושקע וכיפי במיוחד לזוגות שאוהבים לבשל ביחד 👨‍🍳👩‍🍳"}},
-  {id:"07",title:"ערב משחקי וידאו",image:"images/date-series-a-b/07-video-games/IMG_2656-web.JPEG",images:["images/date-series-a-b/07-video-games/IMG_2656-web.JPEG","images/date-series-a-b/07-video-games/IMG_2657-web.PNG"],place:"home",budget:"low",
+  {id:"07",title:"ערב משחקי וידאו",image:"images/date-series-a-b/07-video-games/07-video-games-1-web.JPEG",images:["images/date-series-a-b/07-video-games/07-video-games-1-web.JPEG","images/date-series-a-b/07-video-games/07-video-games-2-web.PNG"],place:"home",budget:"low",
     plan:{cost:"0 ₪",duration:"שעה וחצי",effort:2,
       needed:["קונסולה שכבר יש בבית","שני שלטים","משחקים שמתאימים לשני שחקנים"],
       prepAhead:["כמעט כלום. אפשר להוסיף נשנושים, שתייה, שמיכות/כריות","לבחור מראש 2–3 משחקים"],
       whatYouDo:"מתכרבלים בסלון ומשחקים יחד או אחד נגד השני.",
       note:"דייט קליל וכיפי — הכי מעט התעסקות מכל הרשימה."}},
-  {id:"08",title:"דייט זריחה",image:"images/date-series-a-b/08-sunrise/IMG_3518-web.JPEG",images:["images/date-series-a-b/08-sunrise/IMG_3518-web.JPEG","images/date-series-a-b/08-sunrise/IMG_4482-web.JPEG"],place:"outside",budget:"medium",
+  {id:"08",title:"דייט זריחה",image:"images/date-series-a-b/08-sunrise/08-sunrise-1-web.JPEG",images:["images/date-series-a-b/08-sunrise/08-sunrise-1-web.JPEG","images/date-series-a-b/08-sunrise/08-sunrise-2-web.JPEG"],place:"outside",budget:"medium",
     plan:{cost:"כ־150 ₪ כולל אוכל ודלק",duration:"כ־8 שעות",effort:8,
       needed:["רכב","יעד עם נקודת זריחה יפה","כיסאות שטח/מחצלת","אוכל","שתייה","קפה","ציוד בהתאם למזג האוויר"],
       prepAhead:["לבחור לוקיישן","לבדוק שעת זריחה","להכין אוכל ושתייה","לארוז הכול ערב קודם","לתכנן זמן יציאה כדי להגיע לפני הזריחה"],
       whatYouDo:"יוצאים מהבית בערך ב־2 בלילה, נוסעים למדבר, מתמקמים ואוכלים/שותים מול הזריחה. זה כבר יותר מיני־טיול זוגי מדייט קצר."}},
-  {id:"09",title:"סדנת חימר זוגית",image:"images/date-series-a-b/09-clay/IMG_2684-web.JPEG",images:["images/date-series-a-b/09-clay/IMG_2684-web.JPEG","images/date-series-a-b/09-clay/IMG_2689-web.JPEG"],place:"home",budget:"low",
+  {id:"09",title:"סדנת חימר זוגית",image:"images/date-series-a-b/09-clay/09-clay-1-web.JPEG",images:["images/date-series-a-b/09-clay/09-clay-1-web.JPEG","images/date-series-a-b/09-clay/09-clay-2-web.JPEG"],place:"home",budget:"low",
     plan:{cost:"כ־40 ₪",duration:"כשעתיים",effort:5,
       needed:["קנבסים/דפים","צבעים ומכחולים","חומרי יצירה","דבק/מספריים וכו׳ — תלוי בפעילות שבוחרים"],
       prepAhead:["לבחור מה יוצרים","לקנות את חומרי היצירה","להכין שולחן עבודה"],
       whatYouDo:"דייט יצירה זוגי בבית. אפשר שכל אחד יוצר משהו לשני, ליצור יחד פריט לבית או לעשות פעילות יצירה משותפת.",
       note:"דייט מרגיע וכיפי וקצת מחזיר להיות ילדים 💕🥹"}},
-  {id:"10",title:"דייט טניס",image:"images/date-series-a-b/10-tennis/IMG_2779-web.JPEG",images:["images/date-series-a-b/10-tennis/IMG_2779-web.JPEG","images/date-series-a-b/10-tennis/IMG_2780-web.JPEG"],place:"outside",budget:"low",
+  {id:"10",title:"דייט טניס",image:"images/date-series-a-b/10-tennis/10-tennis-1-web.JPEG",images:["images/date-series-a-b/10-tennis/10-tennis-1-web.JPEG","images/date-series-a-b/10-tennis/10-tennis-2-web.JPEG"],place:"outside",budget:"low",
     plan:{cost:"כ־80 ₪ (הזמנת מגרש)",duration:"כשעה וחצי",effort:4,
       needed:["מגרש טניס (הזמנה מראש)","מחבטים","כדורי טניס","בגדי ספורט נוחים","מים / שתייה קרה"],
       prepAhead:["להזמין מגרש מראש","לוודא ששני המחבטים זמינים או להשכיר במקום","למלא בקבוקי מים"],
@@ -154,12 +154,12 @@ const dateSeriesAB=[
       needed:["בד/קנבס להדפסה","האות הראשונה של השם בעיצוב מגניב להדפסה","צבעים","מכחולים","סלוטייפ וכדומה","יין או משקה לבחירתכם"],
       prepAhead:["להדפיס מראש את האות הראשונה של השם בעיצוב מגניב","לקנות צבעים, מכחולים, סלוטייפ וכדומה"],
       whatYouDo:"מציירים ביחד עם כוס יין, כל אחד מעצב את האות הראשונה של השם שלו (או של השני) — דייט יצירה זוגי ורגוע."}},
-  {id:"12",title:"דייט צפייה בכוכבים",image:"images/date-series-a-b/12-stargazing/IMG_2799-web.JPEG",images:["images/date-series-a-b/12-stargazing/IMG_2799-web.JPEG","images/date-series-a-b/12-stargazing/IMG_2802-web.JPEG","images/date-series-a-b/12-stargazing/IMG_2831-web.JPEG"],place:"outside",budget:"medium",
+  {id:"12",title:"דייט צפייה בכוכבים",image:"images/date-series-a-b/12-stargazing/12-stargazing-1-web.JPEG",images:["images/date-series-a-b/12-stargazing/12-stargazing-1-web.JPEG","images/date-series-a-b/12-stargazing/12-stargazing-2-web.JPEG","images/date-series-a-b/12-stargazing/12-stargazing-3-web.JPEG"],place:"outside",budget:"medium",
     plan:{cost:"כ־150 ₪ (ציוד, אוכל ודלק)",duration:"כ־5 שעות",effort:7,
       needed:["רכב","אוהל/מאהל קטן","כיסאות שטח או שטיח","שמיכות","פנס","אוכל ושתייה חמה"],
       prepAhead:["לבחור מיקום פתוח במדבר בלי זיהום אור","לבדוק שעת שקיעה","לארוז ציוד קמפינג","להכין אוכל ושתייה חמה מראש"],
       whatYouDo:"נוסעים למדבר לפני השקיעה, מקימים מאהל קטן, ומבלים את הערב מתחת לכוכבים — עם אוכל, שמיכות ושיחות עד שעות הלילה."}},
-  {id:"13",title:"דייט לגו זוגי",image:"images/date-series-a-b/13-lego/IMG_3640-web.JPEG",images:["images/date-series-a-b/13-lego/IMG_3640-web.JPEG","images/date-series-a-b/13-lego/IMG_3647-web.JPEG"],place:"home",budget:"low",
+  {id:"13",title:"דייט לגו זוגי",image:"images/date-series-a-b/13-lego/13-lego-1-web.JPEG",images:["images/date-series-a-b/13-lego/13-lego-1-web.JPEG","images/date-series-a-b/13-lego/13-lego-2-web.JPEG"],place:"home",budget:"low",
     plan:{cost:"תלוי בסט שבוחרים (בד״כ 50–150 ₪)",duration:"כשעתיים",effort:3,
       needed:["סט לגו לבחירתכם","שולחן פנוי וגדול","תאורה טובה"],
       prepAhead:["לבחור ולהזמין מראש סט לגו ששניכם אוהבים","לפנות שולחן גדול"],
@@ -473,9 +473,22 @@ function renderReviewedRecipeDetail(recipe){
   const instructions=(recipe.instructions||[]).map((item,index)=>`<li><span class="step-number">${index+1}</span><div><h3>שלב ${index+1}</h3><p>${escapeHtml(stripRedundantStepNumber(item,index+1))}</p></div></li>`).join("");
   const imageSrc=reviewedRecipeHeroImage(recipe);
   const favBtn=`<button class="fav-btn large-fav" data-fav="recipe-${escapeHtml(recipe.id)}" type="button" aria-label="שמירה למועדפים">♡</button>`;
-  const visual=imageSrc?`<div class="recipe-main-image"><img src="${escapeHtml(imageSrc)}" alt="${escapeHtml(recipe.title)}">${favBtn}</div>`:`<div class="recipe-main-image no-image-fav-slot">${favBtn}</div>`;
+  // A few recipe folders have more than one real photo (same idea as the
+  // biscuit-cake/date-series galleries) — reuses that exact gallery markup
+  // and CSS so clicking a thumbnail swaps the hero image.
+  const galleryImages=[imageSrc,...(recipe.images?.gallery||[])].filter(Boolean).filter((src,i,all)=>all.indexOf(src)===i);
+  const galleryHtml=galleryImages.length>1?`<div class="series-gallery">${galleryImages.map((src,i)=>`<button type="button" class="series-gallery-thumb${i===0?" active":""}" data-src="${escapeHtml(src)}"><img src="${escapeHtml(src)}" alt="${escapeHtml(recipe.title)} – תמונה ${i+1}"></button>`).join("")}</div>`:"";
+  const visual=imageSrc?`<div class="recipe-main-image"><img src="${escapeHtml(imageSrc)}" alt="${escapeHtml(recipe.title)}">${favBtn}${galleryHtml}</div>`:`<div class="recipe-main-image no-image-fav-slot">${favBtn}</div>`;
   const note=recipe.notes?`<div class="tip-box"><strong>שימו לב</strong><p>${escapeHtml(recipe.notes)}</p></div>`:"";
   main.innerHTML=`<section class="recipe-detail-hero container reviewed-recipe-hero ${imageSrc?"has-recipe-image":"no-recipe-image"}"><a class="recipe-back-link" href="recipes.html" aria-label="חזרה לכל המתכונים"><span aria-hidden="true">→</span> לכל המתכונים</a>${visual}<div class="recipe-intro"><div class="breadcrumbs"><a href="recipes.html">מתכונים</a><span>›</span><span>${escapeHtml(recipe.siteCategory||recipe.foodType||"מתכון")}</span></div><h1>${escapeHtml(recipe.title)}</h1><p>${escapeHtml(recipe.foodType||"")}</p><div class="recipe-stats"><div><strong>${escapeHtml(recipe.siteCategory||"—")}</strong><span>קטגוריה</span></div><div><strong>${escapeHtml(recipe.difficulty||"—")}</strong><span>רמת קושי</span></div><div><strong>${recipe.prepTimeMinutes?`${recipe.prepTimeMinutes} דק׳`:"—"}</strong><span>זמן הכנה</span></div><div><strong>${escapeHtml(recipe.publishedDate||"—")}</strong><span>פורסם</span></div></div>${note}<div class="recipe-actions"><a class="btn btn-primary" href="${escapeHtml(recipe.sourceUrl)}" target="_blank" rel="noopener">לצפייה בפוסט באינסטגרם</a><a class="btn btn-secondary" href="recipes.html">לכל המתכונים</a></div></div></section><section class="container recipe-content-grid reviewed-recipe-content"><aside class="ingredients-card panel"><span class="section-kicker">מצרכים</span><h2>מה צריך?</h2>${ingredients||"<p>אין רשימת מצרכים זמינה.</p>"}</aside><article class="instructions-card panel"><span class="section-kicker">אופן הכנה</span><h2>איך מכינים?</h2><ol class="steps-list">${instructions||"<li><div><p>אין הוראות הכנה זמינות.</p></div></li>"}</ol></article></section>`;
+  if(galleryImages.length>1){
+    const heroImg=main.querySelector(".recipe-main-image>img");
+    main.querySelectorAll(".series-gallery-thumb").forEach(thumb=>thumb.addEventListener("click",()=>{
+      heroImg.src=thumb.dataset.src;
+      main.querySelectorAll(".series-gallery-thumb").forEach(b=>b.classList.remove("active"));
+      thumb.classList.add("active");
+    }));
+  }
   document.title=`${recipe.title} | רותם עדיני`;
 }
 // Source dates are DD/MM/YYYY. Anything unparseable sorts to the very end
