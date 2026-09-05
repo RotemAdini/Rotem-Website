@@ -301,6 +301,9 @@ syncFavorites();
 // this keeps the older inventory available without turning unreviewed rows into
 // public recipe cards.
 function escapeHtml(value){return String(value??"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[char]))}
+function reviewedRecipeImage(recipe){
+  return recipe.images?.main||recipe.images?.hero||recipe.images?.thumbnail||null;
+}
 function reviewedRecipeCard(recipe){
   const card=document.createElement("article");
   card.className="recipe-card filter-item recipe-card-no-image";
@@ -317,13 +320,22 @@ function reviewedRecipeCard(recipe){
   const meta=document.createElement("div");meta.className="recipe-meta";
   const category=document.createElement("span");category.textContent=recipe.siteCategory||recipe.foodType||"";
   const timing=document.createElement("span");timing.textContent=recipe.prepTimeMinutes?`${recipe.prepTimeMinutes} דק׳`:"";
-  meta.append(category,timing);body.append(heading,meta);card.append(link,body);return card;
+  const imageSrc=reviewedRecipeImage(recipe);
+  meta.append(category,timing);body.append(heading,meta);
+  if(imageSrc){
+    const image=document.createElement("img");
+    image.src=imageSrc;image.alt=recipe.title;image.loading="lazy";
+    card.classList.remove("recipe-card-no-image");card.append(link,image,body);
+  }else card.append(link,body);
+  return card;
 }
 function renderReviewedRecipeDetail(recipe){
   const main=document.querySelector("main.page-main");if(!main)return;
   const ingredients=(recipe.ingredients||[]).map(item=>`<label class="ingredient-check"><input type="checkbox"><span>${escapeHtml(item)}</span></label>`).join("");
   const instructions=(recipe.instructions||[]).map((item,index)=>`<li><span class="step-number">${index+1}</span><div><h3>שלב ${index+1}</h3><p>${escapeHtml(item)}</p></div></li>`).join("");
-  main.innerHTML=`<section class="recipe-detail-hero container reviewed-recipe-hero"><div class="recipe-intro"><div class="breadcrumbs"><a href="recipes.html">מתכונים</a><span>›</span><span>${escapeHtml(recipe.siteCategory||recipe.foodType||"מתכון")}</span></div><h1>${escapeHtml(recipe.title)}</h1><p>${escapeHtml(recipe.foodType||"")}</p><div class="recipe-stats"><div><strong>${escapeHtml(recipe.siteCategory||"—")}</strong><span>קטגוריה</span></div><div><strong>${escapeHtml(recipe.difficulty||"—")}</strong><span>רמת קושי</span></div><div><strong>${recipe.prepTimeMinutes?`${recipe.prepTimeMinutes} דק׳`:"—"}</strong><span>זמן הכנה</span></div><div><strong>${escapeHtml(recipe.publishedDate||"—")}</strong><span>פורסם</span></div></div><div class="recipe-actions"><a class="btn btn-primary" href="${escapeHtml(recipe.sourceUrl)}" target="_blank" rel="noopener">לצפייה בפוסט באינסטגרם</a><a class="btn btn-secondary" href="recipes.html">לכל המתכונים</a></div></div></section><section class="container recipe-content-grid reviewed-recipe-content"><aside class="ingredients-card panel"><span class="section-kicker">מצרכים</span><h2>מה צריך?</h2>${ingredients||"<p>אין רשימת מצרכים זמינה.</p>"}</aside><article class="instructions-card panel"><span class="section-kicker">אופן הכנה</span><h2>איך מכינים?</h2><ol class="steps-list">${instructions||"<li><div><p>אין הוראות הכנה זמינות.</p></div></li>"}</ol></article></section>`;
+  const imageSrc=reviewedRecipeImage(recipe);
+  const visual=imageSrc?`<div class="recipe-main-image"><img src="${escapeHtml(imageSrc)}" alt="${escapeHtml(recipe.title)}"></div>`:"";
+  main.innerHTML=`<section class="recipe-detail-hero container reviewed-recipe-hero ${imageSrc?"has-recipe-image":"no-recipe-image"}">${visual}<div class="recipe-intro"><div class="breadcrumbs"><a href="recipes.html">מתכונים</a><span>›</span><span>${escapeHtml(recipe.siteCategory||recipe.foodType||"מתכון")}</span></div><h1>${escapeHtml(recipe.title)}</h1><p>${escapeHtml(recipe.foodType||"")}</p><div class="recipe-stats"><div><strong>${escapeHtml(recipe.siteCategory||"—")}</strong><span>קטגוריה</span></div><div><strong>${escapeHtml(recipe.difficulty||"—")}</strong><span>רמת קושי</span></div><div><strong>${recipe.prepTimeMinutes?`${recipe.prepTimeMinutes} דק׳`:"—"}</strong><span>זמן הכנה</span></div><div><strong>${escapeHtml(recipe.publishedDate||"—")}</strong><span>פורסם</span></div></div><div class="recipe-actions"><a class="btn btn-primary" href="${escapeHtml(recipe.sourceUrl)}" target="_blank" rel="noopener">לצפייה בפוסט באינסטגרם</a><a class="btn btn-secondary" href="recipes.html">לכל המתכונים</a></div></div></section><section class="container recipe-content-grid reviewed-recipe-content"><aside class="ingredients-card panel"><span class="section-kicker">מצרכים</span><h2>מה צריך?</h2>${ingredients||"<p>אין רשימת מצרכים זמינה.</p>"}</aside><article class="instructions-card panel"><span class="section-kicker">אופן הכנה</span><h2>איך מכינים?</h2><ol class="steps-list">${instructions||"<li><div><p>אין הוראות הכנה זמינות.</p></div></li>"}</ol></article></section>`;
   document.title=`${recipe.title} | רותם עדיני`;
 }
 async function loadReviewedRecipes(){
