@@ -1,0 +1,2 @@
+# Local/dev tooling artifacts — never part of the deployed site.
+node_modules/

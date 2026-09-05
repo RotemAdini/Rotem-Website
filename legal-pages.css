@@ -1,0 +1,281 @@
+/* ==========================================================================
+   legal-pages.css
+   Dedicated, page-scoped styles for faq.html / privacy.html / terms.html.
+   Every rule below is scoped with body[data-page="faq|privacy|terms"] so
+   this file cannot affect any other page on the site (recipes, games, etc).
+   Loaded in ADDITION to styles.css — reuses existing tokens (--pink, --line,
+   --panel, --r-lg, --shadow…) defined in styles.css's :root.
+   ========================================================================== */
+
+/* ---------- shared layout for all three legal-ish pages ---------- */
+body[data-page="faq"] .legal-shell,
+body[data-page="privacy"] .legal-shell,
+body[data-page="terms"] .legal-shell{
+  display:grid;
+  grid-template-columns:260px 1fr;
+  gap:40px;
+  align-items:start;
+  padding:34px 0 60px;
+}
+
+body[data-page="faq"] .legal-toc,
+body[data-page="privacy"] .legal-toc,
+body[data-page="terms"] .legal-toc{
+  position:sticky;
+  top:96px;
+  background:rgba(255,255,255,.8);
+  border:1px solid var(--line);
+  border-radius:var(--r-lg);
+  box-shadow:0 8px 30px rgba(85,48,42,.05);
+  padding:20px;
+}
+body[data-page="faq"] .legal-toc h2,
+body[data-page="privacy"] .legal-toc h2,
+body[data-page="terms"] .legal-toc h2{
+  margin:0 0 10px;
+  font-size:14px;
+  color:var(--pink2);
+  font-weight:700;
+}
+body[data-page="faq"] .legal-toc ol,
+body[data-page="privacy"] .legal-toc ol,
+body[data-page="terms"] .legal-toc ol{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+body[data-page="faq"] .legal-toc a,
+body[data-page="privacy"] .legal-toc a,
+body[data-page="terms"] .legal-toc a{
+  display:block;
+  padding:7px 8px;
+  border-radius:10px;
+  font-size:14px;
+  color:var(--text);
+}
+body[data-page="faq"] .legal-toc a:hover,
+body[data-page="privacy"] .legal-toc a:hover,
+body[data-page="terms"] .legal-toc a:hover{
+  background:var(--panel2);
+  color:var(--pink2);
+}
+
+body[data-page="faq"] .legal-content,
+body[data-page="privacy"] .legal-content,
+body[data-page="terms"] .legal-content{
+  min-width:0;
+}
+
+/* draft / not-yet-final notice, shown at the top of privacy & terms */
+body[data-page="privacy"] .legal-draft-note,
+body[data-page="terms"] .legal-draft-note{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  background:#fff8f4;
+  border:1px solid var(--line);
+  border-radius:var(--r-md);
+  padding:14px 16px;
+  margin:0 0 28px;
+  font-size:14px;
+  color:var(--muted);
+}
+body[data-page="privacy"] .legal-draft-note span,
+body[data-page="terms"] .legal-draft-note span{
+  font-size:18px;
+  line-height:1;
+}
+
+/* legal section blocks */
+body[data-page="privacy"] .legal-section,
+body[data-page="terms"] .legal-section{
+  padding:22px 0;
+  border-bottom:1px solid var(--line);
+  scroll-margin-top:96px;
+}
+body[data-page="privacy"] .legal-section:last-of-type,
+body[data-page="terms"] .legal-section:last-of-type{
+  border-bottom:0;
+}
+body[data-page="privacy"] .legal-section h2,
+body[data-page="terms"] .legal-section h2{
+  font-size:21px;
+  margin:0 0 10px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+body[data-page="privacy"] .legal-section h2 em,
+body[data-page="terms"] .legal-section h2 em{
+  font-style:normal;
+  color:var(--pink2);
+  font-size:14px;
+  background:#f9e6e4;
+  border-radius:999px;
+  padding:3px 10px;
+  font-weight:700;
+}
+body[data-page="privacy"] .legal-section p,
+body[data-page="terms"] .legal-section p{
+  margin:0 0 12px;
+  color:#4c4441;
+  font-size:15.5px;
+  line-height:1.7;
+}
+body[data-page="privacy"] .legal-section ul,
+body[data-page="terms"] .legal-section ul{
+  margin:0 0 12px;
+  padding-inline-start:22px;
+  color:#4c4441;
+  font-size:15.5px;
+  line-height:1.75;
+}
+body[data-page="privacy"] .legal-section li,
+body[data-page="terms"] .legal-section li{
+  margin-bottom:4px;
+}
+body[data-page="privacy"] .legal-updated,
+body[data-page="terms"] .legal-updated{
+  color:var(--muted);
+  font-size:13px;
+  margin:0 0 4px;
+}
+
+/* inline "to complete" placeholder — reads as a normal draft marker,
+   not an alarming broken-looking TODO */
+body[data-page="privacy"] .legal-tbd,
+body[data-page="terms"] .legal-tbd{
+  background:#fdf1e7;
+  border:1px dashed #e7c79a;
+  border-radius:8px;
+  padding:1px 8px;
+  color:#8a6a37;
+  font-weight:600;
+  font-size:.95em;
+}
+
+/* ---------- FAQ accordion (native <details>/<summary>, no JS needed) ---------- */
+body[data-page="faq"] .faq-category{
+  margin-bottom:34px;
+  scroll-margin-top:96px;
+}
+body[data-page="faq"] .faq-category h2{
+  font-size:23px;
+  margin:0 0 14px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+body[data-page="faq"] .faq-category h2 span.icon{
+  font-size:20px;
+}
+body[data-page="faq"] .faq-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+body[data-page="faq"] .faq-item{
+  background:rgba(255,255,255,.8);
+  border:1px solid var(--line);
+  border-radius:var(--r-md);
+  box-shadow:0 8px 30px rgba(85,48,42,.05);
+  overflow:hidden;
+}
+body[data-page="faq"] .faq-item summary{
+  list-style:none;
+  cursor:pointer;
+  padding:16px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  font-weight:600;
+  font-size:16px;
+}
+body[data-page="faq"] .faq-item summary::-webkit-details-marker{ display:none; }
+body[data-page="faq"] .faq-item summary::marker{ content:""; }
+body[data-page="faq"] .faq-item summary:focus-visible{
+  outline:2px solid var(--pink2);
+  outline-offset:-2px;
+}
+body[data-page="faq"] .faq-item summary .faq-plus{
+  flex:0 0 auto;
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  background:var(--panel2);
+  color:var(--pink2);
+  display:grid;
+  place-items:center;
+  font-size:18px;
+  transition:transform .2s;
+}
+body[data-page="faq"] .faq-item[open] summary .faq-plus{
+  transform:rotate(45deg);
+}
+body[data-page="faq"] .faq-item .faq-answer{
+  padding:0 20px 18px;
+  color:#4c4441;
+  font-size:15px;
+  line-height:1.7;
+}
+body[data-page="faq"] .faq-item .faq-answer p{ margin:0 0 8px; }
+body[data-page="faq"] .faq-item .faq-answer p:last-child{ margin-bottom:0; }
+body[data-page="faq"] .faq-item .faq-answer .legal-tbd{
+  background:#fdf1e7;
+  border:1px dashed #e7c79a;
+  border-radius:8px;
+  padding:1px 8px;
+  color:#8a6a37;
+  font-weight:600;
+  font-size:.95em;
+}
+
+/* responsive: stack TOC above content on narrow screens */
+@media(max-width:980px){
+  body[data-page="faq"] .legal-shell,
+  body[data-page="privacy"] .legal-shell,
+  body[data-page="terms"] .legal-shell{
+    grid-template-columns:1fr;
+    gap:20px;
+  }
+  body[data-page="faq"] .legal-toc,
+  body[data-page="privacy"] .legal-toc,
+  body[data-page="terms"] .legal-toc{
+    position:static;
+  }
+  body[data-page="faq"] .legal-toc ol,
+  body[data-page="privacy"] .legal-toc ol,
+  body[data-page="terms"] .legal-toc ol{
+    flex-direction:row;
+    flex-wrap:wrap;
+  }
+  body[data-page="faq"] .legal-toc a,
+  body[data-page="privacy"] .legal-toc a,
+  body[data-page="terms"] .legal-toc a{
+    background:var(--panel2);
+    font-size:13px;
+  }
+}
+
+@media(max-width:640px){
+  body[data-page="faq"] .legal-shell,
+  body[data-page="privacy"] .legal-shell,
+  body[data-page="terms"] .legal-shell{
+    padding:22px 0 44px;
+  }
+  body[data-page="privacy"] .legal-section h2,
+  body[data-page="terms"] .legal-section h2{
+    font-size:19px;
+  }
+  body[data-page="faq"] .faq-item summary{
+    padding:14px 16px;
+    font-size:15px;
+  }
+  body[data-page="faq"] .faq-category h2{
+    font-size:20px;
+  }
+}

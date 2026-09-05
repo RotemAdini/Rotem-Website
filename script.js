@@ -70,35 +70,40 @@ $$("[data-auth-tab]").forEach(btn=>btn.addEventListener("click",()=>{
 // Source-backed editorial series. The page templates stay shared; query parameters
 // supply the title and image for each series item without duplicating their layouts.
 const biscuitCakeSeries=[
-  {id:"01",title:"עוגת ביסקוויטים פיסטוק",image:"images/biscuit-cakes/01-pistachio/IMG_5024.PNG"},
-  {id:"02",title:"עוגת ביסקוויטים קרמבו",image:"images/biscuit-cakes/02-krembo/IMG_5008.JPEG"},
-  {id:"03",title:"עוגת ביסקוויטים מוקה",image:"images/biscuit-cakes/03-mocha/IMG_5176.JPEG"},
+  {id:"01",title:"עוגת ביסקוויטים פיסטוק",image:"images/biscuit-cakes/01-pistachio/IMG_5024-web.PNG"},
+  {id:"02",title:"עוגת ביסקוויטים קרמבו",image:"images/biscuit-cakes/02-krembo/IMG_5008-web.JPEG"},
+  {id:"03",title:"עוגת ביסקוויטים מוקה",image:"images/biscuit-cakes/03-mocha/IMG_5176-web.JPEG"},
   {id:"04",title:"עוגת ביסקוויטים קראנץ׳ נוטלה",image:null},
   {id:"05",title:"עוגת ביסקוויטים לימון ונענע",image:null},
-  {id:"06",title:"עוגת ביסקוויטים קרפ",image:"images/biscuit-cakes/06-crepe/IMG_7314.JPEG"},
+  {id:"06",title:"עוגת ביסקוויטים קרפ",image:"images/biscuit-cakes/06-crepe/IMG_7314-web.JPEG"},
   {id:"07",title:"פירמידת ביסקוויטים כשרה לפסח",image:null},
-  {id:"08",title:"עוגת ביסקוויטים אלפחורס",image:"images/biscuit-cakes/08-alfajores/IMG_3516.JPEG",images:["images/biscuit-cakes/08-alfajores/IMG_3516.JPEG","images/biscuit-cakes/08-alfajores/IMG_7727.JPEG"]},
-  {id:"09",title:"כדורי ביסקוויטים",image:"images/biscuit-cakes/09-biscuit-balls/IMG_3511.JPEG",images:["images/biscuit-cakes/09-biscuit-balls/IMG_3511.JPEG","images/biscuit-cakes/09-biscuit-balls/IMG_3514.JPEG"]},
-  {id:"10",title:"עוגת ביסקוויטים טריפל שוקולד",image:"images/biscuit-cakes/10-triple-chocolate/IMG_3512.JPEG",images:["images/biscuit-cakes/10-triple-chocolate/IMG_3512.JPEG","images/biscuit-cakes/10-triple-chocolate/IMG_3513.JPEG"]},
-  {id:"11",title:"פצצת אוראו וביסקוויטים",image:"images/biscuit-cakes/11-oreo-bomb/IMG_9366.JPEG",images:["images/biscuit-cakes/11-oreo-bomb/IMG_9366.JPEG","images/biscuit-cakes/11-oreo-bomb/IMG_9387.JPEG"]},
+  {id:"08",title:"עוגת ביסקוויטים אלפחורס",image:"images/biscuit-cakes/08-alfajores/IMG_3516-web.JPEG",images:["images/biscuit-cakes/08-alfajores/IMG_3516-web.JPEG","images/biscuit-cakes/08-alfajores/IMG_7727-web.JPEG"]},
+  {id:"09",title:"כדורי ביסקוויטים",image:"images/biscuit-cakes/09-biscuit-balls/IMG_3511-web.JPEG",images:["images/biscuit-cakes/09-biscuit-balls/IMG_3511-web.JPEG","images/biscuit-cakes/09-biscuit-balls/IMG_3514-web.JPEG"]},
+  {id:"10",title:"עוגת ביסקוויטים טריפל שוקולד",image:"images/biscuit-cakes/10-triple-chocolate/IMG_3512-web.JPEG",images:["images/biscuit-cakes/10-triple-chocolate/IMG_3512-web.JPEG","images/biscuit-cakes/10-triple-chocolate/IMG_3513-web.JPEG"]},
+  {id:"11",title:"פצצת אוראו וביסקוויטים",image:"images/biscuit-cakes/11-oreo-bomb/IMG_9366-web.JPEG",images:["images/biscuit-cakes/11-oreo-bomb/IMG_9366-web.JPEG","images/biscuit-cakes/11-oreo-bomb/IMG_9387-web.JPEG"]},
   {id:"12",title:"עוגת ביסקוויטים פקאן סיני",image:null},
-  {id:"13",title:"עוגת ביסקוויטים פירות יער",image:"images/biscuit-cakes/13-berries/IMG_3515.JPEG"},
+  {id:"13",title:"עוגת ביסקוויטים פירות יער",image:"images/biscuit-cakes/13-berries/IMG_3515-web.JPEG"},
   {id:"14",title:"עוגת ביסקוויטים באונטי",image:null}
 ];
+// place/budget below are an estimate inferred from each title (e.g. "video
+// games night" -> home, "tennis date" -> outside/low cost) — not data from
+// Rotem — so the "where"/"budget" filters on the dates page have something
+// real to match against instead of always returning zero results. Flagged
+// to Rotem as a best-effort guess to confirm or correct with real values.
 const dateSeriesAB=[
-  {id:"01",title:"דייט אוכל איטלקי",image:"images/date-series-a-b/01-italian-food/IMG_2453.JPEG",images:["images/date-series-a-b/01-italian-food/IMG_2453.JPEG","images/date-series-a-b/01-italian-food/IMG_2630.JPEG"]},
-  {id:"02",title:"דייט ביר פונג",image:"images/date-series-a-b/02-beer-pong/IMG_2640.PNG",images:["images/date-series-a-b/02-beer-pong/IMG_2640.PNG","images/date-series-a-b/02-beer-pong/IMG_2641.JPEG"]},
-  {id:"03",title:"ערב טעימות גבינות",image:"images/date-series-a-b/03-cheese-1/IMG_2645.PNG"},
-  {id:"04",title:"ערב גבינות ויין",image:"images/date-series-a-b/04-cheese-2/IMG_2648.PNG",images:["images/date-series-a-b/04-cheese-2/IMG_2648.PNG","images/date-series-a-b/04-cheese-2/IMG_2651.JPEG"]},
-  {id:"05",title:"דייט דגים",image:null},
-  {id:"06",title:"דייט המבורגר",image:"images/date-series-a-b/06-burger/IMG_5367.PNG",images:["images/date-series-a-b/06-burger/IMG_2652.JPEG","images/date-series-a-b/06-burger/IMG_5367.PNG","images/date-series-a-b/06-burger/IMG_5423.JPEG"]},
-  {id:"07",title:"ערב משחקי וידאו",image:"images/date-series-a-b/07-video-games/IMG_2656.JPEG",images:["images/date-series-a-b/07-video-games/IMG_2656.JPEG","images/date-series-a-b/07-video-games/IMG_2657.PNG"]},
-  {id:"08",title:"דייט זריחה",image:"images/date-series-a-b/08-sunrise/IMG_3518.JPEG",images:["images/date-series-a-b/08-sunrise/IMG_3518.JPEG","images/date-series-a-b/08-sunrise/IMG_4482.JPEG"]},
-  {id:"09",title:"סדנת חימר זוגית",image:"images/date-series-a-b/09-clay/IMG_2684.JPEG",images:["images/date-series-a-b/09-clay/IMG_2684.JPEG","images/date-series-a-b/09-clay/IMG_2689.JPEG"]},
-  {id:"10",title:"דייט טניס",image:"images/date-series-a-b/10-tennis/IMG_2779.JPEG",images:["images/date-series-a-b/10-tennis/IMG_2779.JPEG","images/date-series-a-b/10-tennis/IMG_2780.JPEG"]},
-  {id:"11",title:"ערב יצירה ויין",image:"images/date-series-a-b/11-crafts-and-wine/IMG_2658.JPEG"},
-  {id:"12",title:"דייט צפייה בכוכבים",image:"images/date-series-a-b/12-stargazing/IMG_2799.JPEG",images:["images/date-series-a-b/12-stargazing/IMG_2799.JPEG","images/date-series-a-b/12-stargazing/IMG_2802.JPEG","images/date-series-a-b/12-stargazing/IMG_2831.JPEG"]},
-  {id:"13",title:"דייט לגו זוגי",image:null}
+  {id:"01",title:"דייט אוכל איטלקי",image:"images/date-series-a-b/01-italian-food/IMG_2453-web.JPEG",images:["images/date-series-a-b/01-italian-food/IMG_2453-web.JPEG","images/date-series-a-b/01-italian-food/IMG_2630-web.JPEG"],place:"outside",budget:"medium"},
+  {id:"02",title:"דייט ביר פונג",image:"images/date-series-a-b/02-beer-pong/IMG_2640-web.PNG",images:["images/date-series-a-b/02-beer-pong/IMG_2640-web.PNG","images/date-series-a-b/02-beer-pong/IMG_2641-web.JPEG"],place:"home",budget:"low"},
+  {id:"03",title:"ערב טעימות גבינות",image:"images/date-series-a-b/03-cheese-1/IMG_2645-web.PNG",place:"home",budget:"medium"},
+  {id:"04",title:"ערב גבינות ויין",image:"images/date-series-a-b/04-cheese-2/IMG_2648-web.PNG",images:["images/date-series-a-b/04-cheese-2/IMG_2648-web.PNG","images/date-series-a-b/04-cheese-2/IMG_2651-web.JPEG"],place:"home",budget:"high"},
+  {id:"05",title:"דייט דגים",image:null,place:"outside",budget:"medium"},
+  {id:"06",title:"דייט המבורגר",image:"images/date-series-a-b/06-burger/IMG_5367-web.PNG",images:["images/date-series-a-b/06-burger/IMG_2652-web.JPEG","images/date-series-a-b/06-burger/IMG_5367-web.PNG","images/date-series-a-b/06-burger/IMG_5423-web.JPEG"],place:"outside",budget:"medium"},
+  {id:"07",title:"ערב משחקי וידאו",image:"images/date-series-a-b/07-video-games/IMG_2656-web.JPEG",images:["images/date-series-a-b/07-video-games/IMG_2656-web.JPEG","images/date-series-a-b/07-video-games/IMG_2657-web.PNG"],place:"home",budget:"low"},
+  {id:"08",title:"דייט זריחה",image:"images/date-series-a-b/08-sunrise/IMG_3518-web.JPEG",images:["images/date-series-a-b/08-sunrise/IMG_3518-web.JPEG","images/date-series-a-b/08-sunrise/IMG_4482-web.JPEG"],place:"outside",budget:"low"},
+  {id:"09",title:"סדנת חימר זוגית",image:"images/date-series-a-b/09-clay/IMG_2684-web.JPEG",images:["images/date-series-a-b/09-clay/IMG_2684-web.JPEG","images/date-series-a-b/09-clay/IMG_2689-web.JPEG"],place:"outside",budget:"medium"},
+  {id:"10",title:"דייט טניס",image:"images/date-series-a-b/10-tennis/IMG_2779-web.JPEG",images:["images/date-series-a-b/10-tennis/IMG_2779-web.JPEG","images/date-series-a-b/10-tennis/IMG_2780-web.JPEG"],place:"outside",budget:"low"},
+  {id:"11",title:"ערב יצירה ויין",image:"images/date-series-a-b/11-crafts-and-wine/IMG_2658-web.JPEG",place:"home",budget:"medium"},
+  {id:"12",title:"דייט צפייה בכוכבים",image:"images/date-series-a-b/12-stargazing/IMG_2799-web.JPEG",images:["images/date-series-a-b/12-stargazing/IMG_2799-web.JPEG","images/date-series-a-b/12-stargazing/IMG_2802-web.JPEG","images/date-series-a-b/12-stargazing/IMG_2831-web.JPEG"],place:"outside",budget:"low"},
+  {id:"13",title:"דייט לגו זוגי",image:null,place:"home",budget:"low"}
 ];
 
 function seriesImage(item,placeholderClass){
@@ -143,7 +148,7 @@ function buildDateCard(item,{filterable=false}={}){
   const card=document.createElement(filterable?"article":"a");
   card.className="date-card"+(filterable?" filter-item":"");
   if(filterable){
-    card.dataset.search=`${item.title} סדרת דייטים א ב`; card.dataset.budget="medium"; card.dataset.place="outside"; card.dataset.duration="medium"; card.dataset.series="date-a-b";
+    card.dataset.search=`${item.title} סדרת דייטים א ב`; card.dataset.budget=item.budget||"medium"; card.dataset.place=item.place||"outside"; card.dataset.duration="medium"; card.dataset.series="date-a-b";
     const link=document.createElement("a");
     link.className="card-link"; link.href=href; link.setAttribute("aria-label",item.title);
     card.append(link);
@@ -345,21 +350,45 @@ function reviewedRecipeCard(recipe){
   card.dataset.series=reviewedRecipeSeriesSlug(recipe);
   card.dataset.tags=(recipe.tags||[]).join(" ");
   const link=document.createElement("a");link.className="card-link";link.href=`recipe.html?recipe=${encodeURIComponent(recipe.id)}`;link.setAttribute("aria-label",recipe.title);
+  const fav=document.createElement("button");fav.className="fav-btn";fav.type="button";fav.dataset.fav=`recipe-${recipe.id}`;fav.setAttribute("aria-label","הוספה למועדפים");fav.textContent="♡";
   const body=document.createElement("div");body.className="recipe-body";
   const heading=document.createElement("h3");heading.textContent=recipe.title;
   const meta=document.createElement("div");meta.className="recipe-meta";
   const category=document.createElement("span");category.textContent=recipe.siteCategory||recipe.foodType||"";
   const timing=document.createElement("span");timing.textContent=recipe.prepTimeMinutes?`${recipe.prepTimeMinutes} דק׳`:"";
   meta.append(category,timing);body.append(heading,meta);
-  card.append(link,reviewedRecipeMedia(recipe),body);
+  card.append(link,fav,reviewedRecipeMedia(recipe),body);
   return card;
+}
+// A source line that's really a sub-heading for the ingredients that follow
+// it (e.g. "לרוטב טחינה ביתי:", "מצרכים לקרמל") rather than an ingredient in
+// its own right — shown as a label instead of a checkable item so it can't be
+// mistaken for something to buy or measure.
+function isIngredientHeading(line){
+  const text=(line||"").trim();
+  if(!text)return false;
+  if(/\d/.test(text))return false;
+  return /[:﹕]$/.test(text)||/^מצרכים(\s|$)/.test(text);
+}
+// Source instructions are sometimes already numbered ("1.\t...", "2.\t...")
+// from the original document, and the template also numbers each step —
+// producing a visible double number. Strip the prefix only when it matches
+// this step's own position, so an instruction that genuinely starts with an
+// unrelated number is left untouched.
+function stripRedundantStepNumber(text,stepNumber){
+  const match=/^\s*(\d+)[.\)]\s*/.exec(text||"");
+  if(match&&Number(match[1])===stepNumber)return text.slice(match[0].length);
+  return text;
 }
 function renderReviewedRecipeDetail(recipe){
   const main=document.querySelector("main.page-main");if(!main)return;
-  const ingredients=(recipe.ingredients||[]).map(item=>`<label class="ingredient-check"><input type="checkbox"><span>${escapeHtml(item)}</span></label>`).join("");
-  const instructions=(recipe.instructions||[]).map((item,index)=>`<li><span class="step-number">${index+1}</span><div><h3>שלב ${index+1}</h3><p>${escapeHtml(item)}</p></div></li>`).join("");
+  const ingredients=(recipe.ingredients||[]).map(item=>isIngredientHeading(item)
+    ?`<div class="ingredient-heading">${escapeHtml(item)}</div>`
+    :`<label class="ingredient-check"><input type="checkbox"><span>${escapeHtml(item)}</span></label>`).join("");
+  const instructions=(recipe.instructions||[]).map((item,index)=>`<li><span class="step-number">${index+1}</span><div><h3>שלב ${index+1}</h3><p>${escapeHtml(stripRedundantStepNumber(item,index+1))}</p></div></li>`).join("");
   const imageSrc=reviewedRecipeHeroImage(recipe);
-  const visual=imageSrc?`<div class="recipe-main-image"><img src="${escapeHtml(imageSrc)}" alt="${escapeHtml(recipe.title)}"></div>`:"";
+  const favBtn=`<button class="fav-btn large-fav" data-fav="recipe-${escapeHtml(recipe.id)}" type="button" aria-label="שמירה למועדפים">♡</button>`;
+  const visual=imageSrc?`<div class="recipe-main-image"><img src="${escapeHtml(imageSrc)}" alt="${escapeHtml(recipe.title)}">${favBtn}</div>`:`<div class="recipe-main-image no-image-fav-slot">${favBtn}</div>`;
   const note=recipe.notes?`<div class="tip-box"><strong>שימו לב</strong><p>${escapeHtml(recipe.notes)}</p></div>`:"";
   main.innerHTML=`<section class="recipe-detail-hero container reviewed-recipe-hero ${imageSrc?"has-recipe-image":"no-recipe-image"}"><a class="recipe-back-link" href="recipes.html" aria-label="חזרה לכל המתכונים"><span aria-hidden="true">→</span> לכל המתכונים</a>${visual}<div class="recipe-intro"><div class="breadcrumbs"><a href="recipes.html">מתכונים</a><span>›</span><span>${escapeHtml(recipe.siteCategory||recipe.foodType||"מתכון")}</span></div><h1>${escapeHtml(recipe.title)}</h1><p>${escapeHtml(recipe.foodType||"")}</p><div class="recipe-stats"><div><strong>${escapeHtml(recipe.siteCategory||"—")}</strong><span>קטגוריה</span></div><div><strong>${escapeHtml(recipe.difficulty||"—")}</strong><span>רמת קושי</span></div><div><strong>${recipe.prepTimeMinutes?`${recipe.prepTimeMinutes} דק׳`:"—"}</strong><span>זמן הכנה</span></div><div><strong>${escapeHtml(recipe.publishedDate||"—")}</strong><span>פורסם</span></div></div>${note}<div class="recipe-actions"><a class="btn btn-primary" href="${escapeHtml(recipe.sourceUrl)}" target="_blank" rel="noopener">לצפייה בפוסט באינסטגרם</a><a class="btn btn-secondary" href="recipes.html">לכל המתכונים</a></div></div></section><section class="container recipe-content-grid reviewed-recipe-content"><aside class="ingredients-card panel"><span class="section-kicker">מצרכים</span><h2>מה צריך?</h2>${ingredients||"<p>אין רשימת מצרכים זמינה.</p>"}</aside><article class="instructions-card panel"><span class="section-kicker">אופן הכנה</span><h2>איך מכינים?</h2><ol class="steps-list">${instructions||"<li><div><p>אין הוראות הכנה זמינות.</p></div></li>"}</ol></article></section>`;
   document.title=`${recipe.title} | רותם עדיני`;
@@ -441,22 +470,40 @@ if(document.body.dataset.page==="recipes")loadReviewedRecipes();
 // Homepage category strip: each category's photo is the most recently
 // published FOOD recipe in that category that actually has a photo yet
 // (skipping newer recipes in the same category that don't have one).
+// The same fetch also refreshes the "latest recipes" panel below the hero —
+// previously always the same 5 legacy series cards regardless of real
+// publish dates — so both use one shared ~500KB request instead of two.
 async function loadHomeCategoryImages(){
   const categoryLinks=$$(".category");
-  if(!categoryLinks.length)return;
+  const homeRecipes=$(".home-recipes");
+  if(!categoryLinks.length&&!homeRecipes)return;
   try{
     const response=await fetch("data/recipes.json");if(!response.ok)return;
     const catalog=await response.json();
     const reviewed=(catalog.recipes||[]).filter(recipe=>Number.isInteger(recipe.sequenceId)&&recipe.status==="COMPLETE"&&recipe.ingredients?.length&&recipe.instructions?.length&&!(recipe.issues||[]).some(issue=>issue.startsWith("DUPLICATE_OF")));
+    if(homeRecipes){
+      const latest=[...reviewed].filter(recipe=>reviewedRecipeCardImage(recipe))
+        .sort((a,b)=>(parseIsraeliDate(b.publishedDate)||0)-(parseIsraeliDate(a.publishedDate)||0))
+        .slice(0,5);
+      if(latest.length){homeRecipes.replaceChildren(...latest.map(recipe=>reviewedRecipeCard(recipe)))}
+    }
     categoryLinks.forEach(link=>{
       const params=new URLSearchParams((link.getAttribute("href")||"").split("?")[1]);
       const categorySlug=params.get("category");if(!categorySlug)return;
       const inCategory=reviewed.filter(recipe=>recipe.categorySlug===categorySlug).sort((a,b)=>(parseIsraeliDate(b.publishedDate)||0)-(parseIsraeliDate(a.publishedDate)||0));
       const latestWithImage=inCategory.find(recipe=>reviewedRecipeCardImage(recipe));
-      // No recipe (or none with a photo yet) in this category: leave the
-      // image as the shared "no photo" state rather than inventing one.
-      if(!latestWithImage)return;
       const image=link.querySelector("img");if(!image)return;
+      // No recipe (or none with a photo yet) in this category: swap in the
+      // same round "no photo" placeholder used elsewhere, instead of leaving
+      // a stripped <img> with no src (which renders as an empty circle).
+      if(!latestWithImage){
+        const placeholder=document.createElement("div");
+        placeholder.className="category-placeholder";
+        placeholder.setAttribute("role","img");
+        placeholder.setAttribute("aria-label",link.querySelector("span")?.textContent||"");
+        image.replaceWith(placeholder);
+        return;
+      }
       image.src=reviewedRecipeCardImage(latestWithImage);
       image.alt=link.querySelector("span")?.textContent||latestWithImage.title;
     });
@@ -564,7 +611,12 @@ const gameCards=$$(".shop-card[data-kind]");
 $$("[data-game-filter]").forEach(btn=>btn.addEventListener("click",()=>{
   $$("[data-game-filter]").forEach(b=>b.classList.remove("active"));btn.classList.add("active");
   const value=btn.dataset.gameFilter;
-  gameCards.forEach(c=>c.classList.toggle("is-hidden",value!=="all"&&c.dataset.kind!==value));
+  let visible=0;
+  gameCards.forEach(c=>{
+    const show=value==="all"||c.dataset.kind===value;
+    c.classList.toggle("is-hidden",!show);if(show)visible++;
+  });
+  if($("#gamesEmpty"))$("#gamesEmpty").hidden=visible!==0;
 }));
 
 // Gifts
@@ -607,6 +659,18 @@ if(favoritesGrid){
   }));
   document.addEventListener("click",e=>{if(e.target.closest("[data-fav]"))setTimeout(renderFavorites,0)});
   renderFavorites();
+  // Recipes from the reviewed catalog are favorited as "recipe-<id>", which
+  // isn't in the static favoriteCatalog above (that only covers the two
+  // hardcoded legacy series) — resolve those lazily from the same JSON the
+  // recipes board uses, then re-render once we know their title/image/link.
+  if(getFavorites().some(id=>id.startsWith("recipe-"))){
+    fetch("data/recipes.json").then(r=>r.ok?r.json():null).then(catalog=>{
+      (catalog?.recipes||[]).forEach(recipe=>{
+        favoriteCatalog[`recipe-${recipe.id}`]={type:"recipe",title:recipe.title,meta:recipe.siteCategory||recipe.foodType||"",href:`recipe.html?recipe=${encodeURIComponent(recipe.id)}`,image:reviewedRecipeCardImage(recipe)};
+      });
+      renderFavorites();
+    }).catch(()=>{ /* Favorites from the reviewed catalog just won't resolve; the rest still render. */ });
+  }
 }
 
 // Demo auth redirect
@@ -647,27 +711,44 @@ $$("[data-demo-form='checkout']").forEach(form=>form.addEventListener("submit",(
   setTimeout(()=>{location.href="dashboard.html"},600);
 }));
 
-// Global search
+// Global search — indexes the real recipe/date/game catalogs so a search
+// actually finds something, instead of always showing the empty state.
+// Gifts have no real catalog yet (see the gifts section above, which keeps
+// that shop intentionally empty), so gift results legitimately stay at zero
+// until there's real content to index.
+const GLOBAL_GAMES_CATALOG=[
+  {title:"היער הקסום",meta:"משחק דיגיטלי · שאלות עומק",href:"games/forest-game.html"},
+  {title:"מירוץ האהבה",meta:"משחק דיגיטלי · תחרות",href:"games/race-game.html"},
+  {title:"משחק הזיכרון הגדול",meta:"משחק דיגיטלי · זיכרונות וצחוק",href:"games/memory-game.html"},
+  {title:"החבילה המלאה",meta:"חבילה דיגיטלית · שלושה משחקים",href:"games/bundle.html"}
+];
 const globalResults=$("#globalResults");
 if(globalResults){
-  // Search has no source-backed catalog entries yet. Remove its prototype rows,
-  // while keeping the search controls and their empty-state behavior in place.
-  globalResults.replaceChildren();
-  const cards=$$(".global-result-card",globalResults);
-  let type="all",term="";
-  function applyGlobalSearch(){
-    let visible=0;
-    cards.forEach(c=>{
-      const show=(type==="all"||c.dataset.type===type)&&(!term||c.dataset.search.includes(term));
-      c.classList.toggle("is-hidden",!show);if(show)visible++;
-    });
-    $("#globalResultCount").textContent=visible;
-    $("#globalEmpty").hidden=visible!==0;
+  let type="all",term="",index=[];
+  function renderGlobalResults(){
+    const filtered=index.filter(item=>(type==="all"||item.type===type)&&(!term||item.search.includes(term)));
+    globalResults.innerHTML=filtered.map(item=>`
+      <a class="global-result-card" href="${item.href}">
+        <span class="result-type">${item.typeLabel}</span>
+        ${item.image?`<img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}">`:`<div class="result-placeholder">♡</div>`}
+        <div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.meta)}</p></div>
+      </a>`).join("");
+    $("#globalResultCount").textContent=filtered.length;
+    $("#globalEmpty").hidden=filtered.length!==0;
   }
-  $("#globalSearchInput")?.addEventListener("input",e=>{term=e.target.value.trim();applyGlobalSearch()});
+  $("#globalSearchInput")?.addEventListener("input",e=>{term=e.target.value.trim().toLowerCase();renderGlobalResults()});
   $$("[data-global-type]").forEach(btn=>btn.addEventListener("click",()=>{
     $$("[data-global-type]").forEach(b=>b.classList.remove("active"));btn.classList.add("active");
-    type=btn.dataset.globalType;applyGlobalSearch();
+    type=btn.dataset.globalType;renderGlobalResults();
   }));
-  applyGlobalSearch();
+  index=[
+    ...dateSeriesAB.map(item=>({type:"date",typeLabel:"דייט",title:item.title,meta:"מסדרת הדייטים א׳-ב׳",href:`date.html?series=date-a-b&item=${item.id}`,image:item.image,search:item.title.toLowerCase()})),
+    ...GLOBAL_GAMES_CATALOG.map(g=>({type:"game",typeLabel:"משחק",...g,search:(g.title+" "+g.meta).toLowerCase()}))
+  ];
+  renderGlobalResults();
+  fetch("data/recipes.json").then(r=>r.ok?r.json():null).then(catalog=>{
+    const reviewed=(catalog?.recipes||[]).filter(recipe=>Number.isInteger(recipe.sequenceId)&&recipe.status==="COMPLETE"&&recipe.ingredients?.length&&recipe.instructions?.length&&!(recipe.issues||[]).some(issue=>issue.startsWith("DUPLICATE_OF")));
+    index.push(...reviewed.map(recipe=>({type:"recipe",typeLabel:"מתכון",title:recipe.title,meta:recipe.siteCategory||recipe.foodType||"מתכון",href:`recipe.html?recipe=${encodeURIComponent(recipe.id)}`,image:reviewedRecipeCardImage(recipe),search:`${recipe.title} ${recipe.foodType||""} ${(recipe.tags||[]).join(" ")}`.toLowerCase()})));
+    renderGlobalResults();
+  }).catch(()=>{ /* Recipe results just won't be searchable if the catalog fails to load; dates/games still work. */ });
 }
