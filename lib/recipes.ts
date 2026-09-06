@@ -134,7 +134,13 @@ export function isIngredientHeading(line: string): boolean {
   const text = (line || "").trim();
   if (!text) return false;
   if (/\d/.test(text)) return false;
-  return /[:﹕]$/.test(text) || /^מצרכים(\s|$)/.test(text);
+  // A colon is the clearest signal, but many imported Instagram recipes use
+  // short labels such as "לרוטב" or "לקרם" without punctuation. Treat only
+  // a concise, label-shaped line as a heading: an ingredient like
+  // "לקישוט - פיסטוק גרוס" must remain a checkbox item.
+  if (/[:﹕]$/.test(text) || /^מצרכים(\s|$)/.test(text)) return true;
+  if (/[\-–—]/.test(text) || text.length > 46) return false;
+  return /^(?:לרוטב|לבצק|לקרם|לציפוי|למילוי|למלית|לבסיס|לתחתית|לגנאש|לקישוט|לסירופ|לטחינה|למרינדה|לקצפת|לקפה|לתערובת|לפסטה|לפירורים)(?:\s+[\p{L}׳״"']+){0,4}$/u.test(text);
 }
 
 /** Source instructions are sometimes already numbered ("1.\t...") from the
@@ -145,4 +151,20 @@ export function stripRedundantStepNumber(text: string, stepNumber: number): stri
   const match = /^\s*(\d+)[.)]\s*/.exec(text || "");
   if (match && Number(match[1]) === stepNumber) return text.slice(match[0].length);
   return text;
+}
+
+export type InstructionLineKind = "step" | "heading" | "nutrition" | "note";
+
+/** Preserve every imported instruction line, but keep section labels,
+ * nutritional values and closing notes out of the numbered cooking flow. */
+export function getInstructionLineKind(line: string): InstructionLineKind {
+  const text = (line || "").trim();
+  if (/^(?:ערכים(?:\s+תזונתיים)?|קלוריות|חלבון|שומן|פחמימ)/.test(text) || /^\d+(?:[.,]\d+)?\s*(?:קלור|חלבון|שומן|פחמימ)/.test(text)) {
+    return "nutrition";
+  }
+  if (/^(?:ובת?אבון|בתיאבון|שימו לב)/.test(text)) return "note";
+  if (/^(?:(?:ל(?:רוטב|בצק|קרם|ציפוי|מילוי|מלית|גנאש|סלמון))|הבסיס|קרם|גנאש|מלית|בשר|פירה|דפי אורז|קינואה|הכנת הקרם|הכנת הגנאש)\s*[:\-]/.test(text)) {
+    return "heading";
+  }
+  return "step";
 }
