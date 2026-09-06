@@ -1,0 +1,28 @@
+/* Restores the legacy page-level canvas inside the scoped product area.
+   These were formerly html/body rules and must not apply to the site shell. */
+.game-content {
+  direction: rtl;
+  font-family: var(--font-body);
+  background-color: var(--bg);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.32  0 0 0 0 0.15  0 0 0 0 0.2  0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='180' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+  isolation: isolate;
+}
+
+.game-content [id] { scroll-margin-top: 96px; }
+.game-content .game-site-trail { margin-bottom: 0; }
+
+/* Current-site globals load after the legacy sheets; restore the original
+   component system only below this boundary. */
+.game-content .container { max-width: var(--container); margin-inline: auto; padding-inline: 1.25rem; }
+.game-content .container--narrow { max-width: var(--container-narrow); }
+.game-content .btn { font-family: var(--font-body); }
+
+@media (max-width: 700px) {
+  .game-content { font-size: 16px; }
+}
