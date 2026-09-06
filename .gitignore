@@ -1,2 +1,11 @@
 # Local/dev tooling artifacts — never part of the deployed site.
 node_modules/
+
+# Next.js
+/.next/
+/out/
+next-env.d.ts
+*.tsbuildinfo
+
+# Env files
+.env*.local
