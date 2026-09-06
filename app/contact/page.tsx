@@ -18,14 +18,14 @@ export default function ContactPage() {
           <p>אפשר לפנות אליי לגבי האתר, משחקים, מתכונים, שיתופי פעולה או כל דבר אחר שמתאים.</p>
 
           <div className="contact-cards">
-            <a href="mailto:hello@rotemadini.com">
+            <a href="mailto:rotemadini@gmail.com">
               <span>✉</span>
               <div>
                 <strong>אימייל</strong>
-                <small>hello@rotemadini.com</small>
+                <small>rotemadini@gmail.com</small>
               </div>
             </a>
-            <a href="#">
+            <a href="https://www.instagram.com/rotem_adini" target="_blank" rel="noopener noreferrer">
               <span>◎</span>
               <div>
                 <strong>Instagram</strong>

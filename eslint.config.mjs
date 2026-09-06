@@ -33,6 +33,9 @@ const eslintConfig = defineConfig([
     "tools/**",
     "*.html",
     "script.js",
+    // Legacy game scripts are intentionally served as static assets rather
+    // than treated as TypeScript application source.
+    "public/games/**",
   ]),
 ]);
 

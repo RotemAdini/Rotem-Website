@@ -6,7 +6,11 @@ export default function NewsletterForm() {
   const onSubmit = useDemoForm("newsletter");
   return (
     <form className="newsletter-form" onSubmit={onSubmit}>
-      <input type="email" placeholder="כתובת האימייל שלכם" required />
+      <input type="email" name="email" aria-label="כתובת אימייל" placeholder="כתובת האימייל שלכם" required />
+      <label className="newsletter-consent">
+        <input type="checkbox" required />
+        <span>אני מאשר/ת קבלת עדכונים במייל</span>
+      </label>
       <button className="btn btn-primary" type="submit">
         הצטרפות
       </button>

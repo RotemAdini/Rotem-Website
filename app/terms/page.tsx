@@ -118,7 +118,7 @@ export default function TermsPage() {
           <section className="legal-section" id="tou-contact">
             <h2>13. יצירת קשר</h2>
             <p>
-              לשאלות בנוגע לתנאי השימוש ניתן לפנות במייל <a href="mailto:hello@rotemadini.com">hello@rotemadini.com</a> או דרך עמוד{" "}
+              לשאלות בנוגע לתנאי השימוש ניתן לפנות במייל <a href="mailto:rotemadini@gmail.com">rotemadini@gmail.com</a> או דרך עמוד{" "}
               <Link href="/contact">צור קשר</Link>.
             </p>
             <p><span className="legal-tbd">להשלמה: דין חל וסמכות שיפוט ייחודית (לאחר קביעה משפטית), ופרטי העסק המלאים.</span></p>

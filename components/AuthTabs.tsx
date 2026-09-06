@@ -11,10 +11,10 @@ export default function AuthTabs() {
   return (
     <div className="auth-card">
       <div className="auth-tabs">
-        <button className={tab === "login" ? "active" : ""} onClick={() => setTab("login")}>
+        <button type="button" className={tab === "login" ? "active" : ""} aria-pressed={tab === "login"} onClick={() => setTab("login")}>
           התחברות
         </button>
-        <button className={tab === "register" ? "active" : ""} onClick={() => setTab("register")}>
+        <button type="button" className={tab === "register" ? "active" : ""} aria-pressed={tab === "register"} onClick={() => setTab("register")}>
           הרשמה
         </button>
       </div>

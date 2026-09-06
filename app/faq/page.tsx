@@ -218,7 +218,7 @@ export default function FaqPage() {
                 <div className="faq-answer">
                   <p>
                     אפשר לפנות בכל שלב דרך עמוד <Link href="/contact">צור קשר</Link> או במייל{" "}
-                    <a href="mailto:hello@rotemadini.com">hello@rotemadini.com</a>, ואשמח לעזור.
+                    <a href="mailto:rotemadini@gmail.com">rotemadini@gmail.com</a>, ואשמח לעזור.
                   </p>
                 </div>
               </details>

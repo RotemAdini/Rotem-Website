@@ -124,7 +124,7 @@ export default function PrivacyPage() {
           <section className="legal-section" id="pp-contact">
             <h2>12. יצירת קשר</h2>
             <p>
-              שאלות בנוגע למדיניות פרטיות זו ניתן להפנות במייל <a href="mailto:hello@rotemadini.com">hello@rotemadini.com</a> או דרך עמוד{" "}
+              שאלות בנוגע למדיניות פרטיות זו ניתן להפנות במייל <a href="mailto:rotemadini@gmail.com">rotemadini@gmail.com</a> או דרך עמוד{" "}
               <Link href="/contact">צור קשר</Link>.
             </p>
             <p><span className="legal-tbd">להשלמה: פרטי החברה/העסק המלאים (שם משפטי, מספר עוסק/ח.פ., כתובת) יתווספו כאן.</span></p>

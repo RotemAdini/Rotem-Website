@@ -53,7 +53,7 @@ export default function Footer() {
         <div className="footer-col">
           <h3>בואו נדבר</h3>
           <Link href="/contact">צור קשר</Link>
-          <a href="mailto:hello@rotemadini.com">hello@rotemadini.com ✉</a>
+          <a href="mailto:rotemadini@gmail.com">rotemadini@gmail.com ✉</a>
           <span>ישראל ♡</span>
         </div>
       </div>
