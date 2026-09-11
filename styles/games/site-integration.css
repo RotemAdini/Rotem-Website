@@ -35,3 +35,19 @@ body { font-family: "Heebo", "Assistant", Arial, sans-serif; }
   .site-header { position: sticky; }
   .game-site-trail .container { padding-inline: 1.1rem; }
 }
+
+/* ---------- Purchase-not-open notice ----------
+   Shown above every game lead form while online payment is not connected, so
+   the panel's price and CTA cannot be read as a working checkout. */
+.purchase-pending-note {
+  margin: 0 0 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--terracotta, #c3735f);
+  border-radius: var(--radius-sm, 12px);
+  background: var(--terracotta-tint, #fdf1ec);
+  color: var(--terracotta-dark, #8d4732);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  text-align: center;
+}
+.purchase-pending-note strong { display: block; margin-bottom: 0.15rem; }

@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { ToastProvider } from "@/lib/toast-context";
 import { FavoritesProvider } from "@/lib/favorites-context";
 import AccessibilityControls from "@/components/AccessibilityControls";
+import SiteChrome from "@/components/SiteChrome";
 
 export const metadata: Metadata = {
   title: "רותם עדיני | מתכונים, דייטים ומשחקים",
@@ -31,13 +32,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        <a className="skip-link" href="#main-content">דילוג לתוכן הראשי</a>
         <ToastProvider>
           <FavoritesProvider>
-            <Header />
-            <div id="main-content">{children}</div>
-            <Footer />
-            <AccessibilityControls />
+            {/* SiteChrome renders the header/footer exactly as before on every
+                site page, and steps out of the way for the embedded Sanity
+                Studio at /studio, which needs the full viewport. */}
+            <SiteChrome header={<Header />} footer={<Footer />} accessibilityControls={<AccessibilityControls />}>
+              {children}
+            </SiteChrome>
           </FavoritesProvider>
         </ToastProvider>
       </body>

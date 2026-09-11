@@ -1,22 +1,23 @@
 import "server-only";
 import type { FavoriteEntry } from "./types";
-import { getReviewedRecipes, reviewedRecipeCardImage } from "./recipes";
+import { getAllRecipes } from "./sanity/recipes";
+import { toFavoriteEntries } from "./sanity/recipe-adapters";
 
-/** The reviewed-recipes catalog is ~500KB and lib/recipes.ts reads it via
- * node:fs — kept server-only and computed into a small id→entry lookup
- * (rather than shipping the whole catalog to the client, unlike the
- * original site's client-side `fetch("data/recipes.json")`). Passed as a
- * prop into the client FavoritesGrid component. */
-export function getRecipeFavoriteCatalog(): Record<string, FavoriteEntry> {
-  const entries: Record<string, FavoriteEntry> = {};
-  getReviewedRecipes().forEach((recipe) => {
-    entries[`recipe-${recipe.id}`] = {
-      type: "recipe",
-      title: recipe.title,
-      meta: recipe.siteCategory || recipe.foodType || "",
-      href: `/recipes/${recipe.id}`,
-      image: reviewedRecipeCardImage(recipe),
-    };
-  });
-  return entries;
+/**
+ * The recipe half of the favourites lookup, computed on the server from Sanity
+ * and passed into the client FavoritesGrid as a small id -> entry map (rather
+ * than shipping the whole catalog to the browser).
+ *
+ * Every token a recipe answers to gets an entry, not just its primary one. A
+ * recipe that absorbed a legacy series card owns both `recipe-<old id>` and
+ * `biscuit-cake-NN`, so a favourite saved under either one still resolves —
+ * which is the whole point of keeping the legacy aliases in Sanity.
+ *
+ * `getAllRecipes()` rather than the listed ones: a recipe hidden from the
+ * board is still reachable at its own URL, and a favourite saved for it must
+ * not vanish from the list.
+ */
+export async function getRecipeFavoriteCatalog(): Promise<Record<string, FavoriteEntry>> {
+  const recipes = await getAllRecipes();
+  return Object.assign({}, ...recipes.map(toFavoriteEntries)) as Record<string, FavoriteEntry>;
 }

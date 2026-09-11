@@ -12,7 +12,10 @@ export function getDateBoardCards(): DateBoardCard[] {
     description: "מסדרת הדייטים א׳-ב׳",
     footerLabel: `רעיון #${item.id}`,
     search: `${item.title} סדרת דייטים א ב`,
-    budget: item.budget || "medium",
+    // This frozen reference predates the audited budget ranges, and its
+    // low/medium/high values cannot be converted into one without inventing
+    // precision, so every card here matches no budget chip.
+    budget: "unknown",
     place: item.place || "outside",
     duration: "medium",
     series: "date-a-b",

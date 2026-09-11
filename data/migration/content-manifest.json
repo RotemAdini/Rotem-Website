@@ -1,0 +1,5873 @@
+{
+  "manifestVersion": 1,
+  "createdAt": "2026-09-07T18:51:19.516Z",
+  "updatedAt": "2026-09-08T12:56:38.846Z",
+  "idPolicy": {
+    "contentId": "Immutable, opaque, minted once as <type>_<ULID> and persisted here. Never derived from a title, a slug, a sequence number or a Sanity _id. This is the only identifier Supabase may store.",
+    "slug": "Human-readable Hebrew URL segment, generated once from the curated title, editable in Sanity, never used as a relationship key. Never derived from an image-folder name.",
+    "imageFolderSlug": "Where a recipe's photos sit on disk. A storage detail: it never determines the slug or the URL, and an unresolved mapping never blocks anything.",
+    "series": "Editorial grouping. The biscuit cakes are an ordinary Recipe carrying series = \"עוגות ביסקוויטים\" plus a seriesPosition — there is no separate biscuit-cake content type.",
+    "legacyIds": "localStorage favourite tokens, verbatim, so existing rotemFavorites entries stay migratable.",
+    "legacyRouteIds": "Current URL segments, verbatim, so every existing link can be permanently redirected.",
+    "naturalKey": "Stable re-identification key used only by this builder, so a rerun never mints a new contentId."
+  },
+  "counts": {
+    "totalItems": 176,
+    "recipes": 159,
+    "recipesFromReviewedCatalog": 160,
+    "recipesFromBiscuitSeriesOnly": 1,
+    "biscuitSeriesMerged": 13,
+    "biscuitSeriesRecipesTotal": 14,
+    "biscuitSeriesPositionUnresolved": 0,
+    "duplicatePostsAbsorbed": 1,
+    "catalogRowsAbsorbedIntoSeriesItems": 1,
+    "recipesAuthoredInSanity": 1,
+    "dateIdeas": 13,
+    "games": 4,
+    "legacyFavouriteTokens": 187,
+    "legacyRoutes": 191,
+    "unsuitableLegacyRouteIds": 34,
+    "recipesWithoutImages": 121,
+    "unmatchedImageFolders": 136
+  },
+  "mergeDecisions": [
+    {
+      "kind": "DUPLICATE_INSTAGRAM_POST_ABSORBED",
+      "decidedBy": "Rotem, 7 September 2026",
+      "detail": "Two Instagram posts of the same dish. The record data/recipes.json already flags as the duplicate is absorbed: its URL and favourite token become aliases of the surviving record, whose content is kept. Its own post URL is preserved in alternateSourceUrls, and data/recipes.json is untouched.",
+      "absorbedRouteId": "instagram-122",
+      "absorbedSequenceId": 122,
+      "absorbedSourceUrl": "https://www.instagram.com/reel/DCGmwC_IaEF/",
+      "absorbedFavouriteToken": "recipe-instagram-122",
+      "survivingRouteId": "עו-12",
+      "survivingSequenceId": 146,
+      "survivingSourceUrl": "https://www.instagram.com/reel/DSKQ3G5iM-7/",
+      "title": "עוגת תפוזים",
+      "contentId": "recipe_01M1YKBSJMD4SZSYJG46JVB38B"
+    },
+    {
+      "kind": "BISCUIT_SERIES_MERGED_INTO_CATALOG_RECIPE",
+      "biscuitId": "13",
+      "biscuitTitle": "עוגת ביסקוויטים פירות יער",
+      "biscuitFavouriteToken": "biscuit-cake-13",
+      "recipeRouteId": "פרק13בסדרהאיךלשדר",
+      "recipeSequenceId": 195,
+      "recipeTitle": "עוגת ביסקוויטים פירות יער ושוקולד לבן",
+      "method": "image-folder",
+      "contentId": "recipe_01M1YKBSJH4CC1JNGP7NZNA4YV"
+    },
+    {
+      "kind": "BISCUIT_SERIES_MERGED_INTO_CATALOG_RECIPE",
+      "biscuitId": "12",
+      "biscuitTitle": "עוגת ביסקוויטים פקאן סיני",
+      "biscuitFavouriteToken": "biscuit-cake-12",
+      "recipeRouteId": "אמאלהאיךכלכךהרבהשניםלאידעתיכמהטובזהפקאןמסוכרקבלואתהפרקה12בסד",
+      "recipeSequenceId": 190,
+      "recipeTitle": "עוגת ביסקוויטים פקאן מסוכר",
+      "method": "recorded-decision",
+      "decidedBy": "Rotem, 8 September 2026",
+      "note": "Catalog row 190 (\"עוגת ביסקוויטים פקאן מסוכר\") and legacy biscuit-series item 12 (\"עוגת ביסקוויטים פקאן סיני\") are the same cake. The series title is canonical, the cake is episode 12, and the two must be one Recipe. The manifest builder had flagged the position as unresolved rather than guessing at it; this is the answer.",
+      "contentId": "recipe_01M1YKBSJK2CCHZBMDQRBQ9QVA"
+    },
+    {
+      "kind": "BISCUIT_SERIES_MERGED_INTO_CATALOG_RECIPE",
+      "biscuitId": "11",
+      "biscuitTitle": "פצצת אוראו וביסקוויטים",
+      "biscuitFavouriteToken": "biscuit-cake-11",
+      "recipeRouteId": "ברוכיםהבאיםלפרק11בסדרהשליאיךלשדר",
+      "recipeSequenceId": 188,
+      "recipeTitle": "עוגת בומב אוראו",
+      "method": "image-folder",
+      "contentId": "recipe_01M1YKBSJKKR0FH2K788DJC8EV"
+    },
+    {
+      "kind": "BISCUIT_SERIES_MERGED_INTO_CATALOG_RECIPE",
+      "biscuitId": "10",
+      "biscuitTitle": "עוגת ביסקוויטים טריפל שוקולד",
+      "biscuitFavouriteToken": "biscuit-cake-10",
+      "recipeRouteId": "ברוכיםהבאיםלפרקהעשיריבסדרהשליאיךלשדר",
+      "recipeSequenceId": 185,
+      "recipeTitle": "עוגת ביסקוויטים טריפל שוקולד",
+      "method": "image-folder",
+      "contentId": "recipe_01M1YKBSJK6K3PZ03YVKFP9HH9"
+    },
+    {
+      "kind": "BISCUIT_SERIES_MERGED_INTO_CATALOG_RECIPE",
+      "biscuitId": "09",
+      "biscuitTitle": "כדורי ביסקוויטים",
+      "biscuitFavouriteToken": "biscuit-cake-09",
+      "recipeRouteId": "הפרקהתשיעיבסדרהשלנואיךלשדר",
+      "recipeSequenceId": 179,
+      "recipeTitle": "כדורי עוגת ביסקוויטים",
+      "method": "image-folder",
+      "contentId": "recipe_01M1YKBSJKF5AAQ8MNDJHYT4H6"
+    },
+    {
+      "kind": "BISCUIT_SERIES_MERGED_INTO_CATALOG_RECIPE",
+      "biscuitId": "06",
+      "biscuitTitle": "עוגת ביסקוויטים קרפ",
+      "biscuitFavouriteToken": "biscuit-cake-06",
+      "recipeRouteId": "הפרקהשישיבסדרהשלנואיךלשדר",
+      "recipeSequenceId": 167,
+      "recipeTitle": "עוגת ביסקוויטים בתוך עוגת קרפים",
+      "method": "image-folder",
+      "contentId": "recipe_01M1YKBSJM6NC1S5VKQ9KBVMVG"
+    },
+    {
+      "kind": "BISCUIT_SERIES_MERGED_INTO_CATALOG_RECIPE",
+      "biscuitId": "05",
+      "biscuitTitle": "עוגת ביסקוויטים לימון ונענע",
+      "biscuitFavouriteToken": "biscuit-cake-05",
+      "recipeRouteId": "הפרקהחמישיבסדרהשליאיךלשדר",
+      "recipeSequenceId": 166,
+      "recipeTitle": "עוגת ביסקוויטים לימונענע",
+      "method": "reviewed-title-alias",
+      "contentId": "recipe_01M1YKBSJMH7A5YT51NNJ2GGZN"
+    },
+    {
+      "kind": "BISCUIT_SERIES_MERGED_INTO_CATALOG_RECIPE",
+      "biscuitId": "03",
+      "biscuitTitle": "עוגת ביסקוויטים מוקה",
+      "biscuitFavouriteToken": "biscuit-cake-03",
+      "recipeRouteId": "ברוכיםהבאיםלפרקהשלישיבסדרהשליאיךלשדר",
+      "recipeSequenceId": 157,
+      "recipeTitle": "עוגת ביסקוויטים מוקה",
+      "method": "image-folder",
+      "contentId": "recipe_01M1YKBSJMZBKW38J1KQWR8GCW"
+    },
+    {
+      "kind": "BISCUIT_SERIES_MERGED_INTO_CATALOG_RECIPE",
+      "biscuitId": "02",
+      "biscuitTitle": "עוגת ביסקוויטים קרמבו",
+      "biscuitFavouriteToken": "biscuit-cake-02",
+      "recipeRouteId": "ברוכיםהבאיםלפרקהשניבסדרהשליאיךלשדר",
+      "recipeSequenceId": 155,
+      "recipeTitle": "עוגת ביסקוויטים קרמבו",
+      "method": "image-folder",
+      "contentId": "recipe_01M1YKBSJMRRZ04P5NSXATNGSN"
+    },
+    {
+      "kind": "BISCUIT_SERIES_MERGED_INTO_CATALOG_RECIPE",
+      "biscuitId": "01",
+      "biscuitTitle": "עוגת ביסקוויטים פיסטוק",
+      "biscuitFavouriteToken": "biscuit-cake-01",
+      "recipeRouteId": "ברוכיםהבאיםלסדרתהמתכוניםהחדשהשליאיךלשדר",
+      "recipeSequenceId": 152,
+      "recipeTitle": "עוגת ביסקוויטים פיסטוק ושוקולד לבן",
+      "method": "image-folder",
+      "contentId": "recipe_01M1YKBSJM6R8F2ZMM7AVR8FQS"
+    },
+    {
+      "kind": "BISCUIT_SERIES_MERGED_INTO_CATALOG_RECIPE",
+      "biscuitId": "14",
+      "biscuitTitle": "עוגת ביסקוויטים באונטי",
+      "biscuitFavouriteToken": "biscuit-cake-14",
+      "recipeRouteId": "instagram-198",
+      "recipeSequenceId": 198,
+      "recipeTitle": "עוגת ביסקוויטים באונטי",
+      "method": "reviewed-title-alias",
+      "contentId": "recipe_01M1YKBSJNMHXBMQ64X6RJWPRB"
+    },
+    {
+      "kind": "BISCUIT_SERIES_MERGED_INTO_CATALOG_RECIPE",
+      "biscuitId": "08",
+      "biscuitTitle": "עוגת ביסקוויטים אלפחורס",
+      "biscuitFavouriteToken": "biscuit-cake-08",
+      "recipeRouteId": "instagram-175",
+      "recipeSequenceId": 175,
+      "recipeTitle": "עוגת ביסקוויטים אלפחורס",
+      "method": "image-folder",
+      "contentId": "recipe_01M1YKBSJPF6Z67YYY541R0587"
+    },
+    {
+      "kind": "BISCUIT_SERIES_MERGED_INTO_CATALOG_RECIPE",
+      "biscuitId": "04",
+      "biscuitTitle": "עוגת ביסקוויטים קראנץ׳ נוטלה",
+      "biscuitFavouriteToken": "biscuit-cake-04",
+      "recipeRouteId": "instagram-162",
+      "recipeSequenceId": 162,
+      "recipeTitle": "עוגת קראנץ׳ נוטלה",
+      "method": "reviewed-title-alias",
+      "contentId": "recipe_01M1YKBSJP8A6441HYKBTPZXKN"
+    }
+  ],
+  "corrections": [
+    {
+      "sequenceId": 190,
+      "canonicalTitle": "עוגת ביסקוויטים פקאן סיני",
+      "mergeWithBiscuitId": "12",
+      "decidedBy": "Rotem, 8 September 2026",
+      "note": "Catalog row 190 (\"עוגת ביסקוויטים פקאן מסוכר\") and legacy biscuit-series item 12 (\"עוגת ביסקוויטים פקאן סיני\") are the same cake. The series title is canonical, the cake is episode 12, and the two must be one Recipe. The manifest builder had flagged the position as unresolved rather than guessing at it; this is the answer."
+    },
+    {
+      "sequenceId": 171,
+      "absorbIntoBiscuitId": "07",
+      "canonicalTitle": "עוגת פירמידה לפסח",
+      "contentAuthoredInSanity": true,
+      "decidedBy": "Rotem, 8 September 2026",
+      "note": "Catalog row 171 (\"עוגת פירמידה\") and legacy biscuit-series item 07 are the same pyramid cake — there is only one. The series item survives, because it carries the canonical title and the ingredients and instructions Rotem wrote in the Studio; row 171 is absorbed and contributes its verified source metadata (Instagram URL and shortcode, sequenceId, publish date, prep time, difficulty, food type) plus its route and favourite token as aliases. Its own title is kept in alternateTitles."
+    }
+  ],
+  "review": {
+    "ambiguous": [],
+    "unmatchedImageFolders": [
+      "savory/almond-challah",
+      "savory/antipasti-salad",
+      "savory/asian-cabbage-salad",
+      "savory/baked-chicken-patties",
+      "savory/baked-potato-latkes",
+      "savory/baked-ptitim-arancini",
+      "savory/beet-gnocchi",
+      "savory/black-lentil-patties",
+      "savory/boureka-bites",
+      "savory/breaded-cauliflower-florets",
+      "savory/broccoli-cottage-cheese-patties",
+      "savory/cauliflower-casserole",
+      "savory/cheese-borekas",
+      "savory/cheese-olive-snacks",
+      "savory/cheese-zucchini-quiche",
+      "savory/cheesy-matzah-brei",
+      "savory/chicken-arayes",
+      "savory/chicken-corn-patties",
+      "savory/chicken-udon-vegetable-stir-fry",
+      "savory/corn-mozzarella-balls",
+      "savory/corn-muffins",
+      "savory/corn-patties",
+      "savory/cottage-cheese-dough-pizza",
+      "savory/eggplant-liver-spread",
+      "savory/fried-rice",
+      "savory/garlic-balls",
+      "savory/grandma-ruti-turkish-salad",
+      "savory/green-hummus",
+      "savory/homemade-corn-schnitzel",
+      "savory/honey-garlic-salmon-cauliflower-puree",
+      "savory/kubaneh",
+      "savory/matzah-borekas",
+      "savory/meat-cannelloni",
+      "savory/meat-challah-snail",
+      "savory/meat-stuffed-cauliflower",
+      "savory/mini-tortilla-sweet-potato-quiche",
+      "savory/mint-teriyaki-chicken-thighs",
+      "savory/mustard-garlic-potatoes",
+      "savory/no-rise-cheese-khachapuri",
+      "savory/noodle-casserole",
+      "savory/one-pot-chicken-pasta",
+      "savory/pan-cheese-garlic-bread",
+      "savory/pan-fried-cheese-pastry",
+      "savory/pan-zaatar-cheese-bread",
+      "savory/pasta-rosa",
+      "savory/pesto-pasta",
+      "savory/pesto-ptitim-risotto",
+      "savory/pizza-samboosek",
+      "savory/polenta-gnocchi",
+      "savory/quinoa-orange-salad",
+      "savory/red-pasta",
+      "savory/red-rice-roasted-tomatoes",
+      "savory/rice-paper-borekas",
+      "savory/rice-paper-meat-borekas",
+      "savory/savory-pancake",
+      "savory/shepherds-pie",
+      "savory/spaghetti-caramelized-onion",
+      "savory/special-salad",
+      "savory/stretchy-cheese-balls",
+      "savory/stuffed-chicken-tortillas",
+      "savory/sweet-potato-pasta",
+      "savory/yishai-pitusi-pizza",
+      "sweet/alfajores-biscuit-cake",
+      "sweet/alfajores-cookies",
+      "sweet/alfajores-cups",
+      "sweet/almond-cookies",
+      "sweet/amsterdam-hamantaschen",
+      "sweet/amsterdam-rugelach",
+      "sweet/apple-cinnamon-cake",
+      "sweet/baked-doughnuts",
+      "sweet/berries-white-chocolate-biscuit-cake",
+      "sweet/biscuit-cake-balls",
+      "sweet/blondie-chocolate-ball-roulade",
+      "sweet/blondie-souffle",
+      "sweet/bounty-biscuit-cake",
+      "sweet/brown-butter-brownies",
+      "sweet/brownie-cheesecake",
+      "sweet/brownie-cookies",
+      "sweet/brownies",
+      "sweet/candied-pecan-biscuit-cake",
+      "sweet/cheese-blintzes",
+      "sweet/chinese-pecan-biscuit-cake",
+      "sweet/chocolate-cake",
+      "sweet/chocolate-chip-cookies",
+      "sweet/chocolate-chip-cookies-2",
+      "sweet/chocolate-crisp-pancakes",
+      "sweet/chocolate-matzah-pie",
+      "sweet/chocolate-mousse-biscuit-cake",
+      "sweet/chocolate-tiramisu-cake",
+      "sweet/cinnamon-roll-rugelach",
+      "sweet/classic-biscuit-cake",
+      "sweet/classic-cheesecake",
+      "sweet/coconut-chocolate-slices",
+      "sweet/coffee-pecan-brownies",
+      "sweet/crepe-biscuit-cake",
+      "sweet/crumb-cheesecake-no-cream",
+      "sweet/crunch-ice-cream-bars",
+      "sweet/double-chocolate-pareve-yeast-cake",
+      "sweet/dry-lemon-cookies",
+      "sweet/eshel-doughnuts",
+      "sweet/heart-shaped-cheese-pancakes",
+      "sweet/honey-brownies",
+      "sweet/honey-glazed-almond-muffins",
+      "sweet/kosher-krembo-cake",
+      "sweet/krembo-biscuit-cake",
+      "sweet/krembo-cake",
+      "sweet/lemon-krembo",
+      "sweet/lemon-mint-biscuit-cake",
+      "sweet/low-calorie-crepe",
+      "sweet/low-fat-creamy-cheesecake",
+      "sweet/maple-pecan-cake",
+      "sweet/milk-chocolate-caramel-pretzel-slab",
+      "sweet/mocha-biscuit-cake",
+      "sweet/mocha-krembo-cake",
+      "sweet/nutella-crunch-biscuit-cake",
+      "sweet/nutella-pastry",
+      "sweet/nutella-yeast-rolls",
+      "sweet/oatmeal-cookies",
+      "sweet/one-dough-variety-cookies",
+      "sweet/orange-cake",
+      "sweet/orange-cake-2",
+      "sweet/oreo-bomb-cake",
+      "sweet/pareve-chocolate-fudge-cake",
+      "sweet/passover-biscuit-pyramid",
+      "sweet/perfect-chocolate-balls",
+      "sweet/pistachio-crunch-bars",
+      "sweet/pistachio-slices",
+      "sweet/pistachio-white-chocolate-biscuit-cake",
+      "sweet/protein-chocolate-souffle",
+      "sweet/protein-pancakes",
+      "sweet/raffaello-balls",
+      "sweet/snickers-biscuit-cake",
+      "sweet/triple-chocolate-biscuit-cake",
+      "sweet/white-chocolate-biscuit-slab",
+      "sweet/white-chocolate-krembo-biscuit-cake",
+      "sweet/wine-cookie-pyramid-cake"
+    ],
+    "note": "NON-BLOCKING. images/recipes/** contains an English kebab-case folder per recipe, created outside this migration. A folder is recorded on a recipe (as legacyImageFolder) only where data/recipes.json already establishes the link; pairing the rest would mean translating a Hebrew title into English, which this project does not guess at. These folders are a storage location and never influence a slug or a URL, so an unresolved mapping does not block the import, the schema, or the eventual frontend switch — it is simply a list for Rotem to work through. No folder is renamed, moved or deleted by any of this."
+  },
+  "items": [
+    {
+      "contentId": "date_01M1YKBSJRYWM92JQZAPXRQFT6",
+      "contentType": "dateIdea",
+      "naturalKey": "date-a-b:01",
+      "title": "דייט אוכל איטלקי",
+      "slug": "דייט-אוכל-איטלקי",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "date-a-b-01"
+      ],
+      "legacyRouteIds": [
+        "01"
+      ],
+      "legacyRoutes": [
+        "/dates/01"
+      ],
+      "sequenceId": null,
+      "instagramShortcode": null,
+      "sourceUrl": null,
+      "publishedDate": null,
+      "series": "סדרת הדייטים א׳-ב׳",
+      "seriesPosition": 1,
+      "imageFolderSlug": null,
+      "imagePaths": [
+        "/images/date-series-a-b/01-italian-food/01-italian-food-1-web.JPEG",
+        "/images/date-series-a-b/01-italian-food/01-italian-food-1-web.JPEG",
+        "/images/date-series-a-b/01-italian-food/01-italian-food-2-web.JPEG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "date_01M1YKBSJRS43XEWC32VJ2QSC5",
+      "contentType": "dateIdea",
+      "naturalKey": "date-a-b:02",
+      "title": "דייט ביר פונג",
+      "slug": "דייט-ביר-פונג",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "date-a-b-02"
+      ],
+      "legacyRouteIds": [
+        "02"
+      ],
+      "legacyRoutes": [
+        "/dates/02"
+      ],
+      "sequenceId": null,
+      "instagramShortcode": null,
+      "sourceUrl": null,
+      "publishedDate": null,
+      "series": "סדרת הדייטים א׳-ב׳",
+      "seriesPosition": 2,
+      "imageFolderSlug": null,
+      "imagePaths": [
+        "/images/date-series-a-b/02-beer-pong/02-beer-pong-1-web.PNG",
+        "/images/date-series-a-b/02-beer-pong/02-beer-pong-1-web.PNG",
+        "/images/date-series-a-b/02-beer-pong/02-beer-pong-2-web.JPEG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "date_01M1YKBSJRHTYD64FS303HH951",
+      "contentType": "dateIdea",
+      "naturalKey": "date-a-b:03",
+      "title": "ערב טעימות גבינות",
+      "slug": "ערב-טעימות-גבינות",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "date-a-b-03"
+      ],
+      "legacyRouteIds": [
+        "03"
+      ],
+      "legacyRoutes": [
+        "/dates/03"
+      ],
+      "sequenceId": null,
+      "instagramShortcode": null,
+      "sourceUrl": null,
+      "publishedDate": null,
+      "series": "סדרת הדייטים א׳-ב׳",
+      "seriesPosition": 3,
+      "imageFolderSlug": null,
+      "imagePaths": [
+        "/images/date-series-a-b/03-cheese-1/IMG_2645-web.PNG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "date_01M1YKBSJSPXG2HPFYQTC2CZ2K",
+      "contentType": "dateIdea",
+      "naturalKey": "date-a-b:04",
+      "title": "ערב גבינות ויין",
+      "slug": "ערב-גבינות-ויין",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "date-a-b-04"
+      ],
+      "legacyRouteIds": [
+        "04"
+      ],
+      "legacyRoutes": [
+        "/dates/04"
+      ],
+      "sequenceId": null,
+      "instagramShortcode": null,
+      "sourceUrl": null,
+      "publishedDate": null,
+      "series": "סדרת הדייטים א׳-ב׳",
+      "seriesPosition": 4,
+      "imageFolderSlug": null,
+      "imagePaths": [
+        "/images/date-series-a-b/04-cheese-2/04-cheese-2-1-web.PNG",
+        "/images/date-series-a-b/04-cheese-2/04-cheese-2-1-web.PNG",
+        "/images/date-series-a-b/04-cheese-2/04-cheese-2-2-web.JPEG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "date_01M1YKBSJS3DFK02EQHFATJPS3",
+      "contentType": "dateIdea",
+      "naturalKey": "date-a-b:05",
+      "title": "דייט דגים",
+      "slug": "דייט-דגים",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "date-a-b-05"
+      ],
+      "legacyRouteIds": [
+        "05"
+      ],
+      "legacyRoutes": [
+        "/dates/05"
+      ],
+      "sequenceId": null,
+      "instagramShortcode": null,
+      "sourceUrl": null,
+      "publishedDate": null,
+      "series": "סדרת הדייטים א׳-ב׳",
+      "seriesPosition": 5,
+      "imageFolderSlug": null,
+      "imagePaths": [
+        "/images/date-series-a-b/05-fish/05-fish-1-web.JPEG",
+        "/images/date-series-a-b/05-fish/05-fish-1-web.JPEG",
+        "/images/date-series-a-b/05-fish/05-fish-2-web.JPEG",
+        "/images/date-series-a-b/05-fish/05-fish-3-web.JPEG",
+        "/images/date-series-a-b/05-fish/05-fish-4-web.JPEG",
+        "/images/date-series-a-b/05-fish/05-fish-5-web.JPEG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "date_01M1YKBSJS4DEN8ZSFRK0SXRR9",
+      "contentType": "dateIdea",
+      "naturalKey": "date-a-b:06",
+      "title": "דייט המבורגר",
+      "slug": "דייט-המבורגר",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "date-a-b-06"
+      ],
+      "legacyRouteIds": [
+        "06"
+      ],
+      "legacyRoutes": [
+        "/dates/06"
+      ],
+      "sequenceId": null,
+      "instagramShortcode": null,
+      "sourceUrl": null,
+      "publishedDate": null,
+      "series": "סדרת הדייטים א׳-ב׳",
+      "seriesPosition": 6,
+      "imageFolderSlug": null,
+      "imagePaths": [
+        "/images/date-series-a-b/06-burger/06-burger-1-web.PNG",
+        "/images/date-series-a-b/06-burger/06-burger-1-web.PNG",
+        "/images/date-series-a-b/06-burger/06-burger-2-web.JPEG",
+        "/images/date-series-a-b/06-burger/06-burger-3-web.JPEG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "date_01M1YKBSJS636RVPPE0PPZ1Y1P",
+      "contentType": "dateIdea",
+      "naturalKey": "date-a-b:07",
+      "title": "ערב משחקי וידאו",
+      "slug": "ערב-משחקי-וידאו",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "date-a-b-07"
+      ],
+      "legacyRouteIds": [
+        "07"
+      ],
+      "legacyRoutes": [
+        "/dates/07"
+      ],
+      "sequenceId": null,
+      "instagramShortcode": null,
+      "sourceUrl": null,
+      "publishedDate": null,
+      "series": "סדרת הדייטים א׳-ב׳",
+      "seriesPosition": 7,
+      "imageFolderSlug": null,
+      "imagePaths": [
+        "/images/date-series-a-b/07-video-games/07-video-games-1-web.JPEG",
+        "/images/date-series-a-b/07-video-games/07-video-games-1-web.JPEG",
+        "/images/date-series-a-b/07-video-games/07-video-games-2-web.PNG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "date_01M1YKBSJSM8H3AN98PRYZRMJZ",
+      "contentType": "dateIdea",
+      "naturalKey": "date-a-b:08",
+      "title": "דייט זריחה",
+      "slug": "דייט-זריחה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "date-a-b-08"
+      ],
+      "legacyRouteIds": [
+        "08"
+      ],
+      "legacyRoutes": [
+        "/dates/08"
+      ],
+      "sequenceId": null,
+      "instagramShortcode": null,
+      "sourceUrl": null,
+      "publishedDate": null,
+      "series": "סדרת הדייטים א׳-ב׳",
+      "seriesPosition": 8,
+      "imageFolderSlug": null,
+      "imagePaths": [
+        "/images/date-series-a-b/08-sunrise/08-sunrise-1-web.JPEG",
+        "/images/date-series-a-b/08-sunrise/08-sunrise-1-web.JPEG",
+        "/images/date-series-a-b/08-sunrise/08-sunrise-2-web.JPEG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "date_01M1YKBSJSJNPVKH9EG9R0A9ZZ",
+      "contentType": "dateIdea",
+      "naturalKey": "date-a-b:09",
+      "title": "סדנת חימר זוגית",
+      "slug": "סדנת-חימר-זוגית",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "date-a-b-09"
+      ],
+      "legacyRouteIds": [
+        "09"
+      ],
+      "legacyRoutes": [
+        "/dates/09"
+      ],
+      "sequenceId": null,
+      "instagramShortcode": null,
+      "sourceUrl": null,
+      "publishedDate": null,
+      "series": "סדרת הדייטים א׳-ב׳",
+      "seriesPosition": 9,
+      "imageFolderSlug": null,
+      "imagePaths": [
+        "/images/date-series-a-b/09-clay/09-clay-1-web.JPEG",
+        "/images/date-series-a-b/09-clay/09-clay-1-web.JPEG",
+        "/images/date-series-a-b/09-clay/09-clay-2-web.JPEG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "date_01M1YKBSJSNNX812GFWHYR53N6",
+      "contentType": "dateIdea",
+      "naturalKey": "date-a-b:10",
+      "title": "דייט טניס",
+      "slug": "דייט-טניס",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "date-a-b-10"
+      ],
+      "legacyRouteIds": [
+        "10"
+      ],
+      "legacyRoutes": [
+        "/dates/10"
+      ],
+      "sequenceId": null,
+      "instagramShortcode": null,
+      "sourceUrl": null,
+      "publishedDate": null,
+      "series": "סדרת הדייטים א׳-ב׳",
+      "seriesPosition": 10,
+      "imageFolderSlug": null,
+      "imagePaths": [
+        "/images/date-series-a-b/10-tennis/10-tennis-1-web.JPEG",
+        "/images/date-series-a-b/10-tennis/10-tennis-1-web.JPEG",
+        "/images/date-series-a-b/10-tennis/10-tennis-2-web.JPEG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "date_01M1YKBSJSEJZNQ2NH6JCB2XMD",
+      "contentType": "dateIdea",
+      "naturalKey": "date-a-b:11",
+      "title": "ערב יצירה ויין",
+      "slug": "ערב-יצירה-ויין",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "date-a-b-11"
+      ],
+      "legacyRouteIds": [
+        "11"
+      ],
+      "legacyRoutes": [
+        "/dates/11"
+      ],
+      "sequenceId": null,
+      "instagramShortcode": null,
+      "sourceUrl": null,
+      "publishedDate": null,
+      "series": "סדרת הדייטים א׳-ב׳",
+      "seriesPosition": 11,
+      "imageFolderSlug": null,
+      "imagePaths": [
+        "/images/date-series-a-b/11-crafts-and-wine/IMG_2658-web.JPEG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "date_01M1YKBSJSKWA1Z410HGZXW1VB",
+      "contentType": "dateIdea",
+      "naturalKey": "date-a-b:12",
+      "title": "דייט צפייה בכוכבים",
+      "slug": "דייט-צפייה-בכוכבים",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "date-a-b-12"
+      ],
+      "legacyRouteIds": [
+        "12"
+      ],
+      "legacyRoutes": [
+        "/dates/12"
+      ],
+      "sequenceId": null,
+      "instagramShortcode": null,
+      "sourceUrl": null,
+      "publishedDate": null,
+      "series": "סדרת הדייטים א׳-ב׳",
+      "seriesPosition": 12,
+      "imageFolderSlug": null,
+      "imagePaths": [
+        "/images/date-series-a-b/12-stargazing/12-stargazing-1-web.JPEG",
+        "/images/date-series-a-b/12-stargazing/12-stargazing-1-web.JPEG",
+        "/images/date-series-a-b/12-stargazing/12-stargazing-2-web.JPEG",
+        "/images/date-series-a-b/12-stargazing/12-stargazing-3-web.JPEG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "date_01M1YKBSJSWFWNJPXM5E0EWA1N",
+      "contentType": "dateIdea",
+      "naturalKey": "date-a-b:13",
+      "title": "דייט לגו זוגי",
+      "slug": "דייט-לגו-זוגי",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "date-a-b-13"
+      ],
+      "legacyRouteIds": [
+        "13"
+      ],
+      "legacyRoutes": [
+        "/dates/13"
+      ],
+      "sequenceId": null,
+      "instagramShortcode": null,
+      "sourceUrl": null,
+      "publishedDate": null,
+      "series": "סדרת הדייטים א׳-ב׳",
+      "seriesPosition": 13,
+      "imageFolderSlug": null,
+      "imagePaths": [
+        "/images/date-series-a-b/13-lego/13-lego-1-web.JPEG",
+        "/images/date-series-a-b/13-lego/13-lego-1-web.JPEG",
+        "/images/date-series-a-b/13-lego/13-lego-2-web.JPEG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "game_01M1YKBSJSMVRPXSXEJHABYQ3R",
+      "contentType": "game",
+      "naturalKey": "game:bundle",
+      "title": "החבילה המלאה",
+      "slug": "bundle",
+      "slugSource": "existing-game-slug",
+      "legacyIds": [],
+      "legacyRouteIds": [
+        "bundle"
+      ],
+      "legacyRoutes": [
+        "/games/bundle"
+      ],
+      "sequenceId": null,
+      "instagramShortcode": null,
+      "sourceUrl": null,
+      "publishedDate": null,
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "ICON_ONLY_NO_PHOTO"
+      ]
+    },
+    {
+      "contentId": "game_01M1YKBSJS9WTKJ0G9W19KDJ18",
+      "contentType": "game",
+      "naturalKey": "game:forest-game",
+      "title": "היער הקסום",
+      "slug": "forest-game",
+      "slugSource": "existing-game-slug",
+      "legacyIds": [],
+      "legacyRouteIds": [
+        "forest-game"
+      ],
+      "legacyRoutes": [
+        "/games/forest-game"
+      ],
+      "sequenceId": null,
+      "instagramShortcode": null,
+      "sourceUrl": null,
+      "publishedDate": null,
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [
+        "/games/assets/forest/forest-moonlit-pines.jpg"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "game_01M1YKBSJSCV16ZXPF4QM3BMS9",
+      "contentType": "game",
+      "naturalKey": "game:memory-game",
+      "title": "משחק הזיכרון הגדול",
+      "slug": "memory-game",
+      "slugSource": "existing-game-slug",
+      "legacyIds": [],
+      "legacyRouteIds": [
+        "memory-game"
+      ],
+      "legacyRoutes": [
+        "/games/memory-game"
+      ],
+      "sequenceId": null,
+      "instagramShortcode": null,
+      "sourceUrl": null,
+      "publishedDate": null,
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "ICON_ONLY_NO_PHOTO"
+      ]
+    },
+    {
+      "contentId": "game_01M1YKBSJS2JSM75TERGEM9X27",
+      "contentType": "game",
+      "naturalKey": "game:race-game",
+      "title": "מירוץ האהבה",
+      "slug": "race-game",
+      "slugSource": "existing-game-slug",
+      "legacyIds": [],
+      "legacyRouteIds": [
+        "race-game"
+      ],
+      "legacyRoutes": [
+        "/games/race-game"
+      ],
+      "sequenceId": null,
+      "instagramShortcode": null,
+      "sourceUrl": null,
+      "publishedDate": null,
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "ICON_ONLY_NO_PHOTO"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJR469G8KWK5NJ02JN5",
+      "contentType": "recipe",
+      "naturalKey": "biscuit:07",
+      "title": "עוגת פירמידה לפסח",
+      "alternateTitles": [
+        "פירמידת ביסקוויטים כשרה לפסח",
+        "עוגת פירמידה"
+      ],
+      "slug": "עוגת-פירמידה-לפסח",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "biscuit-cake-07",
+        "recipe-instagram-171"
+      ],
+      "legacyRouteIds": [
+        "biscuit-cake-07",
+        "instagram-171"
+      ],
+      "legacyRoutes": [
+        "/recipes/biscuit-cake-07",
+        "/recipes/instagram-171"
+      ],
+      "sequenceId": 171,
+      "instagramShortcode": "DWYQmhiCFLu",
+      "sourceUrl": "https://www.instagram.com/reel/DWYQmhiCFLu/",
+      "absorbedNaturalKeys": [
+        "ig:DWYQmhiCFLu"
+      ],
+      "retiredContentIds": [
+        "recipe_01M1YKBSJP02HB70AZCVCMP9JB"
+      ],
+      "publishedDate": "27/03/2026",
+      "series": "עוגות ביסקוויטים",
+      "seriesPosition": 7,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "BISCUIT_SERIES_ONLY",
+        "MERGED_CATALOG_ROW",
+        "TITLE_CORRECTED",
+        "CONTENT_AUTHORED_IN_SANITY"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJP9T36K93TV3EE4EFV",
+      "contentType": "recipe",
+      "naturalKey": "ig:C_AVdSKIqTH",
+      "title": "מגולגלות סמורס",
+      "slug": "מגולגלות-סמורס",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-115"
+      ],
+      "legacyRouteIds": [
+        "instagram-115"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-115"
+      ],
+      "sequenceId": 115,
+      "instagramShortcode": "C_AVdSKIqTH",
+      "sourceUrl": "https://www.instagram.com/reel/C_AVdSKIqTH/",
+      "retiredContentIds": [],
+      "publishedDate": "23/08/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": "smores-rugelach",
+      "imagePaths": [
+        "images/recipes/sweet/smores-rugelach/thumb/IMG_7894.jpg",
+        "images/recipes/sweet/smores-rugelach/IMG_7894-web.JPG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "recipe_01M1YKBSJPBCN17FRRYT0FHC34",
+      "contentType": "recipe",
+      "naturalKey": "ig:C-KN_FKIblM",
+      "title": "עוגיית פקאן ושוקולד מריר",
+      "slug": "עוגיית-פקאן-ושוקולד-מריר",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-114"
+      ],
+      "legacyRouteIds": [
+        "instagram-114"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-114"
+      ],
+      "sequenceId": 114,
+      "instagramShortcode": "C-KN_FKIblM",
+      "sourceUrl": "https://www.instagram.com/reel/C-KN_FKIblM/",
+      "retiredContentIds": [],
+      "publishedDate": "02/08/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": "pecan-dark-chocolate-cookies",
+      "imagePaths": [
+        "images/recipes/sweet/pecan-dark-chocolate-cookies/thumb/FullSizeRender.jpg",
+        "images/recipes/sweet/pecan-dark-chocolate-cookies/pecan-dark-chocolate-cookies-1-web.JPEG",
+        "images/recipes/sweet/pecan-dark-chocolate-cookies/pecan-dark-chocolate-cookies-2-web.JPG",
+        "images/recipes/sweet/pecan-dark-chocolate-cookies/pecan-dark-chocolate-cookies-3-web.JPG",
+        "images/recipes/sweet/pecan-dark-chocolate-cookies/pecan-dark-chocolate-cookies-2.JPG",
+        "images/recipes/sweet/pecan-dark-chocolate-cookies/pecan-dark-chocolate-cookies-3.JPG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQ2JZD2C8PVF941MX4",
+      "contentType": "recipe",
+      "naturalKey": "ig:C03hY-_I18o",
+      "title": "בורקס דפי אורז",
+      "slug": "בורקס-דפי-אורז",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-63"
+      ],
+      "legacyRouteIds": [
+        "instagram-63"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-63"
+      ],
+      "sequenceId": 63,
+      "instagramShortcode": "C03hY-_I18o",
+      "sourceUrl": "https://www.instagram.com/reel/C03hY-_I18o/",
+      "retiredContentIds": [],
+      "publishedDate": "15/12/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQM7B1K3JN69MNNNWZ",
+      "contentType": "recipe",
+      "naturalKey": "ig:C0BZoJXoVz1",
+      "title": "חלת שקדים",
+      "slug": "חלת-שקדים",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-55"
+      ],
+      "legacyRouteIds": [
+        "instagram-55"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-55"
+      ],
+      "sequenceId": 55,
+      "instagramShortcode": "C0BZoJXoVz1",
+      "sourceUrl": "https://www.instagram.com/reel/C0BZoJXoVz1/",
+      "retiredContentIds": [],
+      "publishedDate": "24/11/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQEZ9EJV1C7WG6YGQ8",
+      "contentType": "recipe",
+      "naturalKey": "ig:C0hATuJoK2_",
+      "title": "לביבות תפוח אדמה אפויות",
+      "slug": "לביבות-תפוח-אדמה-אפויות",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-59"
+      ],
+      "legacyRouteIds": [
+        "instagram-59"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-59"
+      ],
+      "sequenceId": 59,
+      "instagramShortcode": "C0hATuJoK2_",
+      "sourceUrl": "https://www.instagram.com/reel/C0hATuJoK2_/",
+      "retiredContentIds": [],
+      "publishedDate": "06/12/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQ36P4XG0D76KF3YZ2",
+      "contentType": "recipe",
+      "naturalKey": "ig:C0HXXAUIEDo",
+      "title": "קציצות עוף אפויות",
+      "slug": "קציצות-עוף-אפויות",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-56"
+      ],
+      "legacyRouteIds": [
+        "instagram-56"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-56"
+      ],
+      "sequenceId": 56,
+      "instagramShortcode": "C0HXXAUIEDo",
+      "sourceUrl": "https://www.instagram.com/reel/C0HXXAUIEDo/",
+      "retiredContentIds": [],
+      "publishedDate": "26/11/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQ9GTGZHVCNJZ6RAM8",
+      "contentType": "recipe",
+      "naturalKey": "ig:C0lcpPkI491",
+      "title": "חלת בשר בצורת שבלול",
+      "slug": "חלת-בשר-בצורת-שבלול",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-60"
+      ],
+      "legacyRouteIds": [
+        "instagram-60"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-60"
+      ],
+      "sequenceId": 60,
+      "instagramShortcode": "C0lcpPkI491",
+      "sourceUrl": "https://www.instagram.com/reel/C0lcpPkI491/",
+      "retiredContentIds": [],
+      "publishedDate": "08/12/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQ39CNGHSR3N0Q69WN",
+      "contentType": "recipe",
+      "naturalKey": "ig:C0rWJhvI-8S",
+      "title": "סופגניות אשל",
+      "slug": "סופגניות-אשל",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-61"
+      ],
+      "legacyRouteIds": [
+        "instagram-61"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-61"
+      ],
+      "sequenceId": 61,
+      "instagramShortcode": "C0rWJhvI-8S",
+      "sourceUrl": "https://www.instagram.com/reel/C0rWJhvI-8S/",
+      "retiredContentIds": [],
+      "publishedDate": "10/12/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQ3GDC3X71CCZ49ZKS",
+      "contentType": "recipe",
+      "naturalKey": "ig:C0zEd32IcBU",
+      "title": "חזה עוף ופסטה שמכינים בסיר אחד",
+      "slug": "חזה-עוף-ופסטה-שמכינים-בסיר-אחד",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-62"
+      ],
+      "legacyRouteIds": [
+        "instagram-62"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-62"
+      ],
+      "sequenceId": 62,
+      "instagramShortcode": "C0zEd32IcBU",
+      "sourceUrl": "https://www.instagram.com/reel/C0zEd32IcBU/",
+      "retiredContentIds": [],
+      "publishedDate": "13/12/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJRF54HETT2FGV0EEM3",
+      "contentType": "recipe",
+      "naturalKey": "ig:C1_uCrhIj-l",
+      "title": "סמבוסק פיצה",
+      "slug": "סמבוסק-פיצה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-71"
+      ],
+      "legacyRouteIds": [
+        "instagram-71"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-71"
+      ],
+      "sequenceId": 71,
+      "instagramShortcode": "C1_uCrhIj-l",
+      "sourceUrl": "https://www.instagram.com/reel/C1_uCrhIj-l/",
+      "retiredContentIds": [],
+      "publishedDate": "12/01/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJRVPGYFD9KDXE06KN6",
+      "contentType": "recipe",
+      "naturalKey": "ig:C17S_DtoyUr",
+      "title": "קציצות עדשים שחורות",
+      "slug": "קציצות-עדשים-שחורות",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-70"
+      ],
+      "legacyRouteIds": [
+        "instagram-70"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-70"
+      ],
+      "sequenceId": 70,
+      "instagramShortcode": "C17S_DtoyUr",
+      "sourceUrl": "https://www.instagram.com/reel/C17S_DtoyUr/",
+      "retiredContentIds": [],
+      "publishedDate": "10/01/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJRHCRK5YCRBWF3C9E8",
+      "contentType": "recipe",
+      "naturalKey": "ig:C1bfPzQoJXM",
+      "title": "פסטה אדומה",
+      "slug": "פסטה-אדומה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-67"
+      ],
+      "legacyRouteIds": [
+        "instagram-67"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-67"
+      ],
+      "sequenceId": 67,
+      "instagramShortcode": "C1bfPzQoJXM",
+      "sourceUrl": "https://www.instagram.com/reel/C1bfPzQoJXM/",
+      "retiredContentIds": [],
+      "publishedDate": "29/12/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQBDNAK2YHMH9Z5DHC",
+      "contentType": "recipe",
+      "naturalKey": "ig:C1CoSxKIs75",
+      "title": "עוגיות לימון יבשות",
+      "slug": "עוגיות-לימון-יבשות",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-64"
+      ],
+      "legacyRouteIds": [
+        "instagram-64"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-64"
+      ],
+      "sequenceId": 64,
+      "instagramShortcode": "C1CoSxKIs75",
+      "sourceUrl": "https://www.instagram.com/reel/C1CoSxKIs75/",
+      "retiredContentIds": [],
+      "publishedDate": "19/12/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQYJD0QTWS4GNNK0WX",
+      "contentType": "recipe",
+      "naturalKey": "ig:C1JgWk1Iglo",
+      "title": "פרחי כרובית מצופים בפירורי לחם",
+      "slug": "פרחי-כרובית-מצופים-בפירורי-לחם",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-65"
+      ],
+      "legacyRouteIds": [
+        "instagram-65"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-65"
+      ],
+      "sequenceId": 65,
+      "instagramShortcode": "C1JgWk1Iglo",
+      "sourceUrl": "https://www.instagram.com/reel/C1JgWk1Iglo/",
+      "retiredContentIds": [],
+      "publishedDate": "22/12/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJRXMQX6A4M909JW7SH",
+      "contentType": "recipe",
+      "naturalKey": "ig:C1kGF0ZoQhI",
+      "title": "חיתוכיות פיסטוק",
+      "slug": "חיתוכיות-פיסטוק",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-68"
+      ],
+      "legacyRouteIds": [
+        "instagram-68"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-68"
+      ],
+      "sequenceId": 68,
+      "instagramShortcode": "C1kGF0ZoQhI",
+      "sourceUrl": "https://www.instagram.com/reel/C1kGF0ZoQhI/",
+      "retiredContentIds": [],
+      "publishedDate": "01/01/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJR3CBZWR7WB72D29BY",
+      "contentType": "recipe",
+      "naturalKey": "ig:C1tlux9I82s",
+      "title": "קרפ",
+      "slug": "קרפ",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-69"
+      ],
+      "legacyRouteIds": [
+        "instagram-69"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-69"
+      ],
+      "sequenceId": 69,
+      "instagramShortcode": "C1tlux9I82s",
+      "sourceUrl": "https://www.instagram.com/reel/C1tlux9I82s/",
+      "retiredContentIds": [],
+      "publishedDate": "05/01/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJR9X07K31M0W232V7C",
+      "contentType": "recipe",
+      "naturalKey": "ig:C1UfI84o3U3",
+      "title": "סלט מיוחד",
+      "slug": "סלט-מיוחד",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-66"
+      ],
+      "legacyRouteIds": [
+        "instagram-66"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-66"
+      ],
+      "sequenceId": 66,
+      "instagramShortcode": "C1UfI84o3U3",
+      "sourceUrl": "https://www.instagram.com/reel/C1UfI84o3U3/",
+      "retiredContentIds": [],
+      "publishedDate": "26/12/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJR81T715P39XBE71GN",
+      "contentType": "recipe",
+      "naturalKey": "ig:C21uUtNohvV",
+      "title": "בורקס בשר מדפי אורז",
+      "slug": "בורקס-בשר-מדפי-אורז",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-77"
+      ],
+      "legacyRouteIds": [
+        "instagram-77"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-77"
+      ],
+      "sequenceId": 77,
+      "instagramShortcode": "C21uUtNohvV",
+      "sourceUrl": "https://www.instagram.com/reel/C21uUtNohvV/",
+      "retiredContentIds": [],
+      "publishedDate": "02/02/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJRQ1CC45WR9NH855NH",
+      "contentType": "recipe",
+      "naturalKey": "ig:C2fRa0gIRAZ",
+      "title": "עוגיות שקדים",
+      "slug": "עוגיות-שקדים",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-74"
+      ],
+      "legacyRouteIds": [
+        "instagram-74"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-74"
+      ],
+      "sequenceId": 74,
+      "instagramShortcode": "C2fRa0gIRAZ",
+      "sourceUrl": "https://www.instagram.com/reel/C2fRa0gIRAZ/",
+      "retiredContentIds": [],
+      "publishedDate": "24/01/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJRYAAE40JHBTQ1A9J2",
+      "contentType": "recipe",
+      "naturalKey": "ig:C2ju5pdI6wS",
+      "title": "עוגת קרמבו",
+      "slug": "עוגת-קרמבו",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-75"
+      ],
+      "legacyRouteIds": [
+        "instagram-75"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-75"
+      ],
+      "sequenceId": 75,
+      "instagramShortcode": "C2ju5pdI6wS",
+      "sourceUrl": "https://www.instagram.com/reel/C2ju5pdI6wS/",
+      "retiredContentIds": [],
+      "publishedDate": "26/01/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJRXD8TJ4TX75VWBDAG",
+      "contentType": "recipe",
+      "naturalKey": "ig:C2KpOhyIfYt",
+      "title": "ממרח חצילים בטעם כבד",
+      "slug": "ממרח-חצילים-בטעם-כבד",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-72"
+      ],
+      "legacyRouteIds": [
+        "instagram-72"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-72"
+      ],
+      "sequenceId": 72,
+      "instagramShortcode": "C2KpOhyIfYt",
+      "sourceUrl": "https://www.instagram.com/reel/C2KpOhyIfYt/",
+      "retiredContentIds": [],
+      "publishedDate": "16/01/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJRY3S1DKFDWYNQ5X30",
+      "contentType": "recipe",
+      "naturalKey": "ig:C2Ri73So-oz",
+      "title": "עוגת גבינה פירורים בלי שמנת מתוקה",
+      "slug": "עוגת-גבינה-פירורים-בלי-שמנת-מתוקה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-73"
+      ],
+      "legacyRouteIds": [
+        "instagram-73"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-73"
+      ],
+      "sequenceId": 73,
+      "instagramShortcode": "C2Ri73So-oz",
+      "sourceUrl": "https://www.instagram.com/reel/C2Ri73So-oz/",
+      "retiredContentIds": [],
+      "publishedDate": "19/01/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJRCYCAA7BT0E04V1YQ",
+      "contentType": "recipe",
+      "naturalKey": "ig:C2utMVxoq2H",
+      "title": "עוגיות שוקולד צ׳יפס",
+      "slug": "עוגיות-שוקולד-ציפס",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-76"
+      ],
+      "legacyRouteIds": [
+        "instagram-76"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-76"
+      ],
+      "sequenceId": 76,
+      "instagramShortcode": "C2utMVxoq2H",
+      "sourceUrl": "https://www.instagram.com/reel/C2utMVxoq2H/",
+      "retiredContentIds": [],
+      "publishedDate": "30/01/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJR9S3H4G0NTBRNNHJ2",
+      "contentType": "recipe",
+      "naturalKey": "ig:C30SPaQt1Eu",
+      "title": "עוגת שוקולד",
+      "slug": "עוגת-שוקולד",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-82"
+      ],
+      "legacyRouteIds": [
+        "instagram-82"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-82"
+      ],
+      "sequenceId": 82,
+      "instagramShortcode": "C30SPaQt1Eu",
+      "sourceUrl": "https://www.instagram.com/reel/C30SPaQt1Eu/",
+      "retiredContentIds": [],
+      "publishedDate": "26/02/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJRVD38BBZ26VCS5FG0",
+      "contentType": "recipe",
+      "naturalKey": "ig:C35hMaNIqVB",
+      "title": "אוזני המן אמסטרדם",
+      "slug": "אוזני-המן-אמסטרדם",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-83"
+      ],
+      "legacyRouteIds": [
+        "instagram-83"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-83"
+      ],
+      "sequenceId": 83,
+      "instagramShortcode": "C35hMaNIqVB",
+      "sourceUrl": "https://www.instagram.com/reel/C35hMaNIqVB/",
+      "retiredContentIds": [],
+      "publishedDate": "28/02/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJRKD12AEEQPZY470VV",
+      "contentType": "recipe",
+      "naturalKey": "ig:C39tTw3I2t-",
+      "title": "סלט קינואה עם תפוז",
+      "slug": "סלט-קינואה-עם-תפוז",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-84"
+      ],
+      "legacyRouteIds": [
+        "instagram-84"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-84"
+      ],
+      "sequenceId": 84,
+      "instagramShortcode": "C39tTw3I2t-",
+      "sourceUrl": "https://www.instagram.com/reel/C39tTw3I2t-/",
+      "retiredContentIds": [],
+      "publishedDate": "01/03/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJRDDJT2F2E7DJGZM8J",
+      "contentType": "recipe",
+      "naturalKey": "ig:C3Hj_wzRsOp",
+      "title": "ספגטי ברוטב בצל מקורמל",
+      "slug": "ספגטי-ברוטב-בצל-מקורמל",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-78"
+      ],
+      "legacyRouteIds": [
+        "instagram-78"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-78"
+      ],
+      "sequenceId": 78,
+      "instagramShortcode": "C3Hj_wzRsOp",
+      "sourceUrl": "https://www.instagram.com/reel/C3Hj_wzRsOp/",
+      "retiredContentIds": [],
+      "publishedDate": "09/02/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJRCK3Z8CNK8V2EMVAP",
+      "contentType": "recipe",
+      "naturalKey": "ig:C3rseqtI0r5",
+      "title": "כדורי שוקולד מושלמים",
+      "slug": "כדורי-שוקולד-מושלמים",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-81"
+      ],
+      "legacyRouteIds": [
+        "instagram-81"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-81"
+      ],
+      "sequenceId": 81,
+      "instagramShortcode": "C3rseqtI0r5",
+      "sourceUrl": "https://www.instagram.com/reel/C3rseqtI0r5/",
+      "retiredContentIds": [],
+      "publishedDate": "23/02/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJRFMB42947QGV3NJ66",
+      "contentType": "recipe",
+      "naturalKey": "ig:C3S2EVaREkq",
+      "title": "ניוקי סלק",
+      "slug": "ניוקי-סלק",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-79"
+      ],
+      "legacyRouteIds": [
+        "instagram-79"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-79"
+      ],
+      "sequenceId": 79,
+      "instagramShortcode": "C3S2EVaREkq",
+      "sourceUrl": "https://www.instagram.com/reel/C3S2EVaREkq/",
+      "retiredContentIds": [],
+      "publishedDate": "13/02/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJRMHVZ5NRB5FSC030S",
+      "contentType": "recipe",
+      "naturalKey": "ig:C3ZmSBaxWHw",
+      "title": "מיני קיש בטטה מטורטייה",
+      "slug": "מיני-קיש-בטטה-מטורטייה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-80"
+      ],
+      "legacyRouteIds": [
+        "instagram-80"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-80"
+      ],
+      "sequenceId": 80,
+      "instagramShortcode": "C3ZmSBaxWHw",
+      "sourceUrl": "https://www.instagram.com/reel/C3ZmSBaxWHw/",
+      "retiredContentIds": [],
+      "publishedDate": "16/02/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJR4PC43F3NBNXF8FMZ",
+      "contentType": "recipe",
+      "naturalKey": "ig:C4-84Bvoiv0",
+      "title": "סלט כרוב ברוטב אסייתי",
+      "slug": "סלט-כרוב-ברוטב-אסייתי",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-92"
+      ],
+      "legacyRouteIds": [
+        "instagram-92"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-92"
+      ],
+      "sequenceId": 92,
+      "instagramShortcode": "C4-84Bvoiv0",
+      "sourceUrl": "https://www.instagram.com/reel/C4-84Bvoiv0/",
+      "retiredContentIds": [],
+      "publishedDate": "26/03/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJR9G1RFKCDR1QC9406",
+      "contentType": "recipe",
+      "naturalKey": "ig:C4a8n7MID3R",
+      "title": "עוגת מייפל ופקאן",
+      "slug": "עוגת-מייפל-ופקאן",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-88"
+      ],
+      "legacyRouteIds": [
+        "instagram-88"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-88"
+      ],
+      "sequenceId": 88,
+      "instagramShortcode": "C4a8n7MID3R",
+      "sourceUrl": "https://www.instagram.com/reel/C4a8n7MID3R/",
+      "retiredContentIds": [],
+      "publishedDate": "12/03/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJR05FVF5ZV2M5P44XD",
+      "contentType": "recipe",
+      "naturalKey": "ig:C4GQmFXoqfZ",
+      "title": "ריזוטו פתיתים פסטו",
+      "slug": "ריזוטו-פתיתים-פסטו",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-85"
+      ],
+      "legacyRouteIds": [
+        "instagram-85"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-85"
+      ],
+      "sequenceId": 85,
+      "instagramShortcode": "C4GQmFXoqfZ",
+      "sourceUrl": "https://www.instagram.com/reel/C4GQmFXoqfZ/",
+      "retiredContentIds": [],
+      "publishedDate": "04/03/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJR0DWD70928BTPEDZC",
+      "contentType": "recipe",
+      "naturalKey": "ig:C4h5vpVInoT",
+      "title": "כדורי גבינה נמתחים",
+      "slug": "כדורי-גבינה-נמתחים",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-89"
+      ],
+      "legacyRouteIds": [
+        "instagram-89"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-89"
+      ],
+      "sequenceId": 89,
+      "instagramShortcode": "C4h5vpVInoT",
+      "sourceUrl": "https://www.instagram.com/reel/C4h5vpVInoT/",
+      "retiredContentIds": [],
+      "publishedDate": "15/03/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJR3AZA5YQRHHTJDDAS",
+      "contentType": "recipe",
+      "naturalKey": "ig:C4LdaZAI5Wd",
+      "title": "רוזלך נוטלה",
+      "slug": "רוזלך-נוטלה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-86"
+      ],
+      "legacyRouteIds": [
+        "instagram-86"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-86"
+      ],
+      "sequenceId": 86,
+      "instagramShortcode": "C4LdaZAI5Wd",
+      "sourceUrl": "https://www.instagram.com/reel/C4LdaZAI5Wd/",
+      "retiredContentIds": [],
+      "publishedDate": "06/03/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJRSVN5FKED62AN66YN",
+      "contentType": "recipe",
+      "naturalKey": "ig:C4PuoimIoLH",
+      "title": "לחם זעתר עם גבינות שמכינים על מחבת",
+      "slug": "לחם-זעתר-עם-גבינות-שמכינים-על-מחבת",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-87"
+      ],
+      "legacyRouteIds": [
+        "instagram-87"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-87"
+      ],
+      "sequenceId": 87,
+      "instagramShortcode": "C4PuoimIoLH",
+      "sourceUrl": "https://www.instagram.com/reel/C4PuoimIoLH/",
+      "retiredContentIds": [],
+      "publishedDate": "08/03/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJRKF0KH8AWKPVEYWNR",
+      "contentType": "recipe",
+      "naturalKey": "ig:C4s6H_oIMBn",
+      "title": "בצק אחד שיוצא ממנו מגוון של עוגיות",
+      "slug": "בצק-אחד-שיוצא-ממנו-מגוון-של-עוגיות",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-90"
+      ],
+      "legacyRouteIds": [
+        "instagram-90"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-90"
+      ],
+      "sequenceId": 90,
+      "instagramShortcode": "C4s6H_oIMBn",
+      "sourceUrl": "https://www.instagram.com/reel/C4s6H_oIMBn/",
+      "retiredContentIds": [],
+      "publishedDate": "19/03/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJRECXH0AXD18CDH7KC",
+      "contentType": "recipe",
+      "naturalKey": "ig:C4zwUOhokzd",
+      "title": "פרגיות בתיבול נענע וטריאקי",
+      "slug": "פרגיות-בתיבול-נענע-וטריאקי",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-91"
+      ],
+      "legacyRouteIds": [
+        "instagram-91"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-91"
+      ],
+      "sequenceId": 91,
+      "instagramShortcode": "C4zwUOhokzd",
+      "sourceUrl": "https://www.instagram.com/reel/C4zwUOhokzd/",
+      "retiredContentIds": [],
+      "publishedDate": "22/03/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJRG9NAWRH2DD30ZRYJ",
+      "contentType": "recipe",
+      "naturalKey": "ig:C509cdVoQw0",
+      "title": "בורקס מצה",
+      "slug": "בורקס-מצה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-97"
+      ],
+      "legacyRouteIds": [
+        "instagram-97"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-97"
+      ],
+      "sequenceId": 97,
+      "instagramShortcode": "C509cdVoQw0",
+      "sourceUrl": "https://www.instagram.com/reel/C509cdVoQw0/",
+      "retiredContentIds": [],
+      "publishedDate": "16/04/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJR5PBBFEEMRH3MC84F",
+      "contentType": "recipe",
+      "naturalKey": "ig:C57yifZI4a1",
+      "title": "עוגיות בראוניז",
+      "slug": "עוגיות-בראוניז",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-98"
+      ],
+      "legacyRouteIds": [
+        "instagram-98"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-98"
+      ],
+      "sequenceId": 98,
+      "instagramShortcode": "C57yifZI4a1",
+      "sourceUrl": "https://www.instagram.com/reel/C57yifZI4a1/",
+      "retiredContentIds": [],
+      "publishedDate": "19/04/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJREJD3K8ARGWYKD8DS",
+      "contentType": "recipe",
+      "naturalKey": "ig:C5F12e5tkty",
+      "title": "בלינצ׳ס במילוי גבינה",
+      "slug": "בלינצס-במילוי-גבינה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-93"
+      ],
+      "legacyRouteIds": [
+        "instagram-93"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-93"
+      ],
+      "sequenceId": 93,
+      "instagramShortcode": "C5F12e5tkty",
+      "sourceUrl": "https://www.instagram.com/reel/C5F12e5tkty/",
+      "retiredContentIds": [],
+      "publishedDate": "29/03/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJR8H4TG48Y83YYWNDT",
+      "contentType": "recipe",
+      "naturalKey": "ig:C5i9ceto1eX",
+      "title": "פאי רועים",
+      "slug": "פאי-רועים",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-96"
+      ],
+      "legacyRouteIds": [
+        "instagram-96"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-96"
+      ],
+      "sequenceId": 96,
+      "instagramShortcode": "C5i9ceto1eX",
+      "sourceUrl": "https://www.instagram.com/reel/C5i9ceto1eX/",
+      "retiredContentIds": [],
+      "publishedDate": "09/04/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJRDQFVXGMZGJY2KC18",
+      "contentType": "recipe",
+      "naturalKey": "ig:C5QxYAnINE4",
+      "title": "פנקייק חלבון",
+      "slug": "פנקייק-חלבון",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-94"
+      ],
+      "legacyRouteIds": [
+        "instagram-94"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-94"
+      ],
+      "sequenceId": 94,
+      "instagramShortcode": "C5QxYAnINE4",
+      "sourceUrl": "https://www.instagram.com/reel/C5QxYAnINE4/",
+      "retiredContentIds": [],
+      "publishedDate": "02/04/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJR26RQ00YWXBGEHGNE",
+      "contentType": "recipe",
+      "naturalKey": "ig:C5XuBYAoc6a",
+      "title": "עוגת קרמבו כשרה",
+      "slug": "עוגת-קרמבו-כשרה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-95"
+      ],
+      "legacyRouteIds": [
+        "instagram-95"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-95"
+      ],
+      "sequenceId": 95,
+      "instagramShortcode": "C5XuBYAoc6a",
+      "sourceUrl": "https://www.instagram.com/reel/C5XuBYAoc6a/",
+      "retiredContentIds": [],
+      "publishedDate": "05/04/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJRBX609VNP06ACH7Y1",
+      "contentType": "recipe",
+      "naturalKey": "ig:C6DkLIOIfYB",
+      "title": "חיתוכיות קוקוס ושוקולד",
+      "slug": "חיתוכיות-קוקוס-ושוקולד",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-99"
+      ],
+      "legacyRouteIds": [
+        "instagram-99"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-99"
+      ],
+      "sequenceId": 99,
+      "instagramShortcode": "C6DkLIOIfYB",
+      "sourceUrl": "https://www.instagram.com/reel/C6DkLIOIfYB/",
+      "retiredContentIds": [],
+      "publishedDate": "22/04/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJR3FJQV9GTWFYW0BA3",
+      "contentType": "recipe",
+      "naturalKey": "ig:C6fxhhmox6a",
+      "title": "סלט אנטי פסטי",
+      "slug": "סלט-אנטי-פסטי",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-101"
+      ],
+      "legacyRouteIds": [
+        "instagram-101"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-101"
+      ],
+      "sequenceId": 101,
+      "instagramShortcode": "C6fxhhmox6a",
+      "sourceUrl": "https://www.instagram.com/reel/C6fxhhmox6a/",
+      "retiredContentIds": [],
+      "publishedDate": "03/05/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJR5XH3NCWZWPK9KD4Y",
+      "contentType": "recipe",
+      "naturalKey": "ig:C6rFFiUITp0",
+      "title": "אורז מוקפץ",
+      "slug": "אורז-מוקפץ",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-102"
+      ],
+      "legacyRouteIds": [
+        "instagram-102"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-102"
+      ],
+      "sequenceId": 102,
+      "instagramShortcode": "C6rFFiUITp0",
+      "sourceUrl": "https://www.instagram.com/reel/C6rFFiUITp0/",
+      "retiredContentIds": [],
+      "publishedDate": "07/05/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJR3ZHHXC3EK9AJ205H",
+      "contentType": "recipe",
+      "naturalKey": "ig:C6x0JkiISVu",
+      "title": "עראייס עוף",
+      "slug": "עראייס-עוף",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-103"
+      ],
+      "legacyRouteIds": [
+        "instagram-103"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-103"
+      ],
+      "sequenceId": 103,
+      "instagramShortcode": "C6x0JkiISVu",
+      "sourceUrl": "https://www.instagram.com/reel/C6x0JkiISVu/",
+      "retiredContentIds": [],
+      "publishedDate": "10/05/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJRXN0X10C850AK3EVE",
+      "contentType": "recipe",
+      "naturalKey": "ig:C6ZEBY7IH-A",
+      "title": "קציצות תירס",
+      "slug": "קציצות-תירס",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-100"
+      ],
+      "legacyRouteIds": [
+        "instagram-100"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-100"
+      ],
+      "sequenceId": 100,
+      "instagramShortcode": "C6ZEBY7IH-A",
+      "sourceUrl": "https://www.instagram.com/reel/C6ZEBY7IH-A/",
+      "retiredContentIds": [],
+      "publishedDate": "30/04/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJRXRFC5XREBF7BS3X7",
+      "contentType": "recipe",
+      "naturalKey": "ig:C7PAmXdovOB",
+      "title": "תפוחי אדמה ברוטב חרדל ושום",
+      "slug": "תפוחי-אדמה-ברוטב-חרדל-ושום",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-104"
+      ],
+      "legacyRouteIds": [
+        "instagram-104"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-104"
+      ],
+      "sequenceId": 104,
+      "instagramShortcode": "C7PAmXdovOB",
+      "sourceUrl": "https://www.instagram.com/reel/C7PAmXdovOB/",
+      "retiredContentIds": [],
+      "publishedDate": "21/05/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJRYHDRP9QCYMYDJAGW",
+      "contentType": "recipe",
+      "naturalKey": "ig:C87My-mIuTz",
+      "title": "סלמון ברוטב דבש ושום על מצע של פירה כרובית ונענע",
+      "slug": "סלמון-ברוטב-דבש-ושום-על-מצע-של-פירה-כרובית-ונענע",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-109"
+      ],
+      "legacyRouteIds": [
+        "instagram-109"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-109"
+      ],
+      "sequenceId": 109,
+      "instagramShortcode": "C87My-mIuTz",
+      "sourceUrl": "https://www.instagram.com/reel/C87My-mIuTz/",
+      "retiredContentIds": [],
+      "publishedDate": "02/07/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJRX3ENNBP47AV0WAVA",
+      "contentType": "recipe",
+      "naturalKey": "ig:C8eBnSiICHo",
+      "title": "בראוניז חמאה חומה",
+      "slug": "בראוניז-חמאה-חומה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-106"
+      ],
+      "legacyRouteIds": [
+        "instagram-106"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-106"
+      ],
+      "sequenceId": 106,
+      "instagramShortcode": "C8eBnSiICHo",
+      "sourceUrl": "https://www.instagram.com/reel/C8eBnSiICHo/",
+      "retiredContentIds": [],
+      "publishedDate": "21/06/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJR3XT9NBHV56GNJBRT",
+      "contentType": "recipe",
+      "naturalKey": "ig:C8MAX8PodA-",
+      "title": "כרובית ממולאת בבשר",
+      "slug": "כרובית-ממולאת-בבשר",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-105"
+      ],
+      "legacyRouteIds": [
+        "instagram-105"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-105"
+      ],
+      "sequenceId": 105,
+      "instagramShortcode": "C8MAX8PodA-",
+      "sourceUrl": "https://www.instagram.com/reel/C8MAX8PodA-/",
+      "retiredContentIds": [],
+      "publishedDate": "14/06/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJRTVFYW0YK7XSF564Y",
+      "contentType": "recipe",
+      "naturalKey": "ig:C8pO2HQIhjp",
+      "title": "פיצה מבצק קוטג׳",
+      "slug": "פיצה-מבצק-קוטג",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-107"
+      ],
+      "legacyRouteIds": [
+        "instagram-107"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-107"
+      ],
+      "sequenceId": 107,
+      "instagramShortcode": "C8pO2HQIhjp",
+      "sourceUrl": "https://www.instagram.com/reel/C8pO2HQIhjp/",
+      "retiredContentIds": [],
+      "publishedDate": "25/06/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJRFKFK3HVDQ74ZHDWY",
+      "contentType": "recipe",
+      "naturalKey": "ig:C8wHRJiIi6c",
+      "title": "עוגת ביסקוויטים קלאסית",
+      "slug": "עוגת-ביסקוויטים-קלאסית",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-108"
+      ],
+      "legacyRouteIds": [
+        "instagram-108"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-108"
+      ],
+      "sequenceId": 108,
+      "instagramShortcode": "C8wHRJiIi6c",
+      "sourceUrl": "https://www.instagram.com/reel/C8wHRJiIi6c/",
+      "retiredContentIds": [],
+      "publishedDate": "28/06/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJR7PEKCEE5AZEBZHPB",
+      "contentType": "recipe",
+      "naturalKey": "ig:C9CEkiUIagP",
+      "title": "פסטה רוזה",
+      "slug": "פסטה-רוזה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-110"
+      ],
+      "legacyRouteIds": [
+        "instagram-110"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-110"
+      ],
+      "sequenceId": 110,
+      "instagramShortcode": "C9CEkiUIagP",
+      "sourceUrl": "https://www.instagram.com/reel/C9CEkiUIagP/",
+      "retiredContentIds": [],
+      "publishedDate": "05/07/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJPSGJCJ6KJWYJHMXNA",
+      "contentType": "recipe",
+      "naturalKey": "ig:C9fSqxxIzof",
+      "title": "עוגת גבינה קרמית",
+      "slug": "עוגת-גבינה-קרמית",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-112"
+      ],
+      "legacyRouteIds": [
+        "instagram-112"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-112"
+      ],
+      "sequenceId": 112,
+      "instagramShortcode": "C9fSqxxIzof",
+      "sourceUrl": "https://www.instagram.com/reel/C9fSqxxIzof/",
+      "retiredContentIds": [],
+      "publishedDate": "16/07/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": "creamy-cheesecake",
+      "imagePaths": [
+        "images/recipes/sweet/creamy-cheesecake/thumb/IMG_6994.jpg",
+        "images/recipes/sweet/creamy-cheesecake/IMG_6994-web.JPEG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "recipe_01M1YKBSJPHNCGP9CBJSYJNQ24",
+      "contentType": "recipe",
+      "naturalKey": "ig:C9mHmFIIcRt",
+      "title": "קנלוני במילוי בשר",
+      "slug": "קנלוני-במילוי-בשר",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-113"
+      ],
+      "legacyRouteIds": [
+        "instagram-113"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-113"
+      ],
+      "sequenceId": 113,
+      "instagramShortcode": "C9mHmFIIcRt",
+      "sourceUrl": "https://www.instagram.com/reel/C9mHmFIIcRt/",
+      "retiredContentIds": [],
+      "publishedDate": "19/07/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJP24W3CPK636J5P8P4",
+      "contentType": "recipe",
+      "naturalKey": "ig:C9NQV93oSLR",
+      "title": "קציצות טונה",
+      "slug": "קציצות-טונה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-111"
+      ],
+      "legacyRouteIds": [
+        "instagram-111"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-111"
+      ],
+      "sequenceId": 111,
+      "instagramShortcode": "C9NQV93oSLR",
+      "sourceUrl": "https://www.instagram.com/reel/C9NQV93oSLR/",
+      "retiredContentIds": [],
+      "publishedDate": "09/07/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": "tuna-patties",
+      "imagePaths": [
+        "images/recipes/savory/tuna-patties/thumb/IMG_0849.jpg",
+        "images/recipes/savory/tuna-patties/IMG_0849-web.JPEG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "recipe_01M1YKBSJPW824EXKCY2C3RPES",
+      "contentType": "recipe",
+      "naturalKey": "ig:Cs-3ZYQxkiS",
+      "title": "קובנה",
+      "slug": "קובנה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-14"
+      ],
+      "legacyRouteIds": [
+        "instagram-14"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-14"
+      ],
+      "sequenceId": 14,
+      "instagramShortcode": "Cs-3ZYQxkiS",
+      "sourceUrl": "https://www.instagram.com/reel/Cs-3ZYQxkiS/",
+      "retiredContentIds": [],
+      "publishedDate": "02/06/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJM8Z692J613TCYT8JR",
+      "contentType": "recipe",
+      "naturalKey": "ig:CsBzzTnL-PT",
+      "title": "מאפה נוטלה",
+      "slug": "מאפה-נוטלה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-2"
+      ],
+      "legacyRouteIds": [
+        "instagram-2"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-2"
+      ],
+      "sequenceId": 2,
+      "instagramShortcode": "CsBzzTnL-PT",
+      "sourceUrl": "https://www.instagram.com/reel/CsBzzTnL-PT/",
+      "retiredContentIds": [],
+      "publishedDate": "09/05/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJMSK86JAZZ1HMRZD8X",
+      "contentType": "recipe",
+      "naturalKey": "ig:CsEVOhkrQfc",
+      "title": "כדורי שום",
+      "slug": "כדורי-שום",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-3"
+      ],
+      "legacyRouteIds": [
+        "instagram-3"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-3"
+      ],
+      "sequenceId": 3,
+      "instagramShortcode": "CsEVOhkrQfc",
+      "sourceUrl": "https://www.instagram.com/reel/CsEVOhkrQfc/",
+      "retiredContentIds": [],
+      "publishedDate": "10/05/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJMWWFD4PMDYDJJ76MX",
+      "contentType": "recipe",
+      "naturalKey": "ig:CseYh3KNdoJ",
+      "title": "עוגת גבינה",
+      "slug": "עוגת-גבינה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-9"
+      ],
+      "legacyRouteIds": [
+        "instagram-9"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-9"
+      ],
+      "sequenceId": 9,
+      "instagramShortcode": "CseYh3KNdoJ",
+      "sourceUrl": "https://www.instagram.com/reel/CseYh3KNdoJ/",
+      "retiredContentIds": [],
+      "publishedDate": "20/05/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJMM8SRY6CY99MECH9J",
+      "contentType": "recipe",
+      "naturalKey": "ig:CsJJOYbMdkI",
+      "title": "אורז אדום עם עגבניות צלויות",
+      "slug": "אורז-אדום-עם-עגבניות-צלויות",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-4"
+      ],
+      "legacyRouteIds": [
+        "instagram-4"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-4"
+      ],
+      "sequenceId": 4,
+      "instagramShortcode": "CsJJOYbMdkI",
+      "sourceUrl": "https://www.instagram.com/reel/CsJJOYbMdkI/",
+      "retiredContentIds": [],
+      "publishedDate": "12/05/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJM9QSG3H6Q31PV9DJ2",
+      "contentType": "recipe",
+      "naturalKey": "ig:Csl8O6FOuCv",
+      "title": "כדורי תירס במילוי מוצרלה",
+      "slug": "כדורי-תירס-במילוי-מוצרלה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-10"
+      ],
+      "legacyRouteIds": [
+        "instagram-10"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-10"
+      ],
+      "sequenceId": 10,
+      "instagramShortcode": "Csl8O6FOuCv",
+      "sourceUrl": "https://www.instagram.com/reel/Csl8O6FOuCv/",
+      "retiredContentIds": [],
+      "publishedDate": "23/05/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJM14DK0TFP63JF1BAX",
+      "contentType": "recipe",
+      "naturalKey": "ig:CsMTYPANMnt",
+      "title": "חומוס ירוק",
+      "slug": "חומוס-ירוק",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-5"
+      ],
+      "legacyRouteIds": [
+        "instagram-5"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-5"
+      ],
+      "sequenceId": 5,
+      "instagramShortcode": "CsMTYPANMnt",
+      "sourceUrl": "https://www.instagram.com/reel/CsMTYPANMnt/",
+      "retiredContentIds": [],
+      "publishedDate": "13/05/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJMEAJ260DFRG02XCA8",
+      "contentType": "recipe",
+      "naturalKey": "ig:CsTyuEaM9x6",
+      "title": "פשטידת אטריות",
+      "slug": "פשטידת-אטריות",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-7"
+      ],
+      "legacyRouteIds": [
+        "instagram-7"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-7"
+      ],
+      "sequenceId": 7,
+      "instagramShortcode": "CsTyuEaM9x6",
+      "sourceUrl": "https://www.instagram.com/reel/CsTyuEaM9x6/",
+      "retiredContentIds": [],
+      "publishedDate": "16/05/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQX27F1JGY5B0A52AA",
+      "contentType": "recipe",
+      "naturalKey": "ig:Ct_1uM4IWz4",
+      "title": "סופלה שוקולד חלבון",
+      "slug": "סופלה-שוקולד-חלבון",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-21"
+      ],
+      "legacyRouteIds": [
+        "instagram-21"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-21"
+      ],
+      "sequenceId": 21,
+      "instagramShortcode": "Ct_1uM4IWz4",
+      "sourceUrl": "https://www.instagram.com/reel/Ct_1uM4IWz4/",
+      "retiredContentIds": [],
+      "publishedDate": "27/06/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQN3EJMFQDD6CT25D1",
+      "contentType": "recipe",
+      "naturalKey": "ig:Ct0-VXbI3kX",
+      "title": "מאפה גבינות על מחבת",
+      "slug": "מאפה-גבינות-על-מחבת",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-20"
+      ],
+      "legacyRouteIds": [
+        "instagram-20"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-20"
+      ],
+      "sequenceId": 20,
+      "instagramShortcode": "Ct0-VXbI3kX",
+      "sourceUrl": "https://www.instagram.com/reel/Ct0-VXbI3kX/",
+      "retiredContentIds": [],
+      "publishedDate": "23/06/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQ2BG0Q75YCTKQ442S",
+      "contentType": "recipe",
+      "naturalKey": "ig:CtHXu5FoZLN",
+      "title": "קרמבו לימון",
+      "slug": "קרמבו-לימון",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-15"
+      ],
+      "legacyRouteIds": [
+        "instagram-15"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-15"
+      ],
+      "sequenceId": 15,
+      "instagramShortcode": "CtHXu5FoZLN",
+      "sourceUrl": "https://www.instagram.com/reel/CtHXu5FoZLN/",
+      "retiredContentIds": [],
+      "publishedDate": "05/06/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQKJE9EMC0JGMKNSW6",
+      "contentType": "recipe",
+      "naturalKey": "ig:CtO-3HaoEFq",
+      "title": "עוגת בראוניז גבינה",
+      "slug": "עוגת-בראוניז-גבינה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-16"
+      ],
+      "legacyRouteIds": [
+        "instagram-16"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-16"
+      ],
+      "sequenceId": 16,
+      "instagramShortcode": "CtO-3HaoEFq",
+      "sourceUrl": "https://www.instagram.com/reel/CtO-3HaoEFq/",
+      "retiredContentIds": [],
+      "publishedDate": "08/06/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQ6GK6WJDJ75MENZ28",
+      "contentType": "recipe",
+      "naturalKey": "ig:CuHBg5PI10S",
+      "title": "קיש גבינות וקישואים",
+      "slug": "קיש-גבינות-וקישואים",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-22"
+      ],
+      "legacyRouteIds": [
+        "instagram-22"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-22"
+      ],
+      "sequenceId": 22,
+      "instagramShortcode": "CuHBg5PI10S",
+      "sourceUrl": "https://www.instagram.com/reel/CuHBg5PI10S/",
+      "retiredContentIds": [],
+      "publishedDate": "30/06/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQWBVQ3X8DA58X9XNB",
+      "contentType": "recipe",
+      "naturalKey": "ig:CuY82Beopd7",
+      "title": "ניוקי פולנטה",
+      "slug": "ניוקי-פולנטה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-24"
+      ],
+      "legacyRouteIds": [
+        "instagram-24"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-24"
+      ],
+      "sequenceId": 24,
+      "instagramShortcode": "CuY82Beopd7",
+      "sourceUrl": "https://www.instagram.com/reel/CuY82Beopd7/",
+      "retiredContentIds": [],
+      "publishedDate": "07/07/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQ2BNG1GE1A5YDJ86J",
+      "contentType": "recipe",
+      "naturalKey": "ig:CvhCeCSo4xe",
+      "title": "סלט תורכי של סבתא רותי",
+      "slug": "סלט-תורכי-של-סבתא-רותי",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-26"
+      ],
+      "legacyRouteIds": [
+        "instagram-26"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-26"
+      ],
+      "sequenceId": 26,
+      "instagramShortcode": "CvhCeCSo4xe",
+      "sourceUrl": "https://www.instagram.com/reel/CvhCeCSo4xe/",
+      "retiredContentIds": [],
+      "publishedDate": "04/08/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQXAARV3Q14WFA02AH",
+      "contentType": "recipe",
+      "naturalKey": "ig:Cvpd1Too9Op",
+      "title": "עוגיות שיבולת שועל כל כך רכות ונמסות בפה",
+      "slug": "עוגיות-שיבולת-שועל-כל-כך-רכות-ונמסות-בפה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-27"
+      ],
+      "legacyRouteIds": [
+        "instagram-27"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-27"
+      ],
+      "sequenceId": 27,
+      "instagramShortcode": "Cvpd1Too9Op",
+      "sourceUrl": "https://www.instagram.com/reel/Cvpd1Too9Op/",
+      "retiredContentIds": [],
+      "publishedDate": "07/08/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQP0NMM3Q5SXEWTRPA",
+      "contentType": "recipe",
+      "naturalKey": "ig:CvXbwoqoavd",
+      "title": "מיני פנקייק גבינה בצורת לבבות",
+      "slug": "מיני-פנקייק-גבינה-בצורת-לבבות",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-25"
+      ],
+      "legacyRouteIds": [
+        "instagram-25"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-25"
+      ],
+      "sequenceId": 25,
+      "instagramShortcode": "CvXbwoqoavd",
+      "sourceUrl": "https://www.instagram.com/reel/CvXbwoqoavd/",
+      "retiredContentIds": [],
+      "publishedDate": "31/07/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQGW2T0NBWCKP98WEK",
+      "contentType": "recipe",
+      "naturalKey": "ig:CvzKO2JoZWt",
+      "title": "פשטידת כרובית",
+      "slug": "פשטידת-כרובית",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-28"
+      ],
+      "legacyRouteIds": [
+        "instagram-28"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-28"
+      ],
+      "sequenceId": 28,
+      "instagramShortcode": "CvzKO2JoZWt",
+      "sourceUrl": "https://www.instagram.com/reel/CvzKO2JoZWt/",
+      "retiredContentIds": [],
+      "publishedDate": "11/08/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQFQ7JJKDEZBVZR7SB",
+      "contentType": "recipe",
+      "naturalKey": "ig:Cw0Mib9I8oP",
+      "title": "בראוניז דבש",
+      "slug": "בראוניז-דבש",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-35"
+      ],
+      "legacyRouteIds": [
+        "instagram-35"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-35"
+      ],
+      "sequenceId": 35,
+      "instagramShortcode": "Cw0Mib9I8oP",
+      "sourceUrl": "https://www.instagram.com/reel/Cw0Mib9I8oP/",
+      "retiredContentIds": [],
+      "publishedDate": "05/09/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQC8FBSSYAWMV7E33M",
+      "contentType": "recipe",
+      "naturalKey": "ig:Cw7MYUToEex",
+      "title": "ארנציני פתיתים אפוי",
+      "slug": "ארנציני-פתיתים-אפוי",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-36"
+      ],
+      "legacyRouteIds": [
+        "instagram-36"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-36"
+      ],
+      "sequenceId": 36,
+      "instagramShortcode": "Cw7MYUToEex",
+      "sourceUrl": "https://www.instagram.com/reel/Cw7MYUToEex/",
+      "retiredContentIds": [],
+      "publishedDate": "08/09/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQ5E02PNJCKAM8NAXC",
+      "contentType": "recipe",
+      "naturalKey": "ig:CwFJXFpIvJ7",
+      "title": "עוגת גבינה קרמית דלת שומן",
+      "slug": "עוגת-גבינה-קרמית-דלת-שומן",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-30"
+      ],
+      "legacyRouteIds": [
+        "instagram-30"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-30"
+      ],
+      "sequenceId": 30,
+      "instagramShortcode": "CwFJXFpIvJ7",
+      "sourceUrl": "https://www.instagram.com/reel/CwFJXFpIvJ7/",
+      "retiredContentIds": [],
+      "publishedDate": "18/08/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQYQ54W42FEQ0279G6",
+      "contentType": "recipe",
+      "naturalKey": "ig:CwkzDnnoJI-",
+      "title": "שניצל תירס ביתי",
+      "slug": "שניצל-תירס-ביתי",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-33"
+      ],
+      "legacyRouteIds": [
+        "instagram-33"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-33"
+      ],
+      "sequenceId": 33,
+      "instagramShortcode": "CwkzDnnoJI-",
+      "sourceUrl": "https://www.instagram.com/reel/CwkzDnnoJI-/",
+      "retiredContentIds": [],
+      "publishedDate": "30/08/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQ4K9R5FC88377T01Q",
+      "contentType": "recipe",
+      "naturalKey": "ig:CwQGqjWI1Nw",
+      "title": "פנקייק מלוח",
+      "slug": "פנקייק-מלוח",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-31"
+      ],
+      "legacyRouteIds": [
+        "instagram-31"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-31"
+      ],
+      "sequenceId": 31,
+      "instagramShortcode": "CwQGqjWI1Nw",
+      "sourceUrl": "https://www.instagram.com/reel/CwQGqjWI1Nw/",
+      "retiredContentIds": [],
+      "publishedDate": "22/08/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQE72DHYXGW6XK3KND",
+      "contentType": "recipe",
+      "naturalKey": "ig:CwsmK4xI130",
+      "title": "חטיפי קראנץ׳ פיסטוק",
+      "slug": "חטיפי-קראנץ-פיסטוק",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-34"
+      ],
+      "legacyRouteIds": [
+        "instagram-34"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-34"
+      ],
+      "sequenceId": 34,
+      "instagramShortcode": "CwsmK4xI130",
+      "sourceUrl": "https://www.instagram.com/reel/CwsmK4xI130/",
+      "retiredContentIds": [],
+      "publishedDate": "02/09/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQ1CTPNHMHD5EGMXB7",
+      "contentType": "recipe",
+      "naturalKey": "ig:CwXOVU8Ita-",
+      "title": "חצאפורי מבצק גבינה ללא התפחה",
+      "slug": "חצאפורי-מבצק-גבינה-ללא-התפחה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-32"
+      ],
+      "legacyRouteIds": [
+        "instagram-32"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-32"
+      ],
+      "sequenceId": 32,
+      "instagramShortcode": "CwXOVU8Ita-",
+      "sourceUrl": "https://www.instagram.com/reel/CwXOVU8Ita-/",
+      "retiredContentIds": [],
+      "publishedDate": "25/08/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQH07EYATYARX1DWBT",
+      "contentType": "recipe",
+      "naturalKey": "ig:CxDl1tHIMDH",
+      "title": "מאפינס שקדים בציפוי דבש",
+      "slug": "מאפינס-שקדים-בציפוי-דבש",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-37"
+      ],
+      "legacyRouteIds": [
+        "instagram-37"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-37"
+      ],
+      "sequenceId": 37,
+      "instagramShortcode": "CxDl1tHIMDH",
+      "sourceUrl": "https://www.instagram.com/reel/CxDl1tHIMDH/",
+      "retiredContentIds": [],
+      "publishedDate": "11/09/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQY60VWJ86C90FZ14B",
+      "contentType": "recipe",
+      "naturalKey": "ig:CxfMq0KIq0N",
+      "title": "מגולגלות סינבון",
+      "slug": "מגולגלות-סינבון",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-40"
+      ],
+      "legacyRouteIds": [
+        "instagram-40"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-40"
+      ],
+      "sequenceId": 40,
+      "instagramShortcode": "CxfMq0KIq0N",
+      "sourceUrl": "https://www.instagram.com/reel/CxfMq0KIq0N/",
+      "retiredContentIds": [],
+      "publishedDate": "22/09/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQ139J7P508NJK6JFZ",
+      "contentType": "recipe",
+      "naturalKey": "ig:CxNKkUuI5J3",
+      "title": "עוגת תפוחים עם קינמון",
+      "slug": "עוגת-תפוחים-עם-קינמון",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-38"
+      ],
+      "legacyRouteIds": [
+        "instagram-38"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-38"
+      ],
+      "sequenceId": 38,
+      "instagramShortcode": "CxNKkUuI5J3",
+      "sourceUrl": "https://www.instagram.com/reel/CxNKkUuI5J3/",
+      "retiredContentIds": [],
+      "publishedDate": "15/09/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQT9XVF6C20T4D5EPM",
+      "contentType": "recipe",
+      "naturalKey": "ig:CxxMHYyIQa0",
+      "title": "בוריקיטס",
+      "slug": "בוריקיטס",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-41"
+      ],
+      "legacyRouteIds": [
+        "instagram-41"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-41"
+      ],
+      "sequenceId": 41,
+      "instagramShortcode": "CxxMHYyIQa0",
+      "sourceUrl": "https://www.instagram.com/reel/CxxMHYyIQa0/",
+      "retiredContentIds": [],
+      "publishedDate": "29/09/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQ148HYDKYY5PHQZTK",
+      "contentType": "recipe",
+      "naturalKey": "ig:Cy5RiJXoNQ9",
+      "title": "עוגיות אלפחורס",
+      "slug": "עוגיות-אלפחורס",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-44"
+      ],
+      "legacyRouteIds": [
+        "instagram-44"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-44"
+      ],
+      "sequenceId": 44,
+      "instagramShortcode": "Cy5RiJXoNQ9",
+      "sourceUrl": "https://www.instagram.com/reel/Cy5RiJXoNQ9/",
+      "retiredContentIds": [],
+      "publishedDate": "27/10/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQR0XSS5FTMW15NYXQ",
+      "contentType": "recipe",
+      "naturalKey": "ig:CyDOmY-IPit",
+      "title": "מאפינס תירס",
+      "slug": "מאפינס-תירס",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-43"
+      ],
+      "legacyRouteIds": [
+        "instagram-43"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-43"
+      ],
+      "sequenceId": 43,
+      "instagramShortcode": "CyDOmY-IPit",
+      "sourceUrl": "https://www.instagram.com/reel/CyDOmY-IPit/",
+      "retiredContentIds": [],
+      "publishedDate": "06/10/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQDVWVSEVQFC4G8W61",
+      "contentType": "recipe",
+      "naturalKey": "ig:Cz35xQvImm_",
+      "title": "פסטה פסטו",
+      "slug": "פסטה-פסטו",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-53"
+      ],
+      "legacyRouteIds": [
+        "instagram-53"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-53"
+      ],
+      "sequenceId": 53,
+      "instagramShortcode": "Cz35xQvImm_",
+      "sourceUrl": "https://www.instagram.com/reel/Cz35xQvImm_/",
+      "retiredContentIds": [],
+      "publishedDate": "20/11/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQ2BB20ADA4NY6YTZC",
+      "contentType": "recipe",
+      "naturalKey": "ig:Cz9FfNgoXTr",
+      "title": "בראוניז שוקולד קפה ופקאנים",
+      "slug": "בראוניז-שוקולד-קפה-ופקאנים",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-54"
+      ],
+      "legacyRouteIds": [
+        "instagram-54"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-54"
+      ],
+      "sequenceId": 54,
+      "instagramShortcode": "Cz9FfNgoXTr",
+      "sourceUrl": "https://www.instagram.com/reel/Cz9FfNgoXTr/",
+      "retiredContentIds": [],
+      "publishedDate": "22/11/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQG1PK0EWRN2V3TSSV",
+      "contentType": "recipe",
+      "naturalKey": "ig:CzEVgrloEOX",
+      "title": "קציצות ברוקולי וקוטג׳",
+      "slug": "קציצות-ברוקולי-וקוטג",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-45"
+      ],
+      "legacyRouteIds": [
+        "instagram-45"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-45"
+      ],
+      "sequenceId": 45,
+      "instagramShortcode": "CzEVgrloEOX",
+      "sourceUrl": "https://www.instagram.com/reel/CzEVgrloEOX/",
+      "retiredContentIds": [],
+      "publishedDate": "31/10/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQK7BH9C6VJ910WRWW",
+      "contentType": "recipe",
+      "naturalKey": "ig:CzjXln-oFOf",
+      "title": "לחם שום מבצק גבינה שמכינים על מחבת",
+      "slug": "לחם-שום-מבצק-גבינה-שמכינים-על-מחבת",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-50"
+      ],
+      "legacyRouteIds": [
+        "instagram-50"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-50"
+      ],
+      "sequenceId": 50,
+      "instagramShortcode": "CzjXln-oFOf",
+      "sourceUrl": "https://www.instagram.com/reel/CzjXln-oFOf/",
+      "retiredContentIds": [],
+      "publishedDate": "12/11/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQK4DDRSW5BVWPJA5M",
+      "contentType": "recipe",
+      "naturalKey": "ig:CzLZ9WloVlV",
+      "title": "כדורי רפאלו",
+      "slug": "כדורי-רפאלו",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-46"
+      ],
+      "legacyRouteIds": [
+        "instagram-46"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-46"
+      ],
+      "sequenceId": 46,
+      "instagramShortcode": "CzLZ9WloVlV",
+      "sourceUrl": "https://www.instagram.com/reel/CzLZ9WloVlV/",
+      "retiredContentIds": [],
+      "publishedDate": "03/11/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQDQ25QRXGD5Q5PG61",
+      "contentType": "recipe",
+      "naturalKey": "ig:CzrCgV2I_im",
+      "title": "סופגניות אפויות",
+      "slug": "סופגניות-אפויות",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-51"
+      ],
+      "legacyRouteIds": [
+        "instagram-51"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-51"
+      ],
+      "sequenceId": 51,
+      "instagramShortcode": "CzrCgV2I_im",
+      "sourceUrl": "https://www.instagram.com/reel/CzrCgV2I_im/",
+      "retiredContentIds": [],
+      "publishedDate": "15/11/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQZJMJH4XSMR4TWZK0",
+      "contentType": "recipe",
+      "naturalKey": "ig:CzRUvXgo_Mq",
+      "title": "מגולגלות אמסטרדם",
+      "slug": "מגולגלות-אמסטרדם",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-47"
+      ],
+      "legacyRouteIds": [
+        "instagram-47"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-47"
+      ],
+      "sequenceId": 47,
+      "instagramShortcode": "CzRUvXgo_Mq",
+      "sourceUrl": "https://www.instagram.com/reel/CzRUvXgo_Mq/",
+      "retiredContentIds": [],
+      "publishedDate": "05/11/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQ99SAZACCRJ930AH9",
+      "contentType": "recipe",
+      "naturalKey": "ig:CzvfR9fIcaC",
+      "title": "נשנושי גבינה וזיתים",
+      "slug": "נשנושי-גבינה-וזיתים",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-52"
+      ],
+      "legacyRouteIds": [
+        "instagram-52"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-52"
+      ],
+      "sequenceId": 52,
+      "instagramShortcode": "CzvfR9fIcaC",
+      "sourceUrl": "https://www.instagram.com/reel/CzvfR9fIcaC/",
+      "retiredContentIds": [],
+      "publishedDate": "17/11/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJQA8PCT25EDXCJ2X5P",
+      "contentType": "recipe",
+      "naturalKey": "ig:CzZDtmeIJfA",
+      "title": "הפיצה של ישי פיטוסי",
+      "slug": "הפיצה-של-ישי-פיטוסי",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-48"
+      ],
+      "legacyRouteIds": [
+        "instagram-48"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-48"
+      ],
+      "sequenceId": 48,
+      "instagramShortcode": "CzZDtmeIJfA",
+      "sourceUrl": "https://www.instagram.com/reel/CzZDtmeIJfA/",
+      "retiredContentIds": [],
+      "publishedDate": "08/11/2023",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJMRT1GGMENS6H7SSV8",
+      "contentType": "recipe",
+      "naturalKey": "ig:Da4mVc5I2RM",
+      "title": "עוגת שמרים שקדים נוטלה",
+      "slug": "עוגת-שמרים-שקדים-נוטלה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-191"
+      ],
+      "legacyRouteIds": [
+        "instagram-191"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-191"
+      ],
+      "sequenceId": 191,
+      "instagramShortcode": "Da4mVc5I2RM",
+      "sourceUrl": "https://www.instagram.com/reel/Da4mVc5I2RM/",
+      "retiredContentIds": [],
+      "publishedDate": "17/07/2026",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": "almond-nutella-yeast-cake",
+      "imagePaths": [
+        "images/recipes/sweet/almond-nutella-yeast-cake/thumb/IMG_3523.jpg",
+        "images/recipes/sweet/almond-nutella-yeast-cake/IMG_3523-web.JPEG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "recipe_01M1YKBSJPNZS2HFQDS7RHWD0B",
+      "contentType": "recipe",
+      "naturalKey": "ig:DABfnyUIoEa",
+      "title": "בורקס גבינות וזיתים משערות קדאיף",
+      "slug": "בורקס-גבינות-וזיתים-משערות-קדאיף",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-116"
+      ],
+      "legacyRouteIds": [
+        "instagram-116"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-116"
+      ],
+      "sequenceId": 116,
+      "instagramShortcode": "DABfnyUIoEa",
+      "sourceUrl": "https://www.instagram.com/reel/DABfnyUIoEa/",
+      "retiredContentIds": [],
+      "publishedDate": "17/09/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": "kadaif-cheese-olive-borekas",
+      "imagePaths": [
+        "images/recipes/savory/kadaif-cheese-olive-borekas/thumb/IMG_0739.jpg",
+        "images/recipes/savory/kadaif-cheese-olive-borekas/IMG_0739-web.JPEG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "recipe_01M1YKBSJK2CCHZBMDQRBQ9QVA",
+      "contentType": "recipe",
+      "naturalKey": "ig:DamgunpI1gA",
+      "title": "עוגת ביסקוויטים פקאן סיני",
+      "alternateTitles": [
+        "עוגת ביסקוויטים פקאן מסוכר"
+      ],
+      "slug": "עוגת-ביסקוויטים-פקאן-סיני",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-אמאלהאיךכלכךהרבהשניםלאידעתיכמהטובזהפקאןמסוכרקבלואתהפרקה12בסד",
+        "biscuit-cake-12"
+      ],
+      "legacyRouteIds": [
+        "אמאלהאיךכלכךהרבהשניםלאידעתיכמהטובזהפקאןמסוכרקבלואתהפרקה12בסד",
+        "biscuit-cake-12"
+      ],
+      "legacyRoutes": [
+        "/recipes/אמאלהאיךכלכךהרבהשניםלאידעתיכמהטובזהפקאןמסוכרקבלואתהפרקה12בסד",
+        "/recipes/biscuit-cake-12"
+      ],
+      "sequenceId": 190,
+      "instagramShortcode": "DamgunpI1gA",
+      "sourceUrl": "https://www.instagram.com/reel/DamgunpI1gA/",
+      "absorbedNaturalKeys": [
+        "biscuit:12"
+      ],
+      "retiredContentIds": [],
+      "publishedDate": "10/07/2026",
+      "series": "עוגות ביסקוויטים",
+      "seriesPosition": 12,
+      "imageFolderSlug": null,
+      "imagePaths": [
+        "images/biscuit-cakes/12-chinese-pecan/IMG_3691.JPEG"
+      ],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE",
+        "MERGED_BISCUIT_SERIES",
+        "TITLE_CORRECTED"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJPZQ1S28E0BB0FJM2E",
+      "contentType": "recipe",
+      "naturalKey": "ig:DAQ91nZozyB",
+      "title": "כדורי סינבון / לחם קופים",
+      "slug": "כדורי-סינבון-לחם-קופים",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-117"
+      ],
+      "legacyRouteIds": [
+        "instagram-117"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-117"
+      ],
+      "sequenceId": 117,
+      "instagramShortcode": "DAQ91nZozyB",
+      "sourceUrl": "https://www.instagram.com/reel/DAQ91nZozyB/",
+      "retiredContentIds": [],
+      "publishedDate": "23/09/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": "cinnamon-monkey-bread",
+      "imagePaths": [
+        "images/recipes/sweet/cinnamon-monkey-bread/thumb/IMG_8914.jpg",
+        "images/recipes/sweet/cinnamon-monkey-bread/cinnamon-monkey-bread-1-web.JPEG",
+        "images/recipes/sweet/cinnamon-monkey-bread/cinnamon-monkey-bread-2-web.JPEG",
+        "images/recipes/sweet/cinnamon-monkey-bread/cinnamon-monkey-bread-2.JPEG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "recipe_01M1YKBSJH4CC1JNGP7NZNA4YV",
+      "contentType": "recipe",
+      "naturalKey": "ig:Dbcu_l_oNzq",
+      "title": "עוגת ביסקוויטים פירות יער ושוקולד לבן",
+      "slug": "עוגת-ביסקוויטים-פירות-יער-ושוקולד-לבן",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-פרק13בסדרהאיךלשדר",
+        "biscuit-cake-13"
+      ],
+      "legacyRouteIds": [
+        "פרק13בסדרהאיךלשדר",
+        "biscuit-cake-13"
+      ],
+      "legacyRoutes": [
+        "/recipes/פרק13בסדרהאיךלשדר",
+        "/recipes/biscuit-cake-13"
+      ],
+      "sequenceId": 195,
+      "instagramShortcode": "Dbcu_l_oNzq",
+      "sourceUrl": "https://www.instagram.com/reel/Dbcu_l_oNzq/",
+      "absorbedNaturalKeys": [
+        "biscuit:13"
+      ],
+      "retiredContentIds": [],
+      "publishedDate": "31/07/2026",
+      "series": "עוגות ביסקוויטים",
+      "seriesPosition": 13,
+      "imageFolderSlug": null,
+      "imagePaths": [
+        "images/biscuit-cakes/13-berries/thumb/IMG_3515.jpg",
+        "images/biscuit-cakes/13-berries/IMG_3515-web.JPEG"
+      ],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE",
+        "MERGED_BISCUIT_SERIES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJP92NS4KE31HH8NG4Z",
+      "contentType": "recipe",
+      "naturalKey": "ig:DbDDuQ7okoJ",
+      "title": "כדורי פירה עם מוצרלה ופרמזן",
+      "slug": "כדורי-פירה-עם-מוצרלה-ופרמזן",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-192"
+      ],
+      "legacyRouteIds": [
+        "instagram-192"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-192"
+      ],
+      "sequenceId": 192,
+      "instagramShortcode": "DbDDuQ7okoJ",
+      "sourceUrl": "https://www.instagram.com/reel/DbDDuQ7okoJ/",
+      "retiredContentIds": [],
+      "publishedDate": "21/07/2026",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": "mozzarella-parmesan-potato-balls",
+      "imagePaths": [
+        "images/recipes/savory/mozzarella-parmesan-potato-balls/thumb/IMG_3522.jpg",
+        "images/recipes/savory/mozzarella-parmesan-potato-balls/IMG_3522-web.JPEG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "recipe_01M1YKBSJPZ83DFPMMF7A7PFV0",
+      "contentType": "recipe",
+      "naturalKey": "ig:DBEYIhhIaO6",
+      "title": "טורטיות ממולאות בפרגית",
+      "slug": "טורטיות-ממולאות-בפרגית",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-119"
+      ],
+      "legacyRouteIds": [
+        "instagram-119"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-119"
+      ],
+      "sequenceId": 119,
+      "instagramShortcode": "DBEYIhhIaO6",
+      "sourceUrl": "https://www.instagram.com/reel/DBEYIhhIaO6/",
+      "retiredContentIds": [],
+      "publishedDate": "13/10/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJPD1V60T97F3XJ0PWK",
+      "contentType": "recipe",
+      "naturalKey": "ig:DBLNgZXIWWl",
+      "title": "עוגת פאדג׳ שוקולד פרווה",
+      "slug": "עוגת-פאדג-שוקולד-פרווה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-120"
+      ],
+      "legacyRouteIds": [
+        "instagram-120"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-120"
+      ],
+      "sequenceId": 120,
+      "instagramShortcode": "DBLNgZXIWWl",
+      "sourceUrl": "https://www.instagram.com/reel/DBLNgZXIWWl/",
+      "retiredContentIds": [],
+      "publishedDate": "16/10/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJPV2ZR5RAPF43CZJXS",
+      "contentType": "recipe",
+      "naturalKey": "ig:DC37g7hIV-0",
+      "title": "מוקפץ אנטריקוט עם ניוקי וברוקולי",
+      "slug": "מוקפץ-אנטריקוט-עם-ניוקי-וברוקולי",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-126"
+      ],
+      "legacyRouteIds": [
+        "instagram-126"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-126"
+      ],
+      "sequenceId": 126,
+      "instagramShortcode": "DC37g7hIV-0",
+      "sourceUrl": "https://www.instagram.com/reel/DC37g7hIV-0/",
+      "retiredContentIds": [],
+      "publishedDate": "27/11/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": "entrecote-gnocchi-broccoli-stir-fry",
+      "imagePaths": [
+        "images/recipes/savory/entrecote-gnocchi-broccoli-stir-fry/thumb/IMG_1995.jpg",
+        "images/recipes/savory/entrecote-gnocchi-broccoli-stir-fry/IMG_1995-web.JPEG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "recipe_01M1YKBSJNQTHECQ87TQXVS2WT",
+      "contentType": "recipe",
+      "naturalKey": "ig:Dck2ZBlImy8",
+      "title": "לחוח ביתי",
+      "slug": "לחוח-ביתי",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-200"
+      ],
+      "legacyRouteIds": [
+        "instagram-200"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-200"
+      ],
+      "sequenceId": 200,
+      "instagramShortcode": "Dck2ZBlImy8",
+      "sourceUrl": "https://www.instagram.com/reel/Dck2ZBlImy8/",
+      "retiredContentIds": [],
+      "publishedDate": "28/08/2026",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": "homemade-lahoh",
+      "imagePaths": [
+        "images/recipes/savory/homemade-lahoh/thumb/IMG_3521.jpg",
+        "images/recipes/savory/homemade-lahoh/IMG_3521-web.PNG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "recipe_01M1YKBSJPNEJ8VM36WZH01H96",
+      "contentType": "recipe",
+      "naturalKey": "ig:DCmWhZxITDJ",
+      "title": "פסטה ברוטב שמנת, זיתים ועגבניות מיובשות",
+      "slug": "פסטה-ברוטב-שמנת-זיתים-ועגבניות-מיובשות",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-125"
+      ],
+      "legacyRouteIds": [
+        "instagram-125"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-125"
+      ],
+      "sequenceId": 125,
+      "instagramShortcode": "DCmWhZxITDJ",
+      "sourceUrl": "https://www.instagram.com/reel/DCmWhZxITDJ/",
+      "retiredContentIds": [],
+      "publishedDate": "20/11/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": "creamy-olive-sun-dried-tomato-pasta",
+      "imagePaths": [
+        "images/recipes/savory/creamy-olive-sun-dried-tomato-pasta/thumb/IMG_0180.jpg",
+        "images/recipes/savory/creamy-olive-sun-dried-tomato-pasta/creamy-olive-sun-dried-tomato-pasta-1-web.JPEG",
+        "images/recipes/savory/creamy-olive-sun-dried-tomato-pasta/creamy-olive-sun-dried-tomato-pasta-2-web.JPG",
+        "images/recipes/savory/creamy-olive-sun-dried-tomato-pasta/creamy-olive-sun-dried-tomato-pasta-2.JPG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "recipe_01M1YKBSJPY8HBVW9GWC2HQ5BH",
+      "contentType": "recipe",
+      "naturalKey": "ig:DCRtEZDImvJ",
+      "title": "פולנטה מתירס טרי",
+      "slug": "פולנטה-מתירס-טרי",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-123"
+      ],
+      "legacyRouteIds": [
+        "instagram-123"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-123"
+      ],
+      "sequenceId": 123,
+      "instagramShortcode": "DCRtEZDImvJ",
+      "sourceUrl": "https://www.instagram.com/reel/DCRtEZDImvJ/",
+      "retiredContentIds": [],
+      "publishedDate": "12/11/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": "fresh-corn-polenta",
+      "imagePaths": [
+        "images/recipes/savory/fresh-corn-polenta/thumb/IMG_9920.jpg",
+        "images/recipes/savory/fresh-corn-polenta/IMG_9920-web.JPEG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "recipe_01M1YKBSJNMHXBMQ64X6RJWPRB",
+      "contentType": "recipe",
+      "naturalKey": "ig:DcSxhVRIPAh",
+      "title": "עוגת ביסקוויטים באונטי",
+      "slug": "עוגת-ביסקוויטים-באונטי",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-198",
+        "biscuit-cake-14"
+      ],
+      "legacyRouteIds": [
+        "instagram-198",
+        "biscuit-cake-14"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-198",
+        "/recipes/biscuit-cake-14"
+      ],
+      "sequenceId": 198,
+      "instagramShortcode": "DcSxhVRIPAh",
+      "sourceUrl": "https://www.instagram.com/reel/DcSxhVRIPAh/",
+      "absorbedNaturalKeys": [
+        "biscuit:14"
+      ],
+      "retiredContentIds": [],
+      "publishedDate": "21/08/2026",
+      "series": "עוגות ביסקוויטים",
+      "seriesPosition": 14,
+      "imageFolderSlug": null,
+      "imagePaths": [
+        "images/biscuit-cakes/14-bounty/IMG_3690.JPEG"
+      ],
+      "listed": true,
+      "flags": [
+        "MERGED_BISCUIT_SERIES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJP0KXPTMM6N5N0VKWM",
+      "contentType": "recipe",
+      "naturalKey": "ig:DCYpVDzoRpJ",
+      "title": "עוגת טירמיסו שוקולד",
+      "slug": "עוגת-טירמיסו-שוקולד",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-124"
+      ],
+      "legacyRouteIds": [
+        "instagram-124"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-124"
+      ],
+      "sequenceId": 124,
+      "instagramShortcode": "DCYpVDzoRpJ",
+      "sourceUrl": "https://www.instagram.com/reel/DCYpVDzoRpJ/",
+      "retiredContentIds": [],
+      "publishedDate": "15/11/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJP247H0CTDKH9FNCZ4",
+      "contentType": "recipe",
+      "naturalKey": "ig:DEExz43o9tM",
+      "title": "עוגת שמרים שוקולד דובאי",
+      "slug": "עוגת-שמרים-שוקולד-דובאי",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-127"
+      ],
+      "legacyRouteIds": [
+        "instagram-127"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-127"
+      ],
+      "sequenceId": 127,
+      "instagramShortcode": "DEExz43o9tM",
+      "sourceUrl": "https://www.instagram.com/reel/DEExz43o9tM/",
+      "retiredContentIds": [],
+      "publishedDate": "27/12/2024",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": "dubai-chocolate-yeast-cake",
+      "imagePaths": [
+        "images/recipes/sweet/dubai-chocolate-yeast-cake/thumb/IMG_2063.jpg",
+        "images/recipes/sweet/dubai-chocolate-yeast-cake/dubai-chocolate-yeast-cake-1-web.JPEG",
+        "images/recipes/sweet/dubai-chocolate-yeast-cake/dubai-chocolate-yeast-cake-2-web.JPEG",
+        "images/recipes/sweet/dubai-chocolate-yeast-cake/dubai-chocolate-yeast-cake-3-web.JPEG",
+        "images/recipes/sweet/dubai-chocolate-yeast-cake/dubai-chocolate-yeast-cake-4-web.JPG",
+        "images/recipes/sweet/dubai-chocolate-yeast-cake/dubai-chocolate-yeast-cake-2.JPEG",
+        "images/recipes/sweet/dubai-chocolate-yeast-cake/dubai-chocolate-yeast-cake-3.JPEG",
+        "images/recipes/sweet/dubai-chocolate-yeast-cake/dubai-chocolate-yeast-cake-4.JPG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "recipe_01M1YKBSJPDMB0CFBPKNCJ1V14",
+      "contentType": "recipe",
+      "naturalKey": "ig:DEhyrl_o5_w",
+      "title": "קציצות עוף ותירס",
+      "slug": "קציצות-עוף-ותירס",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-129"
+      ],
+      "legacyRouteIds": [
+        "instagram-129"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-129"
+      ],
+      "sequenceId": 129,
+      "instagramShortcode": "DEhyrl_o5_w",
+      "sourceUrl": "https://www.instagram.com/reel/DEhyrl_o5_w/",
+      "retiredContentIds": [],
+      "publishedDate": "07/01/2025",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJM9R7S3SEQ1CSSHQFJ",
+      "contentType": "recipe",
+      "naturalKey": "ig:DEovXFYolG6",
+      "title": "עוגת קינמון עם קראמבל",
+      "slug": "עוגת-קינמון-עם-קראמבל",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-עו-9"
+      ],
+      "legacyRouteIds": [
+        "עו-9"
+      ],
+      "legacyRoutes": [
+        "/recipes/עו-9"
+      ],
+      "sequenceId": 130,
+      "instagramShortcode": "DEovXFYolG6",
+      "sourceUrl": "https://www.instagram.com/reel/DEovXFYolG6/",
+      "retiredContentIds": [],
+      "publishedDate": "10/01/2025",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": "cinnamon-crumble-cake",
+      "imagePaths": [
+        "images/recipes/sweet/cinnamon-crumble-cake/thumb/IMG_2720.jpg",
+        "images/recipes/sweet/cinnamon-crumble-cake/cinnamon-crumble-cake-1-web.JPG",
+        "images/recipes/sweet/cinnamon-crumble-cake/cinnamon-crumble-cake-2-web.JPEG",
+        "images/recipes/sweet/cinnamon-crumble-cake/cinnamon-crumble-cake-2.JPEG"
+      ],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJPABHHKNSWY709KZWX",
+      "contentType": "recipe",
+      "naturalKey": "ig:DEWyKw0IWEr",
+      "title": "עוגת קרמבו מוקה",
+      "slug": "עוגת-קרמבו-מוקה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-128"
+      ],
+      "legacyRouteIds": [
+        "instagram-128"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-128"
+      ],
+      "sequenceId": 128,
+      "instagramShortcode": "DEWyKw0IWEr",
+      "sourceUrl": "https://www.instagram.com/reel/DEWyKw0IWEr/",
+      "retiredContentIds": [],
+      "publishedDate": "03/01/2025",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJMTX5SGRGRD961P0FC",
+      "contentType": "recipe",
+      "naturalKey": "ig:DFe_HOkoxXR",
+      "title": "קינוחי כוסות אלפחורס",
+      "slug": "קינוחי-כוסות-אלפחורס",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-קינוחיכוסותאלפחורסשיוצאיםוואו"
+      ],
+      "legacyRouteIds": [
+        "קינוחיכוסותאלפחורסשיוצאיםוואו"
+      ],
+      "legacyRoutes": [
+        "/recipes/קינוחיכוסותאלפחורסשיוצאיםוואו"
+      ],
+      "sequenceId": 131,
+      "instagramShortcode": "DFe_HOkoxXR",
+      "sourceUrl": "https://www.instagram.com/reel/DFe_HOkoxXR/",
+      "retiredContentIds": [],
+      "publishedDate": "31/01/2025",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE",
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJMQZH00T5RDEPXDVG6",
+      "contentType": "recipe",
+      "naturalKey": "ig:DKKOQ1gIW5L",
+      "title": "סלמון עם ניוקי ועגבניות שרי ברוטב ירוק",
+      "slug": "סלמון-עם-ניוקי-ועגבניות-שרי-ברוטב-ירוק",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-סלמוןעםניוקיוע"
+      ],
+      "legacyRouteIds": [
+        "סלמוןעםניוקיוע"
+      ],
+      "legacyRoutes": [
+        "/recipes/סלמוןעםניוקיוע"
+      ],
+      "sequenceId": 133,
+      "instagramShortcode": "DKKOQ1gIW5L",
+      "sourceUrl": "https://www.instagram.com/reel/DKKOQ1gIW5L/",
+      "retiredContentIds": [],
+      "publishedDate": "27/05/2025",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": "salmon-gnocchi-green-sauce",
+      "imagePaths": [
+        "images/recipes/savory/salmon-gnocchi-green-sauce/thumb/IMG_7017.jpg",
+        "images/recipes/savory/salmon-gnocchi-green-sauce/IMG_7017-web.JPEG"
+      ],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJM7MC8VBX5PKCFCX6J",
+      "contentType": "recipe",
+      "naturalKey": "ig:DL9XTDsoHo1",
+      "title": "גלידוניות קראנץ׳",
+      "slug": "גלידוניות-קראנץ",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-httpswwwinstagramcomrotemadinireeldl9xtdsoho1"
+      ],
+      "legacyRouteIds": [
+        "httpswwwinstagramcomrotemadinireeldl9xtdsoho1"
+      ],
+      "legacyRoutes": [
+        "/recipes/httpswwwinstagramcomrotemadinireeldl9xtdsoho1"
+      ],
+      "sequenceId": 138,
+      "instagramShortcode": "DL9XTDsoHo1",
+      "sourceUrl": "https://www.instagram.com/reel/DL9XTDsoHo1/",
+      "retiredContentIds": [],
+      "publishedDate": "11/07/2025",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE",
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJMB6H35PY2YXB0CZRR",
+      "contentType": "recipe",
+      "naturalKey": "ig:DLARXZ4o1V6",
+      "title": "סופלה בלונדי",
+      "slug": "סופלה-בלונדי",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-השמועהאומרתשבזמןשישמתקפהמאיראןהקלוריותלאנספרותכיחייבלהתנחםבמ"
+      ],
+      "legacyRouteIds": [
+        "השמועהאומרתשבזמןשישמתקפהמאיראןהקלוריותלאנספרותכיחייבלהתנחםבמ"
+      ],
+      "legacyRoutes": [
+        "/recipes/השמועהאומרתשבזמןשישמתקפהמאיראןהקלוריותלאנספרותכיחייבלהתנחםבמ"
+      ],
+      "sequenceId": 134,
+      "instagramShortcode": "DLARXZ4o1V6",
+      "sourceUrl": "https://www.instagram.com/reel/DLARXZ4o1V6/",
+      "retiredContentIds": [],
+      "publishedDate": "17/06/2025",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE",
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJMV62T08BW7PDHAYTG",
+      "contentType": "recipe",
+      "naturalKey": "ig:DLHPk-noggE",
+      "title": "עוגת גבינה טריקולד מנומרת",
+      "slug": "עוגת-גבינה-טריקולד-מנומרת",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-עו-10"
+      ],
+      "legacyRouteIds": [
+        "עו-10"
+      ],
+      "legacyRoutes": [
+        "/recipes/עו-10"
+      ],
+      "sequenceId": 135,
+      "instagramShortcode": "DLHPk-noggE",
+      "sourceUrl": "https://www.instagram.com/reel/DLHPk-noggE/",
+      "retiredContentIds": [],
+      "publishedDate": "20/06/2025",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": "marbled-tricolor-cheesecake",
+      "imagePaths": [
+        "images/recipes/sweet/marbled-tricolor-cheesecake/thumb/IMG_7404.jpg",
+        "images/recipes/sweet/marbled-tricolor-cheesecake/marbled-tricolor-cheesecake-1-web.JPEG",
+        "images/recipes/sweet/marbled-tricolor-cheesecake/marbled-tricolor-cheesecake-2-web.JPEG",
+        "images/recipes/sweet/marbled-tricolor-cheesecake/marbled-tricolor-cheesecake-2.JPEG"
+      ],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJM8GHS5MY8TE32ATV1",
+      "contentType": "recipe",
+      "naturalKey": "ig:DLrS-JIokcW",
+      "title": "רולדת כדורי שוקולד בלונדי",
+      "slug": "רולדת-כדורי-שוקולד-בלונדי",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-רולדתכדורישוקולדבלונדיעו"
+      ],
+      "legacyRouteIds": [
+        "רולדתכדורישוקולדבלונדיעו"
+      ],
+      "legacyRoutes": [
+        "/recipes/רולדתכדורישוקולדבלונדיעו"
+      ],
+      "sequenceId": 137,
+      "instagramShortcode": "DLrS-JIokcW",
+      "sourceUrl": "https://www.instagram.com/reel/DLrS-JIokcW/",
+      "retiredContentIds": [],
+      "publishedDate": "04/07/2025",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE",
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJM6FRAXSHGAFA5GERR",
+      "contentType": "recipe",
+      "naturalKey": "ig:DLSaOlgI_Xx",
+      "title": "מוקפץ עוף ואטריות אודון עם ירקות",
+      "slug": "מוקפץ-עוף-ואטריות-אודון-עם-ירקות",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-מוקפץעוףואטריותאודוןעםירקותשיוצאפשוטמושלםfullingredientsmeth"
+      ],
+      "legacyRouteIds": [
+        "מוקפץעוףואטריותאודוןעםירקותשיוצאפשוטמושלםfullingredientsmeth"
+      ],
+      "legacyRoutes": [
+        "/recipes/מוקפץעוףואטריותאודוןעםירקותשיוצאפשוטמושלםfullingredientsmeth"
+      ],
+      "sequenceId": 136,
+      "instagramShortcode": "DLSaOlgI_Xx",
+      "sourceUrl": "https://www.instagram.com/reel/DLSaOlgI_Xx/",
+      "retiredContentIds": [],
+      "publishedDate": "24/06/2025",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE",
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJM2J11NGPSA64YF9YD",
+      "contentType": "recipe",
+      "naturalKey": "ig:DMhT5oVolnJ",
+      "title": "בורקס אסאדו",
+      "slug": "בורקס-אסאדו",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-בורקסאסאדומושלםלערבשבת"
+      ],
+      "legacyRouteIds": [
+        "בורקסאסאדומושלםלערבשבת"
+      ],
+      "legacyRoutes": [
+        "/recipes/בורקסאסאדומושלםלערבשבת"
+      ],
+      "sequenceId": 140,
+      "instagramShortcode": "DMhT5oVolnJ",
+      "sourceUrl": "https://www.instagram.com/reel/DMhT5oVolnJ/",
+      "retiredContentIds": [],
+      "publishedDate": "25/07/2025",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": "asado-borekas",
+      "imagePaths": [
+        "images/recipes/savory/asado-borekas/thumb/IMG_9173.jpg",
+        "images/recipes/savory/asado-borekas/IMG_9173-web.JPEG"
+      ],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJMV4SYTFGZJN38AK0M",
+      "contentType": "recipe",
+      "naturalKey": "ig:DMPQ_qXo--a",
+      "title": "עוגת ביסקוויטים סניקרס",
+      "slug": "עוגת-ביסקוויטים-סניקרס",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-עו-5"
+      ],
+      "legacyRouteIds": [
+        "עו-5"
+      ],
+      "legacyRoutes": [
+        "/recipes/עו-5"
+      ],
+      "sequenceId": 139,
+      "instagramShortcode": "DMPQ_qXo--a",
+      "sourceUrl": "https://www.instagram.com/reel/DMPQ_qXo--a/",
+      "retiredContentIds": [],
+      "publishedDate": "18/07/2025",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE",
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJMJP75568T8F6NDN2Y",
+      "contentType": "recipe",
+      "naturalKey": "ig:DNFUYldoSju",
+      "title": "עוגת קרמבו שוקולד לבן על בסיס ביסקוויטים",
+      "slug": "עוגת-קרמבו-שוקולד-לבן-על-בסיס-ביסקוויטים",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-עו-7"
+      ],
+      "legacyRouteIds": [
+        "עו-7"
+      ],
+      "legacyRoutes": [
+        "/recipes/עו-7"
+      ],
+      "sequenceId": 141,
+      "instagramShortcode": "DNFUYldoSju",
+      "sourceUrl": "https://www.instagram.com/reel/DNFUYldoSju/",
+      "retiredContentIds": [],
+      "publishedDate": "08/08/2025",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE",
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJM0MX1ZRTWZ3DXASPW",
+      "contentType": "recipe",
+      "naturalKey": "ig:DQ4Vn0hiDE2",
+      "title": "עוגת שמרים דאבל שוקולד פרווה",
+      "slug": "עוגת-שמרים-דאבל-שוקולד-פרווה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-עו-6"
+      ],
+      "legacyRouteIds": [
+        "עו-6"
+      ],
+      "legacyRoutes": [
+        "/recipes/עו-6"
+      ],
+      "sequenceId": 142,
+      "instagramShortcode": "DQ4Vn0hiDE2",
+      "sourceUrl": "https://www.instagram.com/reel/DQ4Vn0hiDE2/",
+      "retiredContentIds": [],
+      "publishedDate": "10/11/2025",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE",
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJMVVJBH3H2ZGC5JS6Y",
+      "contentType": "recipe",
+      "naturalKey": "ig:DRxD7mhiMIb",
+      "title": "עוגיית שוקולד צ'יפס",
+      "slug": "עוגיית-שוקולד-ציפס",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-מתלבטתעודאיךלקרואלמתכוןהזהעו"
+      ],
+      "legacyRouteIds": [
+        "מתלבטתעודאיךלקרואלמתכוןהזהעו"
+      ],
+      "legacyRoutes": [
+        "/recipes/מתלבטתעודאיךלקרואלמתכוןהזהעו"
+      ],
+      "sequenceId": 144,
+      "instagramShortcode": "DRxD7mhiMIb",
+      "sourceUrl": "https://www.instagram.com/reel/DRxD7mhiMIb/",
+      "retiredContentIds": [],
+      "publishedDate": "02/12/2025",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE",
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJPEE2EQZ0ARWYDBHKV",
+      "contentType": "recipe",
+      "naturalKey": "ig:DRZzKvNCDf7",
+      "title": "קרפ דל קלוריות",
+      "slug": "קרפ-דל-קלוריות",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-170"
+      ],
+      "legacyRouteIds": [
+        "instagram-170"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-170"
+      ],
+      "sequenceId": 170,
+      "instagramShortcode": "DRZzKvNCDf7",
+      "sourceUrl": "https://www.instagram.com/reel/DRZzKvNCDf7/",
+      "retiredContentIds": [],
+      "publishedDate": "26/03/2026",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJM3KQEMS3BE8BBFQHC",
+      "contentType": "recipe",
+      "naturalKey": "ig:DSklcOgCHXu",
+      "title": "בורקס גבינה",
+      "slug": "בורקס-גבינה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-בורקס"
+      ],
+      "legacyRouteIds": [
+        "בורקס"
+      ],
+      "legacyRoutes": [
+        "/recipes/בורקס"
+      ],
+      "sequenceId": 149,
+      "instagramShortcode": "DSklcOgCHXu",
+      "sourceUrl": "https://www.instagram.com/reel/DSklcOgCHXu/",
+      "retiredContentIds": [],
+      "publishedDate": "22/12/2025",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE",
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJMD4SZSYJG46JVB38B",
+      "contentType": "recipe",
+      "naturalKey": "ig:DSKQ3G5iM-7",
+      "title": "עוגת תפוזים",
+      "slug": "עוגת-תפוזים",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-עו-12",
+        "recipe-instagram-122"
+      ],
+      "legacyRouteIds": [
+        "עו-12",
+        "instagram-122"
+      ],
+      "legacyRoutes": [
+        "/recipes/עו-12",
+        "/recipes/instagram-122"
+      ],
+      "sequenceId": 146,
+      "instagramShortcode": "DSKQ3G5iM-7",
+      "sourceUrl": "https://www.instagram.com/reel/DSKQ3G5iM-7/",
+      "alternateSourceUrls": [
+        "https://www.instagram.com/reel/DCGmwC_IaEF/"
+      ],
+      "absorbedNaturalKeys": [
+        "ig:DCGmwC_IaEF"
+      ],
+      "retiredContentIds": [],
+      "publishedDate": "12/12/2025",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE",
+        "MERGED_DUPLICATE_POST",
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJM5M9PV1HTZ4W6Z1FV",
+      "contentType": "recipe",
+      "naturalKey": "ig:DSXpZrKiPj_",
+      "title": "טבלת עוגת ביסקוויטים",
+      "slug": "טבלת-עוגת-ביסקוויטים",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-שילבתיאתשניהדבריםשאניהכיאוהבתבעולםעו"
+      ],
+      "legacyRouteIds": [
+        "שילבתיאתשניהדבריםשאניהכיאוהבתבעולםעו"
+      ],
+      "legacyRoutes": [
+        "/recipes/שילבתיאתשניהדבריםשאניהכיאוהבתבעולםעו"
+      ],
+      "sequenceId": 147,
+      "instagramShortcode": "DSXpZrKiPj_",
+      "sourceUrl": "https://www.instagram.com/reel/DSXpZrKiPj_/",
+      "retiredContentIds": [],
+      "publishedDate": "17/12/2025",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE",
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJMZBKW38J1KQWR8GCW",
+      "contentType": "recipe",
+      "naturalKey": "ig:DT2HFK7iDoC",
+      "title": "עוגת ביסקוויטים מוקה",
+      "slug": "עוגת-ביסקוויטים-מוקה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-ברוכיםהבאיםלפרקהשלישיבסדרהשליאיךלשדר",
+        "biscuit-cake-03"
+      ],
+      "legacyRouteIds": [
+        "ברוכיםהבאיםלפרקהשלישיבסדרהשליאיךלשדר",
+        "biscuit-cake-03"
+      ],
+      "legacyRoutes": [
+        "/recipes/ברוכיםהבאיםלפרקהשלישיבסדרהשליאיךלשדר",
+        "/recipes/biscuit-cake-03"
+      ],
+      "sequenceId": 157,
+      "instagramShortcode": "DT2HFK7iDoC",
+      "sourceUrl": "https://www.instagram.com/reel/DT2HFK7iDoC/",
+      "absorbedNaturalKeys": [
+        "biscuit:03"
+      ],
+      "retiredContentIds": [],
+      "publishedDate": "23/01/2026",
+      "series": "עוגות ביסקוויטים",
+      "seriesPosition": 3,
+      "imageFolderSlug": null,
+      "imagePaths": [
+        "images/biscuit-cakes/03-mocha/thumb/IMG_5176.jpg",
+        "images/biscuit-cakes/03-mocha/IMG_5176-web.JPEG"
+      ],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE",
+        "MERGED_BISCUIT_SERIES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJMDP3QR942W3WE2PQE",
+      "contentType": "recipe",
+      "naturalKey": "ig:DTfpa0OiANO",
+      "title": "בראוניז",
+      "slug": "בראוניז",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-ברצינותמישהואיפעםסירבלכםכשהצעתםלוחתיכתבראוניזלאשמעתיעלדברכזה"
+      ],
+      "legacyRouteIds": [
+        "ברצינותמישהואיפעםסירבלכםכשהצעתםלוחתיכתבראוניזלאשמעתיעלדברכזה"
+      ],
+      "legacyRoutes": [
+        "/recipes/ברצינותמישהואיפעםסירבלכםכשהצעתםלוחתיכתבראוניזלאשמעתיעלדברכזה"
+      ],
+      "sequenceId": 154,
+      "instagramShortcode": "DTfpa0OiANO",
+      "sourceUrl": "https://www.instagram.com/reel/DTfpa0OiANO/",
+      "retiredContentIds": [],
+      "publishedDate": "14/01/2026",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE",
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJMRRZ04P5NSXATNGSN",
+      "contentType": "recipe",
+      "naturalKey": "ig:DTkEeLliJY4",
+      "title": "עוגת ביסקוויטים קרמבו",
+      "slug": "עוגת-ביסקוויטים-קרמבו",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-ברוכיםהבאיםלפרקהשניבסדרהשליאיךלשדר",
+        "biscuit-cake-02"
+      ],
+      "legacyRouteIds": [
+        "ברוכיםהבאיםלפרקהשניבסדרהשליאיךלשדר",
+        "biscuit-cake-02"
+      ],
+      "legacyRoutes": [
+        "/recipes/ברוכיםהבאיםלפרקהשניבסדרהשליאיךלשדר",
+        "/recipes/biscuit-cake-02"
+      ],
+      "sequenceId": 155,
+      "instagramShortcode": "DTkEeLliJY4",
+      "sourceUrl": "https://www.instagram.com/reel/DTkEeLliJY4/",
+      "absorbedNaturalKeys": [
+        "biscuit:02"
+      ],
+      "retiredContentIds": [],
+      "publishedDate": "16/01/2026",
+      "series": "עוגות ביסקוויטים",
+      "seriesPosition": 2,
+      "imageFolderSlug": null,
+      "imagePaths": [
+        "images/biscuit-cakes/02-krembo/thumb/IMG_5008.jpg",
+        "images/biscuit-cakes/02-krembo/IMG_5008-web.JPEG"
+      ],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE",
+        "MERGED_BISCUIT_SERIES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJM72VPTKT95WWB9F5S",
+      "contentType": "recipe",
+      "naturalKey": "ig:DTLLYa_CGIK",
+      "title": "פסטה בטטטה",
+      "slug": "פסטה-בטטטה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-איןיותרמושלםומנחםמאשרלסייםאתהיוםעםקערתפסטהמפנקתתתאזהכנתילכםכ"
+      ],
+      "legacyRouteIds": [
+        "איןיותרמושלםומנחםמאשרלסייםאתהיוםעםקערתפסטהמפנקתתתאזהכנתילכםכ"
+      ],
+      "legacyRoutes": [
+        "/recipes/איןיותרמושלםומנחםמאשרלסייםאתהיוםעםקערתפסטהמפנקתתתאזהכנתילכםכ"
+      ],
+      "sequenceId": 151,
+      "instagramShortcode": "DTLLYa_CGIK",
+      "sourceUrl": "https://www.instagram.com/reel/DTLLYa_CGIK/",
+      "retiredContentIds": [],
+      "publishedDate": "06/01/2026",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE",
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJM6R8F2ZMM7AVR8FQS",
+      "contentType": "recipe",
+      "naturalKey": "ig:DTSHHILiKlP",
+      "title": "עוגת ביסקוויטים פיסטוק ושוקולד לבן",
+      "slug": "עוגת-ביסקוויטים-פיסטוק-ושוקולד-לבן",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-ברוכיםהבאיםלסדרתהמתכוניםהחדשהשליאיךלשדר",
+        "biscuit-cake-01"
+      ],
+      "legacyRouteIds": [
+        "ברוכיםהבאיםלסדרתהמתכוניםהחדשהשליאיךלשדר",
+        "biscuit-cake-01"
+      ],
+      "legacyRoutes": [
+        "/recipes/ברוכיםהבאיםלסדרתהמתכוניםהחדשהשליאיךלשדר",
+        "/recipes/biscuit-cake-01"
+      ],
+      "sequenceId": 152,
+      "instagramShortcode": "DTSHHILiKlP",
+      "sourceUrl": "https://www.instagram.com/reel/DTSHHILiKlP/",
+      "absorbedNaturalKeys": [
+        "biscuit:01"
+      ],
+      "retiredContentIds": [],
+      "publishedDate": "09/01/2026",
+      "series": "עוגות ביסקוויטים",
+      "seriesPosition": 1,
+      "imageFolderSlug": null,
+      "imagePaths": [
+        "images/biscuit-cakes/01-pistachio/thumb/IMG_5024.jpg",
+        "images/biscuit-cakes/01-pistachio/IMG_5024-web.PNG"
+      ],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE",
+        "MERGED_BISCUIT_SERIES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJMTWC07YHAAJD4ZPNS",
+      "contentType": "recipe",
+      "naturalKey": "ig:DTx0sZCCEEn",
+      "title": "מגולגלות נוטלה וקורנפלקס",
+      "slug": "מגולגלות-נוטלה-וקורנפלקס",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-מתכוןלמ"
+      ],
+      "legacyRouteIds": [
+        "מתכוןלמ"
+      ],
+      "legacyRoutes": [
+        "/recipes/מתכוןלמ"
+      ],
+      "sequenceId": 156,
+      "instagramShortcode": "DTx0sZCCEEn",
+      "sourceUrl": "https://www.instagram.com/reel/DTx0sZCCEEn/",
+      "retiredContentIds": [],
+      "publishedDate": "21/01/2026",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": "nutella-cornflakes-rugelach",
+      "imagePaths": [
+        "images/recipes/sweet/nutella-cornflakes-rugelach/thumb/IMG_5495.jpg",
+        "images/recipes/sweet/nutella-cornflakes-rugelach/IMG_5495-web.JPEG"
+      ],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJME20D732WQY0DCVVN",
+      "contentType": "recipe",
+      "naturalKey": "ig:DUQoaesiFaL",
+      "title": "האני באטר טוסט",
+      "slug": "האני-באטר-טוסט",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-האניבאטרטוסטלאלהאמיןאיךקינוחבלישוקולדיכוללהיותכלכךטעיםומיוחד"
+      ],
+      "legacyRouteIds": [
+        "האניבאטרטוסטלאלהאמיןאיךקינוחבלישוקולדיכוללהיותכלכךטעיםומיוחד"
+      ],
+      "legacyRoutes": [
+        "/recipes/האניבאטרטוסטלאלהאמיןאיךקינוחבלישוקולדיכוללהיותכלכךטעיםומיוחד"
+      ],
+      "sequenceId": 159,
+      "instagramShortcode": "DUQoaesiFaL",
+      "sourceUrl": "https://www.instagram.com/reel/DUQoaesiFaL/",
+      "retiredContentIds": [],
+      "publishedDate": "02/02/2026",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": "honey-butter-toast",
+      "imagePaths": [
+        "images/recipes/sweet/honey-butter-toast/thumb/IMG_5881.jpg",
+        "images/recipes/sweet/honey-butter-toast/IMG_5881-web.JPEG"
+      ],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJMH7A5YT51NNJ2GGZN",
+      "contentType": "recipe",
+      "naturalKey": "ig:DV0RzSKCEw6",
+      "title": "עוגת ביסקוויטים לימונענע",
+      "slug": "עוגת-ביסקוויטים-לימונענע",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-הפרקהחמישיבסדרהשליאיךלשדר",
+        "biscuit-cake-05"
+      ],
+      "legacyRouteIds": [
+        "הפרקהחמישיבסדרהשליאיךלשדר",
+        "biscuit-cake-05"
+      ],
+      "legacyRoutes": [
+        "/recipes/הפרקהחמישיבסדרהשליאיךלשדר",
+        "/recipes/biscuit-cake-05"
+      ],
+      "sequenceId": 166,
+      "instagramShortcode": "DV0RzSKCEw6",
+      "sourceUrl": "https://www.instagram.com/reel/DV0RzSKCEw6/",
+      "absorbedNaturalKeys": [
+        "biscuit:05"
+      ],
+      "retiredContentIds": [],
+      "publishedDate": "13/03/2026",
+      "series": "עוגות ביסקוויטים",
+      "seriesPosition": 5,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE",
+        "MERGED_BISCUIT_SERIES",
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJM37NFKTQ8MFB91N24",
+      "contentType": "recipe",
+      "naturalKey": "ig:DVgMhwciCwr",
+      "title": "טבלת שוקולד חלב עם קרמל ובייגלה",
+      "slug": "טבלת-שוקולד-חלב-עם-קרמל-ובייגלה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-טבלתשוקולדקרמלוביי"
+      ],
+      "legacyRouteIds": [
+        "טבלתשוקולדקרמלוביי"
+      ],
+      "legacyRoutes": [
+        "/recipes/טבלתשוקולדקרמלוביי"
+      ],
+      "sequenceId": 164,
+      "instagramShortcode": "DVgMhwciCwr",
+      "sourceUrl": "https://www.instagram.com/reel/DVgMhwciCwr/",
+      "retiredContentIds": [],
+      "publishedDate": "05/03/2026",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE",
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJP8A6441HYKBTPZXKN",
+      "contentType": "recipe",
+      "naturalKey": "ig:DVQPqNZCIIe",
+      "title": "עוגת קראנץ׳ נוטלה",
+      "slug": "עוגת-קראנץ-נוטלה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-162",
+        "biscuit-cake-04"
+      ],
+      "legacyRouteIds": [
+        "instagram-162",
+        "biscuit-cake-04"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-162",
+        "/recipes/biscuit-cake-04"
+      ],
+      "sequenceId": 162,
+      "instagramShortcode": "DVQPqNZCIIe",
+      "sourceUrl": "https://www.instagram.com/reel/DVQPqNZCIIe/",
+      "absorbedNaturalKeys": [
+        "biscuit:04"
+      ],
+      "retiredContentIds": [],
+      "publishedDate": "27/02/2026",
+      "series": "עוגות ביסקוויטים",
+      "seriesPosition": 4,
+      "imageFolderSlug": null,
+      "imagePaths": [
+        "images/biscuit-cakes/04-nutella-crunch/IMG_3692.JPEG"
+      ],
+      "listed": true,
+      "flags": [
+        "MERGED_BISCUIT_SERIES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJP3E2MDEV3F516QKT2",
+      "contentType": "recipe",
+      "naturalKey": "ig:DVY6pDrCBog",
+      "title": "פנקייקים עם פצפוצי שוקולד",
+      "slug": "פנקייקים-עם-פצפוצי-שוקולד",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-163"
+      ],
+      "legacyRouteIds": [
+        "instagram-163"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-163"
+      ],
+      "sequenceId": 163,
+      "instagramShortcode": "DVY6pDrCBog",
+      "sourceUrl": "https://www.instagram.com/reel/DVY6pDrCBog/",
+      "retiredContentIds": [],
+      "publishedDate": "02/03/2026",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJPF6Z67YYY541R0587",
+      "contentType": "recipe",
+      "naturalKey": "ig:DW8LWEPo2F8",
+      "title": "עוגת ביסקוויטים אלפחורס",
+      "slug": "עוגת-ביסקוויטים-אלפחורס",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-175",
+        "biscuit-cake-08"
+      ],
+      "legacyRouteIds": [
+        "instagram-175",
+        "biscuit-cake-08"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-175",
+        "/recipes/biscuit-cake-08"
+      ],
+      "sequenceId": 175,
+      "instagramShortcode": "DW8LWEPo2F8",
+      "sourceUrl": "https://www.instagram.com/reel/DW8LWEPo2F8/",
+      "absorbedNaturalKeys": [
+        "biscuit:08"
+      ],
+      "retiredContentIds": [],
+      "publishedDate": "10/04/2026",
+      "series": "עוגות ביסקוויטים",
+      "seriesPosition": 8,
+      "imageFolderSlug": null,
+      "imagePaths": [
+        "images/biscuit-cakes/08-alfajores/thumb/IMG_3516.jpg",
+        "images/biscuit-cakes/08-alfajores/08-alfajores-1-web.JPEG",
+        "images/biscuit-cakes/08-alfajores/08-alfajores-2-web.JPEG",
+        "images/biscuit-cakes/08-alfajores/08-alfajores-2.JPEG"
+      ],
+      "listed": true,
+      "flags": [
+        "MERGED_BISCUIT_SERIES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJM6NC1S5VKQ9KBVMVG",
+      "contentType": "recipe",
+      "naturalKey": "ig:DWGVi7kCOtU",
+      "title": "עוגת ביסקוויטים בתוך עוגת קרפים",
+      "slug": "עוגת-ביסקוויטים-בתוך-עוגת-קרפים",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-הפרקהשישיבסדרהשלנואיךלשדר",
+        "biscuit-cake-06"
+      ],
+      "legacyRouteIds": [
+        "הפרקהשישיבסדרהשלנואיךלשדר",
+        "biscuit-cake-06"
+      ],
+      "legacyRoutes": [
+        "/recipes/הפרקהשישיבסדרהשלנואיךלשדר",
+        "/recipes/biscuit-cake-06"
+      ],
+      "sequenceId": 167,
+      "instagramShortcode": "DWGVi7kCOtU",
+      "sourceUrl": "https://www.instagram.com/reel/DWGVi7kCOtU/",
+      "absorbedNaturalKeys": [
+        "biscuit:06"
+      ],
+      "retiredContentIds": [],
+      "publishedDate": "20/03/2026",
+      "series": "עוגות ביסקוויטים",
+      "seriesPosition": 6,
+      "imageFolderSlug": null,
+      "imagePaths": [
+        "images/biscuit-cakes/06-crepe/thumb/IMG_7314.jpg",
+        "images/biscuit-cakes/06-crepe/IMG_7314-web.JPEG"
+      ],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE",
+        "MERGED_BISCUIT_SERIES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJP9HMZ2E3APTGAEYXT",
+      "contentType": "recipe",
+      "naturalKey": "ig:DWqM_oqiJXi",
+      "title": "מצה בריי מושחתת עם גבינות",
+      "slug": "מצה-בריי-מושחתת-עם-גבינות",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-172"
+      ],
+      "legacyRouteIds": [
+        "instagram-172"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-172"
+      ],
+      "sequenceId": 172,
+      "instagramShortcode": "DWqM_oqiJXi",
+      "sourceUrl": "https://www.instagram.com/reel/DWqM_oqiJXi/",
+      "retiredContentIds": [],
+      "publishedDate": "03/04/2026",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJK8CVA2WYEQECQEHPS",
+      "contentType": "recipe",
+      "naturalKey": "ig:DWTyHsjiDvf",
+      "title": "עוגיות בראוניז עם מילוי שוקולד לבן",
+      "slug": "עוגיות-בראוניז-עם-מילוי-שוקולד-לבן",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-עו-11"
+      ],
+      "legacyRouteIds": [
+        "עו-11"
+      ],
+      "legacyRoutes": [
+        "/recipes/עו-11"
+      ],
+      "sequenceId": 169,
+      "instagramShortcode": "DWTyHsjiDvf",
+      "sourceUrl": "https://www.instagram.com/reel/DWTyHsjiDvf/",
+      "retiredContentIds": [],
+      "publishedDate": "25/03/2026",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": "white-chocolate-stuffed-brownie-cookies",
+      "imagePaths": [
+        "images/recipes/sweet/white-chocolate-stuffed-brownie-cookies/thumb/IMG_5158.jpg",
+        "images/recipes/sweet/white-chocolate-stuffed-brownie-cookies/IMG_5158-web.JPEG"
+      ],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJKYEF0B4BQR2RHKBEK",
+      "contentType": "recipe",
+      "naturalKey": "ig:DWvhPCViCPa",
+      "title": "שוקו פאי מצה",
+      "slug": "שוקו-פאי-מצה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-שוקופאימצההקינוחהכימושלםשאפשרלהכיןממצהfullpassovermatzahfren"
+      ],
+      "legacyRouteIds": [
+        "שוקופאימצההקינוחהכימושלםשאפשרלהכיןממצהfullpassovermatzahfren"
+      ],
+      "legacyRoutes": [
+        "/recipes/שוקופאימצההקינוחהכימושלםשאפשרלהכיןממצהfullpassovermatzahfren"
+      ],
+      "sequenceId": 173,
+      "instagramShortcode": "DWvhPCViCPa",
+      "sourceUrl": "https://www.instagram.com/reel/DWvhPCViCPa/",
+      "retiredContentIds": [],
+      "publishedDate": "05/04/2026",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE",
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJKF5AAQ8MNDJHYT4H6",
+      "contentType": "recipe",
+      "naturalKey": "ig:DXgRw3JoY52",
+      "title": "כדורי עוגת ביסקוויטים",
+      "slug": "כדורי-עוגת-ביסקוויטים",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-הפרקהתשיעיבסדרהשלנואיךלשדר",
+        "biscuit-cake-09"
+      ],
+      "legacyRouteIds": [
+        "הפרקהתשיעיבסדרהשלנואיךלשדר",
+        "biscuit-cake-09"
+      ],
+      "legacyRoutes": [
+        "/recipes/הפרקהתשיעיבסדרהשלנואיךלשדר",
+        "/recipes/biscuit-cake-09"
+      ],
+      "sequenceId": 179,
+      "instagramShortcode": "DXgRw3JoY52",
+      "sourceUrl": "https://www.instagram.com/reel/DXgRw3JoY52/",
+      "absorbedNaturalKeys": [
+        "biscuit:09"
+      ],
+      "retiredContentIds": [],
+      "publishedDate": "24/04/2026",
+      "series": "עוגות ביסקוויטים",
+      "seriesPosition": 9,
+      "imageFolderSlug": null,
+      "imagePaths": [
+        "images/biscuit-cakes/09-biscuit-balls/thumb/IMG_3511.jpg",
+        "images/biscuit-cakes/09-biscuit-balls/09-biscuit-balls-1-web.JPEG",
+        "images/biscuit-cakes/09-biscuit-balls/09-biscuit-balls-2-web.JPEG",
+        "images/biscuit-cakes/09-biscuit-balls/09-biscuit-balls-2.JPEG"
+      ],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE",
+        "MERGED_BISCUIT_SERIES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJP5X2HJM4JR4TW56GR",
+      "contentType": "recipe",
+      "naturalKey": "ig:DXOOpl-odb5",
+      "title": "עוגת מוס שוקולד על בסיס ביסקוויטים",
+      "slug": "עוגת-מוס-שוקולד-על-בסיס-ביסקוויטים",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-177"
+      ],
+      "legacyRouteIds": [
+        "instagram-177"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-177"
+      ],
+      "sequenceId": 177,
+      "instagramShortcode": "DXOOpl-odb5",
+      "sourceUrl": "https://www.instagram.com/reel/DXOOpl-odb5/",
+      "retiredContentIds": [],
+      "publishedDate": "17/04/2026",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": null,
+      "imagePaths": [],
+      "listed": true,
+      "flags": [
+        "NO_IMAGES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJPCV4TYYRPGM4K16QW",
+      "contentType": "recipe",
+      "naturalKey": "ig:DXoyXt1ooZe",
+      "title": "קפה קר קרמל",
+      "slug": "קפה-קר-קרמל",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-180"
+      ],
+      "legacyRouteIds": [
+        "instagram-180"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-180"
+      ],
+      "sequenceId": 180,
+      "instagramShortcode": "DXoyXt1ooZe",
+      "sourceUrl": "https://www.instagram.com/reel/DXoyXt1ooZe/",
+      "retiredContentIds": [],
+      "publishedDate": "27/04/2026",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": "iced-caramel-coffee",
+      "imagePaths": [
+        "images/recipes/drinks/iced-caramel-coffee/thumb/IMG_8669.jpg",
+        "images/recipes/drinks/iced-caramel-coffee/IMG_8669-web.JPEG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "recipe_01M1YKBSJKST3GAZXHARH9TW5W",
+      "contentType": "recipe",
+      "naturalKey": "ig:DYPe_G9o1IH",
+      "title": "טבלת שוקולד קרם עוגיות",
+      "slug": "טבלת-שוקולד-קרם-עוגיות",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-טבלתשוקולדקרםעו"
+      ],
+      "legacyRouteIds": [
+        "טבלתשוקולדקרםעו"
+      ],
+      "legacyRoutes": [
+        "/recipes/טבלתשוקולדקרםעו"
+      ],
+      "sequenceId": 182,
+      "instagramShortcode": "DYPe_G9o1IH",
+      "sourceUrl": "https://www.instagram.com/reel/DYPe_G9o1IH/",
+      "retiredContentIds": [],
+      "publishedDate": "12/05/2026",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": "chocolate-cookie-cream-slab",
+      "imagePaths": [
+        "images/recipes/sweet/chocolate-cookie-cream-slab/thumb/IMG_3529.jpg",
+        "images/recipes/sweet/chocolate-cookie-cream-slab/IMG_3529-web.JPEG"
+      ],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJP5APATZRKXHJ5BVHF",
+      "contentType": "recipe",
+      "naturalKey": "ig:DYWTlGGI3cG",
+      "title": "רולדת שמרים עוגת גבינה",
+      "slug": "רולדת-שמרים-עוגת-גבינה",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-183"
+      ],
+      "legacyRouteIds": [
+        "instagram-183"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-183"
+      ],
+      "sequenceId": 183,
+      "instagramShortcode": "DYWTlGGI3cG",
+      "sourceUrl": "https://www.instagram.com/reel/DYWTlGGI3cG/",
+      "retiredContentIds": [],
+      "publishedDate": "15/05/2026",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": "cheesecake-yeast-roulade",
+      "imagePaths": [
+        "images/recipes/sweet/cheesecake-yeast-roulade/thumb/IMG_3528.jpg",
+        "images/recipes/sweet/cheesecake-yeast-roulade/IMG_3528-web.JPEG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "recipe_01M1YKBSJK6K3PZ03YVKFP9HH9",
+      "contentType": "recipe",
+      "naturalKey": "ig:DYzfLC7ozN0",
+      "title": "עוגת ביסקוויטים טריפל שוקולד",
+      "slug": "עוגת-ביסקוויטים-טריפל-שוקולד",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-ברוכיםהבאיםלפרקהעשיריבסדרהשליאיךלשדר",
+        "biscuit-cake-10"
+      ],
+      "legacyRouteIds": [
+        "ברוכיםהבאיםלפרקהעשיריבסדרהשליאיךלשדר",
+        "biscuit-cake-10"
+      ],
+      "legacyRoutes": [
+        "/recipes/ברוכיםהבאיםלפרקהעשיריבסדרהשליאיךלשדר",
+        "/recipes/biscuit-cake-10"
+      ],
+      "sequenceId": 185,
+      "instagramShortcode": "DYzfLC7ozN0",
+      "sourceUrl": "https://www.instagram.com/reel/DYzfLC7ozN0/",
+      "absorbedNaturalKeys": [
+        "biscuit:10"
+      ],
+      "retiredContentIds": [],
+      "publishedDate": "26/05/2026",
+      "series": "עוגות ביסקוויטים",
+      "seriesPosition": 10,
+      "imageFolderSlug": null,
+      "imagePaths": [
+        "images/biscuit-cakes/10-triple-chocolate/thumb/IMG_3512.jpg",
+        "images/biscuit-cakes/10-triple-chocolate/10-triple-chocolate-1-web.JPEG",
+        "images/biscuit-cakes/10-triple-chocolate/10-triple-chocolate-2-web.JPEG",
+        "images/biscuit-cakes/10-triple-chocolate/10-triple-chocolate-2.JPEG"
+      ],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE",
+        "MERGED_BISCUIT_SERIES"
+      ]
+    },
+    {
+      "contentId": "recipe_01M1YKBSJPE1MVX8Q4ANY90AK0",
+      "contentType": "recipe",
+      "naturalKey": "ig:DZC6ahtIJQE",
+      "title": "גלידוניות קורנפלקס מושלמות עכשיו לקיץ",
+      "slug": "גלידוניות-קורנפלקס-מושלמות-עכשיו-לקיץ",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-186"
+      ],
+      "legacyRouteIds": [
+        "instagram-186"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-186"
+      ],
+      "sequenceId": 186,
+      "instagramShortcode": "DZC6ahtIJQE",
+      "sourceUrl": "https://www.instagram.com/reel/DZC6ahtIJQE/",
+      "retiredContentIds": [],
+      "publishedDate": "01/06/2026",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": "cornflakes-ice-cream-bars",
+      "imagePaths": [
+        "images/recipes/sweet/cornflakes-ice-cream-bars/thumb/IMG_3525.jpg",
+        "images/recipes/sweet/cornflakes-ice-cream-bars/cornflakes-ice-cream-bars-1-web.JPEG",
+        "images/recipes/sweet/cornflakes-ice-cream-bars/cornflakes-ice-cream-bars-2-web.JPEG",
+        "images/recipes/sweet/cornflakes-ice-cream-bars/cornflakes-ice-cream-bars-2.JPEG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "recipe_01M1YKBSJPMB8W8G2K6CWYBZ9R",
+      "contentType": "recipe",
+      "naturalKey": "ig:DZeb5pNoXKH",
+      "title": "עוגיות מיני קקאו ושוקולד לבן",
+      "slug": "עוגיות-מיני-קקאו-ושוקולד-לבן",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-instagram-189"
+      ],
+      "legacyRouteIds": [
+        "instagram-189"
+      ],
+      "legacyRoutes": [
+        "/recipes/instagram-189"
+      ],
+      "sequenceId": 189,
+      "instagramShortcode": "DZeb5pNoXKH",
+      "sourceUrl": "https://www.instagram.com/reel/DZeb5pNoXKH/",
+      "retiredContentIds": [],
+      "publishedDate": "12/06/2026",
+      "series": null,
+      "seriesPosition": null,
+      "imageFolderSlug": "mini-cocoa-white-chocolate-cookies",
+      "imagePaths": [
+        "images/recipes/sweet/mini-cocoa-white-chocolate-cookies/thumb/IMG_3524.jpg",
+        "images/recipes/sweet/mini-cocoa-white-chocolate-cookies/IMG_3524-web.JPEG"
+      ],
+      "listed": true,
+      "flags": []
+    },
+    {
+      "contentId": "recipe_01M1YKBSJKKR0FH2K788DJC8EV",
+      "contentType": "recipe",
+      "naturalKey": "ig:DZMcHxIIxEN",
+      "title": "עוגת בומב אוראו",
+      "slug": "עוגת-בומב-אוראו",
+      "slugSource": "curated-title",
+      "legacyIds": [
+        "recipe-ברוכיםהבאיםלפרק11בסדרהשליאיךלשדר",
+        "biscuit-cake-11"
+      ],
+      "legacyRouteIds": [
+        "ברוכיםהבאיםלפרק11בסדרהשליאיךלשדר",
+        "biscuit-cake-11"
+      ],
+      "legacyRoutes": [
+        "/recipes/ברוכיםהבאיםלפרק11בסדרהשליאיךלשדר",
+        "/recipes/biscuit-cake-11"
+      ],
+      "sequenceId": 188,
+      "instagramShortcode": "DZMcHxIIxEN",
+      "sourceUrl": "https://www.instagram.com/reel/DZMcHxIIxEN/",
+      "absorbedNaturalKeys": [
+        "biscuit:11"
+      ],
+      "retiredContentIds": [],
+      "publishedDate": "05/06/2026",
+      "series": "עוגות ביסקוויטים",
+      "seriesPosition": 11,
+      "imageFolderSlug": null,
+      "imagePaths": [
+        "images/biscuit-cakes/11-oreo-bomb/thumb/IMG_9366.jpg",
+        "images/biscuit-cakes/11-oreo-bomb/11-oreo-bomb-1-web.JPEG",
+        "images/biscuit-cakes/11-oreo-bomb/11-oreo-bomb-2-web.JPEG",
+        "images/biscuit-cakes/11-oreo-bomb/11-oreo-bomb-2.JPEG"
+      ],
+      "listed": true,
+      "flags": [
+        "LEGACY_ROUTE_ID_UNSUITABLE",
+        "MERGED_BISCUIT_SERIES"
+      ]
+    }
+  ]
+}

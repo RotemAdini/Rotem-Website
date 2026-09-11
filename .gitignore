@@ -9,3 +9,7 @@ next-env.d.ts
 
 # Env files
 .env*.local
+
+# Supabase CLI local state (linked project ref, cached versions). Not secret,
+# but machine-local — the project is linked per checkout via `supabase link`.
+supabase/.temp/

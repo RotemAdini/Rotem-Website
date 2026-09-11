@@ -47,25 +47,29 @@ export function getListableRecipes(): ReviewedRecipe[] {
   return getReviewedRecipes().filter((recipe) => !(recipe.issues || []).some((issue) => issue.startsWith("DUPLICATE_OF")));
 }
 
-/** Source dates are DD/MM/YYYY. Anything unparseable sorts to the very end
- * (oldest) rather than breaking the newest-first order of everything else. */
-export function parseIsraeliDate(value: string | undefined): number | null {
-  const match = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec((value || "").trim());
-  if (!match) return null;
-  return new Date(Number(match[3]), Number(match[2]) - 1, Number(match[1])).getTime();
-}
+// The pure text/date helpers this module used to define now live in
+// lib/recipe-text.ts, so the Sanity data layer and the shared components can
+// use them without pulling in this module's `server-only` marker and its
+// synchronous read of data/recipes.json. They are re-exported unchanged, so
+// every existing import of this module keeps working exactly as before.
+export {
+  parseIsraeliDate,
+  isIngredientHeading,
+  classifyIngredientLines,
+  stripRedundantStepNumber,
+  getInstructionLineKind,
+  classifyInstructionLines,
+  toPublicPath,
+  type IngredientLineKind,
+  type ClassifiedIngredientLine,
+  type InstructionLineKind,
+  type ClassifiedInstructionLine,
+} from "./recipe-text";
+// Also imported, not just re-exported, because the functions below call them.
+import { parseIsraeliDate, toPublicPath } from "./recipe-text";
 
 export function sortByPublishedDateDesc(recipes: ReviewedRecipe[]): ReviewedRecipe[] {
   return [...recipes].sort((a, b) => (parseIsraeliDate(b.publishedDate) || 0) - (parseIsraeliDate(a.publishedDate) || 0));
-}
-
-/** Image paths in data/recipes.json are stored relative to the project root
- * (e.g. "images/biscuit-cakes/…", "recipes/thumbnails/…") — the same folders
- * this migration copied into /public. Next.js needs a leading "/" to treat
- * them as public URLs. */
-export function toPublicPath(path: string | null | undefined): string | null {
-  if (!path) return null;
-  return path.startsWith("/") ? path : `/${path}`;
 }
 
 /** Cards use the small, web-optimized thumbnail first (falling back to the
@@ -125,46 +129,4 @@ export function getLatestRecipeImageForCategory(categorySlug: string): { image: 
 /** The latest reviewed recipes with a photo, for the homepage highlights panel. */
 export function getHomeHighlightRecipes(count = 5): ReviewedRecipe[] {
   return sortByPublishedDateDesc(getListableRecipes().filter((recipe) => reviewedRecipeCardImage(recipe))).slice(0, count);
-}
-
-/** A source line that's really a sub-heading for the ingredients that
- * follow it (e.g. "לרוטב טחינה ביתי:", "מצרכים לקרמל") rather than an
- * ingredient in its own right. */
-export function isIngredientHeading(line: string): boolean {
-  const text = (line || "").trim();
-  if (!text) return false;
-  if (/\d/.test(text)) return false;
-  // A colon is the clearest signal, but many imported Instagram recipes use
-  // short labels such as "לרוטב" or "לקרם" without punctuation. Treat only
-  // a concise, label-shaped line as a heading: an ingredient like
-  // "לקישוט - פיסטוק גרוס" must remain a checkbox item.
-  if (/[:﹕]$/.test(text) || /^מצרכים(\s|$)/.test(text)) return true;
-  if (/[\-–—]/.test(text) || text.length > 46) return false;
-  return /^(?:לרוטב|לבצק|לקרם|לציפוי|למילוי|למלית|לבסיס|לתחתית|לגנאש|לקישוט|לסירופ|לטחינה|למרינדה|לקצפת|לקפה|לתערובת|לפסטה|לפירורים)(?:\s+[\p{L}׳״"']+){0,4}$/u.test(text);
-}
-
-/** Source instructions are sometimes already numbered ("1.\t...") from the
- * original document, and the template also numbers each step — producing a
- * visible double number. Strip the prefix only when it matches this step's
- * own position. */
-export function stripRedundantStepNumber(text: string, stepNumber: number): string {
-  const match = /^\s*(\d+)[.)]\s*/.exec(text || "");
-  if (match && Number(match[1]) === stepNumber) return text.slice(match[0].length);
-  return text;
-}
-
-export type InstructionLineKind = "step" | "heading" | "nutrition" | "note";
-
-/** Preserve every imported instruction line, but keep section labels,
- * nutritional values and closing notes out of the numbered cooking flow. */
-export function getInstructionLineKind(line: string): InstructionLineKind {
-  const text = (line || "").trim();
-  if (/^(?:ערכים(?:\s+תזונתיים)?|קלוריות|חלבון|שומן|פחמימ)/.test(text) || /^\d+(?:[.,]\d+)?\s*(?:קלור|חלבון|שומן|פחמימ)/.test(text)) {
-    return "nutrition";
-  }
-  if (/^(?:ובת?אבון|בתיאבון|שימו לב)/.test(text)) return "note";
-  if (/^(?:(?:ל(?:רוטב|בצק|קרם|ציפוי|מילוי|מלית|גנאש|סלמון))|הבסיס|קרם|גנאש|מלית|בשר|פירה|דפי אורז|קינואה|הכנת הקרם|הכנת הגנאש)\s*[:\-]/.test(text)) {
-    return "heading";
-  }
-  return "step";
 }

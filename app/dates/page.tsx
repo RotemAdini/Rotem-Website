@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
 import DatesBoard from "@/components/DatesBoard";
-import { getDateBoardCards } from "@/lib/date-board";
+import { getListedDateIdeas } from "@/lib/sanity/dates";
+import { toDateBoardCard } from "@/lib/sanity/date-adapters";
 
 export const metadata: Metadata = {
   title: "רעיונות לדייטים | רותם עדיני",
   description: "רותם עדיני — מתכונים, דייטים, משחקים ומתנות.",
 };
 
-export default function DatesPage() {
-  const cards = getDateBoardCards();
+export default async function DatesPage() {
+  // Date ideas come from Sanity. The board itself is unchanged: it still
+  // receives a plain array of cards and filters entirely on the client.
+  const cards = (await getListedDateIdeas()).map(toDateBoardCard);
 
   return (
     <main className="page-main">

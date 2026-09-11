@@ -1,24 +1,59 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+
+import SignOutButton from "@/components/SignOutButton";
+import { isSupabaseConfigured } from "@/lib/supabase/env";
+import { getSupabaseUser } from "@/lib/supabase/server";
+import { describeUser } from "@/lib/supabase/user";
 
 export const metadata: Metadata = {
-  title: "החשבון שלי | רותם עדיני",
+  title: "האזור האישי | רותם עדיני",
 };
 
-export default function DashboardPage() {
+/**
+ * The signed-in area.
+ *
+ * The only page on the site that requires a user: a signed-out visitor is sent
+ * to /account rather than shown an empty shell. Everything else — recipes,
+ * dates, games — stays readable without an account.
+ *
+ * Favourites are Supabase-backed for a signed-in reader (see
+ * lib/favorites-context.tsx): saves go to the account, are readable from any
+ * device, and anything saved as a guest in this browser is merged in on first
+ * sign-in. This panel links to /favorites rather than repeating the grid.
+ *
+ * The purchases panels are still placeholders — there is no payment provider
+ * connected yet, so there is nothing to list.
+ */
+export default async function DashboardPage() {
+  if (!isSupabaseConfigured) redirect("/account");
+
+  const user = await getSupabaseUser();
+  if (!user) redirect("/account?next=%2Fdashboard");
+
+  const profile = describeUser(user);
+
   return (
     <main className="page-main dashboard-page">
       <section className="container dashboard-header">
-        <div>
-          <span className="eyebrow">החשבון שלי</span>
-          <h1>
-            שלום, אורחת <span>♡</span>
-          </h1>
-          <p>כל מה שתשמרי ותרכשי יופיע כאן.</p>
+        <div className="dashboard-identity">
+          {profile.avatarUrl ? (
+            <img className="dashboard-avatar" src={profile.avatarUrl} alt="" width={64} height={64} referrerPolicy="no-referrer" />
+          ) : (
+            <div className="dashboard-avatar dashboard-avatar-placeholder" aria-hidden="true">
+              ♡
+            </div>
+          )}
+          <div>
+            <span className="eyebrow">האזור האישי</span>
+            <h1>
+              שלום, {profile.firstName} <span>♡</span>
+            </h1>
+            <p>{profile.email}</p>
+          </div>
         </div>
-        <Link className="btn btn-secondary" href="/account">
-          יציאה מהחשבון
-        </Link>
+        <SignOutButton />
       </section>
 
       <section className="container dashboard-grid">
@@ -44,8 +79,14 @@ export default function DashboardPage() {
             </div>
             <div className="empty-state">
               <span>♡</span>
-              <h3>עוד לא שמרת כלום</h3>
-              <p>לחצי על הלב ליד מתכון, דייט או משחק — והם יחכו לך כאן.</p>
+              <h3>המועדפים שלך שמורים בחשבון</h3>
+              <p>
+                כל מה שסימנתם בלב נשמר לחשבון הזה ומופיע בכל מכשיר שתתחברו ממנו. גם מה ששמרתם לפני ההתחברות צורף
+                לחשבון אוטומטית.
+              </p>
+              <Link className="btn btn-primary compact" href="/favorites">
+                לעמוד המועדפים
+              </Link>
             </div>
           </section>
 
@@ -81,6 +122,25 @@ export default function DashboardPage() {
               <span>🧾</span>
               <h3>אין עדיין רכישות</h3>
               <p>ההזמנות שלך יופיעו כאן אחרי הרכישה הראשונה.</p>
+            </div>
+          </section>
+
+          <section className="panel dashboard-section" id="profile">
+            <span className="section-kicker">פרטים אישיים</span>
+            <h2>החשבון שלי</h2>
+            <div className="profile-rows">
+              <div className="profile-row">
+                <span>שם</span>
+                <strong>{profile.name}</strong>
+              </div>
+              <div className="profile-row">
+                <span>אימייל</span>
+                <strong>{profile.email}</strong>
+              </div>
+              <div className="profile-row">
+                <span>אופן ההתחברות</span>
+                <strong>Google</strong>
+              </div>
             </div>
           </section>
         </div>

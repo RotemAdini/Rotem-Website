@@ -1,0 +1,40 @@
+/* Isolates the embedded Sanity Studio from the site's global stylesheet.
+ *
+ * app/globals.css is the original static site's CSS, carried over verbatim: it
+ * sets a Hebrew font stack, an RTL direction and page-level padding on body.
+ * The Studio is an LTR application that expects to own the viewport, so this
+ * file resets exactly those inherited properties inside the Studio subtree and
+ * nothing else. It is imported only by app/studio/layout.tsx, so no site page
+ * is affected. */
+
+.studio-root {
+  direction: ltr;
+  text-align: left;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  overflow: hidden;
+  background: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.studio-root * {
+  box-sizing: border-box;
+}
+
+.studio-setup {
+  direction: ltr;
+  max-width: 44rem;
+  margin: 4rem auto;
+  padding: 2rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #1f2933;
+}
+
+.studio-setup code {
+  background: #f0f2f5;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}

@@ -4,15 +4,30 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node -e \"require('node:fs').rmSync('.next/cache/fetch-cache',{recursive:true,force:true})\"",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:auth": "node --test --experimental-test-module-mocks --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --disable-warning=ExperimentalWarning --import ./tests/node-ts-resolver.mjs tests/supabase-middleware.test.ts tests/favorites-resolve.test.ts tests/favorites-sync.test.ts",
+    "migration:manifest": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/build-migration-manifest.ts",
+    "migration:manifest:check": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/build-migration-manifest.ts --check",
+    "migration:import:dry": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --env-file-if-exists=.env.local scripts/import-to-sanity.ts --dry-run",
+    "migration:import": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --env-file-if-exists=.env.local scripts/import-to-sanity.ts",
+    "migration:verify:offline": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/verify-sanity-import.ts --offline",
+    "migration:verify": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --env-file-if-exists=.env.local scripts/verify-sanity-import.ts"
   },
   "dependencies": {
+    "@sanity/image-url": "^2.1.1",
+    "@sanity/vision": "^6.12.0",
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.116.0",
     "next": "16.3.4",
+    "next-sanity": "^13.3.4",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "server-only": "^0.0.1"
+    "sanity": "^6.12.0",
+    "server-only": "^0.0.1",
+    "styled-components": "^6.5.3"
   },
   "devDependencies": {
     "@types/node": "^20",

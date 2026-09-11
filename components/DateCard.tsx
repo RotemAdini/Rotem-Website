@@ -6,13 +6,15 @@ interface DateCardProps {
   title: string;
   image: string | null;
   favoriteId: string;
+  /** Other legacy tokens this item answers to, for merged items. */
+  favoriteAliases?: string[];
   tag: string;
   description: string;
   footerLabel: string;
 }
 
 /** A single date-idea card, used on the dates board and "related" strips. */
-export default function DateCard({ href, title, image, favoriteId, tag, description, footerLabel }: DateCardProps) {
+export default function DateCard({ href, title, image, favoriteId, favoriteAliases, tag, description, footerLabel }: DateCardProps) {
   return (
     <Link className="date-card" href={href}>
       <div className="date-card-image">
@@ -24,7 +26,7 @@ export default function DateCard({ href, title, image, favoriteId, tag, descript
         <p>{description}</p>
         <div className="date-card-footer">
           <span>{footerLabel}</span>
-          <FavoriteButton id={favoriteId} className="mini-heart" />
+          <FavoriteButton id={favoriteId} aliases={favoriteAliases} className="mini-heart" />
         </div>
       </div>
     </Link>

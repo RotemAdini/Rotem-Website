@@ -1,10 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import RecipeCard from "./RecipeCard";
 import type { RecipeBoardCard } from "@/lib/types";
 import { RECIPE_CATEGORIES } from "@/lib/categories";
+import { rankBy } from "@/lib/search-rank";
 
 interface RecipesBoardProps {
   cards: RecipeBoardCard[];
@@ -12,6 +13,10 @@ interface RecipesBoardProps {
 }
 
 type SortMode = "default" | "time-asc" | "name";
+
+/** How many cards a page of results shows. The board used to render the whole
+ * catalogue — 159 cards and a 12,000px page — on every visit. */
+const PAGE_SIZE = 24;
 
 /** The interactive part of the recipes board: search, chip/select filters,
  * series + tag chips, sort, and the results grid + empty state. A direct
@@ -24,13 +29,13 @@ export default function RecipesBoard({ cards, tagOptions }: RecipesBoardProps) {
   const initialCategory = searchParams.get("category") || "all";
   const quick = searchParams.get("quick");
   const initialTime = quick === "30" ? "30" : "all";
-  const initialBake = quick === "no-bake" ? "no-bake" : "all";
+  const initialBake = quick === "no-bake" ? "no-oven" : "all";
   const initialDifficulty = quick === "easy" ? "easy" : "all";
 
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(searchParams.get("q") || "");
   const [type, setType] = useState<"all" | "sweet" | "savory">("all");
   const [time, setTime] = useState(initialTime);
-  const [bake, setBake] = useState<"all" | "no-bake" | "regular">(initialBake as "all" | "no-bake");
+  const [bake, setBake] = useState<"all" | "no-oven" | "oven">(initialBake as "all" | "no-oven");
   const [difficulty, setDifficulty] = useState(initialDifficulty);
   const [category, setCategory] = useState(initialCategory);
   const [series, setSeries] = useState<string>("all");
@@ -38,8 +43,9 @@ export default function RecipesBoard({ cards, tagOptions }: RecipesBoardProps) {
   const [sort, setSort] = useState<SortMode>("default");
 
   const filtered = useMemo(() => {
+    // Filters first, then the text query — so the query always ranks whatever
+    // the chips and selects left behind, never the whole catalogue.
     const result = cards.filter((card) => {
-      const matchesSearch = !search || card.search.includes(search);
       const matchesType = type === "all" || card.type === type;
       const matchesBake = bake === "all" || card.bake === bake;
       const matchesDifficulty = difficulty === "all" || card.difficulty === difficulty;
@@ -47,16 +53,64 @@ export default function RecipesBoard({ cards, tagOptions }: RecipesBoardProps) {
       const matchesTime = time === "all" || card.time <= Number(time);
       const matchesSeries = series === "all" || card.series === series;
       const matchesTag = tag === "all" || card.tags.includes(tag);
-      return matchesSearch && matchesType && matchesBake && matchesDifficulty && matchesCategory && matchesTime && matchesSeries && matchesTag;
+      return matchesType && matchesBake && matchesDifficulty && matchesCategory && matchesTime && matchesSeries && matchesTag;
     });
 
-    if (sort === "time-asc") return [...result].sort((a, b) => a.time - b.time);
-    if (sort === "name") return [...result].sort((a, b) => a.search.localeCompare(b.search, "he"));
-    return [...result].sort((a, b) => b.sortWeight - a.sortWeight);
+    // The same scoring engine /search uses (lib/search-rank.ts), reading each
+    // card's title, category and keywords — ingredients included. With no
+    // query rankBy returns the list untouched, so the sort control still owns
+    // the order in the normal case.
+    const matched = rankBy(
+      result.map((card) => ({ ...card, meta: card.metaLeft })),
+      search,
+    );
+
+    if (sort === "time-asc") return [...matched].sort((a, b) => a.time - b.time);
+    if (sort === "name") return [...matched].sort((a, b) => a.title.localeCompare(b.title, "he"));
+    // With a query and the default sort, relevance order is what rankBy
+    // already produced — re-sorting by date would throw it away.
+    if (search.trim()) return matched;
+    return [...matched].sort((a, b) => b.sortWeight - a.sortWeight);
   }, [cards, search, type, bake, difficulty, category, time, series, tag, sort]);
 
+  const [visible, setVisible] = useState(PAGE_SIZE);
+
+  // Any change to the result set starts the page count over, so narrowing a
+  // filter can never leave the reader scrolled past the end of the new list.
+  // Keyed off the filtered array's identity, which useMemo already recomputes
+  // exactly when one of the filter inputs changes.
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setVisible(PAGE_SIZE);
+  }, [filtered]);
+
+  const shown = filtered.slice(0, visible);
+
+  /**
+   * Keeps ?q= in step with the box so a refresh or a shared link restores the
+   * search. Written with replaceState rather than router.replace: this page is
+   * a Server Component, and a real navigation per keystroke would re-run it.
+   * Every other filter stays where it was — the existing ?category= and ?quick=
+   * links keep working untouched.
+   */
+  const syncQuery = useCallback((value: string) => {
+    if (typeof window === "undefined") return;
+    const url = new URL(window.location.href);
+    if (value.trim()) url.searchParams.set("q", value.trim());
+    else url.searchParams.delete("q");
+    window.history.replaceState(null, "", url);
+  }, []);
+
+  const updateSearch = useCallback(
+    (value: string) => {
+      setSearch(value);
+      syncQuery(value);
+    },
+    [syncQuery],
+  );
+
   const resetFilters = () => {
-    setSearch("");
+    updateSearch("");
     setType("all");
     setTime("all");
     setBake("all");
@@ -66,8 +120,40 @@ export default function RecipesBoard({ cards, tagOptions }: RecipesBoardProps) {
     setTag("all");
   };
 
+  const hasQuery = search.trim().length > 0;
+
   return (
-    <section className="container filter-layout">
+    <>
+      {/* The board's own search, above the filters so it reads as the primary
+          way in — the same shape the dates board uses. It searches recipes
+          only; the site-wide search still lives at /search. */}
+      <section className="container recipe-search-bar">
+        <label className="recipe-search-field">
+          <span aria-hidden="true">⌕</span>
+          <input
+            id="recipeSearch"
+            type="search"
+            value={search}
+            placeholder="חיפוש מתכון, מצרך או קטגוריה…"
+            aria-label="חיפוש בתוך המתכונים"
+            onChange={(event) => updateSearch(event.target.value)}
+          />
+          {hasQuery && (
+            <button type="button" className="recipe-search-clear" onClick={() => updateSearch("")} aria-label="ניקוי החיפוש">
+              ✕
+            </button>
+          )}
+        </label>
+        {hasQuery && (
+          <p className="recipe-search-status" aria-live="polite">
+            {filtered.length === 0
+              ? `אין תוצאות עבור “${search.trim()}”`
+              : `${filtered.length} תוצאות עבור “${search.trim()}”`}
+          </p>
+        )}
+      </section>
+
+      <section className="container filter-layout">
       <aside className="filters-panel panel" id="recipeFilters">
         <div className="filter-title-row">
           <div>
@@ -78,17 +164,6 @@ export default function RecipesBoard({ cards, tagOptions }: RecipesBoardProps) {
             נקה הכל
           </button>
         </div>
-
-        <label className="search-box">
-          <span>⌕</span>
-          <input
-            id="recipeSearch"
-            type="search"
-            placeholder="חפשו מתכון או מילת מפתח..."
-            value={search}
-            onChange={(event) => setSearch(event.target.value.trim())}
-          />
-        </label>
 
         <div className="filter-group">
           <h3>סוג</h3>
@@ -122,8 +197,8 @@ export default function RecipesBoard({ cards, tagOptions }: RecipesBoardProps) {
           <div className="chips">
             {([
               ["all", "הכל"],
-              ["no-bake", "ללא אפייה"],
-              ["regular", "אפייה / בישול"],
+              ["no-oven", "ללא תנור"],
+              ["oven", "דורש תנור"],
             ] as const).map(([value, label]) => (
               <button key={value} className={`chip${bake === value ? " active" : ""}`} onClick={() => setBake(value)}>
                 {label}
@@ -198,19 +273,48 @@ export default function RecipesBoard({ cards, tagOptions }: RecipesBoardProps) {
         </div>
 
         <div className="recipe-grid recipes-page-grid" id="recipeResults">
-          {filtered.map((card) => (
-            <RecipeCard key={card.key} href={card.href} title={card.title} image={card.image} favoriteId={card.favoriteId} metaLeft={card.metaLeft} metaRight={card.metaRight} />
+          {shown.map((card) => (
+            <RecipeCard key={card.key} href={card.href} title={card.title} image={card.image} favoriteId={card.favoriteId} favoriteAliases={card.favoriteAliases} metaLeft={card.metaLeft} metaRight={card.metaRight} />
           ))}
         </div>
+
+        {filtered.length > shown.length && (
+          <div className="load-more-row">
+            <button type="button" className="btn btn-secondary" onClick={() => setVisible((n) => n + PAGE_SIZE)}>
+              להציג עוד מתכונים
+            </button>
+            <span className="load-more-count" aria-live="polite">
+              מוצגים {shown.length} מתוך {filtered.length}
+            </span>
+          </div>
+        )}
 
         {filtered.length === 0 && (
           <div className="empty-state" id="recipeEmpty">
             <span>♡</span>
             <h3>לא מצאתי בדיוק את זה</h3>
-            <p>נסו לשנות אחד מהפילטרים או לחפש משהו אחר.</p>
+            {hasQuery ? (
+              <p>
+                אין מתכון שמתאים ל“{search.trim()}” עם הסינון הנוכחי. אפשר לחפש לפי מצרך — למשל שוקולד, טחינה או
+                שמנת מתוקה.
+              </p>
+            ) : (
+              <p>נסו לשנות אחד מהפילטרים או לחפש משהו אחר.</p>
+            )}
+            <div className="empty-actions">
+              {hasQuery && (
+                <button type="button" className="btn btn-primary compact" onClick={() => updateSearch("")}>
+                  ניקוי החיפוש
+                </button>
+              )}
+              <button type="button" className="btn btn-secondary compact" onClick={resetFilters}>
+                איפוס כל הסינון
+              </button>
+            </div>
           </div>
         )}
       </div>
-    </section>
+      </section>
+    </>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import DateCard from "./DateCard";
 import type { DateBoardCard } from "@/lib/types";
@@ -24,6 +25,16 @@ export default function DatesBoard({ cards }: { cards: DateBoardCard[] }) {
     [cards, search, budget, place, duration, series],
   );
 
+  const hasActiveFilter = Boolean(search) || budget !== "all" || place !== "all" || duration !== "all" || series !== "all";
+
+  const resetFilters = () => {
+    setSearch("");
+    setBudget("all");
+    setPlace("all");
+    setDuration("all");
+    setSeries("all");
+  };
+
   return (
     <>
       <section className="container discovery-filter panel">
@@ -32,13 +43,16 @@ export default function DatesBoard({ cards }: { cards: DateBoardCard[] }) {
           <input id="dateSearch" type="search" placeholder="חפשו רעיון לדייט..." value={search} onChange={(event) => setSearch(event.target.value.trim())} />
         </div>
         <div className="filter-group inline-filter">
-          <span>תקציב</span>
+          {/* Named in full: the ranges are what the couple spends on the whole
+              date, which the old נמוך/בינוני/גבוה chips never made clear. */}
+          <span>תקציב משוער לזוג</span>
           <div className="chips">
             {([
               ["all", "הכל"],
-              ["low", "עד ₪100"],
-              ["medium", "בינוני"],
-              ["high", "מושקע"],
+              ["free", "חינם"],
+              ["upto100", "עד 100 ₪"],
+              ["100to250", "100–250 ₪"],
+              ["250plus", "250 ₪ ומעלה"],
             ] as const).map(([value, label]) => (
               <button key={value} className={`chip${budget === value ? " active" : ""}`} onClick={() => setBudget(value)}>
                 {label}
@@ -71,15 +85,26 @@ export default function DatesBoard({ cards }: { cards: DateBoardCard[] }) {
         </div>
         <div className="filter-group inline-filter series-filter">
           <span>סדרות</span>
+          {/* An explicit "all" chip. The series used to be a lone toggle, so
+              the only way back to the full list was to guess that clicking the
+              active chip again would clear it. */}
           <div className="chips">
-            <button
-              className={`chip${series === "date-a-b" ? " active" : ""}`}
-              onClick={() => setSeries(series === "date-a-b" ? "all" : "date-a-b")}
-            >
+            <button className={`chip${series === "all" ? " active" : ""}`} onClick={() => setSeries("all")}>
+              הכל
+            </button>
+            <button className={`chip${series === "date-a-b" ? " active" : ""}`} onClick={() => setSeries("date-a-b")}>
               סדרת הא-ב
             </button>
           </div>
         </div>
+
+        {hasActiveFilter && (
+          <div className="filter-group inline-filter discovery-reset">
+            <button className="text-button" onClick={resetFilters}>
+              ניקוי הסינון
+            </button>
+          </div>
+        )}
       </section>
 
       <section className="container listing-section">
@@ -90,13 +115,13 @@ export default function DatesBoard({ cards }: { cards: DateBoardCard[] }) {
               <span id="dateCount">{filtered.length}</span> רעיונות לדייט
             </h2>
           </div>
-          <a href="/games" className="small-pill">
+          <Link href="/games" className="small-pill">
             מחפשים ערב בבית? נסו משחק זוגי
-          </a>
+          </Link>
         </div>
         <div className="dates-grid" id="dateResults">
           {filtered.map((card) => (
-            <DateCard key={card.key} href={card.href} title={card.title} image={card.image} favoriteId={card.favoriteId} tag={card.tag} description={card.description} footerLabel={card.footerLabel} />
+            <DateCard key={card.key} href={card.href} title={card.title} image={card.image} favoriteId={card.favoriteId} favoriteAliases={card.favoriteAliases} tag={card.tag} description={card.description} footerLabel={card.footerLabel} />
           ))}
         </div>
         {filtered.length === 0 && (
@@ -104,6 +129,9 @@ export default function DatesBoard({ cards }: { cards: DateBoardCard[] }) {
             <span>♡</span>
             <h3>אין כרגע התאמה מדויקת</h3>
             <p>שנו פילטר אחד ונמצא משהו אחר.</p>
+            <button className="btn btn-primary compact" onClick={resetFilters}>
+              ניקוי הסינון
+            </button>
           </div>
         )}
       </section>

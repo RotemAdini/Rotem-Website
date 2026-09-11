@@ -9,6 +9,7 @@ interface ImageGalleryHeroProps {
   images: string[];
   title: string;
   favoriteId: string;
+  favoriteAliases?: string[];
   favClassName?: string;
 }
 
@@ -16,13 +17,13 @@ interface ImageGalleryHeroProps {
  * shown at the top of a recipe or date detail page. Holds which photo is
  * currently displayed so a gallery thumbnail click swaps the hero image,
  * exactly like the original addSeriesGallery() behavior. */
-export default function ImageGalleryHero({ wrapClassName, images, title, favoriteId, favClassName = "fav-btn large-fav" }: ImageGalleryHeroProps) {
+export default function ImageGalleryHero({ wrapClassName, images, title, favoriteId, favoriteAliases, favClassName = "fav-btn large-fav" }: ImageGalleryHeroProps) {
   const [activeImage, setActiveImage] = useState(images[0]);
 
   return (
     <div className={wrapClassName}>
       <img src={activeImage} alt={title} />
-      <FavoriteButton id={favoriteId} className={favClassName} label="שמירה למועדפים" />
+      <FavoriteButton id={favoriteId} aliases={favoriteAliases} className={favClassName} label="שמירה למועדפים" />
       <SeriesGallery images={images} title={title} onSelect={setActiveImage} />
     </div>
   );

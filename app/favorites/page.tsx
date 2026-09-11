@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
 import FavoritesGrid from "@/components/FavoritesGrid";
 import { getRecipeFavoriteCatalog } from "@/lib/recipe-favorites";
+import { getDateFavoriteCatalog } from "@/lib/date-favorites";
 
 export const metadata: Metadata = {
   title: "המועדפים שלי | רותם עדיני",
 };
 
-export default function FavoritesPage() {
-  const recipeCatalog = getRecipeFavoriteCatalog();
+export default async function FavoritesPage() {
+  // Recipes and date ideas both resolve from Sanity now; merged here so the
+  // client grid receives one small id -> entry map.
+  const [recipeCatalog, dateCatalog] = await Promise.all([getRecipeFavoriteCatalog(), getDateFavoriteCatalog()]);
+  const catalog = { ...recipeCatalog, ...dateCatalog };
 
   return (
     <main className="page-main">
@@ -21,7 +25,7 @@ export default function FavoritesPage() {
         </div>
       </section>
 
-      <FavoritesGrid recipeCatalog={recipeCatalog} />
+      <FavoritesGrid catalog={catalog} />
     </main>
   );
 }

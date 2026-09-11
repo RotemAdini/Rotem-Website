@@ -6,8 +6,8 @@ export const metadata: Metadata = {
   title: "חיפוש | רותם עדיני",
 };
 
-export default function SearchPage() {
-  const index = getSearchIndex();
+export default async function SearchPage() {
+  const index = await getSearchIndex();
   return (
     <main className="page-main">
       <SearchBoard index={index} />

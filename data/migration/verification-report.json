@@ -1,0 +1,326 @@
+{
+  "generatedAt": "2026-09-11T15:15:20.491Z",
+  "mode": "offline (dry-run plan)",
+  "expected": {
+    "reviewedCatalogRecipes": 160,
+    "duplicatePostsAbsorbed": 1,
+    "biscuitSeriesItems": 14,
+    "biscuitSeriesMergedIntoCatalogRecipes": 13,
+    "biscuitSeriesStandalone": 1,
+    "catalogRowsAbsorbedIntoSeriesItems": 1,
+    "canonicalRecipes": 159,
+    "dateIdeas": 13,
+    "games": 4,
+    "canonicalTotal": 176,
+    "favouriteTokens": 187,
+    "routes": 191
+  },
+  "imported": {
+    "recipes": 159,
+    "dateIdeas": 13,
+    "games": 4,
+    "total": 176
+  },
+  "biscuitMerges": [
+    {
+      "biscuitId": "13",
+      "biscuitTitle": "עוגת ביסקוויטים פירות יער",
+      "intoRecipe": "פרק13בסדרהאיךלשדר",
+      "sequenceId": 195,
+      "method": "image-folder"
+    },
+    {
+      "biscuitId": "12",
+      "biscuitTitle": "עוגת ביסקוויטים פקאן סיני",
+      "intoRecipe": "אמאלהאיךכלכךהרבהשניםלאידעתיכמהטובזהפקאןמסוכרקבלואתהפרקה12בסד",
+      "sequenceId": 190,
+      "method": "recorded-decision"
+    },
+    {
+      "biscuitId": "11",
+      "biscuitTitle": "פצצת אוראו וביסקוויטים",
+      "intoRecipe": "ברוכיםהבאיםלפרק11בסדרהשליאיךלשדר",
+      "sequenceId": 188,
+      "method": "image-folder"
+    },
+    {
+      "biscuitId": "10",
+      "biscuitTitle": "עוגת ביסקוויטים טריפל שוקולד",
+      "intoRecipe": "ברוכיםהבאיםלפרקהעשיריבסדרהשליאיךלשדר",
+      "sequenceId": 185,
+      "method": "image-folder"
+    },
+    {
+      "biscuitId": "09",
+      "biscuitTitle": "כדורי ביסקוויטים",
+      "intoRecipe": "הפרקהתשיעיבסדרהשלנואיךלשדר",
+      "sequenceId": 179,
+      "method": "image-folder"
+    },
+    {
+      "biscuitId": "06",
+      "biscuitTitle": "עוגת ביסקוויטים קרפ",
+      "intoRecipe": "הפרקהשישיבסדרהשלנואיךלשדר",
+      "sequenceId": 167,
+      "method": "image-folder"
+    },
+    {
+      "biscuitId": "05",
+      "biscuitTitle": "עוגת ביסקוויטים לימון ונענע",
+      "intoRecipe": "הפרקהחמישיבסדרהשליאיךלשדר",
+      "sequenceId": 166,
+      "method": "reviewed-title-alias"
+    },
+    {
+      "biscuitId": "03",
+      "biscuitTitle": "עוגת ביסקוויטים מוקה",
+      "intoRecipe": "ברוכיםהבאיםלפרקהשלישיבסדרהשליאיךלשדר",
+      "sequenceId": 157,
+      "method": "image-folder"
+    },
+    {
+      "biscuitId": "02",
+      "biscuitTitle": "עוגת ביסקוויטים קרמבו",
+      "intoRecipe": "ברוכיםהבאיםלפרקהשניבסדרהשליאיךלשדר",
+      "sequenceId": 155,
+      "method": "image-folder"
+    },
+    {
+      "biscuitId": "01",
+      "biscuitTitle": "עוגת ביסקוויטים פיסטוק",
+      "intoRecipe": "ברוכיםהבאיםלסדרתהמתכוניםהחדשהשליאיךלשדר",
+      "sequenceId": 152,
+      "method": "image-folder"
+    },
+    {
+      "biscuitId": "14",
+      "biscuitTitle": "עוגת ביסקוויטים באונטי",
+      "intoRecipe": "instagram-198",
+      "sequenceId": 198,
+      "method": "reviewed-title-alias"
+    },
+    {
+      "biscuitId": "08",
+      "biscuitTitle": "עוגת ביסקוויטים אלפחורס",
+      "intoRecipe": "instagram-175",
+      "sequenceId": 175,
+      "method": "image-folder"
+    },
+    {
+      "biscuitId": "04",
+      "biscuitTitle": "עוגת ביסקוויטים קראנץ׳ נוטלה",
+      "intoRecipe": "instagram-162",
+      "sequenceId": 162,
+      "method": "reviewed-title-alias"
+    }
+  ],
+  "missing": [],
+  "duplicates": [],
+  "unexpectedDocuments": [],
+  "unmappedFavouriteTokens": [],
+  "ambiguousFavouriteTokens": [],
+  "unmappedRoutes": [],
+  "ambiguousRoutes": [],
+  "slugCollisions": [],
+  "contentFidelity": {
+    "ingredientMismatches": 0,
+    "instructionMismatches": 0,
+    "listedMismatches": 0,
+    "authoredInSanity": [
+      {
+        "contentId": "recipe_01M1YKBSJR469G8KWK5NJ02JN5",
+        "title": "עוגת פירמידה לפסח",
+        "note": "Content written in the Studio; intentionally diverges from data/recipes.json and is not compared."
+      }
+    ]
+  },
+  "biscuitSeries": {
+    "documentTypesPresent": [
+      "dateIdea",
+      "game",
+      "recipe"
+    ],
+    "separateBiscuitDocumentType": false,
+    "recipesInSeries": 14,
+    "withSeriesPosition": 14,
+    "positionUnresolved": []
+  },
+  "slugs": {
+    "rule": "Hebrew, derived from the curated title by sanity/lib/slugify.ts. Image-folder names are never used.",
+    "derivedFromTitle": 172,
+    "notDerivedFromTitle": [],
+    "renamedWithSlugKept": [],
+    "gamesKeepingExistingEnglishSlug": 4,
+    "slugsEqualToAnImageFolderName": 0
+  },
+  "taxonomyViolations": [],
+  "holidays": {
+    "rule": "A taxonomy of its own, orthogonal to siteCategory / foodType / series. Zero, one or many per recipe, stored as controlled English slugs in a plain array of strings, and assigned ONLY where the recipe's own caption names the holiday. Never rendered as a card badge; never part of contentId or slug.",
+    "vocabulary": [
+      "pesach (פסח)",
+      "shavuot (שבועות)",
+      "rosh-hashana (ראש השנה)",
+      "hanukkah (חנוכה)",
+      "purim (פורים)"
+    ],
+    "vocabularyViolations": [],
+    "migratedFromSource": 13,
+    "recipesPerHoliday": {
+      "pesach": 8,
+      "hanukkah": 1,
+      "shavuot": 2,
+      "rosh-hashana": 1
+    },
+    "recipesWithNoHoliday": 147,
+    "assignmentsThatDidNotLand": [],
+    "differsFromMigrationTable": [],
+    "leftForEditorialReview": [
+      {
+        "sequenceId": 55,
+        "title": "חלת שקדים",
+        "suggestion": null,
+        "reason": "Keyword false positive, listed so nobody re-adds it: the caption's \"בשבועות האחרונים\" means \"in recent weeks\", not the festival. Published 24/11/2023, nowhere near Shavuot. Must stay unassigned."
+      },
+      {
+        "sequenceId": 83,
+        "title": "אוזני המן אמסטרדם",
+        "suggestion": "purim",
+        "reason": "Hamantaschen, and the caption says \"אם תכינו לו אותם במשלוח מנות\" — a Purim-only custom. The word פורים itself never appears, so this is one inferential step and needs Rotem's yes."
+      },
+      {
+        "sequenceId": 90,
+        "title": "בצק אחד שיוצא ממנו מגוון של עוגיות",
+        "suggestion": "purim",
+        "reason": "Caption signs off \"חג פורים שמח 😍\" and notes \"כן גם אוזני המן\". But it is a general shortcrust dough that makes many cookies, and the Purim mention is a greeting plus one shape option — not the recipe being for Purim. Rotem's call whether the חגים section should carry it."
+      },
+      {
+        "sequenceId": 61,
+        "title": "סופגניות אשל",
+        "suggestion": "hanukkah",
+        "reason": "Doughnuts, and the caption remembers a grandmother making them \"בכל שנה בהדלקת נרות\". Candle-lighting is not exclusively Hanukkah in the wording, and חנוכה is never written."
+      },
+      {
+        "sequenceId": 51,
+        "title": "סופגניות אפויות",
+        "suggestion": "hanukkah",
+        "reason": "Doughnuts, published 15/11/2023. The caption is entirely about baked-vs-fried and names no holiday."
+      },
+      {
+        "sequenceId": 172,
+        "title": "מצה בריי מושחתת עם גבינות",
+        "suggestion": "pesach",
+        "reason": "Built on matzah and published 03/04/2026, inside Passover. Matzah is an ingredient, not a holiday name, and the caption says nothing about פסח — assigning would be inference from ingredient plus date."
+      },
+      {
+        "sequenceId": 173,
+        "title": "שוקו פאי מצה",
+        "suggestion": "pesach",
+        "reason": "Same as 172: \"הקינוח הכי מושלם שאפשר להכין ממצה\", published 05/04/2026. The word \"Passover\" appears only in an English summary added to the review spreadsheet, not in Rotem's caption."
+      },
+      {
+        "sequenceId": 9,
+        "title": "עוגת גבינה",
+        "suggestion": "shavuot",
+        "reason": "Cheesecake — a Shavuot association, never stated. Applies to the whole cheesecake set below too."
+      },
+      {
+        "sequenceId": 30,
+        "title": "עוגת גבינה קרמית דלת שומן",
+        "suggestion": "shavuot",
+        "reason": "Cheesecake; no holiday named."
+      },
+      {
+        "sequenceId": 73,
+        "title": "עוגת גבינה פירורים בלי שמנת מתוקה",
+        "suggestion": "shavuot",
+        "reason": "Cheesecake; no holiday named."
+      },
+      {
+        "sequenceId": 112,
+        "title": "עוגת גבינה קרמית",
+        "suggestion": "shavuot",
+        "reason": "Cheesecake; no holiday named."
+      },
+      {
+        "sequenceId": 135,
+        "title": "עוגת גבינה טריקולד מנומרת",
+        "suggestion": "shavuot",
+        "reason": "Cheesecake; no holiday named."
+      },
+      {
+        "sequenceId": 183,
+        "title": "רולדת שמרים עוגת גבינה",
+        "suggestion": "shavuot",
+        "reason": "Cheesecake; no holiday named."
+      },
+      {
+        "sequenceId": 37,
+        "title": "מאפינס שקדים בציפוי דבש",
+        "suggestion": "rosh-hashana",
+        "reason": "Honey glaze \"באווירת החג\", published 11/09/2023 near Rosh Hashana — but \"החג\" is never named, and the same caption offers maple as an alternative."
+      },
+      {
+        "sequenceId": 119,
+        "title": "טורטיות ממולאות בפרגית",
+        "suggestion": "rosh-hashana",
+        "reason": "Pomegranate, honey and cinnamon, published 13/10/2024, caption ends \"שיהיה חג שמח 😍\". Autumn 2024 puts Rosh Hashana, Yom Kippur and Sukkot all in range; the caption picks none of them."
+      },
+      {
+        "sequenceId": 120,
+        "title": "עוגת פאדג׳ שוקולד פרווה",
+        "suggestion": null,
+        "reason": "Caption ends \"שיהיה לנו חג שמח ❤️\" and the cake is פרווה, published 16/10/2024. Which חג is unstated."
+      }
+    ]
+  },
+  "images": {
+    "sourcePaths": 129,
+    "importedPaths": 129,
+    "dropped": [],
+    "documentsWithRepeatedImages": [],
+    "galleryRule": "A recipe or date idea may hold several different photos, and that gallery is content. Deduplication only ever removes a repeated reference to the same path within one item; a gallery is never collapsed.",
+    "multiImageGalleries": 45,
+    "largestGallery": 8,
+    "galleryMismatches": [],
+    "unrepresentableVideos": [
+      "images/recipes/savory/entrecote-gnocchi-broccoli-stir-fry/IMG_1995.MOV",
+      "images/recipes/savory/meat-cannelloni/meat-cannelloni-2.MOV",
+      "images/recipes/sweet/chocolate-tiramisu-cake/FullSizeRender-1.MOV",
+      "images/recipes/sweet/pecan-dark-chocolate-cookies/FullSizeRender.MOV"
+    ]
+  },
+  "fieldMapping": {
+    "id": "legacyRouteIds[] (and legacyIds[] as recipe-<id>)",
+    "title": "title",
+    "sourceUrl": "sourceUrl",
+    "ingredients": "ingredients",
+    "instructions": "instructions",
+    "images": "legacyImages[] + legacyImageFolder",
+    "imageMatch": "imageMatchConfidence / imageMatchMethod / imageMatchKey",
+    "sourceFiles": "sourceFiles[]",
+    "status": "status",
+    "issues": "issues[]",
+    "sequenceId": "sequenceId",
+    "publishedDate": "publishedDate",
+    "contentCategory": "contentCategory",
+    "foodType": "foodType",
+    "ingredientsText": "ingredientsText",
+    "instructionsText": "instructionsText",
+    "siteCategory": "siteCategory",
+    "categorySlug": "categorySlug",
+    "difficulty": "difficulty",
+    "difficultySlug": "difficultySlug",
+    "prepTimeMinutes": "prepTimeMinutes",
+    "notes": "notes",
+    "series": "series",
+    "tags": "tags[]"
+  },
+  "deliberatelyDropped": {
+    "slug": "The dead \"slug\" field in data/recipes.json — never read by the site, and wrong for 7 records (id \"עו-12\" vs slug \"עו\"). Replaced by the real Sanity slug; the old route id survives in legacyRouteIds."
+  },
+  "notes": [
+    "Images are imported as repository paths (legacyImage), not uploaded Sanity assets: the live site still serves every photo from /public, and re-hosting is a separate decision. 129 path(s) recorded.",
+    "4 video file(s) exist under images/ that the current site data model cannot reference at all (no video field in data/recipes.json). The Sanity recipe schema does not add one either, so they remain unrepresented: images/recipes/savory/entrecote-gnocchi-broccoli-stir-fry/IMG_1995.MOV, images/recipes/savory/meat-cannelloni/meat-cannelloni-2.MOV, images/recipes/sweet/chocolate-tiramisu-cake/FullSizeRender-1.MOV, images/recipes/sweet/pecan-dark-chocolate-cookies/FullSizeRender.MOV"
+  ],
+  "problems": []
+}

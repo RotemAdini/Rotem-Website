@@ -4,14 +4,29 @@
     {
       "name": "static-site",
       "runtimeExecutable": "node",
-      "runtimeArgs": ["tools/static-server.js"],
+      "runtimeArgs": [
+        "tools/static-server.js"
+      ],
       "port": 8083
     },
     {
       "name": "nextjs-app",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
       "port": 3000
+    },
+    {
+      "name": "nextjs-prod",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "start"
+      ],
+      "port": 3000,
+      "autoPort": false
     }
   ]
 }

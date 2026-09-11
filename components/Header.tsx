@@ -2,15 +2,28 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 
+import HeaderAccountPill, { GuestPill } from "./HeaderAccountPill";
+import { FEATURES } from "@/lib/features";
+
+// Filtered rather than commented out: this one list drives both the desktop
+// nav and the mobile menu, so dropping the entry removes it from both. The
+// nav is a flex row with gap, so no separator is left stranded.
 const NAV_LINKS = [
   { href: "/", label: "בית" },
   { href: "/recipes", label: "מתכונים" },
   { href: "/dates", label: "דייטים" },
   { href: "/games", label: "משחקים" },
-  { href: "/gifts", label: "מתנות" },
+  ...(FEATURES.gifts ? [{ href: "/gifts", label: "מתנות" }] : []),
   { href: "/contact", label: "צור קשר" },
+];
+
+/** Repeated inside the mobile menu only — see the note at their render site. */
+const UTILITY_LINKS = [
+  { href: "/search", label: "חיפוש באתר" },
+  { href: "/favorites", label: "המועדפים שלי" },
+  { href: "/account", label: "החשבון שלי" },
 ];
 
 /** Shared site header: brand, main nav (with active-link highlighting) and
@@ -42,6 +55,20 @@ export default function Header() {
               {link.label}
             </Link>
           ))}
+          {/* Search, favourites and account live in the icon row on desktop,
+              but that row sheds the search icon below 640px and the pill below
+              980px — so on a phone these were unreachable. They are repeated
+              inside the menu and hidden again on desktop (.nav-utility). */}
+          {UTILITY_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`nav-utility${isActive(link.href) ? " active" : ""}`}
+              onClick={() => setMenuOpen(false)}
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
 
         <div className="header-actions">
@@ -54,10 +81,13 @@ export default function Header() {
           <Link className="icon-btn account-link" href="/account" aria-label="חשבון משתמש" title="חשבון משתמש">
             ♙
           </Link>
-          <Link className="guest-pill" href="/account">
-            <span>שלום, אורחת</span>
-            <strong>להתחברות</strong>
-          </Link>
+          {/* Suspense keeps HeaderAccountPill's useSearchParams() from opting
+              every statically generated page into client-side rendering. The
+              fallback is the guest pill, which is what the static HTML would
+              have shown anyway. */}
+          <Suspense fallback={<GuestPill />}>
+            <HeaderAccountPill />
+          </Suspense>
           <button
             className="menu-btn"
             id="menuBtn"

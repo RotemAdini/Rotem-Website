@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { FEATURES } from "@/lib/features";
+
 /** Shared site footer — identical on every page of the original site. */
 export default function Footer() {
   return (
@@ -38,7 +40,7 @@ export default function Footer() {
           <Link href="/recipes">כל המתכונים</Link>
           <Link href="/dates">רעיונות לדייטים</Link>
           <Link href="/games">משחקים לזוג</Link>
-          <Link href="/gifts">מתנות</Link>
+          {FEATURES.gifts && <Link href="/gifts">מתנות</Link>}
         </div>
 
         <div className="footer-col">

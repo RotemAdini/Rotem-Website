@@ -1,16 +1,19 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import RecipesBoard from "@/components/RecipesBoard";
-import { getRecipeBoardCards, getRecipeTagOptions } from "@/lib/recipe-board";
+import { getListedRecipes } from "@/lib/sanity/recipes";
+import { boardTagOptions, toBoardCard } from "@/lib/sanity/recipe-adapters";
 
 export const metadata: Metadata = {
   title: "מתכונים | רותם עדיני",
   description: "רותם עדיני — מתכונים, דייטים, משחקים ומתנות.",
 };
 
-export default function RecipesPage() {
-  const cards = getRecipeBoardCards();
-  const tagOptions = getRecipeTagOptions(cards);
+export default async function RecipesPage() {
+  // Recipes come from Sanity. The board itself is unchanged: it still receives
+  // a plain array of cards and does all filtering and sorting on the client.
+  const cards = (await getListedRecipes()).map(toBoardCard);
+  const tagOptions = boardTagOptions(cards);
 
   return (
     <main className="page-main">

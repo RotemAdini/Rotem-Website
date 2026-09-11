@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import GamesBoard from "@/components/GamesBoard";
-import { gamesCatalog } from "@/lib/games";
+import { getListedGames } from "@/lib/sanity/games";
+import { toGameCatalogItem } from "@/lib/sanity/game-adapters";
 
 export const metadata: Metadata = {
   title: "משחקים לזוג | רותם עדיני",
   description: "רותם עדיני — מתכונים, דייטים, משחקים ומתנות.",
 };
 
-export default function GamesPage() {
+export default async function GamesPage() {
+  // Product metadata comes from Sanity. The hero, the "how it works" section
+  // and the board itself stay in this page's own code.
+  const games = (await getListedGames()).map(toGameCatalogItem);
   return (
     <main className="page-main">
       <section className="page-hero games-hero">
@@ -48,7 +52,7 @@ export default function GamesPage() {
         </div>
       </section>
 
-      <GamesBoard games={gamesCatalog} />
+      <GamesBoard games={games} />
 
       <section className="container how-it-works" id="how-it-works">
         <div className="section-head">
@@ -70,8 +74,8 @@ export default function GamesPage() {
           </div>
           <div>
             <span>03</span>
-            <h3>מקבלים גישה</h3>
-            <p>פותחים בטלפון או במחשב ומתחילים מיד.</p>
+            <h3>מקבלים עדכון</h3>
+            <p>הרכישה המקוונת עדיין בהקמה — נשלח לכם מייל ברגע שהמשחק ייפתח.</p>
           </div>
         </div>
       </section>
