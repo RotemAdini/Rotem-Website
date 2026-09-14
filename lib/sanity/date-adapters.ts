@@ -28,6 +28,23 @@ export function dateSeriesLabel(seriesValue: string): string {
   return SERIES_LABELS[seriesValue] ?? "דייט בודד";
 }
 
+/** The chip on a card: the series an idea is in, or what a standalone idea
+ * is. One helper so every card that renders a chip — the board, the related
+ * strip — says the same thing about the same idea. */
+export function dateTag(dateIdea: SanityDateIdea): string {
+  return dateIdea.seriesKey ? "סדרה" : "דייט בודד";
+}
+
+/** The heading over the related strip on a detail page.
+ *
+ * "עוד רעיונות מהסדרה" is kept for an idea that really is in a series, which
+ * is every one of the thirteen א׳-ב׳ instalments, so their pages read exactly
+ * as they did. A standalone idea gets the neutral wording instead of being
+ * made to introduce a series it does not belong to. */
+export function dateRelatedHeading(dateIdea: SanityDateIdea): string {
+  return dateIdea.seriesKey ? "עוד רעיונות מהסדרה ♡" : "עוד רעיונות לדייטים ♡";
+}
+
 /* --------------------------------------------------------------- images */
 
 /** The card photo: the item's lead image. */
@@ -102,7 +119,7 @@ export function toDateBoardCard(dateIdea: SanityDateIdea): DateBoardCard {
     image: dateCardImage(dateIdea),
     favoriteId: dateFavoriteId(dateIdea),
     favoriteAliases: dateIdea.legacyIds,
-    tag: dateIdea.seriesKey ? "סדרה" : "דייט בודד",
+    tag: dateTag(dateIdea),
     description: dateDescription(dateIdea),
     footerLabel: dateFooterLabel(dateIdea),
     // Only a real series instalment claims the series words. A standalone idea

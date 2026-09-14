@@ -96,6 +96,21 @@ async function fetchDates(filter: string, params: Record<string, unknown> = {}):
 }
 
 /**
+ * The gate every public read carries.
+ *
+ * It lives here, as one constant threaded through every accessor, rather than
+ * at the call sites: a single lookup that forgets it — a detail page, a static
+ * param, a favourite token — is exactly how an unfinished idea reaches the
+ * public site, and that is a mistake no reviewer reliably catches. There is
+ * deliberately no accessor left that reads date ideas without it.
+ *
+ * Written as `!= false` rather than `== true` because an idea migrated before
+ * the field existed has no value at all and must stay listed; `coalesce` is
+ * not available in a filter expression.
+ */
+const LISTED = `listed != false`;
+
+/**
  * Series instalments first, in their own order, then standalone ideas.
  *
  * Sorting by `seriesPosition ?? 0` would have given every standalone idea the
@@ -115,19 +130,17 @@ function byDisplayOrder(dates: SanityDateIdea[]): SanityDateIdea[] {
 
 /* ------------------------------------------------------------- accessors */
 
-export async function getAllDateIdeas(): Promise<SanityDateIdea[]> {
-  return byDisplayOrder(await fetchDates("true"));
-}
-
 /**
- * The date ideas shown publicly.
+ * The date ideas shown publicly — and, since there is no ungated accessor, the
+ * only date ideas this site can read at all.
  *
  * Two independent gates keep an unfinished idea off the site, because either
  * one alone can be undone by an ordinary editorial action:
  *
  *   1. A Sanity draft is not readable through the token-less client this site
  *      uses, so an idea left as a draft cannot appear anywhere. That gate
- *      disappears the moment someone presses Publish in the Studio.
+ *      disappears the moment someone presses Publish in the Studio, which is
+ *      why it is never relied on by itself.
  *   2. `listed` is the gate that survives publishing. An idea whose plan is
  *      still empty stays listed:false until its content is written.
  *
@@ -136,22 +149,35 @@ export async function getAllDateIdeas(): Promise<SanityDateIdea[]> {
  * anything — the site has always shown those three items.
  */
 export async function getListedDateIdeas(): Promise<SanityDateIdea[]> {
-  return byDisplayOrder(await fetchDates("listed != false"));
+  return byDisplayOrder(await fetchDates(LISTED));
 }
 
+/**
+ * One idea by its canonical slug, or null.
+ *
+ * An unlisted idea returns null, which is the same answer a slug that never
+ * existed gets. The caller therefore cannot tell the two apart, and no title,
+ * description, sourceUrl or image can leak through a direct request.
+ */
 export async function getDateIdeaByCanonicalSlug(slug: string): Promise<SanityDateIdea | null> {
-  const [dateIdea] = await fetchDates("slug.current == $slug", { slug });
+  const [dateIdea] = await fetchDates(`${LISTED} && slug.current == $slug`, { slug });
   return dateIdea ?? null;
 }
 
+/** The slugs that get a prerendered route. An unlisted idea is absent, so it
+ * is never built into a public page in the first place. */
 export async function getAllDateSlugs(): Promise<string[]> {
-  return getSanityClient().fetch<string[]>(`*[_type == "dateIdea" && defined(slug.current)].slug.current`);
+  return getSanityClient().fetch<string[]>(
+    `*[_type == "dateIdea" && defined(slug.current) && ${LISTED}].slug.current`,
+  );
 }
 
-/** Up to `count` other ideas that have a photo, for the "more from the
- * series" strip — the same rule the previous implementation used. */
+/** Up to `count` other ideas that have a photo, for the related strip — the
+ * same rule the previous implementation used. */
 export async function getRelatedDateIdeas(excludeContentId: string, count: number): Promise<SanityDateIdea[]> {
-  const dates = await fetchDates("contentId != $excludeContentId && listed != false && count(legacyImages) > 0", { excludeContentId });
+  const dates = await fetchDates(`${LISTED} && contentId != $excludeContentId && count(legacyImages) > 0`, {
+    excludeContentId,
+  });
   return byDisplayOrder(dates).slice(0, count);
 }
 
@@ -169,13 +195,18 @@ export type DateRouteResolution =
  *   2. a slug retired into slugHistory   -> permanent redirect
  *   3. a pre-migration route id ("01")   -> permanent redirect
  *   4. otherwise                         -> 404
+ *
+ * Both lookups are gated on `listed`, so an unlisted idea is "not-found" at
+ * every one of them: its own slug 404s, and so does any legacy id pointing at
+ * it, which would otherwise have redirected a visitor to a page that 404s
+ * anyway while confirming the idea exists.
  */
 export async function resolveDateRoute(segment: string): Promise<DateRouteResolution> {
   const canonical = await getDateIdeaByCanonicalSlug(segment);
   if (canonical) return { kind: "canonical", dateIdea: canonical };
 
   const [alias] = await fetchDates(
-    "slug.current != $segment && ($segment in slugHistory[].slug || $segment in legacyRouteIds)",
+    `${LISTED} && slug.current != $segment && ($segment in slugHistory[].slug || $segment in legacyRouteIds)`,
     { segment },
   );
   if (!alias) return { kind: "not-found" };

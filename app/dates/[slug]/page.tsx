@@ -14,15 +14,24 @@ import {
   dateGalleryImages,
   dateHref,
   datePlan,
+  dateRelatedHeading,
+  dateTag,
 } from "@/lib/sanity/date-adapters";
 
 /**
  * A date idea, addressed by its canonical Hebrew slug.
  *
- * Only canonical slugs are prerendered. The pre-migration numeric URLs
- * (/dates/01 … /dates/13) are served on demand and answered with a 308 to the
- * canonical slug, so an old link keeps working without rendering a second
- * copy of the page at a second URL.
+ * Only canonical slugs are prerendered, and only listed ones — an unlisted
+ * idea gets no route built for it, and `resolveDateRoute` answers "not-found"
+ * for its slug as well, so a direct request is indistinguishable from one for
+ * a slug that never existed.
+ *
+ * The pre-migration numeric URLs (/dates/01 … /dates/13) are answered with a
+ * real 308 by the routing-layer redirects in next.config.ts, before this page
+ * renders. The `redirect` branch below is the safety net for anything retired
+ * since the last build: reaching it in a prerender context yields a 200 with a
+ * meta refresh rather than a status, which is exactly why the config-level
+ * redirect exists.
  */
 export async function generateStaticParams() {
   return (await getAllDateSlugs()).map((slug) => ({ slug }));
@@ -119,7 +128,7 @@ export default async function DateDetailPage({ params }: { params: Promise<{ slu
         <div className="section-head">
           <div>
             <span className="section-kicker">אולי תאהבו גם</span>
-            <h2>עוד רעיונות מהסדרה ♡</h2>
+            <h2>{dateRelatedHeading(dateIdea)}</h2>
           </div>
           <Link href="/dates" className="small-pill">
             לכל הדייטים
@@ -134,7 +143,7 @@ export default async function DateDetailPage({ params }: { params: Promise<{ slu
               image={dateCardImage(row)}
               favoriteId={dateFavoriteId(row)}
               favoriteAliases={row.legacyIds}
-              tag="סדרה"
+              tag={dateTag(row)}
               description={dateDescription(row)}
               footerLabel={dateFooterLabel(row)}
             />
