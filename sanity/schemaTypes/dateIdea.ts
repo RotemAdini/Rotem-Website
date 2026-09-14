@@ -2,10 +2,16 @@ import { defineField, defineType } from "sanity";
 
 import { sanitySlugify } from "../lib/slugify";
 import { isUniqueRouteSlug } from "../lib/isUniqueRouteSlug";
-import { DATE_BUDGET_RANGES, DATE_BUDGETS, DATE_PLACES } from "./taxonomy";
+import { DATE_BUDGET_RANGES, DATE_BUDGETS, DATE_PLACES, DATE_SERIES } from "./taxonomy";
 
 /**
- * A date idea from the "סדרת הדייטים א׳-ב׳" series.
+ * A date idea.
+ *
+ * This is the general type for every date idea on the site. Belonging to an
+ * editorial series is optional: the thirteen ideas imported from the א׳-ב׳ run
+ * carry `seriesKey` and a position, and a standalone idea carries neither.
+ * Standalone is a complete, first-class state — a future one-off date needs a
+ * new document and nothing else, no schema change and no invented position.
  *
  * Preserves every field lib/date-series.ts currently supplies to the site,
  * plus the review caveats the content audit recorded: items 09, 10 and 13
@@ -85,12 +91,39 @@ export const dateIdea = defineType({
       description: 'Current /dates/<id> segments, e.g. "01".',
     }),
     defineField({
+      name: "seriesKey",
+      title: "סדרה",
+      type: "string",
+      group: "identity",
+      options: { list: DATE_SERIES.map((entry) => ({ title: entry.title, value: entry.value })) },
+      description:
+        "OPTIONAL. Leave empty for a standalone date idea — that is a normal, complete state, not a missing value. " +
+        "Set it only when the idea really is an instalment of a run.",
+    }),
+    defineField({
       name: "seriesPosition",
       title: "מספר בסדרה",
       type: "number",
       group: "identity",
-      description: "Position in the A-B series (1-13). Drives the display order and the “רעיון #NN” label.",
-      validation: (rule) => rule.min(1),
+      description:
+        "Position within סדרה above. Only meaningful when a series is set; leave empty for a standalone date rather " +
+        "than inventing a number, which would put it in an order it has no place in.",
+      validation: (rule) =>
+        rule.min(1).custom((value, context) => {
+          const parent = context.parent as { seriesKey?: string } | undefined;
+          if (value != null && !parent?.seriesKey) return "A position only makes sense together with a series.";
+          return true;
+        }),
+    }),
+    defineField({
+      name: "listed",
+      title: "מוצג ברשימת הדייטים",
+      type: "boolean",
+      group: "identity",
+      initialValue: true,
+      description:
+        "False keeps the idea out of /dates, the homepage and search while its content is still being written. " +
+        "An idea with no value set counts as listed, so the existing ideas are unaffected.",
     }),
 
     /* ----------------------------------------------------------- content */
@@ -164,6 +197,15 @@ export const dateIdea = defineType({
     }),
 
     /* ------------------------------------------------------------ review */
+    defineField({
+      name: "sourceUrl",
+      title: "Instagram URL",
+      type: "url",
+      group: "review",
+      description:
+        "The post this idea came from, where one is known. Recorded so an idea drafted from a reel keeps a link back " +
+        "to its own source instead of the provenance living only in someone's memory.",
+    }),
     defineField({
       name: "needsRotemApproval",
       title: "דורש אישור רותם",

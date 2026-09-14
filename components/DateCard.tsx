@@ -23,7 +23,10 @@ export default function DateCard({ href, title, image, favoriteId, favoriteAlias
       </div>
       <div className="date-card-body">
         <h3>{title}</h3>
-        <p>{description}</p>
+        {/* A standalone idea with no description of its own renders no blurb
+            at all, rather than an empty paragraph holding open a gap where a
+            series line used to be. */}
+        {description && <p>{description}</p>}
         <div className="date-card-footer">
           <span>{footerLabel}</span>
           <FavoriteButton id={favoriteId} aliases={favoriteAliases} className="mini-heart" />

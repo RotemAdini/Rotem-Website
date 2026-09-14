@@ -10,7 +10,8 @@ import { getListedDateIdeas } from "@/lib/sanity/dates";
 import { dateCardImage, dateHref } from "@/lib/sanity/date-adapters";
 
 export default async function HomePage() {
-  // Recipes come from Sanity; the date panel below still reads lib/date-series.ts.
+  // Recipes and date ideas both come from Sanity. The date panel reads the
+  // listed set, so an idea still being written stays off the homepage too.
   const categories = await Promise.all(
     HOME_CATEGORIES.map(async (category) => ({
       ...category,

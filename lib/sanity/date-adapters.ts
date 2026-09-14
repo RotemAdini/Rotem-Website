@@ -10,9 +10,23 @@ import { toPublicPath } from "@/lib/recipe-text";
  * card, the same copy and the same favourite token as before.
  */
 
-/** The fixed line the board has always shown under a date's title. Sanity has
- * an optional `description`; none is set today, so this stays the fallback. */
-const SERIES_BLURB = "מסדרת הדייטים א׳-ב׳";
+/** The Hebrew label for each editorial series, and the blurb the board shows
+ * under a title when the idea has no description of its own. A standalone idea
+ * gets neither: claiming it came from a series it is not in would be wrong. */
+const SERIES_LABELS: Record<string, string> = { "date-a-b": "סדרת הא-ב" };
+const SERIES_BLURBS: Record<string, string> = { "date-a-b": "מסדרת הדייטים א׳-ב׳" };
+
+/** The filter value a card carries. Standalone is a real, selectable value,
+ * not the absence of one. */
+export const STANDALONE_SERIES = "standalone";
+
+export function dateSeriesValue(dateIdea: SanityDateIdea): string {
+  return dateIdea.seriesKey || STANDALONE_SERIES;
+}
+
+export function dateSeriesLabel(seriesValue: string): string {
+  return SERIES_LABELS[seriesValue] ?? "דייט בודד";
+}
 
 /* --------------------------------------------------------------- images */
 
@@ -48,14 +62,18 @@ export function dateHref(dateIdea: SanityDateIdea): string {
   return `/dates/${dateIdea.slug}`;
 }
 
-/** "רעיון #07" — the footer label, from the series position. */
+/** "רעיון #07" for a series instalment; a standalone idea has no number and
+ * is labelled by what it is instead of being given a position it lacks. */
 export function dateFooterLabel(dateIdea: SanityDateIdea): string {
   const position = dateIdea.seriesPosition;
-  return position ? `רעיון #${String(position).padStart(2, "0")}` : "רעיון";
+  if (dateIdea.seriesKey && position) return `רעיון #${String(position).padStart(2, "0")}`;
+  return "רעיון לדייט";
 }
 
 export function dateDescription(dateIdea: SanityDateIdea): string {
-  return dateIdea.description?.trim() || SERIES_BLURB;
+  const own = dateIdea.description?.trim();
+  if (own) return own;
+  return (dateIdea.seriesKey && SERIES_BLURBS[dateIdea.seriesKey]) || "";
 }
 
 /** The plan object the existing DatePlanPanel renders, with Sanity's nulls
@@ -84,10 +102,12 @@ export function toDateBoardCard(dateIdea: SanityDateIdea): DateBoardCard {
     image: dateCardImage(dateIdea),
     favoriteId: dateFavoriteId(dateIdea),
     favoriteAliases: dateIdea.legacyIds,
-    tag: "סדרה",
+    tag: dateIdea.seriesKey ? "סדרה" : "דייט בודד",
     description: dateDescription(dateIdea),
     footerLabel: dateFooterLabel(dateIdea),
-    search: `${dateIdea.title} סדרת דייטים א ב`,
+    // Only a real series instalment claims the series words. A standalone idea
+    // that matched "סדרת דייטים א ב" would answer a search it has nothing to do with.
+    search: `${dateIdea.title} דייט רעיון לדייט${dateIdea.seriesKey ? " סדרת דייטים א ב" : ""}`,
     // Read from the date's own audited range. Undecided stays "unknown" so
     // the card appears under no budget chip instead of a guessed one.
     budget: (dateIdea.budgetRange as DateBudget) || "unknown",
@@ -95,7 +115,7 @@ export function toDateBoardCard(dateIdea: SanityDateIdea): DateBoardCard {
     // The board's duration chip has never been backed by real data; every card
     // has always been "medium". Kept as-is so the filter behaves identically.
     duration: "medium",
-    series: "date-a-b",
+    series: dateSeriesValue(dateIdea),
   };
 }
 
@@ -109,7 +129,10 @@ export function toDateFavoriteEntries(dateIdea: SanityDateIdea): Record<string, 
       contentId: dateIdea.contentId,
       type: "date",
       title: dateIdea.title,
-      meta: dateIdea.seriesPosition ? `סדרת הא-ב · #${String(dateIdea.seriesPosition).padStart(2, "0")}` : "סדרת הא-ב",
+      meta:
+        dateIdea.seriesKey && dateIdea.seriesPosition
+          ? `${dateSeriesLabel(dateIdea.seriesKey)} · #${String(dateIdea.seriesPosition).padStart(2, "0")}`
+          : "רעיון לדייט",
       href: dateHref(dateIdea),
       image: dateCardImage(dateIdea),
     };
@@ -146,7 +169,8 @@ export function toDateSearchResult(dateIdea: SanityDateIdea): SearchResult {
     type: "date",
     typeLabel: "דייט",
     title: dateIdea.title,
-    meta: SERIES_BLURB,
+    // The series line only for an idea that is actually in one.
+    meta: dateDescription(dateIdea) || "רעיון לדייט",
     href: dateHref(dateIdea),
     image: dateCardImage(dateIdea),
     search: `${dateIdea.title} ${keywords}`.toLowerCase(),

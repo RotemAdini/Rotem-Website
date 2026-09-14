@@ -168,6 +168,16 @@ export const DATE_BUDGETS = [
   { title: "גבוה", value: "high" },
 ] as const;
 
+/**
+ * Editorial series a date idea can belong to.
+ *
+ * Membership is OPTIONAL. A date idea with no series is a standalone idea,
+ * which is the normal case for anything published outside a run — it is not a
+ * lesser or incomplete date. Adding a future series means adding one entry
+ * here; adding a future standalone date means doing nothing at all.
+ */
+export const DATE_SERIES = [{ title: "סדרת הדייטים א׳-ב׳", value: "date-a-b" }] as const;
+
 export const DATE_PLACES = [
   { title: "בבית", value: "home" },
   { title: "בחוץ", value: "outside" },

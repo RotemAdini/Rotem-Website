@@ -22,6 +22,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Vercel's build output: a copy of .next plus bundled dependencies, so
+    // linting it reports thousands of problems in code this repo did not write.
+    ".vercel/**",
     // Pre-migration static site — kept on disk until the Next.js migration
     // is verified (see README), but it's not part of this app and was never
     // written against these lint rules.

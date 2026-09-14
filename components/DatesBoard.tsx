@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import DateCard from "./DateCard";
 import type { DateBoardCard } from "@/lib/types";
+import { dateSeriesLabel } from "@/lib/sanity/date-adapters";
 
 export default function DatesBoard({ cards }: { cards: DateBoardCard[] }) {
   const [search, setSearch] = useState("");
@@ -24,6 +25,16 @@ export default function DatesBoard({ cards }: { cards: DateBoardCard[] }) {
       ),
     [cards, search, budget, place, duration, series],
   );
+
+  /** Every series present in the data, in the order the cards arrive (series
+   * instalments first, then standalone), each with its own count. Derived, so
+   * nothing here has to be updated when a series or a standalone idea is
+   * added — and no total is hardcoded. */
+  const seriesOptions = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const card of cards) counts.set(card.series, (counts.get(card.series) ?? 0) + 1);
+    return [...counts.entries()].map(([value, count]) => ({ value, count, label: dateSeriesLabel(value) }));
+  }, [cards]);
 
   const hasActiveFilter = Boolean(search) || budget !== "all" || place !== "all" || duration !== "all" || series !== "all";
 
@@ -85,16 +96,22 @@ export default function DatesBoard({ cards }: { cards: DateBoardCard[] }) {
         </div>
         <div className="filter-group inline-filter series-filter">
           <span>סדרות</span>
-          {/* An explicit "all" chip. The series used to be a lone toggle, so
-              the only way back to the full list was to guess that clicking the
-              active chip again would clear it. */}
+          {/* Built from the cards actually present, so a new series or the
+              first standalone idea appears here on its own. No count and no
+              series key is written into this component. */}
           <div className="chips">
             <button className={`chip${series === "all" ? " active" : ""}`} onClick={() => setSeries("all")}>
               הכל
             </button>
-            <button className={`chip${series === "date-a-b" ? " active" : ""}`} onClick={() => setSeries("date-a-b")}>
-              סדרת הא-ב
-            </button>
+            {seriesOptions.map(({ value, label, count }) => (
+              <button
+                key={value}
+                className={`chip${series === value ? " active" : ""}`}
+                onClick={() => setSeries(value)}
+              >
+                {label} <span className="chip-count">{count}</span>
+              </button>
+            ))}
           </div>
         </div>
 

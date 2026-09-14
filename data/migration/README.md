@@ -191,3 +191,42 @@ npm run migration:verify          # check the real Sanity dataset against the si
 read-only identity fields. Pass `--update-existing` to also refresh editorial
 content from the local sources — that one overwrites editor changes, so it is
 never the default.
+
+### Why `migration:verify` reports drift, and why that is expected
+
+The two verifier modes answer different questions, and they no longer agree:
+
+- `migration:verify:offline` checks the **dry-run plan** built from
+  `data/recipes.json` and `scripts/migration-source.ts`. It still passes
+  completely — 159 recipes, 13 date ideas, 4 games, 129/129 image paths,
+  176/176 galleries, 0 content mismatches. That is the check that proves the
+  migration itself is sound, and it is the one to keep green.
+- `migration:verify` checks the **live Sanity dataset** against those same
+  local sources. It exits non-zero, and will keep doing so.
+
+The live run's differences are **intentional post-migration editing in Sanity**,
+not migration faults:
+
+- Recipe text edited in the Studio. `data/recipes.json` is deliberately never
+  written back to, so every corrected ingredient list and rewritten instruction
+  reads as a difference against it.
+- The recipe image sync, which added photos to documents that the pre-migration
+  plan had none for. Imported image paths went from 129 to 197 and multi-image
+  galleries from 45 to 60; the `expected: []` entries in the report's
+  `galleryMismatches` are recipes that simply had no photo in the old source.
+
+Two consequences worth stating plainly:
+
+- **Do not "fix" the live run by reverting Sanity content back to the local
+  sources.** The Sanity copy is the newer one. Reverting would destroy real
+  editorial work to satisfy a check whose baseline is a snapshot of the site as
+  it was before the migration.
+- Recording a recipe in `CATALOG_CORRECTIONS` with `contentAuthoredInSanity`
+  silences it individually, and that is the intended escape hatch — but each
+  entry is a decision about one specific recipe and is added deliberately, per
+  the "recorded, not inferred" rule the rest of this file follows. It is not
+  something to apply in bulk to make a number go to zero.
+
+So: treat `migration:verify:offline` as the gate, and read `migration:verify`
+as a **diff between Sanity and the pre-migration snapshot** rather than a
+pass/fail.
