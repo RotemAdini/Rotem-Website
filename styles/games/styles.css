@@ -1044,7 +1044,7 @@ div.feature-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-m
   margin-bottom: var(--space-3);
 }
 .purchase-price { font-family: var(--font-display); font-size: 2.6rem; font-weight: 700; color: var(--wine-dark); }
-.purchase-price-note { color: var(--ink-faint); font-size: 0.9rem; }
+.purchase-price-note { color: #796a72; font-size: 0.9rem; }
 
 .form-field { margin-bottom: 1rem; }
 .form-field label {
@@ -1104,7 +1104,7 @@ div.feature-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-m
   gap: 0.5rem 1.2rem;
   justify-content: center;
   margin-top: 1rem;
-  color: var(--ink-faint);
+  color: #796a72;
   font-size: 0.84rem;
 }
 .form-note li { display: flex; align-items: center; gap: 0.4rem; }

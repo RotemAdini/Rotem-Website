@@ -16,6 +16,8 @@
     rings: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="13" r="4.2"/><circle cx="15" cy="13" r="4.2"/></svg>'
   };
 
+  var SYMBOL_NAMES = { heart: 'לב', star: 'כוכב', flame: 'להבה', rings: 'טבעות' };
+
   // See the matching comment in main.js: this now loads after hydration via
   // next/script, so DOMContentLoaded may already have fired.
   function ready(fn) {
@@ -76,7 +78,7 @@
         if (front) front.innerHTML = SYMBOLS[symbol];
         card.classList.remove('is-flipped', 'is-matched', 'is-flash', 'is-shake');
         card.removeAttribute('disabled');
-        card.setAttribute('aria-pressed', 'false');
+        describeCard(card, false, false);
       });
     }
 
@@ -110,8 +112,14 @@
       }
     }
 
-    function flip(card) { card.classList.add('is-flipped'); card.setAttribute('aria-pressed', 'true'); }
-    function unflip(card) { card.classList.remove('is-flipped'); card.setAttribute('aria-pressed', 'false'); }
+    function describeCard(card, revealed, matched) {
+      card.setAttribute('aria-pressed', revealed ? 'true' : 'false');
+      card.setAttribute('aria-label', revealed
+        ? 'קלף זיכרון: ' + SYMBOL_NAMES[card.getAttribute('data-symbol')] + (matched ? ' — נמצאה התאמה' : '')
+        : 'קלף זיכרון מוסתר');
+    }
+    function flip(card) { card.classList.add('is-flipped'); describeCard(card, true, false); }
+    function unflip(card) { card.classList.remove('is-flipped'); describeCard(card, false, false); }
 
     function onCardClick(e) {
       var card = e.currentTarget;
@@ -130,6 +138,7 @@
           [a, b].forEach(function (c) {
             c.classList.add('is-matched', 'is-flash');
             c.setAttribute('disabled', 'true');
+            describeCard(c, true, true);
           });
           burstParticles(a);
           burstParticles(b);
@@ -183,7 +192,7 @@
       var firstSymbol = cards[0].getAttribute('data-symbol');
       cards
         .filter(function (c) { return c.getAttribute('data-symbol') === firstSymbol; })
-        .forEach(function (c) { c.classList.add('is-flipped', 'is-matched'); c.setAttribute('disabled', 'true'); });
+        .forEach(function (c) { c.classList.add('is-flipped', 'is-matched'); c.setAttribute('disabled', 'true'); describeCard(c, true, true); });
       state.matches = 1;
       updateHud();
     }

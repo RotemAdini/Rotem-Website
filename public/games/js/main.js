@@ -162,10 +162,54 @@
       // inside it — fall back to the shared parent so lookup finds it either way.
       var status = form.querySelector('[data-form-status]') || (form.parentElement && form.parentElement.querySelector('[data-form-status]'));
       var submitBtn = form.querySelector('[type="submit"]');
+      if (status && !status.id) {
+        status.id = 'form-status-' + (form.getAttribute('data-track-form') || 'lead');
+      }
+      var validationShown = false;
+      function syncValidation() {
+        var messages = [];
+        var firstInvalid = null;
+        form.querySelectorAll('[required]').forEach(function (field) {
+          var invalid = !field.validity.valid || (field.type !== 'checkbox' && !field.value.trim());
+          field.setAttribute('aria-invalid', invalid ? 'true' : 'false');
+          // Preserve any existing help-text associations.
+          var descriptions = (field.getAttribute('aria-describedby') || '').split(/\s+/).filter(Boolean);
+          if (status) descriptions = descriptions.filter(function (id) { return id !== status.id; });
+          if (invalid) {
+            if (!firstInvalid) firstInvalid = field;
+            if (status) descriptions.push(status.id);
+            messages.push(field.type === 'checkbox'
+              ? 'יש לסמן הסכמה לקבלת עדכונים, הטבות ותוכן שיווקי כדי להירשם.'
+              : field.type === 'email' ? 'נא להזין כתובת אימייל תקינה.' : 'נא למלא שם מלא.');
+          }
+          if (descriptions.length) field.setAttribute('aria-describedby', descriptions.join(' '));
+          else field.removeAttribute('aria-describedby');
+        });
+        if (status) {
+          status.textContent = messages.join(' ');
+          status.className = messages.length ? 'form-status is-error' : 'form-status';
+        }
+        return firstInvalid;
+      }
+      // Capture non-bubbling invalid events without cancelling native UI/focus.
+      form.addEventListener('invalid', function () {
+        validationShown = true;
+        syncValidation();
+      }, true);
+      function updateValidation() {
+        if (validationShown) syncValidation();
+      }
+      form.addEventListener('input', updateValidation);
+      form.addEventListener('change', updateValidation);
       form.addEventListener('submit', function (e) {
-        // Guard against an unfilled SendMsg form-id placeholder (e.g. the bundle
-        // form before its real id is wired in) so we never silently POST to a
-        // broken endpoint — surface a clear message instead.
+        var firstInvalid = syncValidation();
+        if (firstInvalid) {
+          e.preventDefault();
+          validationShown = true;
+          firstInvalid.focus();
+          return;
+        }
+        // Keep the existing guard for the unconfigured bundle endpoint.
         var formIdField = form.querySelector('[name="form"]');
         if (formIdField && /^REPLACE_WITH/.test(formIdField.value)) {
           e.preventDefault();
@@ -173,41 +217,6 @@
             status.textContent = 'הרכישה הזו עדיין לא מחוברת. אפשר לפנות אלינו ישירות דרך עמוד יצירת הקשר.';
             status.className = 'form-status is-error';
           }
-          return;
-        }
-        // The status element carries role="status"/aria-live in the markup, so
-        // writing into it announces the message. It also needs an id to be
-        // referenced from the fields; assign one if the page did not.
-        if (status && !status.id) {
-          status.id = 'form-status-' + (form.getAttribute('data-track-form') || 'lead');
-        }
-        var required = form.querySelectorAll('[required]');
-        var missing = false;
-        var firstMissing = null;
-        required.forEach(function (field) {
-          var empty = field.type === 'checkbox' ? !field.checked : !field.value.trim();
-          // aria-invalid is what tells a screen reader *which* controls are at
-          // fault; the message alone said only that something was wrong
-          // (WCAG 3.3.1). aria-describedby points the field at that message.
-          field.setAttribute('aria-invalid', empty ? 'true' : 'false');
-          if (empty) {
-            missing = true;
-            if (!firstMissing) firstMissing = field;
-            if (status && status.id) field.setAttribute('aria-describedby', status.id);
-          } else if (status && status.id && field.getAttribute('aria-describedby') === status.id) {
-            field.removeAttribute('aria-describedby');
-          }
-        });
-        if (missing) {
-          e.preventDefault();
-          if (status) {
-            status.textContent = 'נא למלא את כל השדות המסומנים לפני השליחה.';
-            status.className = 'form-status is-error';
-          }
-          // Focus goes to the first field that needs attention, so a keyboard
-          // or screen-reader user lands on the problem rather than having to
-          // hunt back up the form for it.
-          if (firstMissing) firstMissing.focus();
           return;
         }
         if (submitBtn) {
