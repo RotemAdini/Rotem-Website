@@ -20,7 +20,7 @@ export default async function DatesPage() {
           <div>
             <span className="eyebrow">זמן ביחד בלי לחשוב שעה מה עושים</span>
             <h1>
-              רעיונות לדייטים <span>♡</span>
+              רעיונות לדייטים <span aria-hidden="true">♡</span>
             </h1>
             <p>דייט בבית, בחוץ, בתקציב קטן או ערב מושקע — בחרו לפי מצב הרוח ותנו לי לחשוב בשבילכם.</p>
           </div>

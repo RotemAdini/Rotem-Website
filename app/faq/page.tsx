@@ -14,7 +14,7 @@ export default function FaqPage() {
         <div className="container simple-hero">
           <span className="eyebrow">כאן כדי לעזור</span>
           <h1>
-            שאלות ותשובות <span>♡</span>
+            שאלות ותשובות <span aria-hidden="true">♡</span>
           </h1>
           <p>
             כל מה שרציתם לדעת על המתכונים, המשחקים לזוגות ואיך הרכישה עובדת. לא מצאתם תשובה? אפשר תמיד{" "}

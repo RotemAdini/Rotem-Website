@@ -11,7 +11,7 @@ export default function RecipesLoading() {
           <div>
             <span className="eyebrow">כל מה שטעים במקום אחד</span>
             <h1>
-              המתכונים שלי <span>♡</span>
+              המתכונים שלי <span aria-hidden="true">♡</span>
             </h1>
             <p>רגע, מסדרת את המתכונים…</p>
           </div>

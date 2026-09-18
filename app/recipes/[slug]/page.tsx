@@ -185,11 +185,11 @@ async function FullRecipeDetail({ recipe }: { recipe: SanityRecipe }) {
       </section>
 
       <section className="container recipe-content-grid reviewed-recipe-content">
-        <aside className="ingredients-card panel">
+        <section className="ingredients-card panel" aria-labelledby="recipe-ingredients-heading">
           <span className="section-kicker">מצרכים</span>
-          <h2>מה צריך?</h2>
+          <h2 id="recipe-ingredients-heading">מה צריך?</h2>
           <IngredientsList ingredients={recipe.ingredients} storageKey={recipe.contentId} />
-        </aside>
+        </section>
         <article className="instructions-card panel">
           <span className="section-kicker">אופן הכנה</span>
           <h2>איך מכינים?</h2>
@@ -263,11 +263,11 @@ async function SeriesStandInDetail({ recipe }: { recipe: SanityRecipe }) {
         <div className="recipe-intro">
           <div className="breadcrumbs">
             <Link href="/recipes">מתכונים</Link>
-            <span>›</span>
+            <span aria-hidden="true">›</span>
             <span>{recipe.title}</span>
           </div>
           <h1>
-            {recipe.title} <span>♡</span>
+            {recipe.title} <span aria-hidden="true">♡</span>
           </h1>
 
           <div className="recipe-actions">

@@ -38,7 +38,7 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
         <div className="auth-visual">
           <span className="eyebrow">המקום שלכם באתר</span>
           <h1>
-            שמרו את כל מה שאהבתם <span>♡</span>
+            שמרו את כל מה שאהבתם <span aria-hidden="true">♡</span>
           </h1>
           <p>
             עם חשבון, המתכונים והדייטים שתסמנו בלב נשמרים לחשבון עצמו — כך הם מחכים לכם בכל מכשיר שתתחברו ממנו, ולא

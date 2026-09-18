@@ -26,13 +26,28 @@ export default function GiftsFilterBar() {
         </h2>
       </div>
       <div className="filter-stack">
-        <div className="chips">
+        <div className="chips" role="group" aria-labelledby="gift-occasion-label">
+          <span id="gift-occasion-label" className="sr-only">
+            סינון לפי אירוע
+          </span>
           {OCCASIONS.map(([value, label]) => (
-            <button key={value} className={`chip${occasion === value ? " active" : ""}`} onClick={() => setOccasion(value)}>
+            <button
+              key={value}
+              type="button"
+              className={`chip${occasion === value ? " active" : ""}`}
+              aria-pressed={occasion === value}
+              onClick={() => setOccasion(value)}
+            >
               {label}
             </button>
           ))}
         </div>
+        {/* Had no accessible name. This board is behind FEATURES.gifts and
+            renders nothing today, but it is fixed alongside the others so the
+            flag can be switched on without reintroducing the failure. */}
+        <label className="sr-only" htmlFor="giftBudget">
+          סינון לפי תקציב
+        </label>
         <select id="giftBudget" defaultValue="all">
           <option value="all">כל התקציבים</option>
           <option value="low">עד ₪100</option>

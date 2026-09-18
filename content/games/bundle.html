@@ -1,6 +1,3 @@
-<a class="skip-link" href="#main">דלגו לתוכן הראשי</a>
-
-
 <main id="main" class="game-content">
 
   <div class="game-site-trail"><div class="container"><a href="/games">משחקים לזוג</a><span> / החבילה המלאה</span></div></div>
@@ -98,7 +95,7 @@
           <span class="purchase-price-note">המחיר המתוכנן, במקום ₪144 · תשלום חד־פעמי</span>
         </div>
         <p class="purchase-pending-note"><strong>החבילה המלאה עדיין לא נפתחה לרכישה.</strong> הסליקה באתר בהקמה — השאירו פרטים ואשלח לכם מייל ברגע שאפשר יהיה לרכוש ולשחק.</p>
-        <div class="form-status" data-form-status></div>
+        <div class="form-status" data-form-status role="status" aria-live="polite"></div>
         <!--
           הערה טכנית לרותם: הטופס הזה משתמש כרגע באותו נתיב שליחה (endpoint) כמו שאר טפסי האתר.
           לפני עליית האתר לאוויר יש להחליף את השדה החבוי "form" למזהה טופס/רשימה ייעודי
@@ -109,11 +106,11 @@
           <input type="hidden" name="form" value="REPLACE_WITH_BUNDLE_SENDMSG_FORM_ID" />
           <div class="form-field">
             <label for="bd-name">שם מלא</label>
-            <input id="bd-name" type="text" name="1" required>
+            <input id="bd-name" type="text" name="1" autocomplete="name" required aria-required="true">
           </div>
           <div class="form-field">
             <label for="bd-email">אימייל</label>
-            <input id="bd-email" type="email" name="eMail" required>
+            <input id="bd-email" type="email" name="eMail" autocomplete="email" required aria-required="true">
           </div>
           <!-- Marketing consent. Never pre-ticked, always required.
                The address is used for the launch notice AND for ongoing
@@ -128,7 +125,7 @@
                so main.js blocks its submit entirely — nothing reaches
                SendMsg from this page yet. -->
           <label class="form-check">
-            <input type="checkbox" name="confirm" value="1" required>
+            <input type="checkbox" name="confirm" value="1" required aria-required="true">
             <span>אני מאשר/ת לקבל מרותם עדיני עדכונים, הטבות ותוכן שיווקי בדוא״ל. ניתן להסיר את ההסכמה בכל עת.</span>
           </label>
           <button type="submit" class="btn btn-primary btn-lg btn-block">עדכנו אותי כשהחבילה תיפתח</button>
@@ -180,7 +177,7 @@
 
 </main>
 
-<div class="sticky-buy" data-sticky-buy>
+<aside class="sticky-buy" data-sticky-buy role="complementary" aria-label="רכישה מהירה">
   <span class="sticky-buy-price">₪110<small>החבילה המלאה</small></span>
   <a href="#purchase" class="btn btn-primary">להשארת פרטים</a>
-</div>
+</aside>

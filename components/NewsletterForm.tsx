@@ -24,6 +24,7 @@ export default function NewsletterForm() {
           href="https://www.instagram.com/rotem_adini"
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="לעקוב באינסטגרם (נפתח בחלון חדש)"
         >
           לעקוב באינסטגרם
         </a>

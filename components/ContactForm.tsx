@@ -49,43 +49,92 @@ export default function ContactForm() {
 
   return (
     <form className="contact-form panel" onSubmit={onSubmit}>
+      {/* Explicit label/for associations rather than wrapping.
+      
+          A wrapping <label> takes its accessible name from everything inside
+          it, so the wrapped <select> computed its name as the label text plus
+          the text of every <option> — "נושאבחרו נושאשאלה על מתכון…". Explicit
+          htmlFor/id pairs give each control exactly its own label (WCAG
+          4.1.2/3.3.2), and each field states that it is required in text as
+          well as through the required attribute, so the obligation is not
+          carried by the browser's tooltip alone (WCAG 3.3.2).
+      
+          autocomplete lets a browser or password manager fill the two
+          personal fields, which matters most to readers with motor or
+          cognitive disabilities (WCAG 1.3.5). */}
       <div className="form-row">
-        <label>
-          שם
-          <input type="text" name="name" placeholder="איך קוראים לכם?" required />
-        </label>
-        <label>
-          אימייל
-          <input type="email" name="email" placeholder="name@example.com" required />
-        </label>
+        <div className="field">
+          <label htmlFor="contact-name">
+            שם <span aria-hidden="true">*</span>
+            <span className="sr-only">(שדה חובה)</span>
+          </label>
+          <input
+            id="contact-name"
+            type="text"
+            name="name"
+            autoComplete="name"
+            placeholder="איך קוראים לכם?"
+            required
+            aria-required="true"
+          />
+        </div>
+        <div className="field">
+          <label htmlFor="contact-email">
+            אימייל <span aria-hidden="true">*</span>
+            <span className="sr-only">(שדה חובה)</span>
+          </label>
+          <input
+            id="contact-email"
+            type="email"
+            name="email"
+            autoComplete="email"
+            placeholder="name@example.com"
+            required
+            aria-required="true"
+          />
+        </div>
       </div>
-      <label>
-        נושא
-        <select name="topic" required defaultValue="">
+      <div className="field">
+        <label htmlFor="contact-topic">
+          נושא <span aria-hidden="true">*</span>
+          <span className="sr-only">(שדה חובה)</span>
+        </label>
+        <select id="contact-topic" name="topic" required aria-required="true" defaultValue="">
           <option value="">בחרו נושא</option>
           <option>שאלה על מתכון</option>
           <option>שאלה על משחק</option>
           <option>שיתוף פעולה</option>
           <option>משהו אחר</option>
         </select>
-      </label>
-      <label>
-        הודעה
-        <textarea name="message" rows={7} placeholder="כתבו לי כאן..." required />
-      </label>
+      </div>
+      <div className="field">
+        <label htmlFor="contact-message">
+          הודעה <span aria-hidden="true">*</span>
+          <span className="sr-only">(שדה חובה)</span>
+        </label>
+        <textarea
+          id="contact-message"
+          name="message"
+          rows={7}
+          placeholder="כתבו לי כאן..."
+          required
+          aria-required="true"
+          aria-describedby="contact-form-explainer"
+        />
+      </div>
       <button className="btn btn-primary" type="submit">
         פתיחת ההודעה במייל ♡
       </button>
       {/* Deliberately not .micro-note (11px, faint): this line is what tells
           the reader the button opens their mail client rather than sending,
           so it has to be comfortably readable. */}
-      <p className="form-explainer">
+      <p className="form-explainer" id="contact-form-explainer">
         הכפתור פותח את תוכנת המייל שלכם עם ההודעה מוכנה — השליחה עצמה מתבצעת משם. אפשר גם לכתוב ישירות אל{" "}
         <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.
       </p>
 
       {composed && (
-        <div className="contact-fallback" role="status">
+        <div className="contact-fallback" role="status" aria-live="polite">
           <p>
             לא נפתחה תוכנת מייל? העתיקו את ההודעה ושלחו אותה אל <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.
           </p>

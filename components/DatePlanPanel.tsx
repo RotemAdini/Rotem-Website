@@ -6,9 +6,9 @@ import type { DatePlan } from "@/lib/types";
 export default function DatePlanPanel({ plan }: { plan: DatePlan }) {
   return (
     <section className="container recipe-content-grid" id="datePlanSection">
-      <aside className="ingredients-card panel">
+      <section className="ingredients-card panel" aria-labelledby="date-plan-heading">
         <span className="section-kicker">מה זה עולה</span>
-        <h2>פרטי הדייט</h2>
+        <h2 id="date-plan-heading">פרטי הדייט</h2>
         <div className="recipe-stats">
           {plan.cost && (
             <div>
@@ -51,7 +51,7 @@ export default function DatePlanPanel({ plan }: { plan: DatePlan }) {
         ) : (
           <p>אין הכנה מיוחדת מראש.</p>
         )}
-      </aside>
+      </section>
       <article className="instructions-card panel">
         <span className="section-kicker">איך זה עובד</span>
         <h2>מה עושים בדייט</h2>

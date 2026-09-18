@@ -13,7 +13,14 @@ export default function GoogleSignInButton({ next = "/dashboard", label = "המ�
       <input type="hidden" name="next" value={next} />
       <button className="btn btn-primary full google-signin" type="submit">
         <GoogleMark />
-        <span>{label}</span>
+        {/* "Google" is an English word in a lang="he" document; without this a
+            Hebrew screen reader reads it with Hebrew phonetics (WCAG 3.1.2).
+            Only the brand name is marked, not the surrounding Hebrew. */}
+        <span>
+          {label.split("Google")[0]}
+          <span lang="en">Google</span>
+          {label.split("Google")[1] ?? ""}
+        </span>
       </button>
     </form>
   );

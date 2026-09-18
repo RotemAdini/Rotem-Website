@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import type { ReactNode } from "react";
+import { useCallback, type MouseEvent, type ReactNode } from "react";
 
 interface SiteChromeProps {
   header: ReactNode;
@@ -24,15 +24,43 @@ interface SiteChromeProps {
 export default function SiteChrome({ header, footer, accessibilityControls, children }: SiteChromeProps) {
   const pathname = usePathname();
 
+  /**
+   * Moves focus to the page's own <main> landmark.
+   *
+   * `href="#main-content"` alone pointed at a plain <div> with no tabindex.
+   * Whether that actually moves focus — rather than just scrolling — varies by
+   * browser and assistive technology, and it is the documented way for a skip
+   * link to look like it works while leaving the next Tab back at the top of
+   * the page. Focusing the real landmark is unambiguous, and every page here
+   * renders exactly one <main> inside this wrapper.
+   *
+   * The wrapper keeps its id and tabIndex so the plain fragment jump still
+   * lands somewhere sensible if this handler never runs.
+   */
+  const focusMain = useCallback((event: MouseEvent<HTMLAnchorElement>) => {
+    const wrapper = document.getElementById("main-content");
+    const target = wrapper?.querySelector("main") ?? wrapper;
+    if (!target) return;
+    event.preventDefault();
+    // A <main> is not focusable by default. Setting this on the way in rather
+    // than in the page markup keeps all 21 page components untouched, and it
+    // is idempotent, so repeated skips are fine.
+    if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+    target.focus();
+    target.scrollIntoView({ block: "start" });
+  }, []);
+
   if (pathname?.startsWith("/studio")) return <>{children}</>;
 
   return (
     <>
-      <a className="skip-link" href="#main-content">
+      <a className="skip-link" href="#main-content" onClick={focusMain}>
         דילוג לתוכן הראשי
       </a>
       {header}
-      <div id="main-content">{children}</div>
+      <div id="main-content" tabIndex={-1}>
+        {children}
+      </div>
       {footer}
       {accessibilityControls}
     </>

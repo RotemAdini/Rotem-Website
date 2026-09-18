@@ -108,11 +108,11 @@ export default async function DateDetailPage({ params }: { params: Promise<{ slu
         <div className="date-detail-copy">
           <div className="breadcrumbs">
             <Link href="/dates">דייטים</Link>
-            <span>›</span>
+            <span aria-hidden="true">›</span>
             <span>{dateIdea.title}</span>
           </div>
           <h1>
-            {dateIdea.title} <span>♡</span>
+            {dateIdea.title} <span aria-hidden="true">♡</span>
           </h1>
           <div className="recipe-actions">
             <Link className="btn btn-primary" href="/dates">

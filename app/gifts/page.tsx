@@ -26,7 +26,7 @@ export default function GiftsPage() {
           <div>
             <span className="eyebrow">כשלא יודעים מה לקנות</span>
             <h1>
-              מתנות מומלצות <span>♡</span>
+              מתנות מומלצות <span aria-hidden="true">♡</span>
             </h1>
             <p>ריכזתי רעיונות למתנות קטנות, זוגיות וחווייתיות שאפשר לסנן לפי תקציב ולפי למי קונים.</p>
           </div>
@@ -40,7 +40,7 @@ export default function GiftsPage() {
 
       <section className="container gifts-shop-grid" id="giftResults" />
       <div className="empty-state container" id="giftEmpty">
-        <span>♡</span>
+        <span aria-hidden="true">♡</span>
         <h3>אין התאמה לפילטר הזה</h3>
         <p>נסו תקציב או סוג מתנה אחר.</p>
       </div>

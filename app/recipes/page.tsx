@@ -22,7 +22,7 @@ export default async function RecipesPage() {
           <div>
             <span className="eyebrow">כל מה שטעים במקום אחד</span>
             <h1>
-              המתכונים שלי <span>♡</span>
+              המתכונים שלי <span aria-hidden="true">♡</span>
             </h1>
             <p>מחפשים משהו מתוק, מהיר, בלי אפייה או פשוט רעיון לארוחת ערב? כאן אפשר לסנן עד שתמצאו בדיוק מה שמתאים.</p>
           </div>

@@ -51,11 +51,20 @@ export default function GamesBoard({ games }: { games: GameCatalogItem[] }) {
       <section className="container shop-intro">
         <div>
           <span className="section-kicker">בחרו לפי מצב הרוח</span>
-          <h2>איזה ערב בא לכם?</h2>
+          <h2 id="games-filter-label">איזה ערב בא לכם?</h2>
         </div>
-        <div className="chips shop-filter">
+        {/* Labelled group + per-chip selected state, matching the recipes,
+            dates, search and favourites boards. Selection here was a
+            background colour only (WCAG 1.3.1, 1.4.1, 4.1.2). */}
+        <div className="chips shop-filter" role="group" aria-labelledby="games-filter-label">
           {filters.map((item) => (
-            <button key={item.value} className={`chip${filter === item.value ? " active" : ""}`} onClick={() => setFilter(item.value)}>
+            <button
+              key={item.value}
+              type="button"
+              className={`chip${filter === item.value ? " active" : ""}`}
+              aria-pressed={filter === item.value}
+              onClick={() => setFilter(item.value)}
+            >
               {item.label}
             </button>
           ))}
@@ -73,9 +82,14 @@ export default function GamesBoard({ games }: { games: GameCatalogItem[] }) {
         ))}
       </section>
 
+      {/* Announces the count when a filter chip changes it. */}
+      <p className="sr-only" role="status" aria-live="polite">
+        {visible.length === 0 ? "אין משחקים להצגה" : `${visible.length} משחקים מוצגים`}
+      </p>
+
       {visible.length === 0 && (
         <div className="container empty-state" id="gamesEmpty">
-          <span>♡</span>
+          <span aria-hidden="true">♡</span>
           <h3>הקטלוג בדרך</h3>
           <p>המשחקים יופיעו כאן בקרוב.</p>
         </div>

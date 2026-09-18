@@ -19,7 +19,7 @@ export default async function FavoritesPage() {
         <div className="container simple-hero">
           <span className="eyebrow">כל הדברים ששמרתם</span>
           <h1>
-            המועדפים שלי <span>♡</span>
+            המועדפים שלי <span aria-hidden="true">♡</span>
           </h1>
           <p>מתכונים, דייטים, משחקים ומתנות שאהבתם — במקום אחד.</p>
         </div>

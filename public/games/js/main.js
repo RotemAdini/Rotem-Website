@@ -175,11 +175,27 @@
           }
           return;
         }
+        // The status element carries role="status"/aria-live in the markup, so
+        // writing into it announces the message. It also needs an id to be
+        // referenced from the fields; assign one if the page did not.
+        if (status && !status.id) {
+          status.id = 'form-status-' + (form.getAttribute('data-track-form') || 'lead');
+        }
         var required = form.querySelectorAll('[required]');
         var missing = false;
+        var firstMissing = null;
         required.forEach(function (field) {
-          if (field.type === 'checkbox' ? !field.checked : !field.value.trim()) {
+          var empty = field.type === 'checkbox' ? !field.checked : !field.value.trim();
+          // aria-invalid is what tells a screen reader *which* controls are at
+          // fault; the message alone said only that something was wrong
+          // (WCAG 3.3.1). aria-describedby points the field at that message.
+          field.setAttribute('aria-invalid', empty ? 'true' : 'false');
+          if (empty) {
             missing = true;
+            if (!firstMissing) firstMissing = field;
+            if (status && status.id) field.setAttribute('aria-describedby', status.id);
+          } else if (status && status.id && field.getAttribute('aria-describedby') === status.id) {
+            field.removeAttribute('aria-describedby');
           }
         });
         if (missing) {
@@ -188,6 +204,10 @@
             status.textContent = 'נא למלא את כל השדות המסומנים לפני השליחה.';
             status.className = 'form-status is-error';
           }
+          // Focus goes to the first field that needs attention, so a keyboard
+          // or screen-reader user lands on the problem rather than having to
+          // hunt back up the form for it.
+          if (firstMissing) firstMissing.focus();
           return;
         }
         if (submitBtn) {

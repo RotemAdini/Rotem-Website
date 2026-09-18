@@ -1,6 +1,3 @@
-<a class="skip-link" href="#main">דלגו לתוכן הראשי</a>
-
-
 <main id="main" class="game-content">
 
   <div class="game-site-trail"><div class="container"><a href="/games">משחקים לזוג</a><span> / היער הקסום</span></div></div>
@@ -211,16 +208,16 @@
           <span class="purchase-price-note">המחיר המתוכנן · תשלום חד־פעמי, לא מנוי</span>
         </div>
         <p class="purchase-pending-note"><strong>היער הקסום עדיין לא נפתח לרכישה.</strong> הסליקה באתר בהקמה — השאירו פרטים ואשלח לכם מייל ברגע שאפשר יהיה לרכוש ולשחק.</p>
-        <div class="form-status" data-form-status></div>
+        <div class="form-status" data-form-status role="status" aria-live="polite"></div>
         <form action="https://panel.sendmsg.co.il/AddUserFromSite.aspx" method="post" data-lead-form data-track-form="forest-game" data-track-checkout data-track-value="48">
           <input type="hidden" name="form" value="340156__eb0ff2e2-8357-45b2-8820-56e595b38d54" />
           <div class="form-field">
             <label for="fg-name">שם מלא</label>
-            <input id="fg-name" type="text" name="1" required>
+            <input id="fg-name" type="text" name="1" autocomplete="name" required aria-required="true">
           </div>
           <div class="form-field">
             <label for="fg-email">אימייל</label>
-            <input id="fg-email" type="email" name="eMail" required>
+            <input id="fg-email" type="email" name="eMail" autocomplete="email" required aria-required="true">
           </div>
           <!-- Marketing consent. Never pre-ticked, always required.
                The address is used for the launch notice AND for ongoing
@@ -231,7 +228,7 @@
                main.js already marks it aria-invalid and moves focus here
                when it is left unticked. -->
           <label class="form-check">
-            <input type="checkbox" name="confirm" value="1" required>
+            <input type="checkbox" name="confirm" value="1" required aria-required="true">
             <span>אני מאשר/ת לקבל מרותם עדיני עדכונים, הטבות ותוכן שיווקי בדוא״ל. ניתן להסיר את ההסכמה בכל עת.</span>
           </label>
           <button type="submit" class="btn btn-primary btn-lg btn-block">עדכנו אותי כשהמשחק ייפתח</button>
@@ -338,7 +335,7 @@
 
 </main>
 
-<div class="sticky-buy" data-sticky-buy>
+<aside class="sticky-buy" data-sticky-buy role="complementary" aria-label="רכישה מהירה">
   <span class="sticky-buy-price">₪48<small>היער הקסום · <a href="/games/bundle" style="color:inherit;text-decoration:underline;">או החבילה ב-₪110</a></small></span>
   <a href="#purchase" class="btn btn-primary">להשארת פרטים</a>
-</div>
+</aside>

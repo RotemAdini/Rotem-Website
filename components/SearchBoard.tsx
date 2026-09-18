@@ -47,29 +47,43 @@ export default function SearchBoard({ index }: { index: SearchResult[] }) {
         <div className="container simple-hero">
           <span className="eyebrow">חפשו בכל האתר</span>
           <h1>
-            מה בא לכם למצוא? <span>⌕</span>
+            מה בא לכם למצוא? <span aria-hidden="true">⌕</span>
           </h1>
-          <label className="global-search-box">
-            <span>⌕</span>
+          {/* The wrapping <label>'s only text was the magnifier glyph, so the
+              field's computed accessible name was literally "⌕". The glyph is
+              decoration; the name is now stated outright (WCAG 4.1.2/3.3.2). */}
+          <div className="global-search-box">
+            <span aria-hidden="true">⌕</span>
             <input
               id="globalSearchInput"
               type="search"
+              aria-label="חיפוש בכל האתר"
               placeholder="שם של מתכון, מצרך, או רעיון לדייט..."
               autoFocus
               value={term}
               onChange={(event) => updateTerm(event.target.value)}
             />
-          </label>
+          </div>
         </div>
       </section>
 
       <section className="container global-results">
+        {/* Outside the conditional on purpose: results appear and change as
+            the reader types, with nothing announcing that anything happened
+            (WCAG 4.1.3), and a live region mounted alongside its first
+            message tends not to be read at all. */}
+        <p className="sr-only" role="status" aria-live="polite">
+          {!hasQuery ? "" : results.length === 0 ? "לא נמצאו תוצאות" : `${results.length} תוצאות`}
+        </p>
         {!hasQuery ? (
           <div className="search-intro">
             <div className="search-suggestions">
               <h2>אפשר להתחיל מכאן</h2>
               <p>אפשר לחפש גם לפי מצרך — למשל טחינה, נוטלה או שמנת מתוקה.</p>
-              <div className="chips">
+              {/* These run a search rather than toggling a filter, so they
+                  get a group label but deliberately no aria-pressed — there
+                  is no "selected" state for them to report. */}
+              <div className="chips" role="group" aria-label="חיפושים מוצעים">
                 {SUGGESTIONS.map((item) => (
                   <button key={item} type="button" className="chip" onClick={() => updateTerm(item)}>
                     {item}
@@ -101,13 +115,15 @@ export default function SearchBoard({ index }: { index: SearchResult[] }) {
                   <span id="globalResultCount">{results.length}</span> פריטים
                 </h2>
               </div>
-              <div className="chips">
+              <div className="chips" role="group" aria-label="סינון תוצאות לפי סוג">
                 {TYPES.map((item) => {
                   const count = item.value === "all" ? ranked.length : ranked.filter((row) => row.type === item.value).length;
                   return (
                     <button
                       key={item.value}
+                      type="button"
                       className={`chip${type === item.value ? " active" : ""}`}
+                      aria-pressed={type === item.value}
                       disabled={count === 0}
                       onClick={() => {
                         setType(item.value);
@@ -126,7 +142,10 @@ export default function SearchBoard({ index }: { index: SearchResult[] }) {
                 const body = (
                   <>
                     <span className="result-type">{item.typeLabel}</span>
-                    {item.image ? <img src={item.image} alt={item.title} /> : <div className="result-placeholder">♡</div>}
+                    {/* The <h3> below is inside the same link and already
+                        names the result, so repeating the title here would
+                        read it twice (axe image-redundant-alt). */}
+                    {item.image ? <img src={item.image} alt="" /> : <div className="result-placeholder" aria-hidden="true">♡</div>}
                     <div>
                       <h3>{item.title}</h3>
                       <p>{item.meta}</p>
@@ -162,7 +181,7 @@ export default function SearchBoard({ index }: { index: SearchResult[] }) {
 
             {results.length === 0 && (
               <div className="empty-state">
-                <span>⌕</span>
+                <span aria-hidden="true">⌕</span>
                 <h3>לא מצאתי משהו מתאים</h3>
                 <p>נסו מילה אחרת, או חפשו לפי מצרך — למשל שוקולד, גבינה או טחינה.</p>
               </div>

@@ -48,7 +48,7 @@ export default async function DashboardPage() {
           <div>
             <span className="eyebrow">האזור האישי</span>
             <h1>
-              שלום, {profile.firstName} <span>♡</span>
+              שלום, {profile.firstName} <span aria-hidden="true">♡</span>
             </h1>
             <p>{profile.email}</p>
           </div>
@@ -78,7 +78,7 @@ export default async function DashboardPage() {
               </Link>
             </div>
             <div className="empty-state">
-              <span>♡</span>
+              <span aria-hidden="true">♡</span>
               <h3>המועדפים שלך שמורים בחשבון</h3>
               <p>
                 כל מה שסימנתם בלב נשמר לחשבון הזה ומופיע בכל מכשיר שתתחברו ממנו. גם מה ששמרתם לפני ההתחברות צורף

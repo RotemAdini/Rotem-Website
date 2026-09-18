@@ -78,7 +78,7 @@ export default async function HomePage() {
             <div>
               <span className="section-kicker">מה חדש במטבח</span>
               <h2>
-                המתכונים האחרונים <span>♡</span>
+                המתכונים האחרונים <span aria-hidden="true">♡</span>
               </h2>
             </div>
             <Link className="small-pill" href="/recipes">
@@ -102,11 +102,11 @@ export default async function HomePage() {
           </div>
         </div>
 
-        <aside className="dates-panel panel">
+        <section className="dates-panel panel" aria-labelledby="home-dates-heading">
           <span className="section-kicker">רגעים לשניים</span>
           <div className="section-head no-margin">
-            <h2>
-              רעיונות לדייטים <span>♡</span>
+            <h2 id="home-dates-heading">
+              רעיונות לדייטים <span aria-hidden="true">♡</span>
             </h2>
             <Link className="small-pill" href="/dates">
               לכל הדייטים
@@ -121,12 +121,12 @@ export default async function HomePage() {
                 <div>
                   <h3>{item.title}</h3>
                   <p>מסדרת הדייטים א׳-ב׳</p>
-                  <span>♡</span>
+                  <span aria-hidden="true">♡</span>
                 </div>
               </Link>
             ))}
           </div>
-        </aside>
+        </section>
       </section>
 
       <section className={`soft-promos container${FEATURES.gifts ? "" : " promos-2"}`} aria-label="עוד דברים באתר">
@@ -148,7 +148,7 @@ export default async function HomePage() {
             <span className="text-cta">למשחקים ←</span>
           </div>
           <div className="mini-game-art">
-            <span>♡</span>
+            <span aria-hidden="true">♡</span>
             <strong>
               דיבורים
               <br />

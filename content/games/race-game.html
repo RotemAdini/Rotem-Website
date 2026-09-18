@@ -1,6 +1,3 @@
-<a class="skip-link" href="#main">דלגו לתוכן הראשי</a>
-
-
 <main id="main" class="game-content">
 
   <div class="game-site-trail"><div class="container"><a href="/games">משחקים לזוג</a><span> / מירוץ האהבה</span></div></div>
@@ -130,16 +127,16 @@
           <span class="purchase-price-note">המחיר המתוכנן · תשלום חד־פעמי, לא מנוי</span>
         </div>
         <p class="purchase-pending-note"><strong>מירוץ האהבה עדיין לא נפתח לרכישה.</strong> הסליקה באתר בהקמה — השאירו פרטים ואשלח לכם מייל ברגע שאפשר יהיה לרכוש ולשחק.</p>
-        <div class="form-status" data-form-status></div>
+        <div class="form-status" data-form-status role="status" aria-live="polite"></div>
         <form action="https://panel.sendmsg.co.il/AddUserFromSite.aspx" method="post" data-lead-form data-track-form="race-game" data-track-checkout data-track-value="48">
           <input type="hidden" name="form" value="340164__c3b84648-3ac9-4b18-b88f-283e135bc80a" />
           <div class="form-field">
             <label for="rg-email">אימייל</label>
-            <input id="rg-email" type="email" name="eMail" required>
+            <input id="rg-email" type="email" name="eMail" autocomplete="email" required aria-required="true">
           </div>
           <div class="form-field">
             <label for="rg-name">שם מלא</label>
-            <input id="rg-name" type="text" name="1" required>
+            <input id="rg-name" type="text" name="1" autocomplete="name" required aria-required="true">
           </div>
           <!-- Marketing consent. Never pre-ticked, always required.
                This box used to carry `checked` and no `required`, which meant
@@ -152,7 +149,7 @@
                renaming it blind could silently stop the consent being
                recorded. Standardise only after confirming the mapping there. -->
           <label class="form-check">
-            <input type="checkbox" name="subscribe" value="true" required>
+            <input type="checkbox" name="subscribe" value="true" required aria-required="true">
             <span>אני מאשר/ת לקבל מרותם עדיני עדכונים, הטבות ותוכן שיווקי בדוא״ל. ניתן להסיר את ההסכמה בכל עת.</span>
           </label>
           <button type="submit" class="btn btn-primary btn-lg btn-block">עדכנו אותי כשהמשחק ייפתח</button>
@@ -242,7 +239,7 @@
 
 </main>
 
-<div class="sticky-buy" data-sticky-buy>
+<aside class="sticky-buy" data-sticky-buy role="complementary" aria-label="רכישה מהירה">
   <span class="sticky-buy-price">₪48<small>מירוץ האהבה · <a href="/games/bundle" style="color:inherit;text-decoration:underline;">או החבילה ב-₪110</a></small></span>
   <a href="#purchase" class="btn btn-primary">להשארת פרטים</a>
-</div>
+</aside>

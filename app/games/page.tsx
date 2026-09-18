@@ -20,7 +20,7 @@ export default async function GamesPage() {
           <div>
             <span className="eyebrow">לא עוד &quot;אז מה עושים הערב?&quot;</span>
             <h1>
-              משחקים לזוג <span>♡</span>
+              משחקים לזוג <span aria-hidden="true">♡</span>
             </h1>
             <p>משחקים דיגיטליים שנועדו להצחיק, להתחרות, לפתוח שיחה או פשוט להעביר ערב אחר ביחד.</p>
             <div className="hero-buttons">
@@ -36,12 +36,12 @@ export default async function GamesPage() {
             <div className="floating-card card-one">
               <small>קלף 01</small>
               <strong>מה הדבר הכי מצחיק שעשינו יחד?</strong>
-              <span>♡</span>
+              <span aria-hidden="true">♡</span>
             </div>
             <div className="floating-card card-two">
               <small>משימה</small>
               <strong>בחרו מי מתחיל — בלי לדבר</strong>
-              <span>→</span>
+              <span aria-hidden="true">→</span>
             </div>
             <div className="floating-card card-three">
               <small>בונוס</small>

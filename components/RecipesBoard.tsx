@@ -144,32 +144,53 @@ export default function RecipesBoard({ cards, tagOptions }: RecipesBoardProps) {
             </button>
           )}
         </label>
+        {/* The visible line is unchanged — it still appears only once there
+            is a query, so the layout is what it was. */}
         {hasQuery && (
-          <p className="recipe-search-status" aria-live="polite">
+          <p className="recipe-search-status">
             {filtered.length === 0
               ? `אין תוצאות עבור “${search.trim()}”`
               : `${filtered.length} תוצאות עבור “${search.trim()}”`}
           </p>
         )}
+        {/* The announcement is a separate, permanently mounted region. It has
+            to be permanent because a live region inserted together with its
+            first message is routinely never read, and separate because the
+            count also changes when a chip or select is used, with nothing
+            visible appearing to say so (WCAG 4.1.3). */}
+        <p className="sr-only" role="status" aria-live="polite">
+          {filtered.length === 0 ? "לא נמצאו מתכונים" : `${filtered.length} מתכונים מוצגים`}
+        </p>
       </section>
 
       <section className="container filter-layout">
-      <aside className="filters-panel panel" id="recipeFilters">
+      <section className="filters-panel panel" id="recipeFilters" aria-labelledby="recipe-filters-heading">
         <div className="filter-title-row">
           <div>
             <span className="section-kicker">סינון וחיפוש</span>
-            <h2>מה בא לכם?</h2>
+            <h2 id="recipe-filters-heading">מה בא לכם?</h2>
           </div>
-          <button className="text-button" onClick={resetFilters}>
+          <button type="button" className="text-button" onClick={resetFilters}>
             נקה הכל
           </button>
         </div>
 
+        {/* Each chip row is a labelled group whose buttons carry their own
+            selected state. Both were previously visual only: the heading sat
+            beside the chips with nothing tying them together, and "selected"
+            was a background colour — so the state was unavailable to a screen
+            reader (WCAG 1.3.1, 4.1.2) and carried by colour alone (1.4.1). */}
         <div className="filter-group">
-          <h3>סוג</h3>
-          <div className="chips">
+          <h3 id="filter-type-label">סוג</h3>
+          <div className="chips" role="group" aria-labelledby="filter-type-label">
             {(["all", "sweet", "savory"] as const).map((value) => (
-              <button key={value} className={`chip${type === value ? " active" : ""}`} onClick={() => setType(value)}>
+              <button
+                key={value}
+                type="button"
+                className={`chip${type === value ? " active" : ""}`}
+                aria-pressed={type === value}
+                onClick={() => setType(value)}
+              >
                 {value === "all" ? "הכל" : value === "sweet" ? "מתוק" : "מלוח"}
               </button>
             ))}
@@ -177,15 +198,21 @@ export default function RecipesBoard({ cards, tagOptions }: RecipesBoardProps) {
         </div>
 
         <div className="filter-group">
-          <h3>זמן הכנה</h3>
-          <div className="chips">
+          <h3 id="filter-time-label">זמן הכנה</h3>
+          <div className="chips" role="group" aria-labelledby="filter-time-label">
             {([
               ["all", "הכל"],
               ["15", "עד 15 דק׳"],
               ["30", "עד 30 דק׳"],
               ["60", "עד שעה"],
             ] as const).map(([value, label]) => (
-              <button key={value} className={`chip${time === value ? " active" : ""}`} onClick={() => setTime(value)}>
+              <button
+                key={value}
+                type="button"
+                className={`chip${time === value ? " active" : ""}`}
+                aria-pressed={time === value}
+                onClick={() => setTime(value)}
+              >
                 {label}
               </button>
             ))}
@@ -193,14 +220,20 @@ export default function RecipesBoard({ cards, tagOptions }: RecipesBoardProps) {
         </div>
 
         <div className="filter-group">
-          <h3>אופן הכנה</h3>
-          <div className="chips">
+          <h3 id="filter-bake-label">אופן הכנה</h3>
+          <div className="chips" role="group" aria-labelledby="filter-bake-label">
             {([
               ["all", "הכל"],
               ["no-oven", "ללא תנור"],
               ["oven", "דורש תנור"],
             ] as const).map(([value, label]) => (
-              <button key={value} className={`chip${bake === value ? " active" : ""}`} onClick={() => setBake(value)}>
+              <button
+                key={value}
+                type="button"
+                className={`chip${bake === value ? " active" : ""}`}
+                aria-pressed={bake === value}
+                onClick={() => setBake(value)}
+              >
                 {label}
               </button>
             ))}
@@ -208,8 +241,11 @@ export default function RecipesBoard({ cards, tagOptions }: RecipesBoardProps) {
         </div>
 
         <div className="filter-group">
-          <h3>רמת קושי</h3>
-          <select value={difficulty} onChange={(event) => setDifficulty(event.target.value)}>
+          <h3 id="filter-difficulty-label">רמת קושי</h3>
+          {/* aria-labelledby rather than a wrapping <label>: the heading is
+              already the visible label, and this select had no accessible
+              name at all (axe select-name, critical — WCAG 4.1.2/3.3.2). */}
+          <select aria-labelledby="filter-difficulty-label" value={difficulty} onChange={(event) => setDifficulty(event.target.value)}>
             <option value="all">הכל</option>
             <option value="easy">קל</option>
             <option value="medium">בינוני</option>
@@ -217,8 +253,8 @@ export default function RecipesBoard({ cards, tagOptions }: RecipesBoardProps) {
         </div>
 
         <div className="filter-group">
-          <h3>קטגוריה</h3>
-          <select value={category} onChange={(event) => setCategory(event.target.value)}>
+          <h3 id="filter-category-label">קטגוריה</h3>
+          <select aria-labelledby="filter-category-label" value={category} onChange={(event) => setCategory(event.target.value)}>
             <option value="all">כל הקטגוריות</option>
             {RECIPE_CATEGORIES.map((option) => (
               <option key={option.slug} value={option.slug}>
@@ -229,10 +265,12 @@ export default function RecipesBoard({ cards, tagOptions }: RecipesBoardProps) {
         </div>
 
         <div className="filter-group series-filter">
-          <h3>סדרות</h3>
-          <div className="chips">
+          <h3 id="filter-series-label">סדרות</h3>
+          <div className="chips" role="group" aria-labelledby="filter-series-label">
             <button
+              type="button"
               className={`chip${series === "biscuit-cakes" ? " active" : ""}`}
+              aria-pressed={series === "biscuit-cakes"}
               onClick={() => setSeries(series === "biscuit-cakes" ? "all" : "biscuit-cakes")}
             >
               סדרת עוגות ביסקוויטים
@@ -242,20 +280,26 @@ export default function RecipesBoard({ cards, tagOptions }: RecipesBoardProps) {
 
         {tagOptions.length > 0 && (
           <div className="filter-group tag-filter">
-            <h3>תגיות</h3>
-            <div className="chips">
-              <button className={`chip${tag === "all" ? " active" : ""}`} onClick={() => setTag("all")}>
+            <h3 id="filter-tag-label">תגיות</h3>
+            <div className="chips" role="group" aria-labelledby="filter-tag-label">
+              <button type="button" className={`chip${tag === "all" ? " active" : ""}`} aria-pressed={tag === "all"} onClick={() => setTag("all")}>
                 הכל
               </button>
               {tagOptions.map((option) => (
-                <button key={option} className={`chip${tag === option ? " active" : ""}`} onClick={() => setTag(option)}>
+                <button
+                  key={option}
+                  type="button"
+                  className={`chip${tag === option ? " active" : ""}`}
+                  aria-pressed={tag === option}
+                  onClick={() => setTag(option)}
+                >
                   {option}
                 </button>
               ))}
             </div>
           </div>
         )}
-      </aside>
+      </section>
 
       <div className="results-panel">
         <div className="results-toolbar">
@@ -283,7 +327,10 @@ export default function RecipesBoard({ cards, tagOptions }: RecipesBoardProps) {
             <button type="button" className="btn btn-secondary" onClick={() => setVisible((n) => n + PAGE_SIZE)}>
               להציג עוד מתכונים
             </button>
-            <span className="load-more-count" aria-live="polite">
+            {/* No aria-live here any more: the permanently mounted status
+                region above already announces the count, and two regions
+                firing on the same change read the number twice. */}
+            <span className="load-more-count">
               מוצגים {shown.length} מתוך {filtered.length}
             </span>
           </div>
@@ -291,7 +338,7 @@ export default function RecipesBoard({ cards, tagOptions }: RecipesBoardProps) {
 
         {filtered.length === 0 && (
           <div className="empty-state" id="recipeEmpty">
-            <span>♡</span>
+            <span aria-hidden="true">♡</span>
             <h3>לא מצאתי בדיוק את זה</h3>
             {hasQuery ? (
               <p>

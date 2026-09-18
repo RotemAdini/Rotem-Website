@@ -42,7 +42,7 @@ export default function PrivacyPage() {
         <div className="container simple-hero">
           <span className="eyebrow">שקיפות זה חשוב לי</span>
           <h1>
-            מדיניות פרטיות <span>♡</span>
+            מדיניות פרטיות <span aria-hidden="true">♡</span>
           </h1>
           <p>איזה מידע נאסף באתר, לאן הוא מגיע, כמה זמן הוא נשמר ומה אפשר לעשות בקשר לזה.</p>
         </div>
@@ -76,7 +76,7 @@ export default function PrivacyPage() {
         <div className="legal-content">
           <p className="legal-updated">עדכון אחרון: 18 בספטמבר 2026</p>
           <div className="legal-draft-note">
-            <span>✎</span>
+            <span aria-hidden="true">✎</span>
             <p>
               המסמך מתאר את מה שהאתר עושה בפועל נכון לתאריך העדכון שלמעלה. פרטים שטרם נקבעו סופית מסומנים ברקע כתום
               ויושלמו לפני שהאתר עולה לאוויר באופן מסחרי. מסמך זה אינו מהווה ייעוץ משפטי.

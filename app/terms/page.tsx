@@ -14,7 +14,7 @@ export default function TermsPage() {
         <div className="container simple-hero">
           <span className="eyebrow">כדאי להכיר לפני שמשתמשים</span>
           <h1>
-            תנאי שימוש <span>♡</span>
+            תנאי שימוש <span aria-hidden="true">♡</span>
           </h1>
           <p>התנאים להשתמשות באתר, בתכנים ובמשחקים הדיגיטליים של רותם עדיני.</p>
         </div>
@@ -43,7 +43,7 @@ export default function TermsPage() {
         <div className="legal-content">
           <p className="legal-updated">עדכון אחרון: 5 בספטמבר 2026</p>
           <div className="legal-draft-note">
-            <span>✎</span>
+            <span aria-hidden="true">✎</span>
             <p>מסמך זה הוא שלד ראשוני של תנאי שימוש. סעיפים שדורשים ניסוח משפטי סופי, פרטי עסק מחייבים או ייעוץ משפטי מסומנים בהתאם, ויושלמו לפני שהתנאים ייכנסו לתוקף מחייב.</p>
           </div>
 

@@ -3,8 +3,15 @@
 /* Current-site bridge: loaded after the game design system so the game worlds
    keep their visual identity while their shared shell matches Rotem-Website. */
 :root {
+  /* Mirrors of the parent site's palette. These have to track
+     app/globals.css: --site-pink-dark was #c95060, which failed 1.4.3 on the
+     tinted backgrounds it is painted on here (4.16:1 on #fff8f4), and the
+     button gradient below carries white text so both of its stops need
+     4.5:1. Same hues, lower lightness. */
   --site-pink: #df6d79;
-  --site-pink-dark: #c95060;
+  --site-pink-dark: #b3374a;
+  --site-pink-strong: #cc3a4c;
+  --site-pink-deep: #bb3448;
 }
 
 body { font-family: "Heebo", "Assistant", Arial, sans-serif; }
@@ -18,7 +25,7 @@ body { font-family: "Heebo", "Assistant", Arial, sans-serif; }
 .site-header .nav-links a:hover,
 .site-header .nav-links a[aria-current="page"] { color: var(--site-pink-dark); }
 .site-header .btn-primary,
-.sticky-buy .btn-primary { background: linear-gradient(135deg, #e47781, #da5e6c); }
+.sticky-buy .btn-primary { background: linear-gradient(135deg, var(--site-pink-strong), var(--site-pink-deep)); }
 .site-footer { border-top-color: #f0e0da; }
 
 /* A lightweight, clearly visible route back into the parent site. */

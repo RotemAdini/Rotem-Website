@@ -10,7 +10,7 @@ export default function DatesLoading() {
           <div>
             <span className="eyebrow">זמן ביחד בלי לחשוב שעה מה עושים</span>
             <h1>
-              רעיונות לדייטים <span>♡</span>
+              רעיונות לדייטים <span aria-hidden="true">♡</span>
             </h1>
             <p>רגע, מסדרת את הרעיונות…</p>
           </div>

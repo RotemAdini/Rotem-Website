@@ -92,11 +92,17 @@ export default function IngredientsList({
         ),
       )}
 
+      {/* The counter is announced from a region that is always mounted, and
+          only its text changes. It used to live inside this block, which only
+          existed once something was ticked — a live region inserted together
+          with its first message is routinely never read out. The visible row
+          still appears only when there is something to show. */}
+      <p className="sr-only" role="status" aria-live="polite">
+        {checkedCount === 0 ? "" : checkedCount === 1 ? "מצרך אחד מסומן" : `${checkedCount} מצרכים מסומנים`}
+      </p>
       {checkedCount > 0 && (
         <div className="ingredient-progress">
-          <span aria-live="polite">
-            {checkedCount === 1 ? "מצרך אחד מסומן" : `${checkedCount} מצרכים מסומנים`}
-          </span>
+          <span>{checkedCount === 1 ? "מצרך אחד מסומן" : `${checkedCount} מצרכים מסומנים`}</span>
           <button type="button" className="text-button" onClick={clearAll}>
             ניקוי הסימונים
           </button>

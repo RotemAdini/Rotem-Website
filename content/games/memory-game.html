@@ -1,6 +1,3 @@
-<a class="skip-link" href="#main">דלגו לתוכן הראשי</a>
-
-
 <main id="main" class="game-content">
 
   <div class="game-site-trail"><div class="container"><a href="/games">משחקים לזוג</a><span> / משחק הזיכרון הגדול</span></div></div>
@@ -158,15 +155,15 @@
           <span class="purchase-price-note">המחיר המתוכנן · תשלום חד־פעמי, לא מנוי</span>
         </div>
         <p class="purchase-pending-note"><strong>משחק הזיכרון הגדול עדיין לא נפתח לרכישה.</strong> הסליקה באתר בהקמה — השאירו פרטים ואשלח לכם מייל ברגע שאפשר יהיה לרכוש ולשחק.</p>
-        <div class="form-status" data-form-status></div>
+        <div class="form-status" data-form-status role="status" aria-live="polite"></div>
         <form action="https://panel.sendmsg.co.il/AddUserFromSite.aspx" method="post" data-lead-form data-track-form="memory-game" data-track-checkout data-track-value="48">
           <div class="form-field">
             <label for="mg-name">שם מלא</label>
-            <input id="mg-name" type="text" name="1" required>
+            <input id="mg-name" type="text" name="1" autocomplete="name" required aria-required="true">
           </div>
           <div class="form-field">
             <label for="mg-email">כתובת מייל</label>
-            <input id="mg-email" type="email" name="eMail" required>
+            <input id="mg-email" type="email" name="eMail" autocomplete="email" required aria-required="true">
           </div>
           <!-- Marketing consent. Never pre-ticked, always required.
                The address is used for the launch notice AND for ongoing
@@ -177,7 +174,7 @@
                main.js already marks it aria-invalid and moves focus here
                when it is left unticked. -->
           <label class="form-check">
-            <input type="checkbox" name="confirm" value="1" required>
+            <input type="checkbox" name="confirm" value="1" required aria-required="true">
             <span>אני מאשר/ת לקבל מרותם עדיני עדכונים, הטבות ותוכן שיווקי בדוא״ל. ניתן להסיר את ההסכמה בכל עת.</span>
           </label>
           <input type="hidden" name="form" value="340969__642d66b1-5bdf-4f21-afe0-8b99a09aa529">
@@ -274,7 +271,7 @@
 
 </main>
 
-<div class="sticky-buy" data-sticky-buy>
+<aside class="sticky-buy" data-sticky-buy role="complementary" aria-label="רכישה מהירה">
   <span class="sticky-buy-price">₪48<small>הזיכרון הגדול · <a href="/games/bundle" style="color:inherit;text-decoration:underline;">או החבילה ב-₪110</a></small></span>
   <a href="#purchase" class="btn btn-primary">להשארת פרטים</a>
-</div>
+</aside>

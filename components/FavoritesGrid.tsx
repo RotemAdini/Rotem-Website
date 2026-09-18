@@ -60,13 +60,24 @@ export default function FavoritesGrid({ catalog }: FavoritesGridProps) {
 
   return (
     <section className="container favorites-shell">
-      <div className="favorites-tabs">
+      <div className="favorites-tabs" role="group" aria-label="סינון המועדפים לפי סוג">
         {TABS.map((tab) => (
-          <button key={tab.value} className={`chip${activeTab === tab.value ? " active" : ""}`} onClick={() => setActiveTab(tab.value)}>
+          <button
+            key={tab.value}
+            type="button"
+            className={`chip${activeTab === tab.value ? " active" : ""}`}
+            aria-pressed={activeTab === tab.value}
+            onClick={() => setActiveTab(tab.value)}
+          >
             {tab.label}
           </button>
         ))}
       </div>
+
+      {/* Switching tabs re-renders the grid with nothing to say so. */}
+      <p className="sr-only" role="status" aria-live="polite">
+        {rows.length === 0 ? "אין פריטים שמורים בקטגוריה הזו" : `${rows.length} פריטים שמורים`}
+      </p>
 
       <div className="favorites-grid">
         {rows.map((item) => (
@@ -76,8 +87,11 @@ export default function FavoritesGrid({ catalog }: FavoritesGridProps) {
 
       {rows.length === 0 && (
         <div className="empty-state">
-          <span>♡</span>
-          <h3>עוד לא שמרתם כלום</h3>
+          <span aria-hidden="true">♡</span>
+          {/* h2, not h3: this page's only other heading is its <h1>, so an h3
+              here skipped a level (axe heading-order). Rendered size is
+              unchanged. */}
+          <h2>עוד לא שמרתם כלום</h2>
           <p>לחצו על הלב ליד מתכון, דייט, משחק או מתנה — והם יחכו לכם כאן.</p>
           <Link className="btn btn-primary" href="/recipes">
             למצוא משהו טעים
@@ -92,7 +106,8 @@ function FavoriteCard({ tokens, entry }: { tokens: string[]; entry: FavoriteEntr
   const { removeFavorites } = useFavorites();
   const body = (
     <>
-      {entry.image ? <img src={entry.image} alt={entry.title} /> : <div className="favorite-placeholder">♡</div>}
+      {/* The <h3> in the same link already names the item. */}
+      {entry.image ? <img src={entry.image} alt="" /> : <div className="favorite-placeholder" aria-hidden="true">♡</div>}
       <div className="favorite-card-body">
         <h3>{entry.title}</h3>
         <small>{entry.meta}</small>
@@ -107,8 +122,19 @@ function FavoriteCard({ tokens, entry }: { tokens: string[]; entry: FavoriteEntr
       {isGameHref(entry.href) ? <a href={entry.href}>{body}</a> : <Link href={entry.href}>{body}</Link>}
       {/* Removes every token that resolved to this one item, so a merged
           recipe does not come straight back from a second saved alias. */}
-      <button className="mini-heart active" type="button" onClick={() => removeFavorites(tokens)}>
-        ♥
+      {/* Named after what it does and what it acts on. Its accessible name
+          used to be the bare "♥" glyph, which on a grid of saved items told a
+          screen-reader user neither the action nor which card it belonged to
+          (WCAG 4.1.2). aria-pressed reports the saved state, matching the
+          hearts on the boards. */}
+      <button
+        className="mini-heart active"
+        type="button"
+        aria-pressed="true"
+        aria-label={`הסרה מהמועדפים: ${entry.title}`}
+        onClick={() => removeFavorites(tokens)}
+      >
+        <span aria-hidden="true">♥</span>
       </button>
     </article>
   );
