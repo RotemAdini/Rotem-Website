@@ -115,14 +115,27 @@
             <label for="bd-email">אימייל</label>
             <input id="bd-email" type="email" name="eMail" required>
           </div>
+          <!-- Marketing consent. Never pre-ticked, always required.
+               The address is used for the launch notice AND for ongoing
+               marketing, so section 30A of the Communications Law needs an
+               active, recorded opt-in: a pre-ticked or optional box is not
+               "הסכמה מפורשת מראש בכתב". The wrapping <label> gives the
+               checkbox its whole sentence as its accessible name, and
+               main.js already marks it aria-invalid and moves focus here
+               when it is left unticked.
+
+               This form still carries the REPLACE_WITH placeholder form id,
+               so main.js blocks its submit entirely — nothing reaches
+               SendMsg from this page yet. -->
           <label class="form-check">
             <input type="checkbox" name="confirm" value="1" required>
-            <span>אני מאשר/ת לקבל דיוורים מרותם עדיני</span>
+            <span>אני מאשר/ת לקבל מרותם עדיני עדכונים, הטבות ותוכן שיווקי בדוא״ל. ניתן להסיר את ההסכמה בכל עת.</span>
           </label>
           <button type="submit" class="btn btn-primary btn-lg btn-block">עדכנו אותי כשהחבילה תיפתח</button>
         </form>
+        <p class="form-privacy-note">הפרטים נשלחים למערכת הדיוור SendMsg ונשמרים שם לצורך שליחת העדכונים והדיוור. פרטים מלאים ב<a href="/privacy">מדיניות הפרטיות</a>.</p>
         <ul class="form-note">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> הפרטים נשמרים רק לצורך העדכון</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> הפרטים נשמרים אצלנו ובמערכת הדיוור בלבד</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg> נעדכן אתכם במייל כשייפתח</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg> גישה לכל החיים אחרי הרכישה</li>
         </ul>

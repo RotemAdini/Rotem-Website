@@ -1,7 +1,7 @@
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-import { isSupabaseConfigured, supabasePublishableKey, supabaseUrl } from "./env";
+import { isSupabaseConfigured, supabaseCookieOptions, supabasePublishableKey, supabaseUrl } from "./env";
 
 /** A response that hands the browser a rotated session token is unique to that
  * browser and valid once. No shared cache, CDN or bfcache may keep it. */
@@ -71,6 +71,10 @@ export async function updateSession(request: NextRequest): Promise<NextResponse>
   const pendingCookies: PendingCookie[] = [];
 
   const supabase = createServerClient(supabaseUrl, supabasePublishableKey, {
+    // Must match the browser and server clients exactly. This is the client
+    // that rewrites the cookie on refresh, so a mismatch here is the one most
+    // likely to strand a second copy at a different scope.
+    cookieOptions: supabaseCookieOptions,
     cookies: {
       getAll() {
         return request.cookies.getAll();

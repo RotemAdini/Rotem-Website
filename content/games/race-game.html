@@ -141,14 +141,25 @@
             <label for="rg-name">שם מלא</label>
             <input id="rg-name" type="text" name="1" required>
           </div>
+          <!-- Marketing consent. Never pre-ticked, always required.
+               This box used to carry `checked` and no `required`, which meant
+               a visitor could be subscribed without ever having agreed. Both
+               are fixed here.
+
+               NOTE: the field name stays `subscribe` while the other two live
+               forms send `confirm`. Which key SendMsg form 340164 actually
+               reads is defined in the SendMsg dashboard, not in this repo, so
+               renaming it blind could silently stop the consent being
+               recorded. Standardise only after confirming the mapping there. -->
           <label class="form-check">
-            <input type="checkbox" name="subscribe" value="true" checked>
-            <span>מאשר/ת דיוור מרותם עדיני</span>
+            <input type="checkbox" name="subscribe" value="true" required>
+            <span>אני מאשר/ת לקבל מרותם עדיני עדכונים, הטבות ותוכן שיווקי בדוא״ל. ניתן להסיר את ההסכמה בכל עת.</span>
           </label>
           <button type="submit" class="btn btn-primary btn-lg btn-block">עדכנו אותי כשהמשחק ייפתח</button>
         </form>
+        <p class="form-privacy-note">הפרטים נשלחים למערכת הדיוור SendMsg ונשמרים שם לצורך שליחת העדכונים והדיוור. פרטים מלאים ב<a href="/privacy">מדיניות הפרטיות</a>.</p>
         <ul class="form-note">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> הפרטים נשמרים רק לצורך העדכון</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg> הפרטים נשמרים אצלנו ובמערכת הדיוור בלבד</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg> נעדכן אתכם במייל כשייפתח</li>
         </ul>
       </div>

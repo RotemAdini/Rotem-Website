@@ -202,32 +202,12 @@
       });
     });
 
-    // Contact page: AJAX submit to Formspree (reused from existing site config)
-    var contactForm = document.querySelector('[data-contact-form]');
-    if (contactForm) {
-      var successEl = contactForm.querySelector('[data-form-success]');
-      var errorEl = contactForm.querySelector('[data-form-error]');
-      var btn = contactForm.querySelector('[type="submit"]');
-      contactForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        if (successEl) successEl.style.display = 'none';
-        if (errorEl) errorEl.style.display = 'none';
-        if (btn) { btn.disabled = true; btn.dataset.originalText = btn.textContent; btn.textContent = 'שולח…'; }
-
-        fetch(contactForm.action, {
-          method: 'POST',
-          body: new FormData(contactForm),
-          headers: { Accept: 'application/json' }
-        }).then(function (res) {
-          if (!res.ok) throw new Error('network');
-          if (successEl) successEl.style.display = 'block';
-          contactForm.reset();
-        }).catch(function () {
-          if (errorEl) errorEl.style.display = 'block';
-        }).finally(function () {
-          if (btn) { btn.disabled = false; btn.textContent = btn.dataset.originalText; }
-        });
-      });
-    }
+    // A Formspree AJAX handler for `[data-contact-form]` used to live here,
+    // carried over from the pre-Next static site. Nothing renders that
+    // selector any more — the contact page is components/ContactForm.tsx,
+    // which composes a mailto: and posts nothing anywhere. The handler was
+    // removed rather than left dormant: it was a live third-party endpoint
+    // sitting in a script that loads on every game page, one stray attribute
+    // away from silently sending form data off-site.
   }
 })();

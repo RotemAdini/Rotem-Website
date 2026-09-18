@@ -3,7 +3,7 @@
 import { createBrowserClient } from "@supabase/ssr";
 import type { SupabaseClient } from "@supabase/supabase-js";
 
-import { requireSupabaseEnv } from "./env";
+import { requireSupabaseEnv, supabaseCookieOptions } from "./env";
 import type { Database } from "./database.types";
 
 /**
@@ -23,7 +23,9 @@ let browserClient: SupabaseClient<Database> | null = null;
 export function getSupabaseBrowserClient(): SupabaseClient<Database> {
   if (!browserClient) {
     const { url, key } = requireSupabaseEnv();
-    browserClient = createBrowserClient<Database>(url, key);
+    // cookieOptions must match the server and proxy clients exactly — see the
+    // note on supabaseCookieOptions.
+    browserClient = createBrowserClient<Database>(url, key, { cookieOptions: supabaseCookieOptions });
   }
   return browserClient;
 }

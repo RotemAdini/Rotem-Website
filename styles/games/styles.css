@@ -1083,6 +1083,21 @@ div.feature-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-m
 }
 .form-check input { width: 18px; height: 18px; margin-top: 0.15rem; accent-color: var(--terracotta); flex: none; }
 
+/* The "where your details go" line under each lead form.
+   Deliberately larger and darker than .form-note: this is the notice that
+   names the processor and links to the policy, so it has to be comfortably
+   readable rather than fine print. */
+.form-privacy-note {
+  margin: 0.9rem 0 0;
+  text-align: center;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+.form-privacy-note a { color: inherit; text-decoration: underline; }
+.form-privacy-note a:hover,
+.form-privacy-note a:focus-visible { color: var(--terracotta-dark); }
+
 .form-note {
   display: flex;
   flex-wrap: wrap;

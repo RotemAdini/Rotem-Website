@@ -43,3 +43,28 @@ export function requireSupabaseEnv(): { url: string; key: string } {
   }
   return { url: supabaseUrl, key: supabasePublishableKey };
 }
+
+/**
+ * Cookie attributes for the Supabase session cookie.
+ *
+ * @supabase/ssr's own defaults are `{ path: "/", sameSite: "lax",
+ * httpOnly: false, maxAge: 400 days }` and, notably, no `secure` — so without
+ * this the session cookie is written with no Secure attribute at all.
+ *
+ * All three clients (browser, server, proxy) must pass the SAME options. They
+ * write the same cookie name, and letting them disagree on attributes is how
+ * you end up with two cookies of the same name at different scopes and a
+ * session that resurrects itself after sign-out.
+ *
+ * `secure` is switched off outside production on purpose: local development
+ * runs on http://localhost, and a browser silently drops a Secure cookie sent
+ * over http — which would look exactly like sign-in being broken.
+ *
+ * `httpOnly` stays false, and that is architectural rather than an oversight.
+ * createBrowserClient reads the session from JS, and
+ * lib/favorites-context.tsx reads document.cookie directly to notice a
+ * server-side sign-out. Turning it on would break both.
+ */
+export const supabaseCookieOptions = {
+  secure: process.env.NODE_ENV === "production",
+} as const;

@@ -109,6 +109,45 @@ const nextConfig: NextConfig = {
     ]);
     return [...recipes, ...dates];
   },
+
+  /**
+   * Baseline privacy and security headers, applied to every route.
+   *
+   * The one that earns its place on privacy grounds is Referrer-Policy. The
+   * game pages POST to an external mailing provider and every page links out
+   * to Google Fonts, and without this the browser hands each of them the full
+   * URL of the page the visitor was on. `strict-origin-when-cross-origin`
+   * narrows that to the bare origin for any cross-origin request while
+   * leaving same-origin navigation untouched.
+   *
+   * Two headers are deliberately NOT set here:
+   *
+   *   - Content-Security-Policy. The game pages are injected verbatim with
+   *     dangerouslySetInnerHTML and carry inline style attributes, and
+   *     /studio is a third-party SPA. A policy strict enough to be worth
+   *     having would need per-route work and real testing, which is its own
+   *     task rather than a rider on this one.
+   *   - Strict-Transport-Security. It is the right thing to have, but it
+   *     commits the domain (and any subdomain, depending on the directive)
+   *     to HTTPS for the full max-age with no quick way back. That belongs
+   *     to Netlify's own configuration and to a deliberate decision, not to
+   *     a default added in passing.
+   */
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          // Nothing on this site uses any of these, so they are switched off
+          // rather than left to the browser default.
+          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), browsing-topics=()" },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

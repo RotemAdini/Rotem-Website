@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
 import type { SupabaseClient } from "@supabase/supabase-js";
 
-import { requireSupabaseEnv } from "./env";
+import { requireSupabaseEnv, supabaseCookieOptions } from "./env";
 import type { Database } from "./database.types";
 
 /**
@@ -25,6 +25,9 @@ export async function createSupabaseServerClient(): Promise<SupabaseClient<Datab
   const cookieStore = await cookies();
 
   return createServerClient<Database>(url, key, {
+    // Must match the browser and proxy clients exactly — see the note on
+    // supabaseCookieOptions.
+    cookieOptions: supabaseCookieOptions,
     cookies: {
       getAll() {
         return cookieStore.getAll();
