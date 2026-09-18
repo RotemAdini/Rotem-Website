@@ -15,3 +15,7 @@ next-env.d.ts
 supabase/.temp/
 
 .vercel
+
+# Sanity content backups written by the local tooling. Real content dumps —
+# kept on disk for rollback, never committed.
+reports/backups/

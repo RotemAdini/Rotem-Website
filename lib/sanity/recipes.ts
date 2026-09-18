@@ -4,6 +4,7 @@ import { cache } from "react";
 
 import { getSanityClient } from "@/sanity/lib/client";
 import { parseIsraeliDate } from "@/lib/recipe-text";
+import { safeExternalUrl } from "@/lib/safe-external-url";
 
 /**
  * The recipe data layer, backed by Sanity.
@@ -151,12 +152,28 @@ const RECIPE_FIELDS = /* groq */ `{
  * Clearing the build cache gets the freshness without that cost.
  */
 async function fetchRecipes(filter: string, params: Record<string, unknown> = {}): Promise<SanityRecipe[]> {
-  return getSanityClient().fetch<SanityRecipe[]>(`*[_type == "recipe" && ${filter}] ${RECIPE_FIELDS}`, params);
+  const rows = await getSanityClient().fetch<SanityRecipe[]>(`*[_type == "recipe" && ${filter}] ${RECIPE_FIELDS}`, params);
+  return rows.map(normalizeRecipe);
 }
 
 /** The card/filter/search read. Same filters, a fraction of the payload. */
 async function fetchRecipeSummaries(filter: string, params: Record<string, unknown> = {}): Promise<SanityRecipeSummary[]> {
-  return getSanityClient().fetch<SanityRecipeSummary[]>(`*[_type == "recipe" && ${filter}] ${RECIPE_SUMMARY_FIELDS}`, params);
+  const rows = await getSanityClient().fetch<SanityRecipeSummary[]>(`*[_type == "recipe" && ${filter}] ${RECIPE_SUMMARY_FIELDS}`, params);
+  return rows.map(normalizeRecipe);
+}
+
+/**
+ * The one place a recipe document becomes a recipe the site may render.
+ *
+ * Today it does a single thing: it drops a `sourceUrl` that is not an http(s)
+ * URL, so a stored `javascript:` string can never reach an `href`. Doing it
+ * here rather than in the page means every consumer — the detail page, a
+ * future card, a feed — is covered by construction, and `sourceUrl: null` is
+ * a state the renderers already handle, because most recipes have no source
+ * link at all. Valid URLs are passed through byte for byte.
+ */
+function normalizeRecipe<T extends SanityRecipeSummary>(recipe: T): T {
+  return { ...recipe, sourceUrl: safeExternalUrl(recipe.sourceUrl) };
 }
 
 /** Newest first, by the DD/MM/YYYY publishedDate. Anything unparseable (the
