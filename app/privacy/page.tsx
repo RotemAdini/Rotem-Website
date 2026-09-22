@@ -19,7 +19,8 @@ export const metadata: Metadata = pageMetadata({
  *     (supabaseCookieOptions) and @supabase/ssr's own defaults
  *   - the localStorage keys → lib/favorites-context.tsx,
  *     components/AccessibilityControls.tsx, components/IngredientsList.tsx
- *   - the contact form being mailto-only → components/ContactForm.tsx
+ *   - the contact form's server-side delivery → app/contact/actions.ts and
+ *     lib/contact/email.ts
  *   - the SendMsg lead forms → content/games/*.html
  *   - the favourites merge on first sign-in → lib/favorites/actions.ts
  *   - the absence of any analytics or advertising tag → verified by search
@@ -34,6 +35,14 @@ export const metadata: Metadata = pageMetadata({
  *   2. Section 8 states that the site carries no analytics or advertising
  *      trackers. That is true today. It must be rewritten in the same commit
  *      that introduces the first one.
+ *   2a. Section 3 describes the contact form. Delivery is NOT live yet, so
+ *      the section opens by saying so and describes the flow in the future
+ *      tense; section 10 marks Resend as planned for the same reason. When
+ *      RESEND_API_KEY is set in production, section 3 moves to the present
+ *      tense and sections 10 and 13 are updated in the same commit. Nothing
+ *      here may assert what Resend retains, or for how long, until that has
+ *      been read off the account — the markers in sections 3 and 13 are
+ *      there precisely because it has not been.
  *   3. Anything still unknown is marked with <span className="legal-tbd">
  *      rather than guessed. Those markers are visible on the page on purpose.
  */
@@ -76,7 +85,7 @@ export default function PrivacyPage() {
         </nav>
 
         <div className="legal-content">
-          <p className="legal-updated">עדכון אחרון: 18 בספטמבר 2026</p>
+          <p className="legal-updated">עדכון אחרון: 22 בספטמבר 2026</p>
           <div className="legal-draft-note">
             <span aria-hidden="true">✎</span>
             <p>
@@ -105,7 +114,7 @@ export default function PrivacyPage() {
                 <strong>גלישה רגילה באתר — בלי התחברות ובלי מילוי טפסים — אינה יוצרת אצלנו רשומה עליכם, והדפדפן שלכם
                 אינו מקבל שום Cookie מהאתר.</strong>
               </li>
-              <li>מידע נאסף בשלושה מצבים בלבד: כשאתם ממלאים טופס עדכון בעמוד משחק, כשאתם מתחברים לחשבון, וכרישום טכני אצל ספק האחסון.</li>
+              <li>מידע נאסף בארבעה מצבים בלבד: כששולחים הודעה בטופס יצירת הקשר, כשממלאים טופס עדכון בעמוד משחק, כשמתחברים לחשבון, וכרישום טכני אצל ספק האחסון.</li>
               <li>בנוסף, האתר שומר בדפדפן שלכם עצמו העדפות ופריטים ששמרתם. המידע הזה נשאר במכשיר ואינו נשלח אלינו כל עוד לא התחברתם.</li>
             </ul>
             <p>הפירוט המלא של כל אחד מהמצבים האלה מופיע בסעיפים הבאים.</p>
@@ -117,12 +126,40 @@ export default function PrivacyPage() {
               הטופס בעמוד <Link href="/contact">צור קשר</Link> מבקש שם, כתובת דוא״ל, נושא ותוכן הודעה.
             </p>
             <p>
-              <strong>הטופס אינו שולח את המידע לשרת של האתר ואינו שומר אותו אצלנו.</strong> בלחיצה על הכפתור הדפדפן
-              מרכיב הודעת דוא״ל ופותח אותה בתוכנת המייל שלכם — השליחה עצמה מתבצעת מהתיבה שלכם, כמו כל מייל אחר
-              שאתם שולחים. המידע מגיע אלינו רק אם בחרתם ללחוץ על ״שלח״ בתוכנת המייל, ומאותו רגע הוא נמצא בתיבת
-              הדוא״ל שלנו.
+              <strong>נכון למועד עדכון מסמך זה שליחת הטופס עדיין אינה פעילה.</strong> כל עוד היא אינה פעילה,
+              העמוד מציג זאת במפורש, לחיצה על הכפתור אינה שולחת דבר ואיננו מקבלים מכם שום מידע דרכו. אפשר
+              לכתוב אלינו ישירות לכתובת הדוא״ל שבסעיף 17. הסעיף הזה מתאר מה יקרה כשהשליחה תופעל, ויעודכן
+              במועד ההפעלה.
             </p>
-            <p>הודעות שהגיעו אלינו בדוא״ל נשמרות בתיבה לצורך מענה ומעקב. אפשר לבקש את מחיקתן בכל עת.</p>
+            <p>
+              <strong>כשהשליחה תופעל:</strong> בלחיצה על ״שליחת ההודעה״ הפרטים יישלחו לשרת של האתר, שיעביר אותם
+              כהודעת דוא״ל לתיבה שלנו באמצעות <strong>Resend</strong> — ספק שליחת דוא״ל שישמש אותנו כמעבד מידע.
+              ההעברה מתבצעת בין השרתים: <strong>הדפדפן שלכם אינו פונה ל-Resend</strong> ואינו מקבל ממנו דבר.
+              כתובת הדוא״ל שהזנתם תירשם בהודעה כ״השב אל״, כדי שנוכל לענות לכם ישירות.
+            </p>
+            <p>
+              <strong>האתר עצמו לא ישמור את ההודעה במסד נתונים כלשהו.</strong> היא תעבור דרך השרת בזיכרון בלבד
+              ותגיע לתיבת הדוא״ל שלנו. Resend, ככל ספק שליחת דוא״ל, מתעד אצלו את המשלוח; מה בדיוק נשמר שם
+              ולכמה זמן — ראו סעיף 13.
+            </p>
+            <p>
+              <strong>מה ייאסף:</strong> השם, כתובת הדוא״ל, הנושא ותוכן ההודעה שכתבתם — ותו לא. איננו מבקשים טלפון,
+              כתובת או פרטי תשלום, ולא נוסיף את הכתובת לרשימת תפוצה: פנייה בטופס איננה הרשמה לדיוור. כדי
+              להירשם לדיוור צריך לסמן בעצמכם תיבת הסכמה נפרדת בטופס בעמוד משחק (סעיף 4).
+            </p>
+            <p>
+              <strong>הגנה מפני שליחה אוטומטית:</strong> בטופס יש שדה מוסתר שגולש אינו רואה ואינו יכול למלא, וכן
+              בדיקה שהשליחה לא בוצעה מהר מדי אחרי טעינת העמוד. שתי הבדיקות מתבצעות בשרת ואינן אוספות עליכם מידע
+              נוסף. אין באתר CAPTCHA.
+            </p>
+            <p>
+              הודעות שהגיעו אלינו — בטופס או ישירות בדוא״ל — נשמרות בתיבת הדוא״ל לצורך מענה ומעקב. אפשר לבקש
+              את מחיקתן בכל עת.
+            </p>
+            <p className="legal-tbd">
+              להשלמה — עם הפעלת השליחה: לעדכן את הסעיף הזה כך שיתאר את הזרימה בלשון הווה, ולעדכן בהתאם את
+              רשימת הספקים בסעיף 10 ואת סעיף 13.
+            </p>
           </section>
 
           <section className="legal-section" id="pp-games-forms">
@@ -261,9 +298,13 @@ export default function PrivacyPage() {
           <section className="legal-section" id="pp-technical">
             <h2>9. מידע טכני ורישומי שרת</h2>
             <p>
-              האתר מתארח בשירות <strong>Netlify</strong>. כמו כל שרת אינטרנט, הוא רושם נתוני בקשה טכניים: כתובת IP,
-              סוג הדפדפן והמכשיר, העמוד שנטען, מועד הבקשה והעמוד המפנה. רישומים אלה משמשים לתפעול תקין, לאבחון
-              תקלות ולאבטחה, ולא לפילוח שיווקי.
+              האתר מיועד להתארח בשירות <strong>Netlify</strong>. כמו כל שרת אינטרנט, הוא רושם נתוני בקשה טכניים:
+              כתובת IP, סוג הדפדפן והמכשיר, העמוד שנטען, מועד הבקשה והעמוד המפנה. רישומים אלה משמשים לתפעול תקין,
+              לאבחון תקלות ולאבטחה, ולא לפילוח שיווקי.
+            </p>
+            <p className="legal-tbd">
+              להשלמה — לאשר את שם ספק האחסון בפועל עם עליית האתר לאוויר. אם ייבחר ספק אחר, יש לעדכן סעיף זה ואת
+              רשימת הספקים בסעיף 10.
             </p>
             <p>
               משך שמירת רישומי השרת: <span className="legal-tbd">להשלמה — לפי מדיניות השמירה של Netlify בחשבון שבו
@@ -286,17 +327,53 @@ export default function PrivacyPage() {
               <li><strong>Supabase</strong> — התחברות, חשבונות ומסד הנתונים של המועדפים.</li>
               <li><strong>Google</strong> — שירות ההתחברות (Google OAuth), הצגת תמונת הפרופיל וטעינת גופני הטקסט.</li>
               <li><strong>SendMsg</strong> — מערכת הדיוור שאליה מגיעים הפרטים מטפסי העדכון בעמודי המשחקים.</li>
-              <li><strong>Netlify</strong> — אחסון האתר.</li>
+              <li><strong>Resend</strong> — שירות שליחת הדוא״ל שיעביר אלינו הודעות מטופס יצירת הקשר (מתוכנן; ראו סעיף 3).</li>
+              <li><strong>Netlify</strong> — אחסון האתר (מתוכנן; ראו סעיף 9).</li>
               <li><strong>Sanity</strong> — מערכת ניהול התוכן שבה נכתבים המתכונים והעמודים. התוכן נשלף בעת בניית האתר, ולכן <strong>הדפדפן שלכם אינו פונה ל-Sanity בגלישה רגילה</strong>.</li>
             </ul>
             <p>
               מעבר לספקים אלה, איננו מוכרים מידע אישי ואיננו מעבירים אותו לצדדים שלישיים למטרות פרסום. מידע עשוי
               להימסר לגורם נוסף רק אם נידרש לכך על פי דין או על ידי רשות מוסמכת.
             </p>
-            <p>
-              קישורים למדיניות הפרטיות של כל ספק: <span className="legal-tbd">להשלמה — להוסיף קישור למדיניות של כל
-              אחד מהספקים שלמעלה</span>.
-            </p>
+            <p>מדיניות הפרטיות של כל אחד מהספקים:</p>
+            <ul>
+              <li>
+                <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer" lang="en">
+                  Supabase
+                </a>{" "}
+                <span className="sr-only">(נפתח בחלון חדש)</span>
+              </li>
+              <li>
+                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" lang="en">
+                  Google
+                </a>{" "}
+                <span className="sr-only">(נפתח בחלון חדש)</span>
+              </li>
+              <li>
+                <a href="https://www.sendmsg.co.il/privacy/" target="_blank" rel="noopener noreferrer">
+                  שלח מסר <span lang="en">(SendMsg)</span>
+                </a>{" "}
+                <span className="sr-only">(נפתח בחלון חדש)</span>
+              </li>
+              <li>
+                <a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" lang="en">
+                  Resend
+                </a>{" "}
+                <span className="sr-only">(נפתח בחלון חדש)</span>
+              </li>
+              <li>
+                <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener noreferrer" lang="en">
+                  Netlify
+                </a>{" "}
+                <span className="sr-only">(נפתח בחלון חדש)</span>
+              </li>
+              <li>
+                <a href="https://www.sanity.io/legal/privacy" target="_blank" rel="noopener noreferrer" lang="en">
+                  Sanity
+                </a>{" "}
+                <span className="sr-only">(נפתח בחלון חדש)</span>
+              </li>
+            </ul>
             <p>
               באתר מופיעים גם קישורים לפרופילים שלנו ברשתות חברתיות (Instagram, Facebook, TikTok, YouTube). אלה
               קישורים רגילים בלבד — <strong>אין באתר תוספים או תכנים מוטמעים של הרשתות</strong>, ושום מידע אינו
@@ -309,7 +386,7 @@ export default function PrivacyPage() {
             <ul>
               <li>הפעלת האתר והצגת התוכן;</li>
               <li>אספקת שירות ההתחברות, החשבון והמועדפים;</li>
-              <li>מענה לפניות שהגיעו אלינו בדוא״ל;</li>
+              <li>מענה לפניות שהגיעו אלינו בטופס יצירת הקשר או בדוא״ל;</li>
               <li>הודעה על פתיחת משחק או חבילה לרכישה, למי שהשאיר פרטים;</li>
               <li>שליחת עדכונים, הטבות ותוכן שיווקי — רק למי שנתן לכך הסכמה מפורשת;</li>
               <li>אבטחת האתר, איתור תקלות ומניעת שימוש לרעה;</li>
@@ -350,7 +427,9 @@ export default function PrivacyPage() {
                 לאחר הסרה: <span className="legal-tbd">להשלמה — לבדוק את הגדרות השמירה בחשבון SendMsg</span>.
               </li>
               <li>
-                <strong>הודעות דוא״ל שהגיעו אלינו:</strong> נשמרות בתיבה לצורך מענה ומעקב, וניתנות למחיקה לפי בקשה.
+                <strong>הודעות מטופס יצירת הקשר ומדוא״ל:</strong> נשמרות בתיבת הדוא״ל שלנו לצורך מענה ומעקב,
+                וניתנות למחיקה לפי בקשה. מה נשמר אצל Resend עם הפעלת השליחה, ולכמה זמן:{" "}
+                <span className="legal-tbd">להשלמה — לאמת בהגדרות חשבון Resend מה נשמר ולכמה זמן, ולציין זאת כאן</span>.
               </li>
               <li>
                 <strong>רישומי שרת:</strong> <span className="legal-tbd">להשלמה — לפי מדיניות Netlify</span>.

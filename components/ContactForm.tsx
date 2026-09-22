@@ -1,149 +1,257 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useActionState, useEffect, useId, useRef } from "react";
 
-const EMAIL = "rotemadini@gmail.com";
+import { submitContact } from "@/app/contact/actions";
+import { initialContactState, type ContactState } from "@/lib/contact/state";
+import {
+  CONTACT_FIELDS,
+  FIELD_IDS,
+  FIELD_LABELS,
+  HONEYPOT_FIELD,
+  LIMITS,
+  TOKEN_FIELD,
+  type ContactField,
+} from "@/lib/contact/schema";
 
 /**
  * The contact form.
  *
- * There is no message backend on this site, so this form does not pretend to
- * send anything: it composes the message and hands it to the reader's own mail
- * client through a mailto: link. That is a real, completed action — unlike the
- * previous version, which showed a toast and dropped the message.
+ * It posts to a Server Action, which validates and hands the message to the
+ * email provider (see app/contact/actions.ts). The previous version composed
+ * a mailto: link instead, which needed the reader to have a mail client
+ * configured and could fail silently when they did not.
  *
- * mailto: can fail silently (a browser with no mail handler configured), so a
- * successful submit also reveals the composed text and the address, letting
- * the reader copy it manually. The form never claims the message was sent —
- * only that the mail client was opened.
+ * Because it is a real form posting to a Server Action, it still works with
+ * JavaScript switched off: the browser submits natively and the server
+ * re-renders with the result. Everything below — the live error summary, the
+ * focus move, the pending state — is enhancement on top of that.
+ *
+ * The accessibility contract, which is the part worth not breaking:
+ *
+ *   - every control has a real <label for>, never a placeholder as its name
+ *   - an invalid control gets aria-invalid and aria-describedby pointing at
+ *     its own error text, so the message is announced with the field
+ *   - a summary above the form lists each error as a link to its field, so a
+ *     screen-reader user hears the whole problem before walking the form
+ *   - the summary is role="alert" and the confirmation is role="status", the
+ *     two live-region politeness levels those cases call for
+ *   - focus moves to the first invalid control on a rejected submit
+ *   - the submit button reports aria-busy and disables itself while pending
  */
-export default function ContactForm() {
-  const [composed, setComposed] = useState<{ subject: string; body: string } | null>(null);
-  const [copied, setCopied] = useState(false);
+export default function ContactForm({ token, email }: { token: string; email: string }) {
+  const [state, formAction, pending] = useActionState<ContactState, FormData>(submitContact, initialContactState(token));
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const name = String(data.get("name") ?? "").trim();
-    const email = String(data.get("email") ?? "").trim();
-    const topic = String(data.get("topic") ?? "").trim();
-    const message = String(data.get("message") ?? "").trim();
+  const formRef = useRef<HTMLFormElement>(null);
+  const summaryRef = useRef<HTMLDivElement>(null);
+  const successRef = useRef<HTMLDivElement>(null);
+  const summaryId = useId();
 
-    const subject = `${topic} — ${name}`;
-    const body = `${message}\n\n—\n${name}\n${email}`;
+  const errorEntries = CONTACT_FIELDS.filter((field) => state.fieldErrors[field]).map(
+    (field) => [field, state.fieldErrors[field] as string] as const,
+  );
+  const hasFieldErrors = errorEntries.length > 0;
 
-    setComposed({ subject, body });
-    setCopied(false);
-    window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  }
+  /**
+   * Move focus where the reader needs to be after a submission.
+   *
+   * Keyed on `nonce` rather than on `status`, so submitting twice with the
+   * same mistake moves focus both times instead of the effect deciding
+   * nothing changed.
+   */
+  useEffect(() => {
+    if (state.nonce === 0) return;
 
-  async function copyMessage() {
-    if (!composed) return;
-    try {
-      await navigator.clipboard.writeText(`${composed.subject}\n\n${composed.body}`);
-      setCopied(true);
-    } catch {
-      setCopied(false);
+    if (hasFieldErrors) {
+      const first = formRef.current?.querySelector<HTMLElement>("[aria-invalid='true']");
+      // The summary is what explains the whole problem, so it is read first;
+      // the field itself is one Tab away through the summary's own link.
+      summaryRef.current?.focus();
+      if (!summaryRef.current) first?.focus();
+      return;
     }
-  }
+
+    if (state.status === "success") {
+      successRef.current?.focus();
+      return;
+    }
+
+    if (state.formError) summaryRef.current?.focus();
+    // `hasFieldErrors`, `state.status` and `state.formError` are all derived
+    // from the same state object that `nonce` identifies.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.nonce]);
+
+  const describedBy = (field: ContactField, extra?: string) =>
+    [state.fieldErrors[field] ? `${FIELD_IDS[field]}-error` : null, extra].filter(Boolean).join(" ") || undefined;
 
   return (
-    <form className="contact-form panel" onSubmit={onSubmit}>
-      {/* Explicit label/for associations rather than wrapping.
-      
-          A wrapping <label> takes its accessible name from everything inside
-          it, so the wrapped <select> computed its name as the label text plus
-          the text of every <option> — "נושאבחרו נושאשאלה על מתכון…". Explicit
-          htmlFor/id pairs give each control exactly its own label (WCAG
-          4.1.2/3.3.2), and each field states that it is required in text as
-          well as through the required attribute, so the obligation is not
-          carried by the browser's tooltip alone (WCAG 3.3.2).
-      
-          autocomplete lets a browser or password manager fill the two
-          personal fields, which matters most to readers with motor or
-          cognitive disabilities (WCAG 1.3.5). */}
+    <form className="contact-form panel" action={formAction} ref={formRef} noValidate>
+      {/* The server reissues a token on every response, so the form stays
+          submittable after a failure without needing a page reload. */}
+      <input type="hidden" name={TOKEN_FIELD} value={state.token} />
+
+      {/* Honeypot. Off-screen rather than display:none — some bots skip
+          anything that is not rendered — and removed from both the tab order
+          and the accessibility tree, so no reader can reach it by keyboard
+          or hear it announced. autoComplete="off" keeps a password manager
+          from filling it on a person's behalf. */}
+      <div className="contact-hp" aria-hidden="true">
+        <label htmlFor="contact-website">אל תמלאו שדה זה</label>
+        <input id="contact-website" type="text" name={HONEYPOT_FIELD} tabIndex={-1} autoComplete="off" defaultValue="" />
+      </div>
+
+      {(hasFieldErrors || state.formError) && (
+        <div className="form-alert is-error" role="alert" tabIndex={-1} ref={summaryRef} id={summaryId}>
+          {hasFieldErrors && (
+            <>
+              <h2>
+                {errorEntries.length === 1 ? "יש שדה אחד שצריך תיקון" : `יש ${errorEntries.length} שדות שצריכים תיקון`}
+              </h2>
+              <ul>
+                {errorEntries.map(([field, message]) => (
+                  <li key={field}>
+                    <a href={`#${FIELD_IDS[field]}`}>
+                      {FIELD_LABELS[field]}: {message}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+          {state.formError && <p>{state.formError}</p>}
+        </div>
+      )}
+
+      {state.status === "success" && (
+        <div className="form-alert is-success" role="status" tabIndex={-1} ref={successRef}>
+          <h2>ההודעה נשלחה ♡</h2>
+          <p>
+            תודה שכתבתם. ההודעה הגיעה אליי למייל ואחזור אליכם לכתובת שהשארתם, בדרך כלל תוך כמה ימים.
+          </p>
+        </div>
+      )}
+
       <div className="form-row">
-        <div className="field">
-          <label htmlFor="contact-name">
-            שם <span aria-hidden="true">*</span>
-            <span className="sr-only">(שדה חובה)</span>
-          </label>
-          <input
-            id="contact-name"
-            type="text"
-            name="name"
-            autoComplete="name"
-            placeholder="איך קוראים לכם?"
-            required
-            aria-required="true"
-          />
-        </div>
-        <div className="field">
-          <label htmlFor="contact-email">
-            אימייל <span aria-hidden="true">*</span>
-            <span className="sr-only">(שדה חובה)</span>
-          </label>
-          <input
-            id="contact-email"
-            type="email"
-            name="email"
-            autoComplete="email"
-            placeholder="name@example.com"
-            required
-            aria-required="true"
-          />
-        </div>
+        <Field
+          field="name"
+          type="text"
+          autoComplete="name"
+          placeholder="איך קוראים לכם?"
+          defaultValue={state.values.name}
+          error={state.fieldErrors.name}
+          describedBy={describedBy("name")}
+        />
+        <Field
+          field="email"
+          type="email"
+          autoComplete="email"
+          placeholder="name@example.com"
+          defaultValue={state.values.email}
+          error={state.fieldErrors.email}
+          hint="כדי שאוכל לחזור אליכם"
+          describedBy={describedBy("email", `${FIELD_IDS.email}-hint`)}
+        />
       </div>
+
+      <Field
+        field="subject"
+        type="text"
+        placeholder="על מה תרצו לכתוב?"
+        defaultValue={state.values.subject}
+        error={state.fieldErrors.subject}
+        describedBy={describedBy("subject")}
+      />
+
       <div className="field">
-        <label htmlFor="contact-topic">
-          נושא <span aria-hidden="true">*</span>
-          <span className="sr-only">(שדה חובה)</span>
-        </label>
-        <select id="contact-topic" name="topic" required aria-required="true" defaultValue="">
-          <option value="">בחרו נושא</option>
-          <option>שאלה על מתכון</option>
-          <option>שאלה על משחק</option>
-          <option>שיתוף פעולה</option>
-          <option>משהו אחר</option>
-        </select>
-      </div>
-      <div className="field">
-        <label htmlFor="contact-message">
-          הודעה <span aria-hidden="true">*</span>
+        <label htmlFor={FIELD_IDS.message}>
+          {FIELD_LABELS.message} <span aria-hidden="true">*</span>
           <span className="sr-only">(שדה חובה)</span>
         </label>
         <textarea
-          id="contact-message"
+          id={FIELD_IDS.message}
           name="message"
           rows={7}
           placeholder="כתבו לי כאן..."
           required
           aria-required="true"
-          aria-describedby="contact-form-explainer"
+          maxLength={LIMITS.message.max}
+          defaultValue={state.values.message}
+          aria-invalid={state.fieldErrors.message ? true : undefined}
+          aria-describedby={describedBy("message")}
         />
-      </div>
-      <button className="btn btn-primary" type="submit">
-        פתיחת ההודעה במייל ♡
-      </button>
-      {/* Deliberately not .micro-note (11px, faint): this line is what tells
-          the reader the button opens their mail client rather than sending,
-          so it has to be comfortably readable. */}
-      <p className="form-explainer" id="contact-form-explainer">
-        הכפתור פותח את תוכנת המייל שלכם עם ההודעה מוכנה — השליחה עצמה מתבצעת משם. אפשר גם לכתוב ישירות אל{" "}
-        <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.
-      </p>
-
-      {composed && (
-        <div className="contact-fallback" role="status" aria-live="polite">
-          <p>
-            לא נפתחה תוכנת מייל? העתיקו את ההודעה ושלחו אותה אל <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.
+        {state.fieldErrors.message && (
+          <p className="field-error" id={`${FIELD_IDS.message}-error`}>
+            <span aria-hidden="true">⚠</span> {state.fieldErrors.message}
           </p>
-          <pre>{`${composed.subject}\n\n${composed.body}`}</pre>
-          <button className="btn btn-secondary compact" type="button" onClick={copyMessage}>
-            {copied ? "הועתק ♡" : "העתקת ההודעה"}
-          </button>
-        </div>
-      )}
+        )}
+      </div>
+
+      <button className="btn btn-primary" type="submit" disabled={pending} aria-busy={pending}>
+        {pending ? "שולח…" : "שליחת ההודעה ♡"}
+      </button>
+
+      <p className="form-explainer">
+        ההודעה נשלחת אליי למייל ואני עונה משם. אפשר גם לכתוב ישירות אל{" "}
+        <a href={`mailto:${email}`} lang="en">
+          {email}
+        </a>
+        .
+      </p>
     </form>
+  );
+}
+
+/** One labelled text input, with its error text wired to it. */
+function Field({
+  field,
+  type,
+  autoComplete,
+  placeholder,
+  defaultValue,
+  error,
+  hint,
+  describedBy,
+}: {
+  field: Exclude<ContactField, "message">;
+  type: "text" | "email";
+  autoComplete?: string;
+  placeholder: string;
+  defaultValue: string;
+  error?: string;
+  hint?: string;
+  describedBy?: string;
+}) {
+  const id = FIELD_IDS[field];
+  return (
+    <div className="field">
+      <label htmlFor={id}>
+        {FIELD_LABELS[field]} <span aria-hidden="true">*</span>
+        <span className="sr-only">(שדה חובה)</span>
+      </label>
+      <input
+        id={id}
+        type={type}
+        name={field}
+        autoComplete={autoComplete}
+        placeholder={placeholder}
+        required
+        aria-required="true"
+        maxLength={LIMITS[field].max}
+        defaultValue={defaultValue}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={describedBy}
+      />
+      {hint && (
+        <p className="field-hint" id={`${id}-hint`}>
+          {hint}
+        </p>
+      )}
+      {error && (
+        <p className="field-error" id={`${id}-error`}>
+          <span aria-hidden="true">⚠</span> {error}
+        </p>
+      )}
+    </div>
   );
 }

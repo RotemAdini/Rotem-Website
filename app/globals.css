@@ -231,10 +231,46 @@ html[data-high-contrast="true"]{--bg:#fff;--panel:#fff;--panel2:#fff;--text:#111
 .newsletter-status{margin:0;color:var(--muted);font-size:13px;line-height:1.6}
 .newsletter-actions{display:flex;flex-wrap:wrap;gap:10px}
 .newsletter-actions .btn{flex:1 1 auto;min-height:40px;justify-content:center}
-.contact-fallback{margin-top:14px;padding:14px;border:1px solid var(--line);border-radius:var(--r-sm);background:#fff8f5;display:grid;gap:10px}
-.contact-fallback p{margin:0;font-size:13px;color:var(--muted)}
-.contact-fallback pre{margin:0;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff;font:inherit;font-size:13px;white-space:pre-wrap;word-break:break-word;max-height:200px;overflow:auto}
-.contact-fallback .btn{justify-self:start}
+/* ===== Contact form: hints, per-field errors, result alerts =====
+   Replaces the .contact-fallback block, which belonged to the mailto-only
+   form: there is no composed-message fallback to show any more, because the
+   server either delivers the message or says it did not. */
+
+/* The honeypot. Off-screen rather than display:none — a bot that skips
+   unrendered fields still fills this one — and already aria-hidden and
+   tabIndex={-1} in the markup, so nothing reaches it by keyboard or screen
+   reader. */
+.contact-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+.field-hint{margin:0;font-size:12px;color:var(--muted)}
+
+/* 4.6:1 on the form's white background, so an error is legible rather than
+   merely present. The ⚠ before it means colour is not the only thing
+   carrying "this is wrong" (WCAG 1.4.1). */
+.field-error{margin:0;font-size:13px;font-weight:600;color:#a8102b;display:flex;gap:6px;align-items:flex-start}
+
+/* An invalid control is outlined as well as described, so the field a
+   summary link lands on is visibly the one at fault. */
+.contact-form [aria-invalid="true"]{border-color:#a8102b;box-shadow:0 0 0 3px rgba(168,16,43,.12)}
+
+.form-alert{padding:14px 16px;border-radius:var(--r-sm);border:1px solid var(--line);display:grid;gap:8px}
+.form-alert h2{margin:0;font-size:16px}
+.form-alert p{margin:0;font-size:14px;line-height:1.6}
+.form-alert ul{margin:0;padding-inline-start:18px;display:grid;gap:4px;font-size:14px}
+.form-alert a{font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.form-alert.is-error{border-color:#a8102b;background:#fff5f6;color:#7a0c20}
+.form-alert.is-error a{color:#7a0c20}
+.form-alert.is-success{border-color:#2f6b45;background:#f2faf5;color:#1f4a2f}
+
+/* Both alerts take focus after a submission, so they need a visible ring of
+   their own — the global :focus-visible rule does not apply to a
+   programmatic focus() on a non-interactive element. */
+.form-alert:focus{outline:3px solid #9d2e3d;outline-offset:3px}
+.form-alert:focus:not(:focus-visible){outline:3px solid #9d2e3d;outline-offset:3px}
+
+.contact-offline-note{margin-top:18px;padding:12px 14px;border:1px solid var(--line);border-radius:var(--r-sm);background:#fff8f5;font-size:13px;line-height:1.6;color:var(--muted)}
+
+.contact-form button[disabled]{opacity:.65;cursor:progress}
 @media(max-width:640px){.newsletter-actions .btn{flex:1 1 100%}}
 
 /* ===== Mobile menu: search / favourites / account ===== */

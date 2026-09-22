@@ -56,6 +56,31 @@ function resolveSiteUrl(): string {
 export const SITE_URL = resolveSiteUrl();
 
 /**
+ * The link-preview image for pages that have no picture of their own.
+ *
+ * A recipe or a date idea supplies its own photo, and a game page supplies
+ * its product shot from Sanity. Everything else — the homepage, the four hub
+ * pages, /about, /faq, /contact and the three legal pages — currently shares
+ * a link to nothing, so a share to WhatsApp or Facebook renders as a bare
+ * URL with no image.
+ *
+ * It is `null` rather than a path on purpose: naming a file that does not
+ * exist would publish a broken og:image to every one of those pages, which
+ * is worse than none. Rotem is preparing the artwork separately.
+ *
+ * To switch it on, put the file at public/og-default.jpg and change this to
+ *
+ *   const DEFAULT_OG_IMAGE: string | null = "/og-default.jpg";
+ *
+ * Nothing else has to change: every page builds its metadata through
+ * pageMetadata(), so all of them pick it up at once. Recommended artwork is
+ * 1200×630 (the size Facebook, WhatsApp, LinkedIn and X all crop from), JPEG
+ * or PNG, under 1 MB, with any text kept well inside the middle two-thirds —
+ * the edges are cropped on some clients.
+ */
+const DEFAULT_OG_IMAGE: string | null = null;
+
+/**
  * A site-relative path, percent-encoded per segment and made absolute.
  *
  * Every canonical slug on this site is Hebrew and some image folders may be
@@ -88,8 +113,12 @@ export interface PageMetadataInput {
 }
 
 export function pageMetadata(input: PageMetadataInput): Metadata {
-  const { title, description, path, image, type = "website", noIndex = false } = input;
+  const { title, description, path, type = "website", noIndex = false } = input;
   const url = absoluteUrl(path);
+  // A page's own picture wins; the site-wide fallback covers the rest. Both
+  // may be absent, in which case no image tag is emitted at all rather than
+  // one pointing at nothing.
+  const image = input.image ?? DEFAULT_OG_IMAGE;
 
   return {
     title,

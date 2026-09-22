@@ -1,0 +1,58 @@
+# Netlify build configuration.
+#
+# Strictly speaking Netlify can build this site without this file: it detects
+# Next.js and installs its own Next Runtime, and the build command and publish
+# directory can be typed into the UI instead. The file earns its place for one
+# reason that the UI cannot give — the settings are in version control, so a
+# deploy cannot start behaving differently because someone changed a field in
+# a dashboard six months ago and nobody wrote it down.
+#
+# What is deliberately NOT here:
+#
+#   - Redirects. Every redirect this site has is generated from Sanity at
+#     build time in next.config.ts (176 recipe + 13 date legacy URLs, plus
+#     three retired stand-in routes). Netlify's Next Runtime applies them.
+#     Writing any of them here as well would create a second, hand-maintained
+#     copy that silently goes stale.
+#   - Headers. Same reason: next.config.ts already sets Referrer-Policy,
+#     X-Content-Type-Options, X-Frame-Options and Permissions-Policy on every
+#     route, and the runtime applies those too. The one header that is not
+#     there, and belongs here rather than in the app, is commented out at the
+#     bottom.
+#   - Environment variables. Secrets belong in the Netlify UI, never in a file
+#     in the repository. See .env.example for the full list and which of them
+#     are public.
+
+[build]
+  command = "npm run build"
+  # The Next Runtime rewrites this itself; it is stated so the intent is
+  # readable rather than implied.
+  publish = ".next"
+
+[build.environment]
+  # Next 16 requires Node >= 20.9. Netlify's default build image Node version
+  # changes over time and is not the same across accounts, so a build that
+  # works today can break on a version bump nobody made. Pinned to the
+  # current LTS line, which satisfies Next and is what the site is built
+  # against.
+  NODE_VERSION = "22"
+
+# ---------------------------------------------------------------------------
+# HSTS — deliberately left switched off until after the first successful
+# HTTPS deploy on the real domain.
+#
+# Strict-Transport-Security commits the domain, and every subdomain if
+# includeSubDomains is used, to HTTPS for the whole max-age, with no quick way
+# back: a browser that has seen the header will refuse plain HTTP for that
+# long even if the certificate later breaks. That is the right end state and
+# the wrong thing to enable on day one.
+#
+# Turn it on once the domain is live on HTTPS and has been stable for a few
+# days, starting with a short max-age (300) and raising it to 31536000 only
+# after nothing has broken.
+#
+# [[headers]]
+#   for = "/*"
+#   [headers.values]
+#     Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+# ---------------------------------------------------------------------------
