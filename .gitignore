@@ -19,3 +19,12 @@ supabase/.temp/
 # Sanity content backups written by the local tooling. Real content dumps —
 # kept on disk for rollback, never committed.
 reports/backups/
+
+# Written automatically by `next dev` (see
+# node_modules/next/dist/server/lib/generate-agent-files.js) and re-created on
+# every run. Their content tracks the installed Next version rather than
+# anything about this project, so committing them would mean a spurious diff
+# on every Next upgrade. Ignoring keeps the tree clean either way — the files
+# still exist locally for whichever assistant reads them.
+/AGENTS.md
+/CLAUDE.md

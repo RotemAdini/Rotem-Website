@@ -96,10 +96,11 @@ export default function PrivacyPage() {
 
           <section className="legal-section" id="pp-operator">
             <h2>1. מי מפעיל את האתר</h2>
-            <p>האתר מופעל על ידי רותם עדיני (״אנחנו״, ״האתר״).</p>
+            <p>האתר מופעל על ידי רותם עדיני (״אנחנו״, ״האתר״), הפועלת כ<strong>עוסק פטור</strong>.</p>
             <ul>
               <li>דוא״ל לפניות בנושא פרטיות: <a href="mailto:rotemadini@gmail.com">rotemadini@gmail.com</a></li>
-              <li>שם משפטי ומספר עוסק/ח.פ.: <span className="legal-tbd">להשלמה — שם רשום ומספר עוסק מורשה או ח.פ.</span></li>
+              <li>סוג העסק: עוסק פטור</li>
+              <li>מספר עוסק: <span lang="en">212087399</span></li>
               <li>כתובת: <span className="legal-tbd">להשלמה — כתובת עסק, אם נדרשת</span></li>
               <li>טלפון: <span className="legal-tbd">להשלמה — מספר טלפון, אם רוצים לפרסם אותו</span></li>
             </ul>

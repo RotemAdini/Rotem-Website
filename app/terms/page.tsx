@@ -52,7 +52,12 @@ export default function TermsPage() {
           <section className="legal-section" id="tou-general">
             <h2>1. כללי שימוש באתר</h2>
             <p>הגלישה והשימוש באתר זה כפופים לתנאים המפורטים במסמך זה. אם אינכם מסכימים לתנאי מהתנאים, נא להימנע מהמשך השימוש באתר.</p>
-            <p><span className="legal-tbd">להשלמה: שם העסק/החברה המפעילים את האתר, ופרטים מזהים נוספים (למשל מספר עוסק/ח.פ.).</span></p>
+            <p>
+              האתר מופעל על ידי <strong>רותם עדיני</strong>, הפועלת כ<strong>עוסק פטור</strong>. לפניות:{" "}
+              <a href="mailto:rotemadini@gmail.com">rotemadini@gmail.com</a>.
+            </p>
+            <p>מספר עוסק: <span lang="en">212087399</span>.</p>
+            <p><span className="legal-tbd">להשלמה: פרטי התקשרות נוספים (כתובת/טלפון), ככל שיידרשו.</span></p>
           </section>
 
           <section className="legal-section" id="tou-content">
