@@ -347,11 +347,15 @@ export const recipe = defineType({
     }),
     defineField({
       name: "listed",
-      title: "Listed on /recipes",
+      title: "מוצג באתר",
       type: "boolean",
       group: "provenance",
       initialValue: true,
-      description: "False for a recipe that stays reachable at its own URL but is hidden from the board (duplicates).",
+      description:
+        "False removes the recipe from the site completely — the board, search, the sitemap, the favourites list " +
+        "and its own URL, which then answers 404 exactly as an address that never existed. This used to mean " +
+        "\"duplicate of another post\", where the recipe stayed reachable at its URL; it does not any more. " +
+        "A duplicate marker needs a field of its own.",
     }),
     defineField({
       name: "alternateSourceUrls",

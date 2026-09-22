@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
 
+import { SITE_URL } from "@/lib/seo";
+
 /**
  * Everything a reader can browse stays crawlable — recipes, date ideas, games
  * and the rest of the public site are the whole point of the site being
@@ -15,6 +17,9 @@ import type { MetadataRoute } from "next";
  *
  * This is a crawling hint, not access control: those routes are protected by
  * their own auth checks, and robots.txt is read by well-behaved crawlers only.
+ *
+ * The sitemap line is what turns app/sitemap.ts from a file nobody requests
+ * into the discovery path a crawler actually follows.
  */
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -23,5 +28,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/studio", "/dashboard", "/account", "/auth"],
     },
+    sitemap: `${SITE_URL}/sitemap.xml`,
   };
 }

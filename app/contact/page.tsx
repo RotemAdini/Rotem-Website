@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import ContactForm from "@/components/ContactForm";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "צור קשר | רותם עדיני",
-  description: "רותם עדיני — מתכונים, דייטים, משחקים ומתנות.",
-};
+  description: "שאלה על מתכון, על משחק, הצעה לשיתוף פעולה או כל דבר אחר — אפשר לכתוב לי דרך הטופס, במייל או באינסטגרם.",
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

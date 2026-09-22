@@ -2,6 +2,8 @@ import fs from "node:fs";
 import path from "node:path";
 import type { Metadata } from "next";
 import { getGameMetadataBySlug } from "@/lib/sanity/games";
+import { gameCardImage } from "@/lib/sanity/game-adapters";
+import { pageMetadata } from "@/lib/seo";
 import Script from "next/script";
 import "@/styles/games/styles.css";
 import "@/styles/games/memory-scene.css";
@@ -20,10 +22,14 @@ import "@/styles/games/game-fidelity.css";
  */
 export async function generateMetadata(): Promise<Metadata> {
   const game = await getGameMetadataBySlug("memory-game");
-  return {
+  return pageMetadata({
     title: game?.seoTitle?.trim() || "משחק הזיכרון הגדול — משחק זוגי דיגיטלי | רותם עדיני",
     description: game?.seoDescription?.trim() || "משחק הזיכרון הגדול: 40 שאלות שמחזירות אתכם לרגעים ולזיכרונות שכמעט שכחתם, עם ניקוד ותחרות קלילה. ₪48 — הרכישה המקוונת נפתחת בקרוב.",
-  };
+    path: "/games/memory-game",
+    // The product photo, so a link shared to WhatsApp or Instagram shows
+    // the game rather than a bare URL.
+    image: game ? gameCardImage(game) ?? null : null,
+  });
 }
 
 const html = fs.readFileSync(path.join(process.cwd(), "content/games/memory-game.html"), "utf8");

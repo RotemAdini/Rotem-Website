@@ -5,21 +5,21 @@ import type { NextConfig } from "next";
  *
  * Why this cannot live in the page. `/recipes/[slug]` and `/dates/[slug]` are
  * statically generated, and `generateStaticParams` returns only the canonical
- * slugs — an alias is therefore an unknown param, which Next renders on demand
- * in a *prerender* context. `permanentRedirect()` inside a prerender cannot set
- * an HTTP status, so it degrades into a 200 carrying
- * `<meta http-equiv="refresh">`, which Next then caches for a year. Verified on
- * a cold server: the first, uncached request already answered 200 with
- * `x-nextjs-prerender: 1`.
+ * slugs, so an alias is an unknown param. Both routes now set
+ * `dynamicParams = false`, which makes an unknown param a real 404 — so
+ * without this list every legacy URL would simply 404.
  *
- * A redirect declared here runs before the page renders, so the alias answers
- * with a genuine 308 and the canonical pages stay SSG. The pages' own
- * `resolveRecipeRoute()` / `resolveDateRoute()` redirect branches are
- * deliberately left in place as the safety net: they still cover anything
- * retired after the last build.
+ * Before `dynamicParams = false`, an unknown param was rendered on demand in
+ * a *prerender* context, where `permanentRedirect()` cannot set an HTTP
+ * status: it degraded into a 200 carrying `<meta http-equiv="refresh">`,
+ * cached for a year. Verified on a cold server — the first, uncached request
+ * already answered 200 with `x-nextjs-prerender: 1`. Either way, this list is
+ * the only thing that gives a legacy URL a genuine 308.
  *
- * The list is a build-time snapshot, which is the same freshness contract the
- * statically generated pages already have.
+ * The pages' own `resolveRecipeRoute()` / `resolveDateRoute()` redirect
+ * branches are kept, but they are now build-time only and no longer act as a
+ * runtime safety net: a slug retired after the last build 404s until the next
+ * deploy, the same freshness contract the statically generated pages have.
  */
 
 interface AliasRow {
@@ -31,18 +31,21 @@ interface AliasRow {
  * Reads one content type's canonical slugs and the aliases that must redirect
  * to them, and turns them into 308s under `basePath`.
  *
- * `listedOnly` gates the read the same way the site's own data layer does. An
- * unlisted idea must not be reachable at any URL, so its legacy ids are not
- * given a redirect either — a 308 to a page that then 404s would still confirm
- * the idea exists, which is the thing `listed:false` is there to prevent.
+ * `listedFilter` must be the exact GROQ the matching data-layer module uses
+ * to gate its own reads — `listed == true` for recipes (lib/sanity/recipes.ts)
+ * and `listed != false` for date ideas (lib/sanity/dates.ts), which differ
+ * because the two fields have different histories. Passing the expression
+ * rather than a boolean is deliberate: a redirect generated for an item the
+ * data layer will not serve is a 308 to a page that then 404s, which still
+ * confirms the item exists — the thing `listed:false` is there to prevent.
  */
 async function legacyRedirects(options: {
   type: string;
   basePath: string;
   label: string;
-  listedOnly?: boolean;
+  listedFilter: string;
 }): Promise<{ source: string; destination: string; permanent: true }[]> {
-  const { type, basePath, label, listedOnly = false } = options;
+  const { type, basePath, label, listedFilter } = options;
   const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
   const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
   const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2026-09-07";
@@ -53,7 +56,7 @@ async function legacyRedirects(options: {
 
   // Both alias kinds the route resolvers honour: slugs retired into
   // slugHistory, and pre-migration route ids.
-  const query = `*[_type == "${type}" && defined(slug.current)${listedOnly ? " && listed != false" : ""}]{
+  const query = `*[_type == "${type}" && defined(slug.current) && ${listedFilter}]{
     "slug": slug.current,
     "aliases": coalesce(slugHistory[].slug, []) + coalesce(legacyRouteIds, [])
   }`;
@@ -99,15 +102,35 @@ async function legacyRedirects(options: {
   return redirects;
 }
 
+/**
+ * The three retired stand-in routes.
+ *
+ * /checkout, /game and /play were pages for a demo product that never
+ * existed. Their route files still call permanentRedirect() as the fallback,
+ * but a redirect called from a *statically generated* page cannot set an HTTP
+ * status — it degrades into a 200 carrying a meta refresh, exactly as
+ * documented above for the alias slugs. Declared here they answer with a real
+ * 308 and never render at all.
+ */
+const retiredRoutes = ["/checkout", "/game", "/play"].map((source) => ({
+  source,
+  destination: "/games",
+  permanent: true as const,
+}));
+
 const nextConfig: NextConfig = {
   async redirects() {
+    // Both types are gated on `listed` now. For recipes this is new: the
+    // flag used to mean "duplicate of another post" and an unlisted recipe
+    // stayed reachable at its own URL, so its aliases were still worth
+    // redirecting. It is now the publication gate for recipes as well as
+    // dates. Each filter is copied from that type's own data layer so the
+    // two can never disagree about what is public.
     const [recipes, dates] = await Promise.all([
-      legacyRedirects({ type: "recipe", basePath: "/recipes", label: "recipe" }),
-      // Dates are gated on `listed`; recipes are not, because the recipe layer
-      // has always served every published recipe.
-      legacyRedirects({ type: "dateIdea", basePath: "/dates", label: "date", listedOnly: true }),
+      legacyRedirects({ type: "recipe", basePath: "/recipes", label: "recipe", listedFilter: "listed == true" }),
+      legacyRedirects({ type: "dateIdea", basePath: "/dates", label: "date", listedFilter: "listed != false" }),
     ]);
-    return [...recipes, ...dates];
+    return [...recipes, ...dates, ...retiredRoutes];
   },
 
   /**

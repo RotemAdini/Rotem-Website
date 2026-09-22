@@ -57,12 +57,22 @@ export default function SiteChrome({ header, footer, accessibilityControls, chil
       <a className="skip-link" href="#main-content" onClick={focusMain}>
         דילוג לתוכן הראשי
       </a>
+      {/* Second in the tab order, straight after the skip link, although it
+          renders fixed at the bottom-left corner either way.
+
+          It used to be last: measured on the homepage, its trigger was the
+          55th and final focusable element, so a keyboard or screen-reader
+          user had to traverse the whole page — header, nav, every card, the
+          whole footer — before they could reach the control that adjusts the
+          display for them. Moving it here costs sighted keyboard users one
+          Tab stop and costs nothing visually, because the element is
+          position:fixed. */}
+      {accessibilityControls}
       {header}
       <div id="main-content" tabIndex={-1}>
         {children}
       </div>
       {footer}
-      {accessibilityControls}
     </>
   );
 }

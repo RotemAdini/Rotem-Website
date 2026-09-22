@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import "@/styles/legal-pages.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "שאלות ותשובות | רותם עדיני",
   description: "תשובות לשאלות נפוצות על מתכונים, משחקים לזוגות ורכישה באתר של רותם עדיני.",
-};
+  path: "/faq",
+});
 
 export default function FaqPage() {
   return (

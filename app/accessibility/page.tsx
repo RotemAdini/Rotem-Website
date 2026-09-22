@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import "@/styles/legal-pages.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "הצהרת נגישות | רותם עדיני",
   description: "הצהרת הנגישות של אתר רותם עדיני — מצב ההנגשה, התקן שלפיו נעשתה העבודה, מגבלות ידועות ודרכי פנייה בנושאי נגישות.",
-};
+  path: "/accessibility",
+});
 
 /**
  * The accessibility statement required by regulation 35(ה) of the Israeli

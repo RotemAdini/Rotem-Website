@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { FEATURES } from "@/lib/features";
 import CategoryCarousel from "@/components/CategoryCarousel";
@@ -8,6 +9,50 @@ import { getHomeHighlightRecipes, getLatestRecipeImageForCategory } from "@/lib/
 import { recipeCardImage, recipeFavoriteId, recipeHref } from "@/lib/sanity/recipe-adapters";
 import { getListedDateIdeas } from "@/lib/sanity/dates";
 import { dateCardImage, dateHref } from "@/lib/sanity/date-adapters";
+import { SITE_NAME, SITE_URL, jsonLdScript, pageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = pageMetadata({
+  title: `${SITE_NAME} | מתכונים, דייטים ומשחקים`,
+  description:
+    "מתכונים שאפשר באמת להכין בבית, רעיונות לדייטים עם תכנון מוכן ומשחקים זוגיים דיגיטליים — הכל במקום אחד, אצל רותם עדיני.",
+  path: "/",
+});
+
+/**
+ * Who publishes this site, and where else she publishes.
+ *
+ * Deliberately minimal. `WebSite` without a `potentialAction` because the
+ * site's search runs entirely in the browser and never puts the query in the
+ * URL, so there is no search URL template to declare — announcing one that
+ * does not work is worse than announcing none. `Person` rather than
+ * `Organization` because that is what this is, and `sameAs` lists exactly
+ * the four profiles the footer already links to.
+ */
+const homeJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: `${SITE_URL}/`,
+      name: SITE_NAME,
+      inLanguage: "he-IL",
+      publisher: { "@id": `${SITE_URL}/#person` },
+    },
+    {
+      "@type": "Person",
+      "@id": `${SITE_URL}/#person`,
+      name: SITE_NAME,
+      url: `${SITE_URL}/`,
+      sameAs: [
+        "https://www.instagram.com/rotem_adini",
+        "https://www.facebook.com/share/16WJDMpdpV/",
+        "https://www.tiktok.com/@rotem_adini",
+        "https://www.youtube.com/@rotemadini",
+      ],
+    },
+  ],
+};
 
 export default async function HomePage() {
   // Recipes and date ideas both come from Sanity. The date panel reads the
@@ -23,6 +68,7 @@ export default async function HomePage() {
 
   return (
     <main>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript(homeJsonLd) }} />
       <section className="hero hero-home">
         <div className="hero-copy">
           <span className="eyebrow">מתכונים, רגעים וזוגיות</span>

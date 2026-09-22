@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 
 import GoogleSignInButton from "@/components/GoogleSignInButton";
@@ -14,10 +15,15 @@ import { describeUser } from "@/lib/supabase/user";
  */
 export async function generateMetadata(): Promise<Metadata> {
   const user = isSupabaseConfigured ? await getSupabaseUser() : null;
-  return {
+  return pageMetadata({
     title: user ? "החשבון שלי | רותם עדיני" : "התחברות | רותם עדיני",
-    description: "רותם עדיני — מתכונים, דייטים, משחקים ומתנות.",
-  };
+    description: "התחברות לאתר עם חשבון Google, כדי לשמור מתכונים ורעיונות לדייטים ולמצוא אותם מכל מכשיר.",
+    path: "/account",
+    // Already disallowed in robots.txt. The tag matters because the title
+    // itself changes with who is looking, so there is no one page here to
+    // index even in principle.
+    noIndex: true,
+  });
 }
 
 /**

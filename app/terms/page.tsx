@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import "@/styles/legal-pages.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "תנאי שימוש | רותם עדיני",
   description: "תנאי השימוש באתר רותם עדיני — שימוש בתכנים, מתכונים, משחקים דיגיטליים, רכישות וזכויות יוצרים.",
-};
+  path: "/terms",
+});
 
 export default function TermsPage() {
   return (

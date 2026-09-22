@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import FavoritesGrid from "@/components/FavoritesGrid";
 import { getRecipeFavoriteCatalog } from "@/lib/recipe-favorites";
 import { getDateFavoriteCatalog } from "@/lib/date-favorites";
 
-export const metadata: Metadata = {
+/** A per-reader page: what it shows depends on who is looking, so there is
+ * nothing here that belongs in an index. */
+export const metadata: Metadata = pageMetadata({
   title: "המועדפים שלי | רותם עדיני",
-};
+  description: "המתכונים, הדייטים והמשחקים ששמרתם — במקום אחד.",
+  path: "/favorites",
+  noIndex: true,
+});
 
 export default async function FavoritesPage() {
   // Recipes and date ideas both resolve from Sanity now; merged here so the

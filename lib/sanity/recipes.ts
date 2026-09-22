@@ -185,42 +185,74 @@ export function sortByPublishedDateDesc<T extends { publishedDate: string | null
 
 /* ------------------------------------------------------------- accessors */
 
-/** Every recipe document, listed or not. */
-export async function getAllRecipes(): Promise<SanityRecipeSummary[]> {
-  return sortByPublishedDateDesc(await fetchRecipeSummaries("true"));
+/**
+ * The publication gate. A recipe that is not listed does not exist as far as
+ * this site is concerned.
+ *
+ * It is one constant threaded through every accessor, for the same reason
+ * lib/sanity/dates.ts does it: a single lookup that forgets the gate — a
+ * detail page, a static param, a related-recipes strip, a favourite token —
+ * is exactly how unpublished content reaches the public site, and it is the
+ * kind of omission no reviewer reliably catches. There is deliberately no
+ * accessor left that reads recipes without it: `getAllRecipes()`, which used
+ * to be exactly that, has been removed rather than left available.
+ *
+ * Written `== true` rather than the dates module's `!= false` because the
+ * two fields have different histories. Every recipe document carries an
+ * explicit value and the schema's initialValue is true, so a new recipe is
+ * public from the moment it is created and only an explicit false hides it.
+ *
+ * Review status is deliberately NOT part of this gate: the hand-authored
+ * biscuit-series stand-in carries status NEEDS_REVIEW because it has no
+ * catalog record, yet the site has always shown it. Filtering on status here
+ * would silently drop it from the board.
+ */
+const LISTED = `listed == true`;
+
+/**
+ * The recipes shown publicly — and, since there is no ungated accessor, the
+ * only recipes this site can read at all.
+ *
+ * `listed` originally meant "is this a duplicate of another post?", and an
+ * unlisted recipe stayed reachable at its own URL while being hidden from the
+ * board. That is no longer what it means. It is now the publication gate,
+ * matching date ideas: an unlisted recipe is unreachable everywhere. A
+ * duplicate marker, if one is wanted again, needs a field of its own — this
+ * one is no longer available for that.
+ */
+export async function getListedRecipes(): Promise<SanityRecipeSummary[]> {
+  return sortByPublishedDateDesc(await fetchRecipeSummaries(LISTED));
 }
 
 /**
- * The recipes shown publicly.
+ * One recipe by its canonical slug, or null.
  *
- * `listed` is the flag the migration carried over from the previous
- * implementation's "is this a duplicate of another post?" rule. Review status
- * is deliberately NOT part of this filter: the hand-authored biscuit-series
- * stand-in carries status NEEDS_REVIEW because it has no catalog record, yet
- * the site has always shown it. Filtering on status here would silently drop
- * it from the board.
+ * An unlisted recipe returns null, which is the same answer a slug that never
+ * existed gets. The caller cannot tell the two apart, so no title,
+ * description, ingredient, source link or image can leak through a direct
+ * request.
  */
-export async function getListedRecipes(): Promise<SanityRecipeSummary[]> {
-  return sortByPublishedDateDesc(await fetchRecipeSummaries("listed == true"));
-}
-
 export async function getRecipeByCanonicalSlug(slug: string): Promise<SanityRecipe | null> {
-  const [recipe] = await fetchRecipes("slug.current == $slug", { slug });
+  const [recipe] = await fetchRecipes(`${LISTED} && slug.current == $slug`, { slug });
   return recipe ?? null;
 }
 
+/** The slugs that get a prerendered route. An unlisted recipe is absent, so
+ * it is never built into a public page in the first place — and because the
+ * route sets `dynamicParams = false`, absent here means a real 404 rather
+ * than an on-demand render. */
 export async function getAllRecipeSlugs(): Promise<string[]> {
-  return getSanityClient().fetch<string[]>(`*[_type == "recipe" && defined(slug.current)].slug.current`);
+  return getSanityClient().fetch<string[]>(`*[_type == "recipe" && defined(slug.current) && ${LISTED}].slug.current`);
 }
 
 export async function getRecipesByCategory(categorySlug: string): Promise<SanityRecipeSummary[]> {
-  return sortByPublishedDateDesc(await fetchRecipeSummaries("listed == true && categorySlug == $categorySlug", { categorySlug }));
+  return sortByPublishedDateDesc(await fetchRecipeSummaries(`${LISTED} && categorySlug == $categorySlug`, { categorySlug }));
 }
 
 /** For the planned חגים section. No UI consumes it yet; it exists so the
  * holiday metadata already carried on every recipe is reachable. */
 export async function getRecipesByHoliday(holiday: string): Promise<SanityRecipeSummary[]> {
-  return sortByPublishedDateDesc(await fetchRecipeSummaries("listed == true && $holiday in holidays", { holiday }));
+  return sortByPublishedDateDesc(await fetchRecipeSummaries(`${LISTED} && $holiday in holidays`, { holiday }));
 }
 
 /**
@@ -247,13 +279,13 @@ export async function getRelatedRecipes(recipe: SanityRecipe, count: number): Pr
     take(await getRelatedSeriesRecipes(recipe.series, recipe.contentId, count));
   }
   if (picked.size < count && recipe.categorySlug) {
-    const sameCategory = await fetchRecipeSummaries("listed == true && categorySlug == $categorySlug && count(legacyImages) > 0", {
+    const sameCategory = await fetchRecipeSummaries(`${LISTED} && categorySlug == $categorySlug && count(legacyImages) > 0`, {
       categorySlug: recipe.categorySlug,
     });
     take(sortByPublishedDateDesc(sameCategory));
   }
   if (picked.size < count) {
-    take(sortByPublishedDateDesc(await fetchRecipeSummaries("listed == true && count(legacyImages) > 0", {})));
+    take(sortByPublishedDateDesc(await fetchRecipeSummaries(`${LISTED} && count(legacyImages) > 0`, {})));
   }
 
   return [...picked.values()].slice(0, count);
@@ -262,7 +294,7 @@ export async function getRelatedRecipes(recipe: SanityRecipe, count: number): Pr
 /** Other recipes in the same editorial series that actually have a photo —
  * the "more from this series" strip on a series stand-in's page. */
 export async function getRelatedSeriesRecipes(series: string, excludeContentId: string, count: number): Promise<SanityRecipeSummary[]> {
-  const recipes = await fetchRecipeSummaries("series == $series && contentId != $excludeContentId && count(legacyImages) > 0", {
+  const recipes = await fetchRecipeSummaries(`${LISTED} && series == $series && contentId != $excludeContentId && count(legacyImages) > 0`, {
     series,
     excludeContentId,
   });
@@ -289,6 +321,11 @@ export type RecipeRouteResolution =
  * alive — the raw Instagram-caption ids, the `instagram-NN` ids and the
  * `biscuit-cake-NN` series pages — without any of them rendering a second,
  * duplicate copy of the page.
+ *
+ * Both lookups are gated on `listed`, so an unlisted recipe is "not-found" at
+ * every one of them: its own slug 404s, and so does any legacy id pointing at
+ * it, which would otherwise have redirected a visitor to a page that 404s
+ * anyway while confirming the recipe exists.
  */
 /**
  * Wrapped in React's cache() because a recipe page resolves the same segment
@@ -304,7 +341,7 @@ export const resolveRecipeRoute = cache(async (segment: string): Promise<RecipeR
   if (canonical) return { kind: "canonical", recipe: canonical };
 
   const [alias] = await getSanityClient().fetch<{ slug: string; slugHistory: string[] }[]>(
-    `*[_type == "recipe" && slug.current != $segment && ($segment in slugHistory[].slug || $segment in legacyRouteIds)]{
+    `*[_type == "recipe" && ${LISTED} && slug.current != $segment && ($segment in slugHistory[].slug || $segment in legacyRouteIds)]{
       "slug": slug.current,
       "slugHistory": coalesce(slugHistory[].slug, [])
     }`,

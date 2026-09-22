@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import GamesBoard from "@/components/GamesBoard";
 import { getListedGames } from "@/lib/sanity/games";
 import { toGameCatalogItem } from "@/lib/sanity/game-adapters";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "משחקים לזוג | רותם עדיני",
-  description: "רותם עדיני — מתכונים, דייטים, משחקים ומתנות.",
-};
+  description: "משחקים זוגיים דיגיטליים — היער הקסום, מירוץ האהבה ומשחק הזיכרון הגדול. שיחות עומק, תחרות ידידותית וערב אחר ביחד, בלי הכנות מראש.",
+  path: "/games",
+});
 
 export default async function GamesPage() {
   // Product metadata comes from Sanity. The hero, the "how it works" section

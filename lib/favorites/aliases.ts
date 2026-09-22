@@ -3,7 +3,7 @@ import "server-only";
 import { cache } from "react";
 
 import { getListedDateIdeas } from "@/lib/sanity/dates";
-import { getAllRecipes } from "@/lib/sanity/recipes";
+import { getListedRecipes } from "@/lib/sanity/recipes";
 import { dateFavoriteId } from "@/lib/sanity/date-adapters";
 import { recipeFavoriteId } from "@/lib/sanity/recipe-adapters";
 import type { FavoriteContentType } from "@/lib/supabase/database.types";
@@ -16,15 +16,15 @@ import type { FavoriteAliasMap } from "./resolve";
  * cache() keeps it to one read per request even when several actions run
  * within the same request.
  *
- * Listed date ideas only, so an unlisted idea cannot be hearted, cannot be
- * counted, and cannot be confirmed to exist by probing a token. This destroys
- * nothing: an unresolved token is returned to the caller rather than dropped
- * (see ./resolve), removeFavoriteTokens only ever deletes what resolved, and
- * the Supabase row is never touched — so a favourite saved while an idea was
- * public comes back intact if it is listed again.
+ * Listed items only, on both sides, so an unlisted recipe or idea cannot be
+ * hearted, cannot be counted, and cannot be confirmed to exist by probing a
+ * token. This destroys nothing: an unresolved token is returned to the caller
+ * rather than dropped (see ./resolve), removeFavoriteTokens only ever deletes
+ * what resolved, and the Supabase row is never touched — so a favourite saved
+ * while an item was public comes back intact if it is listed again.
  */
 export const getFavoriteAliasMap = cache(async (): Promise<FavoriteAliasMap> => {
-  const [recipes, dateIdeas] = await Promise.all([getAllRecipes(), getListedDateIdeas()]);
+  const [recipes, dateIdeas] = await Promise.all([getListedRecipes(), getListedDateIdeas()]);
 
   const byToken = new Map<string, { contentId: string; contentType: FavoriteContentType }>();
   const tokensByContentId = new Map<string, string[]>();

@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import DatesBoard from "@/components/DatesBoard";
 import { getListedDateIdeas } from "@/lib/sanity/dates";
 import { toDateBoardCard } from "@/lib/sanity/date-adapters";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "רעיונות לדייטים | רותם עדיני",
-  description: "רותם עדיני — מתכונים, דייטים, משחקים ומתנות.",
-};
+  description: "רעיונות לדייט בבית ובחוץ, בתקציב קטן או לערב מושקע — עם תכנון מוכן לכל רעיון, כדי שלא תבזבזו שעה על ״אז מה עושים הערב?״.",
+  path: "/dates",
+});
 
 export default async function DatesPage() {
   // Date ideas come from Sanity. The board itself is unchanged: it still

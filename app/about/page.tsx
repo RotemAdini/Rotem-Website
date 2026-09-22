@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "קצת עליי | רותם עדיני",
-  description: "רותם עדיני — מתכונים, דייטים, משחקים ומתנות.",
-};
+  description: "מי אני ולמה האתר הזה קיים — מתכונים שאפשר באמת להכין בבית, רעיונות לדייטים ומשחקים זוגיים שנולדו מהרצון לעשות את היומיום קצת יותר כיף.",
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

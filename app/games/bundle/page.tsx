@@ -2,6 +2,8 @@ import fs from "node:fs";
 import path from "node:path";
 import type { Metadata } from "next";
 import { getGameMetadataBySlug } from "@/lib/sanity/games";
+import { gameCardImage } from "@/lib/sanity/game-adapters";
+import { pageMetadata } from "@/lib/seo";
 import Script from "next/script";
 import "@/styles/games/styles.css";
 import "@/styles/games/site-integration.css";
@@ -19,10 +21,14 @@ import "@/styles/games/game-fidelity.css";
  */
 export async function generateMetadata(): Promise<Metadata> {
   const game = await getGameMetadataBySlug("bundle");
-  return {
+  return pageMetadata({
     title: game?.seoTitle?.trim() || "החבילה המלאה — שלושת המשחקים ב-₪110 | רותם עדיני",
     description: game?.seoDescription?.trim() || "החבילה המלאה: היער הקסום, מירוץ האהבה ומשחק הזיכרון הגדול — שלושת המשחקים יחד ב-₪110 במקום ₪144. תשלום חד-פעמי, גישה לכל החיים. הרכישה המקוונת נפתחת בקרוב.",
-  };
+    path: "/games/bundle",
+    // The product photo, so a link shared to WhatsApp or Instagram shows
+    // the game rather than a bare URL.
+    image: game ? gameCardImage(game) ?? null : null,
+  });
 }
 
 const html = fs.readFileSync(path.join(process.cwd(), "content/games/bundle.html"), "utf8");

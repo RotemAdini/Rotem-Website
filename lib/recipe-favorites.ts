@@ -1,6 +1,6 @@
 import "server-only";
 import type { FavoriteEntry } from "./types";
-import { getAllRecipes } from "./sanity/recipes";
+import { getListedRecipes } from "./sanity/recipes";
 import { toFavoriteEntries } from "./sanity/recipe-adapters";
 
 /**
@@ -13,11 +13,18 @@ import { toFavoriteEntries } from "./sanity/recipe-adapters";
  * `biscuit-cake-NN`, so a favourite saved under either one still resolves —
  * which is the whole point of keeping the legacy aliases in Sanity.
  *
- * `getAllRecipes()` rather than the listed ones: a recipe hidden from the
- * board is still reachable at its own URL, and a favourite saved for it must
- * not vanish from the list.
+ * Listed recipes only, matching getDateFavoriteCatalog(). This used to read
+ * every recipe, on the reasoning that an unlisted one was still reachable at
+ * its own URL so a favourite saved for it should keep showing. That reasoning
+ * no longer holds: `listed` is now the publication gate, and an entry here
+ * carries a title, a link and a photo — building one for an unlisted recipe
+ * would publish exactly the content the flag exists to withhold.
+ *
+ * Nothing is lost by leaving it out. The Supabase row and the localStorage
+ * token both survive untouched, so the item reappears in the grid if the
+ * recipe is listed again.
  */
 export async function getRecipeFavoriteCatalog(): Promise<Record<string, FavoriteEntry>> {
-  const recipes = await getAllRecipes();
+  const recipes = await getListedRecipes();
   return Object.assign({}, ...recipes.map(toFavoriteEntries)) as Record<string, FavoriteEntry>;
 }

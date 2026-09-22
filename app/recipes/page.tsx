@@ -1,13 +1,15 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import RecipesBoard from "@/components/RecipesBoard";
 import { getListedRecipes } from "@/lib/sanity/recipes";
 import { boardTagOptions, toBoardCard } from "@/lib/sanity/recipe-adapters";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "מתכונים | רותם עדיני",
-  description: "רותם עדיני — מתכונים, דייטים, משחקים ומתנות.",
-};
+  description: "כל המתכונים של רותם עדיני במקום אחד — מתוקים ומלוחים, עם תנור וללא אפייה. אפשר לסנן לפי קטגוריה, זמן הכנה, רמת קושי וחג.",
+  path: "/recipes",
+});
 
 export default async function RecipesPage() {
   // Recipes come from Sanity. The board itself is unchanged: it still receives

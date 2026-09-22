@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -7,9 +8,14 @@ import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { getSupabaseUser } from "@/lib/supabase/server";
 import { describeUser } from "@/lib/supabase/user";
 
-export const metadata: Metadata = {
+/** Already disallowed in robots.txt; the meta tag is the belt to that
+ * braces, for a crawler that reached the URL without reading robots.txt. */
+export const metadata: Metadata = pageMetadata({
   title: "האזור האישי | רותם עדיני",
-};
+  description: "האזור האישי של המשתמשים הרשומים באתר.",
+  path: "/dashboard",
+  noIndex: true,
+});
 
 /**
  * The signed-in area.
