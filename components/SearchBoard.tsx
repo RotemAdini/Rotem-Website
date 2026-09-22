@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { SearchResult, SearchResultType } from "@/lib/types";
 import { rankResults } from "@/lib/search-rank";
 import { isGameHref } from "@/lib/is-game-href";
 import { FEATURES } from "@/lib/features";
+import { trackEvent } from "@/lib/analytics";
 
 const TYPES: { value: SearchResultType | "all"; label: string }[] = [
   { value: "all", label: "הכל" },
@@ -23,6 +24,16 @@ const SUGGESTIONS = ["שוקולד", "עוגת ביסקוויטים", "טחינ�
 
 const PAGE_SIZE = 24;
 
+/**
+ * How long to wait after the last keystroke before recording a search.
+ *
+ * The board filters as you type, so there is no submit to hang the event on.
+ * Firing per keystroke would record "מ", "מת", "מתכ", "מתכו"… — noise that
+ * says nothing about what anyone was looking for. Waiting for a pause
+ * records one event per actual search.
+ */
+const SEARCH_EVENT_DELAY_MS = 900;
+
 export default function SearchBoard({ index }: { index: SearchResult[] }) {
   const [term, setTerm] = useState("");
   const [type, setType] = useState<SearchResultType | "all">("all");
@@ -35,6 +46,31 @@ export default function SearchBoard({ index }: { index: SearchResult[] }) {
 
   const hasQuery = term.trim().length > 0;
   const shown = results.slice(0, visible);
+
+  /**
+   * Records that a search happened — never what was searched for.
+   *
+   * There is deliberately no `query` parameter. People type their own names,
+   * their partner's name and worse into a search box, and a stored query log
+   * is personal data: it would have to be disclosed in the privacy policy,
+   * given a retention period, and included in any subject access request.
+   * The length of the term, how many results it found and which filter was
+   * active answer "is search working" without keeping a word of it.
+   *
+   * A no-op until a provider is configured.
+   */
+  useEffect(() => {
+    if (!hasQuery) return;
+    const timer = window.setTimeout(() => {
+      trackEvent("search", {
+        term_length: term.trim().length,
+        result_count: results.length,
+        filter: type,
+        found: results.length > 0,
+      });
+    }, SEARCH_EVENT_DELAY_MS);
+    return () => window.clearTimeout(timer);
+  }, [term, type, results.length, hasQuery]);
 
   function updateTerm(value: string) {
     setTerm(value);

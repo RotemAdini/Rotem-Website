@@ -1,6 +1,8 @@
 "use client";
 
 import { useFavorites } from "@/lib/favorites-context";
+import { trackEvent } from "@/lib/analytics";
+import type { ContentKind } from "@/lib/analytics/events";
 
 interface FavoriteButtonProps {
   id: string;
@@ -26,6 +28,25 @@ interface FavoriteButtonProps {
    * a given heart belongs to.
    */
   itemName?: string;
+  /** What kind of thing is being saved, for measurement only. Optional, and
+   * omitted at most call sites — the event is still useful without it, and
+   * the alternative is threading a prop through every card component for the
+   * sake of a metric. */
+  contentKind?: ContentKind;
+}
+
+/**
+ * Best guess at what a favourite token refers to, from the token itself.
+ *
+ * Tokens are structured: a date idea's is `date-…`, a biscuit-series card's
+ * is `biscuit-cake-NN`, everything else is a recipe. This exists so the
+ * event can say what kind of thing was saved without a prop being threaded
+ * through every card on the site. It is used for measurement only, so a
+ * wrong guess costs a mislabelled row in a report and nothing else.
+ */
+function inferContentKind(token: string): ContentKind {
+  if (token.startsWith("date-")) return "date";
+  return "recipe";
 }
 
 /** Heart toggle used on recipe/date cards and detail pages. Ports the
@@ -38,6 +59,7 @@ export default function FavoriteButton({
   label = "הוספה למועדפים",
   activeLabel = "הסרה מהמועדפים",
   itemName,
+  contentKind,
 }: FavoriteButtonProps) {
   const { isFavorite, toggleFavorite, removeFavorites } = useFavorites();
   const tokens = aliases?.length ? aliases : [id];
@@ -66,6 +88,14 @@ export default function FavoriteButton({
         // second saved alias would keep it in the favourites list.
         if (active) removeFavorites(savedTokens);
         else toggleFavorite(id);
+
+        // Measurement only, and a no-op until a provider is configured.
+        // Deliberately carries no user id and no item title — the id below
+        // is a public content token, the same one that appears in a URL.
+        trackEvent(active ? "favorite_remove" : "favorite_add", {
+          content_kind: contentKind ?? inferContentKind(id),
+          slug: id,
+        });
       }}
     >
       <span aria-hidden="true">{active ? "♥" : "♡"}</span>

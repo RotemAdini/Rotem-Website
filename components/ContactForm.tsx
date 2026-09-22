@@ -4,6 +4,7 @@ import { useActionState, useEffect, useId, useRef } from "react";
 
 import { submitContact } from "@/app/contact/actions";
 import { initialContactState, type ContactState } from "@/lib/contact/state";
+import { trackEvent } from "@/lib/analytics";
 import {
   CONTACT_FIELDS,
   FIELD_IDS,
@@ -61,6 +62,19 @@ export default function ContactForm({ token, email }: { token: string; email: st
    */
   useEffect(() => {
     if (state.nonce === 0) return;
+
+    /**
+     * Records the outcome of the submission, and nothing else.
+     *
+     * Not the name, not the address, not the subject, not one character of
+     * the message. `reason` is the site's own status code, which is the part
+     * worth watching: a run of "unconfigured" means a deployment lost its
+     * API key and every message since has been refused.
+     *
+     * A no-op until a provider is configured.
+     */
+    if (state.status === "success") trackEvent("contact_submit_success", {});
+    else if (state.status !== "idle") trackEvent("contact_submit_failure", { reason: state.status });
 
     if (hasFieldErrors) {
       const first = formRef.current?.querySelector<HTMLElement>("[aria-invalid='true']");

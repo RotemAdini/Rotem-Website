@@ -33,8 +33,22 @@ export const metadata: Metadata = pageMetadata({
  *      (untrue since the game forms went live) or "no personal data is
  *      stored" (untrue since accounts went live).
  *   2. Section 8 states that the site carries no analytics or advertising
- *      trackers. That is true today. It must be rewritten in the same commit
- *      that introduces the first one.
+ *      trackers. That is true today and must stay accurate.
+ *
+ *      Note what does NOT make it false: lib/analytics/ exists and several
+ *      components call trackEvent(). With NEXT_PUBLIC_GA_MEASUREMENT_ID
+ *      empty — which is every environment today — no provider script is
+ *      loaded, no request is made and no cookie is set, so there is nothing
+ *      to disclose. Section 8 describes what reaches a visitor's browser,
+ *      not what exists in the repository.
+ *
+ *      What DOES make it false is loading a provider script. That must not
+ *      happen before this section is rewritten in the same commit, and
+ *      before the consent question in docs/analytics-plan.md has an answer.
+ *      Setting the measurement id alone does not start collection — the
+ *      script is deliberately not loaded from the analytics helper, so that
+ *      turning measurement on is a visible edit rather than a side effect of
+ *      an environment variable.
  *   2a. Section 3 describes the contact form. Delivery is NOT live yet, so
  *      the section opens by saying so and describes the flow in the future
  *      tense; section 10 marks Resend as planned for the same reason. When

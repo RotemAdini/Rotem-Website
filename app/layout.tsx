@@ -8,6 +8,7 @@ import AccessibilityControls from "@/components/AccessibilityControls";
 import SiteChrome from "@/components/SiteChrome";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
 import { ACCESSIBILITY_INIT_SCRIPT } from "@/lib/accessibility-preferences";
+import AnalyticsProvider from "@/components/AnalyticsProvider";
 
 /**
  * `metadataBase` is the piece that has to live here rather than on a page: it
@@ -65,6 +66,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
+        {/* Renders nothing and sends nothing: with no measurement id
+            configured it only registers two inert listeners. See
+            lib/analytics/index.ts and docs/analytics-plan.md. */}
+        <AnalyticsProvider />
         <ToastProvider>
           <FavoritesProvider>
             {/* SiteChrome renders the header/footer exactly as before on every
