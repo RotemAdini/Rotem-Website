@@ -1,24 +1,28 @@
 /* ==========================================================================
-   משחק הזיכרון הגדול — Interactive memory-card demo
-   Loaded ONLY by memory-game.html, in addition to js/main.js.
-   A short, self-contained product demo: 4 pairs, one clean round at a
-   time. No score is saved or claimed anywhere outside this widget.
+   משחק הזיכרון הגדול — "who remembered?" round demo
+   Loaded ONLY by the memory-game page, in addition to js/main.js.
+   Plays the game's real mechanic on six of its real questions (one per
+   topic): read the question, mark who remembered, the score moves. Nothing
+   is saved; the figure's caption labels it as an illustration.
    ========================================================================== */
 (function () {
   'use strict';
 
+  // Sample questions from the game's question bank. Counts (questions,
+  // topics) are deliberately not shown until the current build confirms them.
+  var QUESTIONS = [
+    { topic: 'זיכרונות קלאסיים', text: 'איפה היה הדייט הראשון שלכם?' },
+    { topic: 'הרגעים של עכשיו', text: 'מה הייתה ההודעה האחרונה ששלחתם אחד לשני?' },
+    { topic: 'מפגשים חברתיים', text: 'מה היה האירוע החברתי האחרון שהייתם בו יחד – ואיפה זה היה?' },
+    { topic: 'מה קרה בפעם האחרונה ש…', text: 'מה הייתה התמונה הזוגית האחרונה שצילמתם?' },
+    { topic: 'אירועים זוגיים מיוחדים', text: 'מתי הייתה הפעם הראשונה שאמרתם ״אני אוהב/ת אותך״?' },
+    { topic: 'מאחורי הקלעים של הזוגיות', text: 'מי התחיל עם מי?' }
+  ];
+  var NAMES = { a: 'שחקן א׳', b: 'שחקן ב׳' };
+
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  var SYMBOLS = {
-    heart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.2s-7.2-4.4-9.6-9C.8 7.5 2.4 4 5.8 4c2 0 3.3 1.1 4.2 2.3.3.4.7.4 1 0C11.9 5.1 13.2 4 15.2 4c3.4 0 5 3.5 3.4 7.2-2.4 4.6-6.6 9-6.6 9Z"/></svg>',
-    star: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"/></svg>',
-    flame: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c1.2 2.8-2.6 4.3-2.6 7.6a2.6 2.6 0 0 0 5.2 0c0-.8-.3-1.5-.8-2.1.4 1.7 0 2.9-1 3.7a3 3 0 0 1-2.5-3C10.3 6.6 12.3 5.6 12 3Z"/><path d="M8.3 13a3.9 3.9 0 0 0 7.4 0"/></svg>',
-    rings: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="13" r="4.2"/><circle cx="15" cy="13" r="4.2"/></svg>'
-  };
-
-  var SYMBOL_NAMES = { heart: 'לב', star: 'כוכב', flame: 'להבה', rings: 'טבעות' };
-
-  // See the matching comment in main.js: this now loads after hydration via
+  // See the matching comment in main.js: this loads after hydration via
   // next/script, so DOMContentLoaded may already have fired.
   function ready(fn) {
     if (document.readyState === 'loading') {
@@ -29,186 +33,95 @@
   }
 
   ready(function () {
-    var board = document.querySelector('[data-mg-board]');
-    if (board) initBoard(board);
-    initFlipReveal();
+    var root = document.querySelector('[data-mg-round]');
+    if (root) initRound(root);
   });
 
-  function initBoard(board) {
-    var grid = board.querySelector('[data-mg-grid]');
-    var cards = Array.prototype.slice.call(grid.querySelectorAll('.mg-card'));
-    var matchesEl = board.querySelector('[data-mg-matches]');
-    var streakEl = board.querySelector('[data-mg-streak]');
-    var streakWrap = board.querySelector('[data-mg-streak-wrap]');
-    var ringFill = board.querySelector('.mg-ring-fill');
-    var successEl = board.querySelector('[data-mg-success]');
-    var particlesLayer = board.querySelector('[data-mg-particles]');
-    if (!cards.length) return;
+  function initRound(root) {
+    var card = root.querySelector('[data-mg-card]');
+    var topicEl = root.querySelector('[data-mg-topic]');
+    var countEl = root.querySelector('[data-mg-count]');
+    var questionEl = root.querySelector('[data-mg-question]');
+    var statusEl = root.querySelector('[data-mg-status]');
+    var resetBtn = root.querySelector('[data-mg-reset]');
+    var buttons = Array.prototype.slice.call(root.querySelectorAll('[data-mg-award]'));
+    var scoreEls = { a: root.querySelector('[data-mg-score="a"]'), b: root.querySelector('[data-mg-score="b"]') };
+    var playerEls = { a: root.querySelector('[data-mg-player="a"]'), b: root.querySelector('[data-mg-player="b"]') };
+    if (!card || !questionEl || !buttons.length) return;
 
-    var TOTAL_PAIRS = cards.length / 2;
-    var RING_R = 19;
-    var ringCircumference = 2 * Math.PI * RING_R;
-    if (ringFill) {
-      ringFill.style.strokeDasharray = ringCircumference.toFixed(2);
-      ringFill.style.strokeDashoffset = ringCircumference.toFixed(2);
+    var state = { index: 0, score: { a: 0, b: 0 }, busy: false };
+
+    function render() {
+      var q = QUESTIONS[state.index];
+      topicEl.textContent = q.topic;
+      questionEl.textContent = q.text;
+      countEl.textContent = 'דוגמה ' + (state.index + 1);
     }
 
-    var state = { flipped: [], matches: 0, streak: 0, busy: false };
-
-    function symbolPool() {
-      var pool = [];
-      Object.keys(SYMBOLS).forEach(function (s) { pool.push(s, s); });
-      return pool;
-    }
-
-    function shuffle(arr) {
-      for (var i = arr.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var t = arr[i]; arr[i] = arr[j]; arr[j] = t;
-      }
-      return arr;
-    }
-
-    function assignSymbols() {
-      var pool = shuffle(symbolPool());
-      cards.forEach(function (card, i) {
-        var symbol = pool[i];
-        card.setAttribute('data-symbol', symbol);
-        var front = card.querySelector('.mg-card-front');
-        if (front) front.innerHTML = SYMBOLS[symbol];
-        card.classList.remove('is-flipped', 'is-matched', 'is-flash', 'is-shake');
-        card.removeAttribute('disabled');
-        describeCard(card, false, false);
+    function paintScore(bumped) {
+      ['a', 'b'].forEach(function (p) {
+        scoreEls[p].textContent = String(state.score[p]);
+        playerEls[p].classList.toggle('is-leading', state.score[p] > state.score[p === 'a' ? 'b' : 'a']);
+        if (bumped.indexOf(p) !== -1 && !reducedMotion.matches) {
+          scoreEls[p].classList.remove('is-bump');
+          void scoreEls[p].offsetWidth; // restart the transition
+          scoreEls[p].classList.add('is-bump');
+          setTimeout(function () { scoreEls[p].classList.remove('is-bump'); }, 320);
+        }
       });
     }
 
-    function updateHud() {
-      if (matchesEl) matchesEl.textContent = state.matches + '/' + TOTAL_PAIRS;
-      if (streakEl) streakEl.textContent = String(state.streak);
-      if (streakWrap) streakWrap.classList.toggle('is-hot', state.streak >= 2);
-      if (ringFill) {
-        var offset = ringCircumference * (1 - state.matches / TOTAL_PAIRS);
-        ringFill.style.strokeDashoffset = offset.toFixed(2);
-      }
+    function message(award) {
+      if (award === 'both') return 'נקודה לכל אחד';
+      if (award === 'none') return 'אף אחד לא זכר. קורה.';
+      return 'נקודה ל' + NAMES[award];
     }
 
-    function burstParticles(card) {
-      if (reducedMotion.matches || !particlesLayer) return;
-      var rect = card.getBoundingClientRect();
-      var boardRect = board.getBoundingClientRect();
-      var cx = rect.left - boardRect.left + rect.width / 2;
-      var cy = rect.top - boardRect.top + rect.height / 2;
-      for (var i = 0; i < 8; i++) {
-        var p = document.createElement('span');
-        p.className = 'mg-particle';
-        var angle = (Math.PI * 2 * i) / 8 + Math.random() * 0.3;
-        var dist = 28 + Math.random() * 16;
-        p.style.left = cx + 'px';
-        p.style.top = cy + 'px';
-        p.style.setProperty('--px', (Math.cos(angle) * dist).toFixed(1) + 'px');
-        p.style.setProperty('--py', (Math.sin(angle) * dist).toFixed(1) + 'px');
-        particlesLayer.appendChild(p);
-        (function (el) { window.setTimeout(function () { el.remove(); }, 750); })(p);
-      }
+    function finish() {
+      var a = state.score.a, b = state.score.b;
+      var result = a === b ? 'תיקו!' : ('ניצחון ל' + (a > b ? NAMES.a : NAMES.b));
+      statusEl.textContent = result + ' במשחק המלא יש עוד הרבה שאלות כאלה.';
+      buttons.forEach(function (btn) { btn.disabled = true; });
+      root.classList.add('is-done');
     }
 
-    function describeCard(card, revealed, matched) {
-      card.setAttribute('aria-pressed', revealed ? 'true' : 'false');
-      card.setAttribute('aria-label', revealed
-        ? 'קלף זיכרון: ' + SYMBOL_NAMES[card.getAttribute('data-symbol')] + (matched ? ' — נמצאה התאמה' : '')
-        : 'קלף זיכרון מוסתר');
-    }
-    function flip(card) { card.classList.add('is-flipped'); describeCard(card, true, false); }
-    function unflip(card) { card.classList.remove('is-flipped'); describeCard(card, false, false); }
+    function award(who) {
+      if (state.busy) return;
+      var bumped = who === 'both' ? ['a', 'b'] : (who === 'none' ? [] : [who]);
+      bumped.forEach(function (p) { state.score[p] += 1; });
+      paintScore(bumped);
+      statusEl.textContent = message(who);
 
-    function onCardClick(e) {
-      var card = e.currentTarget;
-      if (state.busy || card.hasAttribute('disabled') || card.classList.contains('is-flipped')) return;
-
-      flip(card);
-      state.flipped.push(card);
-      if (state.flipped.length < 2) return;
+      if (state.index === QUESTIONS.length - 1) { finish(); return; }
 
       state.busy = true;
-      var a = state.flipped[0], b = state.flipped[1];
-      state.flipped = [];
-
-      if (a.getAttribute('data-symbol') === b.getAttribute('data-symbol')) {
-        window.setTimeout(function () {
-          [a, b].forEach(function (c) {
-            c.classList.add('is-matched', 'is-flash');
-            c.setAttribute('disabled', 'true');
-            describeCard(c, true, true);
-          });
-          burstParticles(a);
-          burstParticles(b);
-          state.matches++;
-          state.streak++;
-          updateHud();
-          window.setTimeout(function () { a.classList.remove('is-flash'); b.classList.remove('is-flash'); }, 500);
-          state.busy = false;
-          if (state.matches === TOTAL_PAIRS) onComplete();
-        }, reducedMotion.matches ? 0 : 150);
-      } else {
-        state.streak = 0;
-        updateHud();
-        if (!reducedMotion.matches) { a.classList.add('is-shake'); b.classList.add('is-shake'); }
-        window.setTimeout(function () {
-          a.classList.remove('is-shake'); b.classList.remove('is-shake');
-          unflip(a); unflip(b);
-          state.busy = false;
-        }, reducedMotion.matches ? 0 : 700);
-      }
+      var delay = reducedMotion.matches ? 0 : 260;
+      card.classList.add('is-leaving');
+      setTimeout(function () {
+        state.index += 1;
+        render();
+        card.classList.remove('is-leaving');
+        state.busy = false;
+      }, delay);
     }
 
-    function onComplete() {
-      if (!successEl) return;
-      successEl.classList.add('is-visible');
-      window.setTimeout(function () {
-        successEl.classList.remove('is-visible');
-        newRound();
-      }, reducedMotion.matches ? 400 : 2000);
-    }
-
-    function newRound() {
-      state.matches = 0;
-      state.streak = 0;
-      updateHud();
-      if (!reducedMotion.matches) {
-        grid.classList.add('is-shuffling');
-        window.setTimeout(function () { grid.classList.remove('is-shuffling'); }, 650);
-      }
-      assignSymbols();
-    }
-
-    cards.forEach(function (card) { card.addEventListener('click', onCardClick); });
-
-    assignSymbols();
-    updateHud();
-
-    if (reducedMotion.matches) {
-      // Static preview: settle one pair face-up at rest so the visual
-      // hierarchy (symbol, match glow) reads without any motion.
-      var firstSymbol = cards[0].getAttribute('data-symbol');
-      cards
-        .filter(function (c) { return c.getAttribute('data-symbol') === firstSymbol; })
-        .forEach(function (c) { c.classList.add('is-flipped', 'is-matched'); c.setAttribute('disabled', 'true'); describeCard(c, true, true); });
-      state.matches = 1;
-      updateHud();
-    }
-  }
-
-  /* Sample-questions section: same flip mechanic, revealing real product
-     copy instead of a demo symbol. Purely presentational — the question
-     text already exists in the DOM (data-question), nothing invented. */
-  function initFlipReveal() {
-    var cards = document.querySelectorAll('[data-mg-reveal]');
-    cards.forEach(function (card) {
-      card.addEventListener('click', function () {
-        var wasOpen = card.classList.contains('is-flipped');
-        cards.forEach(function (c) { c.classList.remove('is-flipped'); c.setAttribute('aria-pressed', 'false'); });
-        if (!wasOpen) { card.classList.add('is-flipped'); card.setAttribute('aria-pressed', 'true'); }
-      });
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function () { award(btn.getAttribute('data-mg-award')); });
     });
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function () {
+        state.index = 0;
+        state.score = { a: 0, b: 0 };
+        buttons.forEach(function (btn) { btn.disabled = false; });
+        root.classList.remove('is-done');
+        statusEl.textContent = '';
+        paintScore([]);
+        render();
+        buttons[0].focus();
+      });
+    }
+
+    render();
   }
 })();

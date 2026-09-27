@@ -199,28 +199,91 @@
 .forest-panel h1 em { color: #eab766; font-style: normal; }
 .forest-panel p { color: rgba(255,255,255,.88); }
 
-/* Hero: panel hugs the right edge (RTL start), leaving the left clear for
-   the guide character. Physical margins on purpose — not logical ones. */
-.forest-hero .forest-panel { margin-right: 0; margin-left: auto; text-align: right; max-width: 620px; }
+/* Keep the copy group on the left in the current desktop composition, opposite
+   the guide artwork on the right. The panel stays right-aligned for Hebrew. */
+.forest-hero .forest-panel { margin-right: auto; margin-left: 0; text-align: right; max-width: 620px; }
 .forest-hero .hero-kicker { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.3); color: #fdf6ea; backdrop-filter: blur(3px); }
 .forest-hero .hero-kicker svg { color: var(--gold, #d8a94a); }
 .forest-hero .hero-trust { color: rgba(255,255,255,.82); }
 .forest-hero .hero-trust svg { color: #9fd9ad; }
 
+.forest-hero .h1-name { color: #eab766; opacity: 1; }
+.forest-hero .hero-facts li { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.28); color: #fdf6ea; }
+.forest-hero .hero-facts strong { color: #eab766; }
+.forest-hero .hero-waitlist { color: rgba(255,255,255,.82); }
+.forest-hero .btn-outline { color: #fdf6ea; border-color: rgba(255,255,255,.6); }
+.forest-hero .btn-outline:hover { background: rgba(255,255,255,.12); border-color: #fff; }
+
 @media (max-width: 720px) {
   /* Stack, don't overlap: the panel reads top-to-bottom first (kicker →
      h1 → CTA), the guide stays a smaller figure anchored at the very
-     bottom of the section instead of centered behind the buttons. */
-  .forest-hero { min-height: min(88vh, 700px); align-items: flex-start; padding-top: var(--space-5); padding-bottom: min(34vh, 240px); }
+     bottom of the section instead of behind the buttons. Right-aligned
+     like the other two game heroes. */
+  .forest-hero { min-height: min(88vh, 700px); align-items: flex-start; padding-top: var(--space-4); padding-bottom: min(30vh, 210px); }
   .forest-hero .forest-panel {
     margin-inline: auto;
-    text-align: center;
-    background: rgba(10, 16, 13, .62); /* stronger than desktop: guaranteed CTA contrast on narrow screens */
+    background: rgba(10, 16, 13, .66); /* stronger than desktop: guaranteed CTA contrast on narrow screens */
   }
-  .forest-hero .hero-actions,
-  .forest-hero .hero-trust { justify-content: center !important; }
-  .forest-guide { height: min(30vh, 220px); opacity: .92; }
+  .forest-guide { height: min(26vh, 200px); opacity: .92; }
 }
+
+/* ---------- Missions: six real stations ---------- */
+.fg-missions {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+  max-width: 980px;
+  margin: 0 auto;
+}
+@media (min-width: 640px) { .fg-missions { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 980px) { .fg-missions { grid-template-columns: repeat(3, 1fr); } }
+.fg-mission {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.2rem 1.3rem 1.3rem;
+  border-top: 3px solid #3e5c46;
+}
+.fg-mission-no { display: block; font-size: .78rem; font-weight: 700; color: #3e5c46; margin-bottom: .3rem; }
+.fg-mission h3 { font-size: 1.15rem; margin-bottom: .35rem; }
+.fg-mission p { color: var(--ink-soft); font-size: .95rem; }
+.fg-missions-note { max-width: 640px; margin: 1.5rem auto 0; text-align: center; color: var(--ink-soft); }
+
+/* ---------- The full route: 18 stops as a trail ---------- */
+.fg-trail {
+  counter-reset: stop;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  max-width: 860px;
+  margin: 0 auto;
+}
+@media (min-width: 560px) { .fg-trail { grid-template-columns: repeat(2, 1fr); column-gap: 2rem; } }
+@media (min-width: 900px) { .fg-trail { grid-template-columns: repeat(3, 1fr); } }
+.fg-trail li {
+  counter-increment: stop;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .6rem 0;
+  border-bottom: 1px dashed rgba(62,92,70,.35);
+  font-weight: 600;
+  color: var(--ink);
+}
+.fg-trail li::before {
+  content: counter(stop);
+  flex: none;
+  width: 2rem; height: 2rem;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: #3e5c46;
+  color: #fdf6ea;
+  font-size: .85rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.fg-trail li:last-child::before { background: #b07c2c; }
 
 /* ---------- Intro / path section ---------- */
 .forest-scene[data-scene="path"] .forest-panel { max-width: var(--container-narrow); }

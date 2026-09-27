@@ -2,11 +2,14 @@ import fs from "node:fs";
 import path from "node:path";
 import type { Metadata } from "next";
 import { getGameMetadataBySlug } from "@/lib/sanity/games";
+import { gameCardImage } from "@/lib/sanity/game-adapters";
+import { pageMetadata } from "@/lib/seo";
 import Script from "next/script";
 import "@/styles/games/styles.css";
 import "@/styles/games/forest-scene.css";
 import "@/styles/games/site-integration.css";
 import "@/styles/games/game-fidelity.css";
+import "@/styles/games/sales.css";
 
 /**
  * SEO metadata is the one piece of this page's content that now comes from
@@ -20,10 +23,12 @@ import "@/styles/games/game-fidelity.css";
  */
 export async function generateMetadata(): Promise<Metadata> {
   const game = await getGameMetadataBySlug("forest-game");
-  return {
-    title: game?.seoTitle?.trim() || "היער הקסום — משחק זוגי דיגיטלי | רותם עדיני",
-    description: game?.seoDescription?.trim() || "היער הקסום: משחק זוגי דיגיטלי של שיחות עומק, משימות מקרבות ורגעי קסם. גישה לכל החיים. ₪48 — הרכישה המקוונת נפתחת בקרוב.",
-  };
+  return pageMetadata({
+    title: game?.seoTitle?.trim() || "היער הקסום — סיפור זוגי שמתחיל בערב שקט | רותם עדיני",
+    description: game?.seoDescription?.trim() || "חוויה זוגית דיגיטלית בתוך סיפור מאויר ומסתורי שמוציא אתכם יחד מהשגרה. זה לא עוד דייט. זה ערב שלא תשכחו.",
+    path: "/games/forest-game",
+    image: game ? gameCardImage(game) ?? null : null,
+  });
 }
 
 const html = fs.readFileSync(path.join(process.cwd(), "content/games/forest-game.html"), "utf8");

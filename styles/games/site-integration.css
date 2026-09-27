@@ -43,6 +43,17 @@ body { font-family: "Heebo", "Assistant", Arial, sans-serif; }
   .game-site-trail .container { padding-inline: 1.1rem; }
 }
 
+/* While the game pages' sticky sign-up bar is showing, lift the
+   accessibility trigger above it. Unscoped on purpose: the trigger lives
+   in the site shell, outside .game-content. Keyed off the bar itself, so
+   it can never outlive the page. */
+@media (max-width: 899px) {
+  body:has(.sticky-buy.is-visible) .accessibility-tools {
+    bottom: calc(80px + env(safe-area-inset-bottom));
+    transition: bottom .3s ease;
+  }
+}
+
 /* ---------- Purchase-not-open notice ----------
    Shown above every game lead form while online payment is not connected, so
    the panel's price and CTA cannot be read as a working checkout. */

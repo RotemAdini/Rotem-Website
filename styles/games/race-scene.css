@@ -1,0 +1,200 @@
+@scope (.game-content) {
+/* ==========================================================================
+   מירוץ האהבה — race-day world
+   Loaded ONLY by the race-game page. Palette lifted from the game's own
+   artwork: sunset peach, track crimson, trophy gold. Signature element: the
+   station board, an 11-row scoreboard of the real stations and points.
+   ========================================================================== */
+
+:scope {
+  --rc-crimson: #7d1426;
+  --rc-crimson-deep: #3f0a14;
+  --rc-gold: #c99a3e;
+  --rc-gold-light: #eccb85;
+  --rc-peach: #fbe7d8;
+  --rc-cream: #fff7ef;
+  --rc-font-score: 'Rubik', 'Assistant', sans-serif;
+}
+
+/* ---------- Hero ---------- */
+.rc-hero {
+  position: relative;
+  padding: var(--space-5) 0 var(--space-6);
+  background:
+    radial-gradient(120% 80% at 85% 0%, #fff3e6 0%, transparent 60%),
+    linear-gradient(180deg, var(--rc-peach) 0%, #f7d6c2 100%);
+  overflow: hidden;
+}
+.rc-hero-grid { display: grid; gap: var(--space-4); align-items: center; }
+@media (min-width: 900px) { .rc-hero-grid { grid-template-columns: 1.1fr .9fr; } }
+.rc-hero .hero-kicker { background: rgba(255,255,255,.7); border-color: rgba(125,20,38,.18); color: var(--rc-crimson); }
+.rc-hero .h1-name { color: var(--rc-crimson); }
+.rc-hero .h1-promise { color: var(--rc-crimson-deep); }
+.rc-hero .hero-sub { color: #5b3b40; }
+.rc-hero .hero-facts li { background: rgba(255,255,255,.72); border-color: rgba(125,20,38,.16); }
+.rc-hero .hero-facts strong { color: var(--rc-crimson); font-family: var(--rc-font-score); }
+.rc-hero .btn-outline { color: var(--rc-crimson-deep); border-color: var(--rc-crimson-deep); }
+
+.rc-track {
+  position: relative;
+  margin: 0;
+  justify-self: center;
+  width: min(100%, 380px);
+}
+.rc-track-frame {
+  position: relative;
+  aspect-ratio: 9 / 13;
+  border-radius: 30px;
+  overflow: hidden;
+  border: 3px solid var(--rc-gold);
+  box-shadow: 0 30px 60px rgba(63,10,20,.35), 0 0 0 8px rgba(255,255,255,.45);
+}
+.rc-track-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center 12%; }
+.rc-track figcaption {
+  margin-top: .9rem;
+  text-align: center;
+  font-size: .84rem;
+  color: #6d4a4f;
+}
+@media (max-width: 899px) {
+  .rc-hero { padding: var(--space-3) 0 var(--space-5); }
+  .rc-track { width: min(100%, 340px); }
+  .rc-track-frame { aspect-ratio: 4 / 5; }
+}
+
+/* ---------- Station board (signature) ---------- */
+.rc-board-section {
+  background:
+    radial-gradient(90% 60% at 50% 0%, rgba(201,154,62,.18), transparent 70%),
+    var(--rc-crimson-deep);
+  color: var(--rc-cream);
+}
+.rc-board-section .eyebrow { background: rgba(236,203,133,.12); color: var(--rc-gold-light); border: 1px solid rgba(236,203,133,.3); }
+.rc-board-section .section-title { color: #fff; }
+.rc-board-section .section-lede { color: rgba(255,247,239,.78); }
+
+.rc-board {
+  max-width: 860px;
+  margin: 0 auto;
+  border: 1px solid rgba(236,203,133,.35);
+  border-radius: var(--radius-lg);
+  background: rgba(0,0,0,.18);
+  overflow: hidden;
+}
+.rc-board-head,
+.rc-station {
+  display: grid;
+  grid-template-columns: 2.6rem 1fr 4.2rem;
+  gap: .9rem;
+  align-items: center;
+  padding: .85rem 1.1rem;
+}
+.rc-board-head {
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--rc-gold-light);
+  background: rgba(236,203,133,.08);
+  border-bottom: 1px solid rgba(236,203,133,.35);
+}
+.rc-board-head span:last-child,
+.rc-station .rc-pts { text-align: left; }
+.rc-station + .rc-station { border-top: 1px solid rgba(236,203,133,.14); }
+.rc-num {
+  width: 2.3rem; height: 2.3rem;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  border: 1.5px solid var(--rc-gold);
+  color: var(--rc-gold-light);
+  font-family: var(--rc-font-score);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.rc-station h3 {
+  font-family: var(--font-body);
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: .1rem;
+}
+.rc-station p { font-size: .9rem; line-height: 1.5; color: rgba(255,247,239,.74); }
+.rc-pts {
+  font-family: var(--rc-font-score);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--rc-gold-light);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.rc-pts small { display: block; font-size: .68rem; font-weight: 500; color: rgba(255,247,239,.6); font-family: var(--font-body); }
+.rc-station--warmup .rc-pts { color: rgba(255,247,239,.5); font-size: 1rem; }
+.rc-board-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1rem 1.1rem;
+  background: linear-gradient(90deg, rgba(201,154,62,.25), rgba(201,154,62,.08));
+  border-top: 1px solid rgba(236,203,133,.45);
+  font-weight: 700;
+  color: #fff;
+}
+.rc-board-total strong { font-family: var(--rc-font-score); font-size: 1.7rem; color: var(--rc-gold-light); }
+@media (max-width: 480px) {
+  .rc-board-head, .rc-station { grid-template-columns: 2.1rem 1fr 3.4rem; gap: .65rem; padding: .8rem .85rem; }
+  .rc-num { width: 2rem; height: 2rem; font-size: .9rem; }
+  .rc-pts { font-size: 1.15rem; }
+}
+
+/* ---------- Artwork strip ---------- */
+.rc-art {
+  display: grid;
+  gap: .9rem;
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 860px;
+  margin: var(--space-4) auto 0;
+}
+@media (min-width: 760px) { .rc-art { grid-template-columns: repeat(4, 1fr); } }
+.rc-art figure { margin: 0; }
+.rc-art img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(236,203,133,.35);
+}
+.rc-art figcaption { margin-top: .45rem; font-size: .85rem; text-align: center; color: rgba(255,247,239,.8); }
+.rc-art-note { margin-top: 1rem; text-align: center; font-size: .82rem; color: rgba(255,247,239,.6); }
+
+/* ---------- Final CTA over the victory artwork ---------- */
+.rc-finale {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--rc-crimson-deep);
+}
+.rc-finale-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+}
+.rc-finale::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(63,10,20,.55), rgba(63,10,20,.8));
+}
+.rc-finale .final-cta {
+  background: rgba(63,10,20,.55);
+  border: 1px solid rgba(236,203,133,.35);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.rc-finale .final-cta::before { display: none; }
+
+}

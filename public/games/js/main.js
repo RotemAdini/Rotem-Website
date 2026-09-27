@@ -143,17 +143,27 @@
     });
   }
 
+  /* The bar shows only once the hero CTA has scrolled away, and hides again
+     whenever something it would duplicate or cover is on screen: the
+     sign-up section, the final CTA and the footer ([data-sticky-hide]).
+     site-integration.css lifts the accessibility trigger clear of it via
+     :has(), so no page-level state outlives a client-side navigation. */
   function initStickyBuy() {
     var bar = document.querySelector('[data-sticky-buy]');
     var trigger = document.querySelector('[data-sticky-trigger]');
     if (!bar || !trigger) return;
     if (!('IntersectionObserver' in window)) return;
+    var blockers = Array.prototype.slice.call(document.querySelectorAll('[data-sticky-hide], .site-footer'));
+    var onScreen = new Set();
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        bar.classList.toggle('is-visible', !entry.isIntersecting);
+        if (entry.isIntersecting) onScreen.add(entry.target);
+        else onScreen.delete(entry.target);
       });
+      bar.classList.toggle('is-visible', onScreen.size === 0);
     }, { threshold: 0 });
     io.observe(trigger);
+    blockers.forEach(function (el) { io.observe(el); });
   }
 
   function initForms() {

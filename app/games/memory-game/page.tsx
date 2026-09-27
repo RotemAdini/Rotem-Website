@@ -9,6 +9,7 @@ import "@/styles/games/styles.css";
 import "@/styles/games/memory-scene.css";
 import "@/styles/games/site-integration.css";
 import "@/styles/games/game-fidelity.css";
+import "@/styles/games/sales.css";
 
 /**
  * SEO metadata is the one piece of this page's content that now comes from
@@ -23,8 +24,8 @@ import "@/styles/games/game-fidelity.css";
 export async function generateMetadata(): Promise<Metadata> {
   const game = await getGameMetadataBySlug("memory-game");
   return pageMetadata({
-    title: game?.seoTitle?.trim() || "משחק הזיכרון הגדול — משחק זוגי דיגיטלי | רותם עדיני",
-    description: game?.seoDescription?.trim() || "משחק הזיכרון הגדול: 40 שאלות שמחזירות אתכם לרגעים ולזיכרונות שכמעט שכחתם, עם ניקוד ותחרות קלילה. ₪48 — הרכישה המקוונת נפתחת בקרוב.",
+    title: game?.seoTitle?.trim() || "משחק הזיכרון הגדול — הזיכרונות שלכם ביחד | רותם עדיני",
+    description: game?.seoDescription?.trim() || "משחק זוגי שצולל לזיכרונות המשותפים ומזכיר לכם למה התאהבתם. ערב של סיפורים, קרבה ונוסטלגיה.",
     path: "/games/memory-game",
     // The product photo, so a link shared to WhatsApp or Instagram shows
     // the game rather than a bare URL.

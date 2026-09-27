@@ -1,0 +1,679 @@
+@scope (.game-content) {
+/* ==========================================================================
+   Landing-page layer shared by the three single-game sales pages.
+   Loaded after styles.css and each game's scene sheet.
+
+   The copy on these pages comes from the original landing pages and sets
+   the section order; this file only lays that copy out. Principles:
+   - A section's kicker/heading/supporting copy is always one visual unit.
+   - Two columns only when one of them is a real image (.lp-split).
+   - Text-only sections sit in one readable measure (.lp-narrow).
+   - Each game supplies its palette through the --lp-* tokens below, so
+     every component here is theme-agnostic.
+   ========================================================================== */
+
+.lp {
+  --lp-bg: var(--bg);
+  --lp-bg-alt: var(--surface-soft);
+  --lp-ink: var(--ink);
+  --lp-ink-soft: var(--ink-soft);
+  --lp-heading: var(--wine-dark);
+  --lp-highlight: var(--wine);
+  --lp-card: var(--surface);
+  --lp-card-border: var(--border);
+  --lp-accent-fill: var(--terracotta);
+  --lp-on-accent: #fff;
+  --lp-band-bg: var(--wine-dark);
+  --lp-media-shadow: 0 28px 60px rgba(43, 27, 34, .22);
+  --lp-measure: 44rem;
+  background: var(--lp-bg);
+  color: var(--lp-ink);
+}
+
+/* ---------- Section shells ---------- */
+.lp-sec {
+  position: relative;
+  padding: clamp(3.5rem, 7vw, 6rem) 0;
+  background: var(--lp-bg);
+}
+.lp-sec--alt { background: var(--lp-bg-alt); }
+.lp-sec--tight { padding-block: clamp(2.75rem, 5vw, 4rem); }
+.lp-narrow { width: min(100% - 2.5rem, var(--lp-measure)); margin-inline: auto; }
+.lp-wide { width: min(100% - 2.5rem, 68rem); margin-inline: auto; }
+
+/* ---------- Heading group: kicker + title + lede read as one unit ---------- */
+.lp-head { margin-bottom: clamp(1.75rem, 3.5vw, 2.5rem); }
+.lp-head > :last-child { margin-bottom: 0; }
+.lp-head--center { text-align: center; max-width: 46rem; margin-inline: auto; }
+.lp-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 3.4vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--lp-heading);
+  margin: 0 0 .8rem;
+  text-wrap: balance;
+}
+.lp-emoji {
+  display: inline-block;
+  margin-inline-end: .3em;
+  font-size: .85em;
+  font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
+}
+.lp-lede {
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  line-height: 1.75;
+  color: var(--lp-ink-soft);
+  margin: 0 0 .9rem;
+  text-wrap: pretty;
+}
+.lp-lede strong { color: var(--lp-ink); }
+.lp-head--center .lp-lede { max-width: 42rem; margin-inline: auto; }
+
+.lp-prose p {
+  font-size: clamp(1.05rem, 1.5vw, 1.14rem);
+  line-height: 1.85;
+  color: var(--lp-ink-soft);
+  margin: 0 0 1.1rem;
+  text-wrap: pretty;
+}
+.lp-prose p:last-child { margin-bottom: 0; }
+.lp-prose strong { color: var(--lp-ink); }
+
+.lp-highlight {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.3vw, 1.6rem);
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--lp-highlight) !important;
+  margin: 1.75rem 0 0;
+  text-wrap: balance;
+}
+.lp-highlight--center { text-align: center; }
+
+/* ---------- Two columns: copy beside a meaningful image ---------- */
+.lp-split {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .lp-split { grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); }
+  /* In RTL the first grid column is on the right; this puts the image there. */
+  .lp-split--media-first > .lp-media { order: -1; }
+}
+
+.lp-media { position: relative; margin: 0; }
+.lp-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: var(--lp-pos, center);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--lp-media-shadow);
+}
+.lp-media--tall img { aspect-ratio: 3 / 4; }
+.lp-media--square img { aspect-ratio: 1 / 1; }
+.lp-prose--lg p { font-size: clamp(1.1rem, 1.9vw, 1.35rem); line-height: 1.8; color: var(--lp-ink); }
+@media (min-width: 900px) {
+  .lp-media { max-width: 30rem; justify-self: center; width: 100%; }
+}
+@media (max-width: 899px) {
+  .lp-media { width: min(100%, 30rem); margin-inline: auto; }
+  .lp-media img,
+  .lp-media--tall img,
+  .lp-media--square img { aspect-ratio: 5 / 4; object-position: var(--lp-pos-m, var(--lp-pos, center)); }
+}
+
+/* ---------- Cards ---------- */
+.lp-cards {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 600px) { .lp-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1000px) {
+  .lp-cards--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .lp-cards--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+.lp-cards--3 { max-width: 64rem; margin-inline: auto; }
+.lp-card {
+  background: var(--lp-card);
+  border: 1px solid var(--lp-card-border);
+  border-radius: var(--radius-md);
+  padding: 1.6rem 1.35rem;
+  text-align: center;
+}
+.lp-card__icon {
+  display: block;
+  font-size: 2rem;
+  line-height: 1;
+  margin-bottom: .8rem;
+  font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
+}
+.lp-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--lp-heading);
+  margin: 0 0 .4rem;
+}
+.lp-card h3:last-child { margin-bottom: 0; }
+.lp-card p { color: var(--lp-ink-soft); font-size: 1.04rem; line-height: 1.65; margin: 0; }
+/* On phones a card is a row (icon beside text), so four cards don't
+   become four screens of scrolling. */
+@media (max-width: 599px) {
+  .lp-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 1rem;
+    align-items: start;
+    text-align: start;
+    padding: 1.1rem 1.15rem;
+  }
+  .lp-card__icon { grid-row: span 2; margin: .1rem 0 0; font-size: 1.7rem; }
+  .lp-card h3 { font-size: 1.1rem; }
+}
+
+/* ---------- Numbered steps ---------- */
+.lp-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: .85rem;
+  counter-reset: lpstep;
+}
+.lp-steps > li {
+  counter-increment: lpstep;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 1rem;
+  align-items: start;
+  padding: 1.1rem 1.2rem;
+  background: var(--lp-card);
+  border: 1px solid var(--lp-card-border);
+  border-radius: var(--radius-md);
+  color: var(--lp-ink);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+.lp-steps > li::before {
+  content: counter(lpstep);
+  grid-row: span 2;
+  width: 2.4rem;
+  height: 2.4rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--lp-accent-fill);
+  color: var(--lp-on-accent);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.lp-steps h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--lp-heading);
+  margin: .3rem 0 .25rem;
+}
+.lp-steps p { margin: 0; color: var(--lp-ink-soft); font-size: 1rem; }
+.lp-steps--plain > li { align-items: center; }
+.lp-steps--plain > li::before { grid-row: auto; }
+
+/* ---------- Lists with a leading icon ---------- */
+.lp-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: .7rem;
+}
+.lp-list > li {
+  display: flex;
+  align-items: flex-start;
+  gap: .85rem;
+  padding: 1rem 1.2rem;
+  background: var(--lp-card);
+  border: 1px solid var(--lp-card-border);
+  border-radius: var(--radius-md);
+  color: var(--lp-ink);
+  font-size: clamp(1.02rem, 1.5vw, 1.1rem);
+  line-height: 1.6;
+}
+.lp-list .lp-li-icon {
+  flex: none;
+  font-size: 1.3rem;
+  line-height: 1.3;
+  font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
+}
+
+/* ---------- Buttons & CTA rows ---------- */
+.lp .btn-primary {
+  background: linear-gradient(135deg, var(--site-pink-strong, #cc3a4c), var(--site-pink-deep, #bb3448));
+  color: #fff;
+  box-shadow: 0 12px 26px rgba(187, 52, 72, .32);
+}
+.lp .btn-primary:hover { background: linear-gradient(135deg, #b8303f, #a32a3d); }
+.lp-cta-row {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(2rem, 4vw, 2.75rem);
+}
+.lp-cta-solo {
+  display: flex;
+  justify-content: center;
+  padding: clamp(.5rem, 2vw, 1rem) 1.25rem clamp(3rem, 6vw, 4.5rem);
+  background: var(--lp-bg);
+}
+.lp-cta-solo--alt { background: var(--lp-bg-alt); }
+@media (max-width: 560px) {
+  .lp-cta-row .btn,
+  .lp-cta-solo .btn,
+  .lp-hero-actions .btn { width: 100%; }
+}
+.lp .btn { white-space: normal; text-align: center; }
+
+/* ---------- Colour band (mid-page CTA) ---------- */
+.lp-band {
+  position: relative;
+  padding: clamp(3.25rem, 6vw, 4.75rem) 0;
+  background: var(--lp-band-bg);
+  text-align: center;
+  overflow: hidden;
+}
+.lp-band .lp-title { color: #fff; }
+.lp-band .lp-lede { color: rgba(255, 255, 255, .86); }
+.lp-band .lp-cta-row { margin-top: 1.5rem; }
+
+/* ---------- Hero ---------- */
+.lp-hero { position: relative; padding: clamp(2.75rem, 7vw, 6rem) 0; }
+.lp-hero__inner { position: relative; z-index: 3; }
+.lp-hero-copy { max-width: 38rem; }
+.lp-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6.2vw, 4.4rem);
+  font-weight: 700;
+  line-height: 1.08;
+  color: var(--lp-heading);
+  margin: 0 0 1rem;
+  text-wrap: balance;
+}
+.lp-hero-promise {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.6vw, 1.85rem);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--lp-highlight);
+  margin: 0 0 1rem;
+  text-wrap: balance;
+}
+.lp-hero-sub {
+  font-size: clamp(1.03rem, 1.6vw, 1.16rem);
+  line-height: 1.75;
+  color: var(--lp-ink-soft);
+  margin: 0 0 1.75rem;
+  max-width: 34rem;
+  text-wrap: pretty;
+}
+.lp-hero-sub strong { color: var(--lp-ink); }
+.lp-hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+
+.lp-hero--split .lp-hero__inner { display: grid; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+@media (min-width: 900px) {
+  .lp-hero--split .lp-hero__inner { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); }
+}
+.lp-hero--center .lp-hero-copy { max-width: 44rem; margin-inline: auto; text-align: center; }
+.lp-hero--center .lp-hero-sub { margin-inline: auto; }
+.lp-hero--center .lp-hero-actions { justify-content: center; }
+
+/* ---------- Purchase ---------- */
+.lp-purchase {
+  width: min(100%, 42rem);
+  margin: 0 auto;
+  padding: clamp(1.75rem, 4.5vw, 3rem);
+  text-align: center;
+  background: var(--lp-purchase-bg, var(--lp-card));
+  border: 1px solid var(--lp-card-border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .16);
+}
+.lp-purchase .lp-title { margin-bottom: 1rem; }
+.lp-purchase .lp-highlight { margin-top: 1rem; }
+/* Checkout mounts here once online payment is connected. Empty today, so it
+   takes no space and shows nothing. */
+.lp-checkout:empty { display: none; }
+.lp-checkout { margin-top: 1.5rem; }
+.lp-purchase-note {
+  margin: 1.5rem 0 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--lp-card-border);
+  color: var(--lp-ink-soft);
+  font-size: 1.02rem;
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+.lp-price-line {
+  margin: 1.25rem auto 0;
+  max-width: 36rem;
+  padding: 1rem 1.2rem;
+  border-radius: var(--radius-md);
+  background: var(--lp-bg-alt);
+  color: var(--lp-ink);
+  line-height: 1.7;
+}
+
+/* ---------- Name + email form inside the purchase panel ---------- */
+.lp-form { margin-top: 1.5rem; text-align: start; }
+@media (min-width: 600px) {
+  .lp-form__row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 1rem; }
+}
+.lp .form-field label { color: var(--lp-ink); font-size: .95rem; }
+.lp .form-field input[type="text"],
+.lp .form-field input[type="email"] { background: #fff; color: var(--ink); min-height: 48px; }
+.lp .form-field input[dir="ltr"] { text-align: right; }
+.lp .form-check { color: var(--lp-ink-soft); font-size: .9rem; line-height: 1.6; }
+.lp .form-privacy-note { color: var(--lp-ink-soft); }
+.lp .form-privacy-note a:hover,
+.lp .form-privacy-note a:focus-visible { color: var(--lp-highlight); }
+
+/* ---------- FAQ recolour through the tokens ---------- */
+.lp .faq-list { max-width: var(--lp-measure); }
+.lp .faq-item { background: var(--lp-card); border-color: var(--lp-card-border); }
+.lp .faq-item summary { color: var(--lp-heading); }
+.lp .faq-item summary:hover { color: var(--lp-highlight); }
+.lp .faq-item summary svg { color: var(--lp-highlight); }
+.lp .faq-item p { color: var(--lp-ink-soft); }
+.lp .faq-item a { color: var(--lp-highlight); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- Sticky mobile bar ----------
+   main.js shows it once the hero CTA has scrolled away and hides it while
+   the purchase section or the footer is on screen. */
+.sticky-buy { gap: .75rem; }
+.sticky-buy-price { line-height: 1.2; }
+.sticky-buy-price small { color: var(--ink-soft); } /* ink-faint was 3.2:1 on white */
+.sticky-buy .btn { min-height: 48px; padding: .7rem 1.25rem; font-size: .98rem; }
+.sticky-buy:not(.is-visible) { visibility: hidden; transition: transform .3s ease, visibility 0s linear .3s; }
+.sticky-buy.is-visible { visibility: visible; }
+@media (max-width: 899px) {
+  /* room for the bar under the last block, so nothing ends up behind it */
+  .lp > :last-child { padding-bottom: calc(clamp(3rem, 6vw, 4.5rem) + 72px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sticky-buy { transition: none; }
+}
+
+/* ==========================================================================
+   היער הקסום — night forest
+   ========================================================================== */
+.lp--forest {
+  --bg: #0c1611; /* the scene fades in forest-scene.css blend into this */
+  --lp-bg: #0c1611;
+  --lp-bg-alt: #111f18;
+  --lp-ink: #f4efe3;
+  --lp-ink-soft: rgba(244, 239, 227, .8);
+  --lp-heading: #fdf6ea;
+  --lp-highlight: #eec27a;
+  --lp-card: rgba(255, 255, 255, .045);
+  --lp-card-border: rgba(238, 194, 122, .2);
+  --lp-accent-fill: #eec27a;
+  --lp-on-accent: #1d1508;
+  --lp-media-shadow: 0 30px 70px rgba(0, 0, 0, .55);
+  --lp-purchase-bg: rgba(12, 22, 17, .86);
+}
+.lp--forest .lp-hero--scene {
+  min-height: min(88vh, 800px);
+  display: flex;
+  align-items: center;
+}
+.lp--forest .lp-hero--scene .lp-hero__inner { width: 100%; }
+.lp--forest .lp-hero-copy {
+  background: rgba(9, 15, 12, .55);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.5rem, 3.5vw, 2.6rem);
+}
+.lp--forest .lp-hero .forest-scene__bg { object-position: center 60%; }
+.lp--forest .lp-purchase-sec { background: radial-gradient(70% 60% at 30% 50%, rgba(238, 194, 122, .1), transparent 70%), var(--lp-bg); }
+/* Hero composition: the car on the road must stay visible.
+   Wide screens: the photo is widened and shifted so the car sits at ~37% of
+   the width (left side), clear of the copy panel on the right.
+   Narrower screens: the photo becomes a band above the copy, cropped around
+   the car, and the panel follows below it instead of on top of it. */
+@media (min-width: 1100px) {
+  .lp--forest .lp-hero--scene .forest-scene__bg-wrap { left: -25%; right: 0; }
+  .lp--forest .lp-hero--scene .lp-hero-copy { max-width: 34rem; }
+}
+@media (max-width: 1099px) {
+  .lp--forest .lp-hero--scene {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0 0 clamp(2.5rem, 6vw, 4rem);
+  }
+  .lp--forest .lp-hero--scene .forest-scene__bg-wrap {
+    position: relative;
+    inset: auto;
+    height: min(100vw, 460px);
+    flex: none;
+  }
+  .lp--forest .lp-hero--scene .forest-scene__bg { object-position: center 62%; }
+  .lp--forest .lp-hero--scene .forest-scene__bg-wrap::after { content: ""; position: absolute; inset: auto 0 0; height: 35%; background: linear-gradient(0deg, var(--lp-bg), transparent); pointer-events: none; }
+  .lp--forest .lp-hero--scene .lp-hero__inner { margin-top: -2.5rem; }
+  .lp--forest .lp-hero--scene .lp-hero-copy { max-width: 38rem; margin-inline: auto; background: rgba(9, 15, 12, .78); }
+}
+
+/* Full-bleed scene bands inside the page */
+.lp--forest .lp-scene-band {
+  min-height: min(78vh, 760px);
+  display: flex;
+  align-items: flex-end;
+  padding: clamp(5rem, 12vw, 9rem) 0 clamp(2.5rem, 6vw, 4.5rem);
+  text-align: center;
+}
+.lp--forest .lp-scene-band > .container { width: 100%; }
+.lp--forest .lp-scene-band .forest-panel { background: rgba(9, 15, 12, .62); }
+.lp--forest .lp-scene-band .forest-panel { max-width: 40rem; }
+.lp--forest .lp-scene-band .forest-panel p { font-family: var(--font-display); font-size: clamp(1.15rem, 2vw, 1.4rem); line-height: 1.8; margin: 0; }
+.lp--forest .lp-scene-band .lp-highlight { margin-top: 1.25rem; }
+.lp--forest [data-scene="band"] .forest-scene__bg { object-position: center 58%; }
+
+/* Characters: two portraits, no names */
+.lp-folk {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(.9rem, 3vw, 2rem);
+  max-width: 40rem;
+  margin: 0 auto;
+}
+.lp-folk figure { margin: 0; text-align: center; }
+.lp-folk img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: var(--lp-pos, center);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(238, 194, 122, .28);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, .5), 0 0 40px rgba(238, 194, 122, .12);
+}
+.lp-folk figcaption {
+  margin-top: .9rem;
+  font-size: clamp(.95rem, 1.6vw, 1.08rem);
+  line-height: 1.6;
+  color: var(--lp-ink-soft);
+  text-wrap: balance;
+}
+
+/* ==========================================================================
+   מירוץ האהבה — race day: sunset peach, track crimson, trophy gold
+   ========================================================================== */
+.lp--race {
+  --lp-bg: #fff8f1;
+  --lp-bg-alt: #fbe9dc;
+  --lp-ink: #2b1b22;
+  --lp-ink-soft: #5b3b40;
+  --lp-heading: #3f0a14;
+  --lp-highlight: #8a1a2c;
+  --lp-card: #fff;
+  --lp-card-border: rgba(125, 20, 38, .14);
+  --lp-accent-fill: #7d1426;
+  --lp-on-accent: #fff;
+  --lp-band-bg: radial-gradient(90% 90% at 50% 0%, rgba(201, 154, 62, .28), transparent 70%), linear-gradient(160deg, #7d1426, #3f0a14);
+  --lp-media-shadow: 0 30px 60px rgba(63, 10, 20, .28);
+}
+.lp--race .lp-hero {
+  background:
+    radial-gradient(120% 80% at 85% 0%, #fff3e6 0%, transparent 60%),
+    linear-gradient(180deg, #fbe7d8 0%, #f7d6c2 100%);
+}
+.lp--race .lp-hero-tagline {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  font-weight: 700;
+  color: var(--lp-heading);
+  margin: 0 0 .75rem;
+}
+.lp--race .lp-hero-media { margin: 0; justify-self: center; width: min(100%, 25rem); }
+.lp--race .lp-hero-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center 30%;
+  border-radius: 30px;
+  border: 3px solid #c99a3e;
+  box-shadow: 0 30px 60px rgba(63, 10, 20, .32), 0 0 0 8px rgba(255, 255, 255, .45);
+}
+@media (max-width: 899px) {
+  .lp--race .lp-hero-media { width: min(100%, 21rem); }
+  .lp--race .lp-hero-media img { aspect-ratio: 1 / 1; object-position: center 32%; }
+}
+.lp--race .lp-media img { border: 3px solid rgba(201, 154, 62, .7); }
+.lp--race .lp-cards--duel { margin-top: 1.5rem; }
+@media (min-width: 600px) { .lp--race .lp-cards--duel { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.lp--race .lp-cards--duel .lp-card { padding: 1.2rem 1.1rem; }
+.lp--race .lp-cards--duel h3 { font-size: 1.1rem; }
+@media (max-width: 599px) {
+  .lp--race .lp-cards--duel { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem; }
+  .lp--race .lp-cards--duel .lp-card { display: block; text-align: center; padding: 1rem .7rem; }
+  .lp--race .lp-cards--duel .lp-card__icon { margin: 0 auto .5rem; }
+  .lp--race .lp-cards--duel h3 { font-size: 1rem; }
+}
+.lp-chips {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  display: grid;
+  gap: .75rem;
+  grid-template-columns: 1fr;
+  max-width: 60rem;
+}
+@media (min-width: 600px) { .lp-chips { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1000px) { .lp-chips { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.lp-chips li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+  min-height: 4.25rem;
+  padding: .9rem 1rem;
+  text-align: center;
+  background: var(--lp-card);
+  border: 1px solid var(--lp-card-border);
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--lp-heading);
+}
+
+/* ==========================================================================
+   משחק הזיכרון הגדול — midnight navy with one warm amber accent
+   ========================================================================== */
+.lp--memory {
+  --lp-bg: #101a2e;
+  --lp-bg-alt: #0b1222;
+  --lp-ink: #f5efe2;
+  --lp-ink-soft: rgba(245, 239, 226, .8);
+  --lp-heading: #fff;
+  --lp-highlight: #eab35c;
+  --lp-card: #1a2740;
+  --lp-card-border: rgba(231, 169, 74, .24);
+  --lp-accent-fill: #e7a94a;
+  --lp-on-accent: #0a0f1c;
+  --lp-media-shadow: 0 30px 70px rgba(0, 0, 0, .5);
+}
+/* Faint star field on every memory section — purely decorative. */
+.lp--memory .lp-sec::before,
+.lp--memory .lp-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .45;
+  background-image: radial-gradient(rgba(231, 169, 74, .18) 1px, transparent 1.4px);
+  background-size: 26px 26px;
+}
+.lp--memory .lp-sec > *,
+.lp--memory .lp-hero > * { position: relative; }
+.lp--memory .lp-hero {
+  padding: clamp(4rem, 10vw, 8rem) 0 clamp(4rem, 9vw, 7rem);
+  background:
+    radial-gradient(60% 70% at 50% 35%, rgba(231, 169, 74, .16), transparent 70%),
+    linear-gradient(180deg, #0b1222, #101a2e);
+  overflow: hidden;
+}
+.lp--memory .lp-h1 { color: #fff; }
+.lp--memory .lp-hero-copy::after { /* a short amber rule under the hero copy */
+  content: "";
+  display: block;
+  width: 4.5rem;
+  height: 2px;
+  margin: 2.25rem auto 0;
+  background: linear-gradient(90deg, transparent, var(--lp-highlight), transparent);
+}
+.lp-compare {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+  max-width: 50rem;
+  margin: 0 auto;
+}
+@media (min-width: 700px) { .lp-compare { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.lp-compare > div {
+  padding: 1.5rem 1.4rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--lp-card-border);
+  background: var(--lp-card);
+  font-size: clamp(1.05rem, 1.6vw, 1.15rem);
+  line-height: 1.7;
+  color: var(--lp-ink-soft);
+}
+.lp-compare strong { display: block; margin-bottom: .35rem; color: var(--lp-ink); font-size: 1.1em; }
+.lp-compare .lp-compare--now { border-color: rgba(231, 169, 74, .6); box-shadow: 0 0 0 1px rgba(231, 169, 74, .25), 0 20px 40px rgba(0, 0, 0, .3); }
+.lp-compare--now strong { color: var(--lp-highlight); }
+.lp-result {
+  max-width: 44rem;
+  margin: 2rem auto 0;
+  padding: 1.25rem 1.4rem;
+  border-radius: var(--radius-md);
+  background: rgba(231, 169, 74, .1);
+  border: 1px solid rgba(231, 169, 74, .35);
+  text-align: center;
+  font-size: clamp(1.05rem, 1.7vw, 1.2rem);
+  line-height: 1.7;
+  color: var(--lp-ink);
+}
+.lp-result strong { color: var(--lp-highlight); }
+
+}
