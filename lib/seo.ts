@@ -78,7 +78,7 @@ export const SITE_URL = resolveSiteUrl();
  * or PNG, under 1 MB, with any text kept well inside the middle two-thirds —
  * the edges are cropped on some clients.
  */
-const DEFAULT_OG_IMAGE: string | null = null;
+const DEFAULT_OG_IMAGE: string | null = "/og-default.jpg";
 
 /**
  * A site-relative path, percent-encoded per segment and made absolute.

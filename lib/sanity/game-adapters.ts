@@ -10,7 +10,14 @@ import { toPublicPath } from "@/lib/recipe-text";
 
 /** The card photo, where a product has one. Products without a photo show
  * their decorative icon instead, exactly as before. */
+const LOCAL_GAME_COVERS: Record<string, string> = {
+  "forest-game": "/games/assets/covers/forest-game-cover.jpg",
+  "race-game": "/games/assets/covers/race-game-cover.jpg",
+  "memory-game": "/games/assets/covers/memory-game-cover.jpg",
+};
 export function gameCardImage(game: SanityGame): string | undefined {
+  const localCover = LOCAL_GAME_COVERS[game.slug];
+  if (localCover) return localCover;
   const main = game.images.find((image) => image.role === "main") ?? game.images[0];
   return toPublicPath(main?.path ?? null) ?? undefined;
 }
