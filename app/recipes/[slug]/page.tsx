@@ -210,7 +210,7 @@ async function FullRecipeDetail({ recipe }: { recipe: SanityRecipe }) {
   const heroImage = recipeHeroImage(recipe);
   const galleryImages = recipeGalleryImages(recipe);
   const favoriteId = recipeFavoriteId(recipe);
-  const related = await getRelatedRecipes(recipe, 3);
+  const related = await getRelatedRecipes(recipe, 4);
 
   return (
     <main className="page-main">
