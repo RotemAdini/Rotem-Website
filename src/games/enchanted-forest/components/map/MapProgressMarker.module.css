@@ -1,0 +1,89 @@
+/*
+ * The couple's position on the path — the game's only progress indicator.
+ *
+ * It used to be centred on the current station's coordinate, which covered 54%
+ * of the active icon: the one station you are meant to tap was the hardest to
+ * see, on every one of the eighteen returns to the map. The couple now stand
+ * just *below* the node, on the stretch of path they have already walked, and
+ * sit behind it in the stacking order.
+ */
+.marker {
+  position: absolute;
+  inset-inline-start: var(--ef-x);
+  inset-block-start: var(--ef-y);
+  transform: translate(50%, -50%) translate(18%, 104%);
+  /*
+   * The walk is a keyframe animation on `.walking`, not a transition here.
+   * MapProgressMarker explains why at length: the map remounts on every return
+   * from a station, and a transition has no previous value to start from. The
+   * declaration that used to sit at this spot looked like it worked and never
+   * ran once.
+   */
+  pointer-events: none;
+  z-index: 3;
+  /* Sized against the board, like the station nodes: a shrink-to-fit box makes
+     the percentage below resolve against the PNG's intrinsic width instead. */
+  inline-size: max(40px, 15%);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+}
+
+.image {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 2px 6px rgb(0 0 0 / 0.8));
+}
+
+
+/*
+ * Prototype map: the coordinate is already a point on the trail, picked per
+ * station beside the landmark rather than on it, so the couple are centred on it
+ * with no correction. They are also drawn a little smaller — the prototype's
+ * places are painted at map scale, and a silhouette sized for the old icon grid
+ * stood taller than the gnome's front door.
+ */
+.onPath {
+  transform: translate(50%, -50%);
+  inline-size: max(34px, 12%);
+}
+
+/*
+ * The walk itself: slow on purpose, and the slowest thing in the arrival beat.
+ * This is the only moment the map is a journey rather than a menu, and it has to
+ * be unmissable at a glance across a 320px board. The destination flares while
+ * they are still walking and settles just before they arrive; ScreenRouter holds
+ * the map open until both have finished.
+ */
+.walking { animation: walk 1800ms var(--ef-ease) both; }
+
+@keyframes walk {
+  from {
+    inset-inline-start: var(--ef-from-x);
+    inset-block-start: var(--ef-from-y);
+  }
+  to {
+    inset-inline-start: var(--ef-x);
+    inset-block-start: var(--ef-y);
+  }
+}
+
+/* No journey to replay: they are simply already where they belong. */
+@media (prefers-reduced-motion: reduce) {
+  .walking { animation: none; }
+}
+
+/* Fallback only — used if the silhouette asset is ever missing again. */
+.placeholder {
+  inline-size: 26px;
+  block-size: 26px;
+  border-radius: 50%;
+  background: #ff3ea5;
+  border: 2px solid #fff;
+  box-shadow: 0 0 12px rgb(255 62 165 / 0.9);
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+}

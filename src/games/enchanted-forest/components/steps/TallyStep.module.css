@@ -1,0 +1,50 @@
+.wrap { display: flex; flex-direction: column; gap: var(--ef-space-3); inline-size: 100%; align-items: center; }
+
+.counter {
+  display: flex;
+  gap: var(--ef-space-2);
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/*
+ * Empty pips used to be dark circles on a dark ring, which vanished against the
+ * bright stations (7 is a wall of orange light). A light glass fill keeps them
+ * readable on every background, and a filled pip carries a check as well as a
+ * colour.
+ */
+.pip {
+  inline-size: 36px;
+  block-size: 36px;
+  border-radius: 50%;
+  border: 2px solid rgb(255 255 255 / 0.75);
+  background: rgb(8 4 16 / 0.55);
+  box-shadow: 0 2px 10px rgb(0 0 0 / 0.5), inset 0 0 0 2px rgb(255 255 255 / 0.12);
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+  font-weight: 900;
+  color: #26123f;
+  transition: transform var(--ef-dur) var(--ef-ease), background var(--ef-dur) var(--ef-ease),
+              border-color var(--ef-dur) var(--ef-ease);
+}
+
+.pipDone {
+  background: linear-gradient(180deg, var(--ef-accent-soft), var(--ef-accent));
+  border-color: var(--ef-accent-soft);
+  transform: scale(1.1);
+  box-shadow: 0 2px 14px rgb(233 201 106 / 0.45);
+}
+
+.count { margin: 0; font-size: var(--ef-text-sm); color: var(--ef-ink-dim); text-shadow: 0 1px 8px rgb(0 0 0 / 0.9); }
+
+@media (max-height: 34rem) {
+  .wrap { gap: var(--ef-space-2); }
+  .pip { inline-size: 30px; block-size: 30px; font-size: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pip { transition: none; }
+}

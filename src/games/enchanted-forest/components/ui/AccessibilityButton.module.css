@@ -1,0 +1,105 @@
+/*
+ * The one piece of site chrome inside the game.
+ *
+ * Pinned to the stage rather than the viewport (`position: absolute` against
+ * `.root`), so it travels with the game when the host mounts it under a header
+ * instead of sitting over the site's own navigation.
+ *
+ * Corner choice: the stage's inline END, which in this RTL game is the LEFT.
+ * The inline-start corner is taken on two screens — the station's back control
+ * and, on the map, the run of chrome the heading sits behind — and the bottom is
+ * the action dock, the one control the couple need on every screen. The top-left
+ * is empty on every screen in the game.
+ */
+.button {
+  position: absolute;
+  z-index: 5;
+  inset-block-start: calc(var(--ef-space-2) + env(safe-area-inset-top, 0px));
+  /*
+   * `inline-end` is the LEFT edge here, because the game root is always
+   * `dir="rtl"` — so the physical inset to respect is `safe-area-inset-left`.
+   * The two halves of this line have to be read together: a logical property
+   * paired with a physical `env()`, which CSS has no logical equivalent of.
+   */
+  inset-inline-end: calc(var(--ef-space-2) + env(safe-area-inset-left, 0px));
+
+  /* A full 44px target under a smaller visible chip — see the note below. */
+  inline-size: var(--ef-tap);
+  block-size: var(--ef-tap);
+  display: grid;
+  place-items: center;
+
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ef-ink);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/*
+ * The visible chip. Drawn as a child of the tap target rather than as the target
+ * itself, so the control can be quiet — 30px of translucent glass — while still
+ * meeting the 44px minimum the rest of the game holds itself to. Shrinking the
+ * button to match the art would have made this the one control in the game that
+ * is hard to hit.
+ */
+.chip {
+  inline-size: 30px;
+  block-size: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--ef-panel);
+  border: 1px solid var(--ef-hairline);
+  box-shadow: var(--ef-lift-sm);
+  opacity: 0.55;
+  transition: opacity var(--ef-dur) var(--ef-ease), transform var(--ef-dur) var(--ef-ease);
+}
+
+.button:hover .chip,
+.button:focus-visible .chip {
+  opacity: 1;
+  transform: scale(1.06);
+}
+
+/*
+ * Focus goes on the button, not the chip, and is drawn with an outline offset
+ * outwards — the chip is translucent, so an inset ring would be read against the
+ * artwork rather than against the control.
+ */
+.button:focus-visible {
+  outline: 2px solid var(--ef-accent);
+  outline-offset: -6px;
+  border-radius: 50%;
+}
+
+.glyph {
+  inline-size: 18px;
+  block-size: 18px;
+  display: block;
+  /* `currentColor` so the icon follows forced-colors and high-contrast modes. */
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chip { transition: none; }
+  .button:hover .chip,
+  .button:focus-visible .chip { transform: none; }
+}
+
+/*
+ * Windows high-contrast: the translucent glass disappears, so give the chip a
+ * real border in the system's own colours rather than leaving a floating glyph.
+ */
+@media (forced-colors: active) {
+  .chip {
+    opacity: 1;
+    background: Canvas;
+    border-color: CanvasText;
+  }
+}

@@ -1,0 +1,67 @@
+/*
+ * A station. No scrolling: if copy does not fit, it is split into another step
+ * in `data/` rather than given a scrollbar.
+ */
+.screen { flex: 1; display: flex; flex-direction: column; gap: var(--ef-space-3); min-block-size: 0; }
+
+.header { flex: 0 0 auto; display: flex; align-items: center; gap: var(--ef-space-3); }
+
+.back {
+  appearance: none; border: 1px solid rgb(255 255 255 / 0.2); background: rgb(8 4 16 / 0.55); color: var(--ef-ink);
+  font: inherit; font-size: 1.25rem; line-height: 1;
+  min-inline-size: var(--ef-tap); min-block-size: var(--ef-tap);
+  border-radius: 50%; cursor: pointer; touch-action: manipulation;
+  display: grid; place-items: center; flex: 0 0 auto;
+  backdrop-filter: blur(6px);
+}
+.back:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+
+.titleBlock { min-inline-size: 0; display: flex; flex-direction: column; gap: 1px; }
+
+/*
+ * The station's name, and nothing else. 'תחנה 4 מתוך 18' used to sit above it on
+ * every screen: the map already says where the couple are, and repeating it here
+ * turned a forest into a dashboard.
+ */
+.heading {
+  margin: 0;
+  font-family: var(--ef-font-display);
+  font-size: var(--ef-text-lg);
+  font-weight: 900;
+  line-height: 1.25;
+  text-shadow: 0 2px 12px rgb(0 0 0 / 0.85), 0 0 28px rgb(0 0 0 / 0.5);
+}
+
+/* Meaningful context — this one is a replay — rather than a progress readout. */
+.revisitTag {
+  margin: 0;
+  font-size: var(--ef-text-xs);
+  font-weight: 600;
+  color: var(--ef-accent-soft);
+  text-shadow: 0 1px 8px rgb(0 0 0 / 0.9);
+}
+
+.body { flex: 1; display: flex; flex-direction: column; min-block-size: 0; }
+.bodyTop { justify-content: flex-start; }
+.bodyBottom { justify-content: safe flex-end; }
+
+.spacer { flex: 1; min-block-size: var(--ef-space-4); }
+
+.footer {
+  flex: 0 0 auto;
+  display: flex; flex-direction: column; gap: var(--ef-space-3); align-items: center;
+}
+.ctaSlot { inline-size: 100%; min-block-size: var(--ef-dock); display: flex; align-items: center; justify-content: center; }
+.hidden { visibility: hidden; }
+
+/*
+ * Landscape and other short viewports. Spacing gives way first; the dock keeps
+ * its height so every control stays a comfortable target.
+ */
+@media (max-height: 34rem) {
+  .screen { gap: var(--ef-space-2); }
+  .footer { gap: var(--ef-space-2); }
+  .heading { font-size: var(--ef-text-base); }
+  .spacer { min-block-size: var(--ef-space-2); }
+}
+

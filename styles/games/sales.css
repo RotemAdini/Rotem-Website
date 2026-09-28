@@ -426,6 +426,43 @@
   --lp-media-shadow: 0 30px 70px rgba(0, 0, 0, .55);
   --lp-purchase-bg: rgba(12, 22, 17, .86);
 }
+.lp--forest .forest-access-notice {
+  margin: 0;
+  padding: 1rem max(1.25rem, calc((100% - 68rem) / 2));
+  border-block-end: 1px solid var(--lp-highlight);
+  background: var(--lp-bg-alt);
+  color: var(--lp-ink);
+  font-weight: 700;
+  text-align: center;
+}
+.lp--forest .forest-access-status {
+  display: flex;
+  justify-content: center;
+  padding: .75rem max(1rem, calc((100% - 68rem) / 2));
+  background: var(--lp-bg);
+}
+.lp--forest .forest-ownership-badge {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  margin: 0;
+  padding: .55rem .9rem;
+  border: 1px solid var(--lp-card-border);
+  border-radius: 999px;
+  background: rgba(12, 22, 17, .9);
+  color: var(--lp-ink);
+  box-shadow: var(--lp-media-shadow);
+  font-weight: 800;
+  backdrop-filter: blur(8px);
+}
+.lp--forest .forest-ownership-badge--owned {
+  border-color: var(--lp-highlight);
+  color: var(--lp-heading);
+}
+@media (forced-colors: active) {
+  .lp--forest .forest-ownership-badge { border-color: CanvasText; }
+}
 .lp--forest .lp-hero--scene {
   min-height: min(88vh, 800px);
   display: flex;

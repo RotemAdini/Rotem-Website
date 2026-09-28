@@ -1,0 +1,93 @@
+/*
+ * Full-bleed artwork.
+ *
+ * Positioned against `.root` (the frame is intentionally unpositioned), so on a
+ * wide desktop the scene fills the entire screen instead of being boxed into the
+ * text column. A blurred copy sits underneath to fill the areas a 9:16 image
+ * cannot reach on very wide screens, so the edges never read as empty bars.
+ */
+.layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: var(--ef-backdrop);
+}
+
+.blurFill {
+  position: absolute;
+  inset: -5%;
+  inline-size: 110%;
+  block-size: 110%;
+  object-fit: cover;
+  filter: blur(28px) saturate(1.1) brightness(0.55);
+  display: none;
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  object-position: var(--ef-object-position, center);
+  display: block;
+}
+
+/*
+ * Wide screens: show the artwork at its own proportions, centred, with the
+ * blurred copy filling the rest. Keeps the illustration uncropped and strong.
+ */
+@media (min-width: 64rem) {
+  .blurFill { display: block; }
+  .image {
+    inline-size: auto;
+    block-size: 100%;
+    aspect-ratio: 1080 / 1920;
+    inset-inline: 0;
+    margin-inline: auto;
+    object-fit: cover;
+  }
+}
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 80% at 50% 12%, #4b2d7a 0%, transparent 60%),
+    linear-gradient(180deg, #2a1748 0%, #170d2c 55%, #0d0719 100%);
+}
+
+.placeholderNote {
+  position: absolute;
+  inset-block-start: calc(var(--ef-space-3) + env(safe-area-inset-top, 0px));
+  inset-inline: var(--ef-space-4);
+  max-inline-size: 26rem;
+  margin-inline: auto;
+  text-align: center;
+  font-size: var(--ef-text-sm);
+  color: rgb(255 255 255 / 0.6);
+  border: 1px dashed rgb(255 255 255 / 0.3);
+  border-radius: var(--ef-radius-sm);
+  padding: var(--ef-space-2);
+  pointer-events: none;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  /*
+   * Graded so the two text bands are legible on every one of the eighteen
+   * scenes, while the middle — where the artwork's subject lives — stays almost
+   * untouched. Measured: with the old 0.45 top the station title ran at 2.6:1
+   * over the bright tops of stations 4 and 5.
+   */
+  background: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 0.78) 0%,
+    rgb(0 0 0 / 0.44) 9%,
+    rgb(0 0 0 / 0.12) 22%,
+    rgb(0 0 0 / 0.12) 55%,
+    rgb(0 0 0 / 0.66) 100%
+  );
+}

@@ -1,0 +1,151 @@
+/*
+ * The game's own root. Everything visual is contained here: its own stacking
+ * context, its own direction, its own font scale. No rule in this module targets
+ * an element outside `.root`, so a host site is never affected.
+ *
+ * Layout model: the ARTWORK fills the whole viewport, while the CONTENT sits in
+ * a centred, readable column. On a phone the two are the same width; on desktop
+ * the background spreads to the full screen and only the text stays narrow, so
+ * the game reads as a full-screen scene rather than a phone floating in a void.
+ */
+.root {
+  position: relative;          /* containing block for the full-bleed artwork */
+  isolation: isolate;
+  inline-size: 100%;
+  /*
+   * How tall the game's stage is.
+   *
+   * `100dvh` is the standalone default, so playing this on its own — and the
+   * dev harness — is unchanged. It is a variable because the game does not own
+   * the page: mounted under a site header at /games/enchanted-forest/play, a
+   * hard 100dvh pushes the stage past the bottom of the viewport by exactly the
+   * header's height and takes the action dock, the only forward control, below
+   * the fold.
+   *
+   * The host sets it on the element it mounts the game into, or on any ancestor
+   * of it:
+   *   .game-slot { --ef-stage-height: calc(100dvh - var(--site-header-height)); }
+   * or, inside a wrapper it has already sized, `--ef-stage-height: 100%`.
+   *
+   * The default is the `var()` fallback rather than a declaration on this rule,
+   * and that distinction is the whole mechanism: a custom property declared HERE
+   * would win over the same property inherited from the host's wrapper, so the
+   * override would silently do nothing. As a fallback it applies only when no
+   * ancestor has said otherwise, which is exactly the contract — 100dvh unless
+   * told, and whatever the host says when it is.
+   *
+   * The game deliberately knows nothing about what that chrome is. It reads one
+   * number and fills it.
+   */
+  min-block-size: var(--ef-stage-height, 100dvh);
+  block-size: var(--ef-stage-height, 100dvh);
+  overflow: hidden;            /* no scrolling anywhere in the game */
+  background: var(--ef-backdrop);
+  display: flex;
+  justify-content: center;
+}
+
+/* Content column. Deliberately NOT positioned, so the artwork inside it
+   resolves against `.root` and covers the entire screen. */
+.frame {
+  inline-size: 100%;
+  max-inline-size: 30rem;      /* phone-ish reading measure */
+  block-size: 100%;
+  display: flex;
+  flex-direction: column;
+  min-block-size: 0;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-block-size: 0;
+  /*
+   * Clip sideways, yield vertically.
+   *
+   * Every screen is authored to fit without scrolling, and at every tested
+   * viewport it does — so this scrollport stays invisible and the no-scroll
+   * reading experience is unchanged. It exists for the one case where the
+   * layout genuinely cannot hold: a visitor who has scaled their text up. At
+   * 320x568 with a 200% root font the station copy overflowed by 124px and
+   * `overflow: hidden` destroyed it, cutting a sentence in half and leaving the
+   * CTA sitting on the bubble. Losing the words is never the better failure, so
+   * past the point where the screen stops fitting, the rest of it is reachable.
+   *
+   * Horizontal stays clipped: nothing here is meant to be read sideways, and
+   * the full-bleed artwork would otherwise invite a stray pan.
+   *
+   * ⚠️ This scrollport only works because the screens above it align with the
+   * `safe` keyword — `justify-content: safe flex-end`, `align-items: safe
+   * center`. Every screen is a bottom-aligned or centred flex column, and an
+   * overflowing centred column spills past its START edge, which is the one
+   * direction a scrollport cannot reach: at 200% text the station copy was
+   * sitting 875px ABOVE the viewport with `scrollTop` pinned at 0. `safe` drops
+   * the alignment to `start` at exactly the moment content stops fitting, so
+   * the overflow goes downward, where this can follow it. Removing `safe` from
+   * any of those rules silently re-breaks large-text support without moving a
+   * pixel at normal sizes.
+   */
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-inline: var(--ef-space-4);
+  padding-block-start: calc(var(--ef-space-3) + env(safe-area-inset-top, 0px));
+  padding-block-end: calc(var(--ef-space-4) + env(safe-area-inset-bottom, 0px));
+}
+
+/* Tablet and up: a little more breathing room without widening the text. */
+@media (min-width: 48rem) {
+  .frame { max-inline-size: 34rem; }
+  .content {
+    padding-inline: var(--ef-space-5);
+    padding-block: var(--ef-space-5);
+  }
+}
+
+/* Large desktop: cap the vertical run so content does not drift apart, and let
+   the artwork carry the rest of the screen. */
+@media (min-width: 64rem) and (min-height: 45rem) {
+  .frame { max-inline-size: 36rem; }
+  .content { padding-block: var(--ef-space-6); }
+}
+
+.locked, .loading {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: grid;
+  place-items: center;
+  padding: var(--ef-space-6);
+  text-align: center;
+  color: var(--ef-ink-dim);
+}
+
+/*
+ * Screen change.
+ *
+ * Opacity only — deliberately NOT transform. The full-bleed artwork inside each
+ * screen is absolutely positioned against `.root`, and a transform here would
+ * make this wrapper the containing block instead, boxing the scene into the
+ * text column on desktop. Opacity creates a stacking context but no containing
+ * block, so the scene still fills the screen.
+ */
+.screenEnter {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-block-size: 0;
+  animation: screenIn var(--ef-dur-screen) var(--ef-ease) both;
+}
+
+@keyframes screenIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screenEnter { animation: none; }
+}

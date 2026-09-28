@@ -346,6 +346,10 @@ html[data-high-contrast="true"]{--bg:#fff;--panel:#fff;--panel2:#fff;--text:#111
 /* /games — the bundle states what it saves against buying the three singly. */
 .shop-card-saving{margin:6px 0 0;font-size:13px;font-weight:600;color:var(--pink2)}
 .shop-card-saving s{color:var(--muted);font-weight:400}
+.game-ownership-badge{position:absolute;z-index:2;top:12px;left:12px;min-height:34px;display:inline-flex;align-items:center;gap:7px;padding:5px 11px 5px 9px;border:1px solid #c9aeb5;border-radius:999px;background:linear-gradient(145deg,#fff,#fff7f5);color:#5f263d;font-size:12px;font-weight:800;box-shadow:0 8px 22px rgba(48,21,31,.18),inset 0 1px 0 rgba(255,255,255,.9);backdrop-filter:blur(8px)}
+.game-ownership-badge.is-owned{border-color:#b4863d;background:linear-gradient(145deg,#fffdf5,#fff3d8);color:#5c3a08}
+.game-ownership-badge svg{width:20px;height:20px;padding:2px;border:1px solid currentColor;border-radius:50%;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+@media(forced-colors:active){.game-ownership-badge{border-color:CanvasText}}
 
 @media(max-width:760px){.search-intro{grid-template-columns:1fr}}
 
@@ -559,4 +563,10 @@ html[data-high-contrast="true"]{--bg:#fff;--panel:#fff;--panel2:#fff;--text:#111
       transform:none;
     }
   }
+}
+/* The forest game supplies its own in-stage accessibility button. Keep the
+   site's panel mounted for the bridge event without drawing a duplicate
+   floating trigger over the playfield. */
+.game-accessibility-host .accessibility-trigger {
+  display: none;
 }

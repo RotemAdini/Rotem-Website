@@ -11,17 +11,23 @@ import { register } from "node:module";
 
 const RELATIVE_SUFFIXES = [".ts", ".tsx", "/index.ts", "/index.tsx", ".js"];
 const BARE_SUFFIXES = [".js"];
+const PROJECT_ROOT = new URL("../", import.meta.url);
 
 async function resolve(specifier, context, next) {
+  const isProjectAlias = specifier.startsWith("@/");
+  const resolvedSpecifier = isProjectAlias
+    ? new URL(specifier.slice(2), PROJECT_ROOT).href
+    : specifier;
+
   try {
-    return await next(specifier, context);
+    return await next(resolvedSpecifier, context);
   } catch (error) {
-    const relative = specifier.startsWith("./") || specifier.startsWith("../");
+    const relative = isProjectAlias || specifier.startsWith("./") || specifier.startsWith("../");
     const suffixes = relative ? RELATIVE_SUFFIXES : BARE_SUFFIXES;
 
     for (const suffix of suffixes) {
       try {
-        return await next(specifier + suffix, context);
+        return await next(resolvedSpecifier + suffix, context);
       } catch {
         // keep trying
       }

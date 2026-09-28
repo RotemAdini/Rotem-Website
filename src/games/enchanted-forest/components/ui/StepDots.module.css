@@ -1,0 +1,45 @@
+/*
+ * Progress inside one station. Small, but it has to be findable at arm's length
+ * on a phone the two of you are sharing, so the current step is a filled gold
+ * dot with a ring rather than a slightly larger grey one.
+ */
+/*
+ * `flex-wrap` and the inline padding are what keep the gnome on screen.
+ *
+ * His station runs thirteen steps, and at 7px a dot plus an 8px gap that row
+ * measures 195px — wider than the 188px a 375px phone has left at 200% browser
+ * zoom, where it ran off both edges and lost its first and last dot. The active
+ * dot also carries a 3px ring outside its own box, which is what the padding is
+ * for. Wrapping rather than shrinking: a dot below 7px stops reading as a dot.
+ */
+.dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ef-space-2);
+  justify-content: center;
+  align-items: center;
+  min-block-size: 14px;
+  padding-inline: 3px;
+  max-inline-size: 100%;
+}
+
+.dot {
+  flex: 0 0 auto;
+  inline-size: 7px; block-size: 7px; border-radius: 50%;
+  background: rgb(255 255 255 / 0.3);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.6);
+  transition: background var(--ef-dur) var(--ef-ease), transform var(--ef-dur) var(--ef-ease),
+              box-shadow var(--ef-dur) var(--ef-ease);
+}
+
+.active {
+  background: var(--ef-accent);
+  transform: scale(1.5);
+  box-shadow: 0 0 0 3px rgb(233 201 106 / 0.24), 0 1px 4px rgb(0 0 0 / 0.6);
+}
+
+.done { background: rgb(255 255 255 / 0.72); }
+
+@media (prefers-reduced-motion: reduce) {
+  .dot { transition: none; }
+}

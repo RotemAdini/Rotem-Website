@@ -1,0 +1,292 @@
+/*
+ * The hub — a place, not a card.
+ *
+ * The map used to be a rounded, shadowed board inside the padded content column,
+ * floating on a blurred backdrop. Coming back from a station, the stage visibly
+ * changed size. It is now laid out exactly like a station's artwork: one
+ * full-bleed plane against the game root, with the same cover-on-portrait /
+ * fit-on-landscape behaviour and the same blurred fill at the edges.
+ *
+ * `.plane` is the single source of the map's geometry. The artwork and the
+ * station overlay are two copies of the SAME class, so an icon cannot drift off
+ * the path: both are laid out by identical rules, and the coordinates stay
+ * percentages of the 1080x1920 design frame they were measured in.
+ */
+
+.art, .overlay {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.art { z-index: 0; background: var(--ef-backdrop); }
+
+/* Above the content column so stations stay tappable; inert except on an icon. */
+.overlay { z-index: 2; pointer-events: none; }
+
+.plane {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  transform: translate(50%, -50%);   /* RTL-safe centring */
+  /*
+   * The ratio is the ACTIVE map's, handed down from the manifest, because the
+   * two boards are not quite the same shape (1080x1920 against 941x1672). The
+   * fallback keeps the classic geometry if the variable never arrives.
+   */
+  aspect-ratio: var(--ef-map-ratio, 0.5625);
+  /*
+   * The host owns the stage height. Deriving both dimensions from this actual
+   * containing block keeps standalone and embedded layouts on the same
+   * geometry, including hosts that reserve space for their own header.
+   */
+  block-size: 100%;
+  inline-size: auto;
+}
+
+/*
+ * Viewports wider than the board: the cover rule above would crop most of the
+ * map away, so fit to height and let the blurred forest carry the rest — the
+ * same thing a station background does. The breakpoint stays on the classic
+ * ratio: the two boards differ by 0.0003, far inside the width at which this
+ * switch matters.
+ */
+/*
+ * Hidden by default and revealed by the landscape rule below. The two rules have
+ * the same specificity, so this one has to come FIRST: while it sat after the
+ * media query it won on source order and the blurred forest never appeared —
+ * every viewport wider than the board showed the flat backdrop colour beside the
+ * map instead.
+ */
+.blurFill {
+  position: absolute;
+  inset: -5%;
+  inline-size: 110%;
+  block-size: 110%;
+  object-fit: cover;
+  filter: blur(30px) saturate(1.2) brightness(0.45);
+  display: none;
+}
+
+@media (min-aspect-ratio: 1080 / 1920) {
+  .blurFill { display: block; }
+}
+
+.mapImage {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.mapMissing {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: var(--ef-space-4);
+  background: linear-gradient(180deg, #34215c, #150c28);
+  color: var(--ef-ink-dim);
+  font-size: var(--ef-text-sm);
+}
+
+/* Same grading as a station's scrim, so the two screens feel like one world. */
+.scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 0.72) 0%,
+    rgb(0 0 0 / 0.36) 10%,
+    rgb(0 0 0 / 0.04) 24%,
+    rgb(0 0 0 / 0.04) 62%,
+    rgb(0 0 0 / 0.58) 100%
+  );
+}
+
+.nodes { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; }
+
+/*
+ * The <li> must NOT establish a box over the plane. Each station button is
+ * absolutely positioned against `.nodes`, so the list item itself stays out of
+ * the way — otherwise every li would blanket the map and the last one would
+ * swallow all the taps.
+ */
+.node { position: static; }
+
+/* ── chrome ─────────────────────────────────────────────────────────────── */
+
+.screen {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-block-size: 0;
+}
+
+/*
+ * One cluster, in one corner.
+ *
+ * The moon occupies the top-left and the kiss gate the top-right, so the small
+ * progress/restart cluster sits between them in the quiet mountain band. The
+ * whole row used to stretch edge to edge and later hugged the moon; both
+ * positions covered meaningful artwork.
+ *
+ * Its capped width keeps the cluster inside that neutral band at every tested
+ * viewport instead of stretching back over either landmark.
+ */
+.header {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chrome {
+  display: flex;
+  align-items: center;
+  gap: var(--ef-space-2);
+  /* Widened just enough for the count. Still inside the quiet mountain band
+     between the moon and the kiss gate at every tested viewport. */
+  inline-size: min(62%, 13rem);
+  max-inline-size: 13rem;
+  min-inline-size: 0;
+}
+
+/*
+ * X/18. Small, tabular and gold, so it belongs to the same light as the path and
+ * the progress bar rather than reading as an app's status chrome.
+ */
+.count {
+  flex: 0 0 auto;
+  font-size: var(--ef-text-xs);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  color: var(--ef-accent-soft);
+  text-shadow: 0 1px 6px rgb(0 0 0 / 0.9), 0 0 12px rgb(0 0 0 / 0.7);
+  white-space: nowrap;
+}
+
+/* The journey as one line of light. The count lives in the label, not as a
+   second readout beside it. */
+.track {
+  block-size: 4px;
+  flex: 1 1 auto;
+  min-inline-size: 2.5rem;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.2);
+  overflow: hidden;
+  box-shadow: 0 1px 6px rgb(0 0 0 / 0.6);
+}
+
+.trackFill {
+  display: block;
+  block-size: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--ef-accent-soft), var(--ef-accent));
+  box-shadow: var(--ef-glow);
+  transition: inline-size 700ms var(--ef-ease);
+}
+
+/*
+ * Restart is destructive and permanent, so only its icon is visible. The hit
+ * area remains a full 44px while the compact visual stays off the moon.
+ */
+.restart {
+  position: relative;
+  flex: 0 0 auto;
+  appearance: none;
+  background: none;
+  border: 0;
+  color: var(--ef-ink-faint);
+  font: inherit;
+  font-size: 1.1rem;
+  inline-size: var(--ef-tap);
+  padding: 0;
+  min-block-size: var(--ef-tap);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: color var(--ef-dur) var(--ef-ease);
+}
+
+.restart::before {
+  content: '';
+  position: absolute;
+  inset-block: 6px;
+  inset-inline: 0;
+  border-radius: 999px;
+  background: rgb(8 4 16 / 0.55);
+  border: 1px solid rgb(255 255 255 / 0.22);
+  backdrop-filter: blur(6px);
+  transition: border-color var(--ef-dur) var(--ef-ease);
+  z-index: -1;
+}
+
+.restart:hover { color: var(--ef-ink); }
+.restart:hover::before { border-color: rgb(255 255 255 / 0.45); }
+.restart:focus-visible { outline: 3px solid #fff; outline-offset: -4px; border-radius: 999px; }
+
+
+/* Completion feedback floats above the bottom dock, away from map landmarks. */
+.toast {
+  position: absolute;
+  inset-block-end: calc(var(--ef-space-3) + env(safe-area-inset-bottom, 0px));
+  inset-inline: 0;
+  z-index: 6;
+  margin: 0;
+  inline-size: fit-content;
+  margin-inline: auto;
+  text-align: center;
+  font-size: var(--ef-text-sm);
+  font-weight: 700;
+  background: var(--ef-surface);
+  border: 1px solid var(--ef-hairline);
+  border-radius: 999px;
+  padding: var(--ef-space-2) var(--ef-space-4);
+  box-shadow: var(--ef-lift-sm);
+  backdrop-filter: blur(8px);
+  animation: toastIn 320ms var(--ef-ease) both;
+  pointer-events: none;
+}
+
+/* The live region must stay in the DOM between announcements without taking space. */
+.toastQuiet { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; margin: 0; }
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(10px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast { animation: none; }
+  .trackFill { transition: none; }
+}
+
+.footer { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; min-block-size: var(--ef-space-4); }
+
+.endingLink {
+  appearance: none;
+  border: 1px solid var(--ef-hairline);
+  background: var(--ef-surface);
+  color: var(--ef-accent-soft);
+  font: inherit;
+  font-size: var(--ef-text-sm);
+  font-weight: 700;
+  border-radius: 999px;
+  padding-inline: var(--ef-space-4);
+  min-block-size: var(--ef-tap);
+  cursor: pointer;
+  touch-action: manipulation;
+  backdrop-filter: blur(8px);
+  box-shadow: var(--ef-lift-sm);
+}
+.endingLink:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }

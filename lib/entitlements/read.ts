@@ -5,6 +5,7 @@ import { cache } from "react";
 import { getAllGames } from "@/lib/sanity/games";
 import type { SanityGame } from "@/lib/sanity/games";
 import { createSupabaseServerClient, getSupabaseUser } from "@/lib/supabase/server";
+import { entitlementRowsAllowAccess } from "./access-policy";
 
 /**
  * Reading who owns what.
@@ -70,8 +71,17 @@ export const getOwnedGameContentIds = cache(async (): Promise<string[]> => {
  */
 export async function ownsGame(gameContentId: string): Promise<boolean> {
   if (!gameContentId) return false;
-  const owned = await getOwnedGameContentIds();
-  return owned.includes(gameContentId);
+  const user = await getSupabaseUser();
+  if (!user) return false;
+
+  const supabase = await createSupabaseServerClient();
+  const { data, error } = await supabase
+    .from("entitlements")
+    .select("revoked_at")
+    .eq("game_content_id", gameContentId);
+
+  if (error) throw new Error(`Could not read game entitlement: ${error.message}`);
+  return entitlementRowsAllowAccess(data);
 }
 
 /**

@@ -74,32 +74,44 @@ export type Database = {
       entitlements: {
         Row: {
           game_content_id: string
+          granted_by: string | null
           granted_at: string
           id: string
+          note: string | null
           purchase_id: string | null
           revoked_at: string | null
+          revoked_by: string | null
           revoked_reason: string | null
           source: string
+          source_reference: string | null
           user_id: string
         }
         Insert: {
           game_content_id: string
+          granted_by?: string | null
           granted_at?: string
           id?: string
+          note?: string | null
           purchase_id?: string | null
           revoked_at?: string | null
+          revoked_by?: string | null
           revoked_reason?: string | null
           source?: string
+          source_reference?: string | null
           user_id: string
         }
         Update: {
           game_content_id?: string
+          granted_by?: string | null
           granted_at?: string
           id?: string
+          note?: string | null
           purchase_id?: string | null
           revoked_at?: string | null
+          revoked_by?: string | null
           revoked_reason?: string | null
           source?: string
+          source_reference?: string | null
           user_id?: string
         }
         Relationships: [
@@ -111,6 +123,30 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      game_feedback: {
+        Row: {
+          comment: string | null
+          created_at: string
+          game_id: string
+          id: string
+          rating: number
+        }
+        Insert: {
+          comment?: string | null
+          created_at?: string
+          game_id: string
+          id?: string
+          rating: number
+        }
+        Update: {
+          comment?: string | null
+          created_at?: string
+          game_id?: string
+          id?: string
+          rating?: number
+        }
+        Relationships: []
       }
       favorites: {
         Row: {
@@ -441,7 +477,7 @@ export type PurchaseStatus = "paid" | "refunded" | "chargeback";
 
 /** Where an entitlement came from. 'bundle' and 'purchase' both follow a
  * payment; 'manual' is a deliberate support grant. */
-export type EntitlementSource = "purchase" | "bundle" | "manual";
+export type EntitlementSource = "purchase" | "bundle" | "manual" | "legacy" | "promo" | "gift";
 
 /** Processing state of a webhook delivery. Only 'processed' refuses a retry. */
 export type PaymentEventStatus = "pending" | "processing" | "processed" | "failed";

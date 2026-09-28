@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { safeNextPath } from "@/lib/supabase/safe-next";
 import { resolvePublicOrigin } from "@/lib/supabase/site-url";
 
 /**
@@ -29,14 +30,6 @@ import { resolvePublicOrigin } from "@/lib/supabase/site-url";
  * way in and a session cookie on the way out. */
 const NO_STORE = "private, no-cache, no-store, max-age=0, must-revalidate";
 
-/** Guards against an open redirect: an attacker-supplied `next` must be a
- * plain path on this site, never an absolute URL or a protocol-relative one. */
-function safeNext(raw: string | null): string {
-  if (!raw) return "/dashboard";
-  if (!raw.startsWith("/") || raw.startsWith("//")) return "/dashboard";
-  return raw;
-}
-
 /** A redirect that no cache is allowed to keep. */
 function redirectTo(url: string): NextResponse {
   const response = NextResponse.redirect(url);
@@ -48,7 +41,7 @@ function redirectTo(url: string): NextResponse {
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const origin = resolvePublicOrigin(request.url);
-  const next = safeNext(searchParams.get("next"));
+  const next = safeNextPath(searchParams.get("next"));
 
   // Google or Supabase can report a failure instead of a code — a declined
   // consent screen, or an account that is not on the test-user list while the

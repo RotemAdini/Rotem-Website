@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import GamesBoard from "@/components/GamesBoard";
+import {
+  getCatalogOwnedGameContentIds,
+  getOwnedIndividualGameSlugs,
+} from "@/lib/entitlements/catalog-access";
 import { getListedGames } from "@/lib/sanity/games";
 import { toGameCatalogItem } from "@/lib/sanity/game-adapters";
 
@@ -14,7 +18,12 @@ export const metadata: Metadata = pageMetadata({
 export default async function GamesPage() {
   // Product metadata comes from Sanity. The hero, the "how it works" section
   // and the board itself stay in this page's own code.
-  const games = (await getListedGames()).map(toGameCatalogItem);
+  const [listedGames, ownedGameContentIds] = await Promise.all([
+    getListedGames(),
+    getCatalogOwnedGameContentIds(),
+  ]);
+  const ownedIndividualGameSlugs = getOwnedIndividualGameSlugs(listedGames, ownedGameContentIds);
+  const games = listedGames.map(toGameCatalogItem);
   return (
     <main className="page-main">
       <section className="page-hero games-hero">
@@ -54,7 +63,7 @@ export default async function GamesPage() {
         </div>
       </section>
 
-      <GamesBoard games={games} />
+      <GamesBoard games={games} ownedIndividualGameSlugs={ownedIndividualGameSlugs} />
 
       <section className="container how-it-works" id="how-it-works">
         <div className="section-head">

@@ -4,8 +4,10 @@ import Link from "next/link";
 
 import GoogleSignInButton from "@/components/GoogleSignInButton";
 import SignOutButton from "@/components/SignOutButton";
+import { FOREST_GAME_PLAY_PATH } from "@/lib/entitlements/require-game-access";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { getSupabaseUser } from "@/lib/supabase/server";
+import { safeNextPath } from "@/lib/supabase/safe-next";
 import { describeUser } from "@/lib/supabase/user";
 
 /**
@@ -33,8 +35,10 @@ export async function generateMetadata(): Promise<Metadata> {
  * email or password field anywhere on this page. The surrounding card markup
  * is the same as before, so the page keeps its existing styling.
  */
-export default async function AccountPage({ searchParams }: { searchParams: Promise<{ error?: string; signedOut?: string }> }) {
-  const { error, signedOut } = await searchParams;
+export default async function AccountPage({ searchParams }: { searchParams: Promise<{ error?: string; signedOut?: string; next?: string }> }) {
+  const { error, signedOut, next: nextRaw } = await searchParams;
+  const next = safeNextPath(nextRaw);
+  const signedInCtaLabel = next === FOREST_GAME_PLAY_PATH ? "המשך למשחק" : "לאזור האישי";
   const user = isSupabaseConfigured ? await getSupabaseUser() : null;
   const profile = user ? describeUser(user) : null;
 
@@ -69,8 +73,8 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
                   <span>{profile.email}</span>
                 </div>
               </div>
-              <Link className="btn btn-primary full" href="/dashboard">
-                לאזור האישי
+              <Link className="btn btn-primary full" href={next}>
+                {signedInCtaLabel}
               </Link>
               <SignOutButton className="btn btn-secondary full" />
             </>
@@ -94,7 +98,7 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
               )}
 
               {isSupabaseConfigured ? (
-                <GoogleSignInButton />
+                <GoogleSignInButton next={next} />
               ) : (
                 <p className="auth-error" role="alert">
                   ההתחברות אינה מוגדרת בסביבה הזו.
@@ -102,7 +106,7 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
               )}
 
               <p className="micro-note">
-                אפשר להמשיך לגלוש באתר בלי להתחבר — כל המתכונים, הדייטים והמשחקים פתוחים לכולם.
+                אפשר להמשיך לגלוש באתר בלי להתחבר. משחקים שנרכשו נפתחים לאחר התחברות לחשבון שקיבל את הגישה.
               </p>
             </>
           )}

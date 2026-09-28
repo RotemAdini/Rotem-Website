@@ -1,0 +1,104 @@
+/*
+ * The one warm control.
+ *
+ * Primary buttons are made of the same gold as the path on the map and the
+ * hairline on every panel, so "this is what you tap" is a single, consistent
+ * signal across eighteen stations.
+ */
+.button {
+  /* Scoped to the game: no bare `button` selector anywhere in this module. */
+  appearance: none;
+  border: 0;
+  font: inherit;
+  font-weight: 700;
+  color: #26123f;
+  background: linear-gradient(180deg, #f8e6b6, var(--ef-accent));
+  border-radius: 999px;
+  min-height: var(--ef-tap);
+  padding: var(--ef-space-3) var(--ef-space-6);
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgb(0 0 0 / 0.4), 0 0 20px rgb(233 201 106 / 0.22);
+  transition: transform var(--ef-dur) var(--ef-ease), filter var(--ef-dur) var(--ef-ease),
+              box-shadow var(--ef-dur) var(--ef-ease);
+  touch-action: manipulation;
+  max-width: 100%;
+}
+
+.button:hover { filter: brightness(1.04); box-shadow: 0 8px 22px rgb(0 0 0 / 0.42), 0 0 28px rgb(233 201 106 / 0.34); }
+.button:active { transform: scale(0.97); }
+.button:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+.secondary {
+  background: var(--ef-surface);
+  color: var(--ef-ink);
+  box-shadow: var(--ef-lift-sm);
+  border: 1px solid rgb(255 255 255 / 0.35);
+  backdrop-filter: blur(6px);
+}
+.secondary:hover { filter: none; border-color: rgb(255 255 255 / 0.6); box-shadow: var(--ef-lift-sm); }
+
+/*
+ * Destructive actions are outlined, not solid. A solid red slab above a quiet
+ * "cancel" made wiping the whole journey the most attractive thing on the
+ * screen; outlined keeps it unmistakably red and unmistakably a choice.
+ */
+.danger {
+  background: rgb(60 16 20 / 0.55);
+  color: #ffc9c9;
+  border: 2px solid var(--ef-danger);
+  box-shadow: none;
+}
+.danger:hover { filter: none; background: rgb(80 20 26 / 0.7); box-shadow: none; }
+
+.block { inline-size: 100%; }
+
+/*
+ * Story navigation, not a checkout button.
+ *
+ * Passive 'המשך' steps used to be the same full-width gold bar as 'סיימנו ✓',
+ * which made turning a page look as consequential as finishing a task and ate a
+ * sixth of a phone screen. This is a compact glass pill: hugging its text, lit
+ * by the same gold hairline as every other surface, and still a 44px target.
+ */
+.quiet {
+  background: var(--ef-surface);
+  color: var(--ef-accent-soft);
+  border: 1px solid var(--ef-hairline);
+  box-shadow: var(--ef-lift-sm);
+  backdrop-filter: blur(8px) saturate(1.15);
+  font-weight: 600;
+  font-size: var(--ef-text-sm);
+  padding-inline: var(--ef-space-5);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ef-space-2);
+}
+.quiet:hover { filter: none; border-color: rgb(233 201 106 / 0.6); box-shadow: var(--ef-lift-sm); }
+/* .block must not stretch a quiet control across the screen. */
+.quiet.block { inline-size: auto; max-inline-size: none; margin-inline: 0; }
+
+.quietArrow {
+  font-size: 0.85em;
+  /* Tall enough to contain the glyph: at line-height 1 the arrow's ink sat a
+     couple of pixels outside its own box, which is a clipping risk waiting for
+     an ancestor to start clipping. */
+  line-height: 1.4;
+  opacity: 0.8;
+  transition: transform var(--ef-dur) var(--ef-ease);
+}
+.quiet:hover .quietArrow { transform: translateX(-3px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .quietArrow { transition: none; }
+}
+
+.button[disabled] { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
+
+/* On roomier screens a full-width CTA looks stretched; cap and centre it. */
+@media (min-width: 48rem) {
+  .block { max-inline-size: 22rem; margin-inline: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button { transition: none; }
+}

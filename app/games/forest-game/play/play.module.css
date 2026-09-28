@@ -1,0 +1,56 @@
+.page {
+  inline-size: 100%;
+  block-size: 100dvh;
+  min-block-size: 100dvh;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  background: #0c1611;
+}
+
+.toolbar {
+  position: relative;
+  z-index: 50;
+  min-block-size: 52px;
+  display: flex;
+  align-items: center;
+  padding-inline: max(0.5rem, env(safe-area-inset-left)) max(0.5rem, env(safe-area-inset-right));
+  border-block-end: 1px solid rgb(238 194 122 / 0.3);
+  background: #111f18;
+}
+
+.backLink {
+  min-block-size: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-inline: 1rem;
+  border: 1px solid rgb(238 194 122 / 0.45);
+  border-radius: 999px;
+  color: #fdf6ea;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.backLink:hover {
+  border-color: #eec27a;
+  background: rgb(238 194 122 / 0.12);
+}
+
+.backLink:focus-visible {
+  outline: 3px solid #eec27a;
+  outline-offset: 2px;
+}
+
+.stage {
+  min-block-size: 0;
+  overflow: hidden;
+  --ef-stage-height: 100%;
+}
+
+@media (forced-colors: active) {
+  .toolbar,
+  .backLink {
+    border-color: CanvasText;
+  }
+}

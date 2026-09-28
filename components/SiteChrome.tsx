@@ -52,6 +52,15 @@ export default function SiteChrome({ header, footer, accessibilityControls, chil
 
   if (pathname?.startsWith("/studio")) return <>{children}</>;
 
+  if (pathname === "/games/forest-game/play") {
+    return (
+      <>
+        <div className="game-accessibility-host">{accessibilityControls}</div>
+        {children}
+      </>
+    );
+  }
+
   return (
     <>
       <a className="skip-link" href="#main-content" onClick={focusMain}>

@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 
 import { createSupabaseServerClient } from "./server";
+import { safeNextPath } from "./safe-next";
 import { getRequestOrigin } from "./site-url";
 
 /**
@@ -28,7 +29,7 @@ import { getRequestOrigin } from "./site-url";
  */
 export async function signInWithGoogle(formData?: FormData): Promise<void> {
   const nextRaw = formData?.get("next");
-  const next = typeof nextRaw === "string" && nextRaw.startsWith("/") && !nextRaw.startsWith("//") ? nextRaw : "/dashboard";
+  const next = safeNextPath(typeof nextRaw === "string" ? nextRaw : null);
 
   const supabase = await createSupabaseServerClient();
   const origin = await getRequestOrigin();
@@ -41,7 +42,7 @@ export async function signInWithGoogle(formData?: FormData): Promise<void> {
   });
 
   if (error || !data?.url) {
-    redirect(`/account?error=${encodeURIComponent(error?.message ?? "oauth_start_failed")}`);
+    redirect(`/account?error=${encodeURIComponent(error?.message ?? "oauth_start_failed")}&next=${encodeURIComponent(next)}`);
   }
 
   redirect(data.url);

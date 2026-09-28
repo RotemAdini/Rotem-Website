@@ -1,0 +1,100 @@
+.wrap { display: flex; flex-direction: column; gap: var(--ef-space-3); inline-size: 100%; align-items: center; }
+
+/*
+ * The dial has to read across a dim room while the two of you are looking at
+ * each other, not at it. The track used to be white at 18% — invisible on the
+ * night scenes both timers actually use.
+ */
+.dial {
+  position: relative;
+  inline-size: clamp(104px, 28vw, 140px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(8 4 16 / 0.72), rgb(8 4 16 / 0.3));
+  box-shadow: 0 8px 26px rgb(0 0 0 / 0.5);
+}
+
+.ring { position: absolute; inset: 0; transform: rotate(-90deg); }
+.ringTrack { fill: none; stroke: rgb(255 255 255 / 0.32); stroke-width: 6; }
+.ringFill {
+  fill: none;
+  stroke: var(--ef-accent);
+  stroke-width: 7;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 6px rgb(233 201 106 / 0.75));
+  transition: stroke-dashoffset 1s linear;
+}
+
+.time {
+  margin: 0;
+  font-family: var(--ef-font-display);
+  font-size: var(--ef-text-xl);
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 2px 10px rgb(0 0 0 / 0.8);
+}
+
+.done {
+  margin: 0;
+  font-size: var(--ef-text-base);
+  font-weight: 700;
+  color: var(--ef-accent);
+  text-shadow: 0 1px 10px rgb(0 0 0 / 0.9);
+}
+
+/* Stable, empty role=status before completion: present to AT without using space. */
+.statusQuiet {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  margin: 0;
+}
+
+.skip { font-size: var(--ef-text-sm); }
+
+/*
+ * The permission to stop watching. Quiet on purpose — it is an instruction about
+ * the phone, not part of the forest's voice — but it has to survive a night
+ * scene, so it carries the same shadow as everything else on this screen.
+ */
+.handsFree {
+  margin: 0;
+  text-align: center;
+  font-size: var(--ef-text-sm);
+  color: var(--ef-ink-dim);
+  text-shadow: 0 1px 8px rgb(0 0 0 / 0.9);
+}
+
+/* Shown in the dock while an unskippable wait runs: the screen has nothing to
+   ask of them, and should say so rather than sit empty. */
+.waiting {
+  margin: 0;
+  font-size: var(--ef-text-sm);
+  color: var(--ef-ink-faint);
+  text-shadow: 0 1px 8px rgb(0 0 0 / 0.9);
+}
+
+/*
+ * Short viewports: the dial is a graphic, so it gives way before the words do.
+ * At 320px tall the finished-timer screen used to push its bubble off the top.
+ */
+@media (max-height: 34rem) {
+  .wrap { gap: var(--ef-space-2); }
+  .dial { inline-size: clamp(76px, 20vh, 104px); }
+  .time { font-size: var(--ef-text-lg); }
+}
+
+@media (max-height: 24rem) {
+  .dial { inline-size: clamp(60px, 17vh, 80px); }
+  .time { font-size: var(--ef-text-base); }
+  .done { font-size: var(--ef-text-sm); }
+  /* The words the couple must read win the last of the height. */
+  .handsFree { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ringFill { transition: none; }
+}

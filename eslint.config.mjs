@@ -15,6 +15,17 @@ const eslintConfig = defineConfig([
       "@next/next/no-img-element": "off",
     },
   },
+  {
+    files: ["src/games/enchanted-forest/**/*.{ts,tsx}"],
+    rules: {
+      // This is a completed external module copied in without gameplay
+      // rewrites. Its effects deliberately reset screen-local state when the
+      // authored route changes, and its restart dialog captures the opener ref
+      // expected by its tested focus-restoration contract.
+      "react-hooks/set-state-in-effect": "off",
+      "react-hooks/refs": "off",
+    },
+  },
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:

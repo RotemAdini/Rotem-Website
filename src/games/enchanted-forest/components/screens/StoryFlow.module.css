@@ -1,0 +1,159 @@
+/*
+ * Narrative screens.
+ *
+ * Two compositions, no scrolling in either:
+ *
+ *  - panel  : the storytelling voice. Centred in the frame, horizontally and
+ *             vertically, text centred — one cinematic grammar held across the
+ *             whole opening sequence. It used to sit pinned to the bottom, and
+ *             long panels flipped to start-alignment, so consecutive screens in
+ *             one sequence looked like they belonged to different games.
+ *  - bubble : a character speaking. Rides opposite its tail so the speaker below
+ *             (or above) stays fully visible.
+ */
+.wrap { flex: 1; display: flex; flex-direction: column; gap: var(--ef-space-3); min-block-size: 0; }
+
+/*
+ * The cinematic composition: the words float in the middle of the scene, while
+ * the dock stays where it is on every other story screen. Centring the panel and
+ * the dock together as one group moved the control up on panel screens and left
+ * it at the bottom on the elf's, which is exactly the inconsistency this pass
+ * was asked to remove.
+ */
+.panelSlot {
+  flex: 1;
+  min-block-size: 0;
+  inline-size: 100%;
+  display: flex;
+  align-items: safe center;
+  justify-content: center;
+}
+
+/* Set from `panel.anchor`, for scenes whose middle is already occupied. */
+.anchorTop { align-items: flex-start; }
+.anchorBottom { align-items: safe flex-end; }
+
+.spacer { flex: 1; min-block-size: var(--ef-space-4); }
+
+.label {
+  align-self: center;
+  background: var(--ef-surface);
+  border: 1px solid var(--ef-hairline);
+  border-radius: 999px;
+  padding: var(--ef-space-2) var(--ef-space-4);
+  font-family: var(--ef-font-display);
+  font-size: var(--ef-text-sm);
+  font-weight: 700;
+  backdrop-filter: blur(6px);
+}
+
+/*
+ * The elf's name card.
+ *
+ * As a caption it was a small pill near the bottom of the screen, arriving a
+ * second and a bit after she did — by which time the couple had read her face
+ * and moved on, and it read as a footnote to a character who had already
+ * introduced herself. It is now the first thing on the screen and the size of a
+ * title, sitting above her head rather than beside her dress.
+ */
+.nameCard {
+  flex: 0 0 auto;
+  margin-block-start: var(--ef-space-4);
+  font-size: var(--ef-text-xl);
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  padding: var(--ef-space-3) var(--ef-space-5);
+  box-shadow: var(--ef-lift-sm), var(--ef-glow);
+  text-shadow: 0 2px 14px rgb(0 0 0 / 0.8);
+  animation: nameCardIn 420ms var(--ef-ease) both;
+}
+
+@keyframes nameCardIn {
+  from { opacity: 0; transform: translateY(-8px) scale(0.96); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nameCard { animation: none; }
+}
+
+.bubbleSlot { flex: 0 0 auto; }
+
+/*
+ * The story dock: forward on the physical left, back on the physical right.
+ *
+ * These two controls are anchored to the screen's CORNERS rather than to the
+ * reading direction — the same two thumbs reach the same two corners whichever
+ * way the words run. The game runs RTL, where a grid's first column is the
+ * RIGHT-hand one, so the track order is declared explicitly LTR and each cell
+ * turns its own contents back round for the Hebrew inside it. `justify-self`
+ * alone was not enough: that aligns a control within its cell, and it was the
+ * cells themselves that were the wrong way round.
+ *
+ * The outer columns are equal fractions, so the dots stay centred on the screen
+ * however wide the two labels turn out to be.
+ */
+.nav {
+  flex: 0 0 auto;
+  direction: ltr;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--ef-space-2);
+  min-block-size: var(--ef-dock);
+  padding-block-start: var(--ef-space-2);
+}
+
+.nav > * { direction: rtl; grid-row: 1; }
+.navNext { grid-column: 1; justify-self: start; }
+.navBack { grid-column: 3; justify-self: end; }
+
+/*
+ * Back is a ghost: no fill, no border until it is touched. Going forward is the
+ * thing the couple came here to do, and two pills of equal weight in the corners
+ * made the opening look like a form with a Cancel button.
+ */
+.back {
+  appearance: none;
+  border: 1px solid transparent;
+  background: none;
+  color: var(--ef-ink-faint);
+  font: inherit;
+  font-size: var(--ef-text-sm);
+  font-weight: 600;
+  white-space: nowrap;
+  border-radius: 999px;
+  min-block-size: var(--ef-tap);
+  padding-inline: var(--ef-space-4);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ef-space-2);
+  cursor: pointer;
+  touch-action: manipulation;
+  text-shadow: 0 2px 10px rgb(0 0 0 / 0.9);
+  transition: color var(--ef-dur) var(--ef-ease), border-color var(--ef-dur) var(--ef-ease);
+}
+
+.back:hover { color: var(--ef-ink); border-color: var(--ef-hairline); }
+.back:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+
+/* Points at the right edge where Back now sits. */
+.chevron {
+  font-size: 1.15em;
+  line-height: 1;
+  opacity: 0.85;
+  transition: transform var(--ef-dur) var(--ef-ease);
+}
+.back:hover .chevron { transform: translateX(3px); }
+
+.hidden { visibility: hidden; }
+
+@media (prefers-reduced-motion: reduce) {
+  .back, .chevron { transition: none; }
+}
+
+/* 320px: the dots are the first thing to go, not a control. */
+@media (max-width: 22.5rem) {
+  .nav { gap: var(--ef-space-1); }
+  .back { padding-inline: var(--ef-space-3); }
+}

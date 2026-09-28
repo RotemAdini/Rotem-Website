@@ -7,7 +7,7 @@ import { SITE_URL } from "@/lib/seo";
  * and the rest of the public site are the whole point of the site being
  * indexed.
  *
- * The four disallowed prefixes are the ones that are never a useful search
+ * The disallowed prefixes are the ones that are never a useful search
  * result and should not be sitting in an index:
  *
  *   /studio    — the Sanity editing interface
@@ -26,7 +26,13 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/studio", "/dashboard", "/account", "/auth"],
+      disallow: [
+        "/studio",
+        "/dashboard",
+        "/account",
+        "/auth",
+        "/games/forest-game/play",
+      ],
     },
     sitemap: `${SITE_URL}/sitemap.xml`,
   };

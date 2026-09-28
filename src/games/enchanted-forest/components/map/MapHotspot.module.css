@@ -1,0 +1,206 @@
+/*
+ * A station on the prototype map.
+ *
+ * The button itself is invisible and always round — the artwork underneath is
+ * the picture, and anything drawn here would be a second, worse copy of it. All
+ * three states are expressed with light alone, through the one `.glow` layer.
+ *
+ * Sized against the board rather than shrink-to-fit, so `--ef-size` resolves
+ * against the map's rendered width and a hotspot keeps its place on the landmark
+ * at every viewport. `--ef-tap` is the floor: at 320px the board is only 320px
+ * wide, where a 12% landmark would come out at 38px.
+ */
+.hotspot {
+  position: absolute;
+  inset-inline-start: var(--ef-x);
+  inset-block-start: var(--ef-y);
+  transform: translate(50%, -50%);   /* RTL-safe centring on the coordinate */
+  inline-size: max(var(--ef-tap), var(--ef-size, 14%));
+  aspect-ratio: 1;
+  border-radius: 50%;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  touch-action: manipulation;
+  z-index: 1;
+  /*
+   * The overlay this sits in is `pointer-events: none`, so that the map does not
+   * blanket the screen and swallow taps meant for the chrome underneath it. That
+   * property INHERITS, so every station has to opt back in explicitly — without
+   * this line the hotspots are invisible to a real tap and the map is a dead
+   * end, however correct the rest of the wiring is. (The classic map's icons opt
+   * back in the same way, on their `.hit` circle.)
+   *
+   * Driving the page from script does not catch this: `element.click()` is
+   * dispatched straight at the node and never hit-tests, so a hotspot with no
+   * pointer events still "works" that way. `mapHotspot.test.ts` asserts the
+   * declaration itself for that reason.
+   */
+  pointer-events: auto;
+}
+
+/*
+ * A locked place is not merely disabled — it is not there. Landmarks sit where
+ * the illustrator put them, so hotspots overlap in places (the raft and the
+ * stone circle share a corner). A disabled button still hit-tests in Chrome, so
+ * without this a place they cannot reach yet would swallow the tap meant for
+ * the one they can.
+ */
+.locked {
+  pointer-events: none;
+  cursor: default;
+}
+
+/* The one station they can open always wins an overlap. */
+.active { z-index: 3; }
+.completed { z-index: 2; }
+
+.hotspot:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+
+.glow {
+  inline-size: 100%;
+  block-size: 100%;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity var(--ef-dur) var(--ef-ease);
+}
+
+/*
+ * Active: a soft halo that breathes. Radial rather than a ring, so it reads as
+ * the place itself catching the light instead of a UI badge pinned over it.
+ *
+ * The outer bloom is what makes it survive a bright landmark. Several of these
+ * places are already lit in the artwork — the great tree carries lanterns, the
+ * campfire is on fire — and a gradient that stopped at the button's edge simply
+ * disappeared into them. The bloom spills past the circle, so the halo reads as
+ * light falling ON the scene rather than a wash tinting it.
+ *
+ * Raised along with the completed ring, and for the same reason: late in the
+ * journey there are seventeen visited places lit on the board, and the one the
+ * couple can actually open has to be obviously brighter than any of them rather
+ * than merely different. The filled centre is what separates the two states — a
+ * completed place is a ring, the current one is lit right through — so the core
+ * moves further from the ring's zero than the ring itself moved.
+ */
+.active .glow {
+  opacity: 1;
+  background: radial-gradient(
+    circle,
+    rgb(255 246 214 / 0.66) 0%,
+    rgb(246 227 173 / 0.42) 34%,
+    rgb(233 201 106 / 0.18) 56%,
+    rgb(233 201 106 / 0.07) 70%,
+    transparent 80%
+  );
+  box-shadow: 0 0 32px 8px rgb(246 227 173 / 0.34);
+  animation: breathe 2600ms var(--ef-ease) infinite;
+}
+
+/*
+ * Completed: a faint steady ring, no fill. It marks the door as still open
+ * without re-drawing the landmark or competing with the active halo.
+ *
+ * Measured against the rendered board at 17/18 complete, the ring at 0.16 was
+ * indistinguishable from the artwork's own lantern light: the map looked exactly
+ * the same after seventeen stations as it had at the trailhead, so the one place
+ * that records an hour of play recorded nothing.
+ *
+ * Tuned at 17/18, which is the hardest case — seventeen of these are on screen
+ * at once, and whatever they are set to they must not add up to something that
+ * out-shouts the single place the couple can actually open. 0.24 is the setting
+ * at which the chain of visited places reads up the path and the active halo
+ * still wins: the ring has no fill, so even at this density it stays light
+ * falling on the landscape rather than a badge pinned over it.
+ */
+.completed .glow {
+  opacity: 1;
+  background: radial-gradient(
+    circle,
+    transparent 0%,
+    transparent 54%,
+    rgb(246 227 173 / 0.24) 64%,
+    rgb(246 227 173 / 0.1) 74%,
+    transparent 84%
+  );
+}
+
+.completed:hover .glow,
+.completed:focus-visible .glow {
+  background: radial-gradient(
+    circle,
+    transparent 0%,
+    transparent 50%,
+    rgb(246 227 173 / 0.46) 62%,
+    rgb(246 227 173 / 0.2) 74%,
+    transparent 86%
+  );
+}
+
+/*
+ * The arrival — the one thing on the map that moves by itself.
+ *
+ * The place the couple have just reached flares, falls back, pulses once more
+ * and then holds. It is louder than the steady halo on purpose: it has to carry
+ * the eye across the board from where they were standing, over artwork that is
+ * already full of lanterns and firelight, in the second or two before the
+ * station opens itself.
+ *
+ * `both` matters. The animation holds its last frame instead of snapping back
+ * to the resting halo, which is what gives the beat its settle: the light
+ * arrives, steadies, and only then does the station open. ScreenRouter's timings
+ * are set against this length — see the note there before changing either.
+ */
+.justUnlocked .glow {
+  background: radial-gradient(
+    circle,
+    rgb(255 251 236 / 0.72) 0%,
+    rgb(255 240 194 / 0.46) 30%,
+    rgb(246 227 173 / 0.2) 52%,
+    rgb(233 201 106 / 0.07) 70%,
+    transparent 80%
+  );
+  box-shadow: 0 0 46px 14px rgb(246 227 173 / 0.42);
+  animation: arrive 1700ms var(--ef-ease) both;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(0.94); opacity: 0.72; }
+  50%      { transform: scale(1.12); opacity: 1; }
+}
+
+@keyframes arrive {
+  0%   { transform: scale(0.45); opacity: 0; }
+  26%  { transform: scale(1.62); opacity: 1; }   /* the flare */
+  48%  { transform: scale(1.04); opacity: 0.86; }
+  66%  { transform: scale(1.34); opacity: 1; }   /* a second, smaller pulse */
+  84%  { transform: scale(1.02); opacity: 0.9; }
+  100% { transform: scale(1.08); opacity: 0.96; } /* and it holds, lit */
+}
+
+/*
+ * Reduced motion keeps the signal and drops the movement: the active place is
+ * still the only lit one, it simply holds steady instead of breathing.
+ */
+/*
+ * Reduced motion keeps every signal and drops every movement: the place that
+ * just opened is still the brightest thing on the board, it simply arrives lit
+ * instead of flaring. ScreenRouter shortens the beat to match, so nobody waits
+ * through a pause for an animation they are not being shown.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .active .glow,
+  .justUnlocked .glow {
+    animation: none;
+    transform: none;
+    opacity: 1;
+  }
+}

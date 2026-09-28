@@ -15,8 +15,15 @@ const FILTER_LABELS: Record<Exclude<GameFilterKind, "all">, string> = {
  * belongs under every mood rather than only under "הכל". */
 const isBundle = (game: GameCatalogItem) => game.kind === "all";
 
-export default function GamesBoard({ games }: { games: GameCatalogItem[] }) {
+export default function GamesBoard({
+  games,
+  ownedIndividualGameSlugs,
+}: {
+  games: GameCatalogItem[];
+  ownedIndividualGameSlugs: string[];
+}) {
   const [filter, setFilter] = useState<GameFilterKind>("all");
+  const ownedGameSlugs = useMemo(() => new Set(ownedIndividualGameSlugs), [ownedIndividualGameSlugs]);
 
   // Chips are derived from the catalogue instead of hardcoded. The list used
   // to include "רומנטי", which no product has ever carried, so selecting it
@@ -78,6 +85,7 @@ export default function GamesBoard({ games }: { games: GameCatalogItem[] }) {
             game={game}
             compareAtPrice={isBundle(game) ? savings?.full : undefined}
             savesAmount={isBundle(game) ? savings?.saves : undefined}
+            owned={!isBundle(game) && ownedGameSlugs.has(game.slug)}
           />
         ))}
       </section>

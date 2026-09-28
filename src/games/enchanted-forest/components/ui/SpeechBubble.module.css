@@ -1,0 +1,129 @@
+/*
+ * A character's voice, drawn as part of the illustration rather than a slab of
+ * UI laid over it.
+ *
+ * Moonlit glass: light enough to read Hebrew over any of the eighteen scenes,
+ * translucent enough that the forest still moves behind it. The silhouette is
+ * deliberately asymmetric — a hand-drawn oval rather than a chat-app rectangle —
+ * and the tail is a trail of mist rather than a pointed triangle, so it can
+ * gesture at a character without stabbing them.
+ */
+.bubble {
+  position: relative;
+  background:
+    radial-gradient(120% 140% at 80% 0%, rgb(255 255 255 / 0.96), rgb(252 248 240 / 0.88) 62%),
+    rgb(250 246 238 / 0.86);
+  color: #241634;
+  border: 1px solid rgb(255 255 255 / 0.75);
+  /* Asymmetric on both axes: no two corners share a radius. */
+  border-radius: 30px 40px 32px 44px / 40px 30px 46px 32px;
+  padding: var(--ef-space-4) var(--ef-space-5);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ef-space-2);
+  backdrop-filter: blur(10px) saturate(1.25);
+  box-shadow:
+    0 14px 34px rgb(0 0 0 / 0.42),
+    0 0 34px rgb(233 201 106 / 0.16),
+    inset 0 1px 0 rgb(255 255 255 / 0.9);
+  inline-size: 100%;
+  /* Must stay visible: the tail is drawn outside this box. There is no
+     scrolling either way — long copy is split into steps instead. */
+  overflow: visible;
+}
+
+.line { margin: 0; font-size: var(--ef-text-base); line-height: 1.55; }
+.lineSmall { font-size: var(--ef-text-sm); }
+.lineTitle {
+  font-family: var(--ef-font-display);
+  font-size: var(--ef-text-lg);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+/*
+ * The tail: two soft motes drifting towards the speaker, largest first. Shaped
+ * like the bubble (translucent, glass-lit) so it reads as the same substance,
+ * and small enough that it never lands on a face.
+ */
+.tail, .tailInner {
+  position: absolute;
+  border-radius: 50%;
+  background: rgb(252 248 240 / 0.86);
+  border: 1px solid rgb(255 255 255 / 0.7);
+  backdrop-filter: blur(10px) saturate(1.25);
+  box-shadow: 0 6px 16px rgb(0 0 0 / 0.3);
+  pointer-events: none;
+}
+
+.tail { inline-size: 16px; block-size: 16px; }
+.tailInner { inline-size: 9px; block-size: 9px; opacity: 0.85; }
+
+/* Downward trail — the speaker is below the bubble. */
+.bottomStart .tail, .bottomEnd .tail { inset-block-end: -11px; }
+.bottomStart .tailInner, .bottomEnd .tailInner { inset-block-end: -26px; }
+
+/* Upward trail — the speaker is above. */
+.topStart .tail, .topEnd .tail { inset-block-start: -11px; }
+.topStart .tailInner, .topEnd .tailInner { inset-block-start: -26px; }
+
+/* Logical placement keeps the trail on the correct side in RTL. */
+.bottomStart .tail, .topStart .tail { inset-inline-start: 2.25rem; }
+.bottomStart .tailInner, .topStart .tailInner { inset-inline-start: 3.15rem; }
+.bottomEnd .tail, .topEnd .tail { inset-inline-end: 2.25rem; }
+.bottomEnd .tailInner, .topEnd .tailInner { inset-inline-end: 3.15rem; }
+
+/* Entrance: the bubble settles, the motes follow. */
+.enter { animation: bubbleIn 480ms var(--ef-ease) both; }
+.enter .tail { animation: moteIn 380ms var(--ef-ease) 160ms both; }
+.enter .tailInner { animation: moteIn 380ms var(--ef-ease) 280ms both; }
+
+@keyframes bubbleIn {
+  from { opacity: 0; transform: translateY(10px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes moteIn {
+  from { opacity: 0; transform: scale(0.4); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enter, .enter .tail, .enter .tailInner { animation: none; }
+}
+
+/*
+ * Short viewports: pull the padding and the leading in before anything else, so
+ * a three-line bubble still fits between the title and the dock in landscape.
+ */
+@media (max-height: 34rem) {
+  .bubble { padding: var(--ef-space-3) var(--ef-space-4); gap: var(--ef-space-1); }
+  .line { line-height: 1.4; }
+  .speaker { margin-block-end: 0; }
+}
+
+@media (max-height: 24rem) {
+  .bubble { padding: var(--ef-space-2) var(--ef-space-3); border-radius: 22px 28px 24px 30px / 28px 22px 32px 24px; }
+  .line { line-height: 1.32; font-size: var(--ef-text-sm); }
+  .tail { inline-size: 12px; block-size: 12px; }
+  .tailInner { inline-size: 7px; block-size: 7px; }
+  .bottomStart .tailInner, .bottomEnd .tailInner { inset-block-end: -20px; }
+  .topStart .tailInner, .topEnd .tailInner { inset-block-start: -20px; }
+}
+
+/* Keep the reading measure comfortable when the frame widens. */
+@media (min-width: 48rem) {
+  .bubble { padding: var(--ef-space-5) var(--ef-space-6); }
+  .line { font-size: calc(var(--ef-text-base) * 1.05); }
+}
+
+/* A quiet attribution, used where it is not obvious who is speaking. */
+.speaker {
+  margin: 0 0 var(--ef-space-1);
+  font-family: var(--ef-font-display);
+  font-size: var(--ef-text-sm);
+  font-weight: 700;
+  color: #6b4a86;
+  letter-spacing: 0.01em;
+}

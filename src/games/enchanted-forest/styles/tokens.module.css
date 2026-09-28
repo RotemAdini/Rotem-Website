@@ -1,0 +1,133 @@
+/*
+ * Design tokens, scoped to `.gameRoot`.
+ *
+ * Every custom property is prefixed `--ef-` so it can never collide with a host
+ * site's variables, and no rule here targets a bare element selector. The game
+ * owns its own stacking context, direction and font sizing; nothing leaks out
+ * and nothing global leaks in.
+ *
+ * The visual idea: everything the couple can act on is made of the same warm
+ * light as the golden path on the map. Surfaces are moonlit glass — dark enough
+ * to read Hebrew over any scene, with a single gold hairline that ties a panel,
+ * a bubble and a button to the artwork instead of floating above it.
+ */
+
+/*
+ * The game's own box model.
+ *
+ * Every width here is declared as the visible width — a panel is `100%` and
+ * then padded, a hotspot is a `--ef-size` circle — which is only true under
+ * `border-box`. That was being supplied by the dev harness's global
+ * `* { box-sizing: border-box }`, i.e. by a file the game is explicitly not
+ * allowed to depend on. Dropping that rule split the ending's speech bubble
+ * 33px past the content column and cut the Hebrew mid-word, so a host page
+ * without a reset of its own would have shipped exactly that.
+ *
+ * Scoped to the game root and its descendants, so it fixes the module without
+ * reaching a single element of the surrounding site. The pseudo-element
+ * selectors matter as much as the others: the restart control's hit pill and
+ * the speech-bubble tails are drawn with `::before`/`::after`.
+ */
+.gameRoot,
+.gameRoot *,
+.gameRoot *::before,
+.gameRoot *::after {
+  box-sizing: border-box;
+}
+
+.gameRoot {
+  /* palette — sampled from the artwork */
+  --ef-ink: #ffffff;
+  --ef-ink-dim: rgb(255 255 255 / 0.78);
+  --ef-ink-faint: rgb(255 255 255 / 0.6);
+  --ef-panel: rgb(8 4 16 / 0.76);
+  --ef-panel-olive: rgb(42 44 26 / 0.74);
+  --ef-accent: #e9c96a;
+  --ef-accent-soft: #f6e3ad;
+  --ef-accent-deep: #8b5cf6;
+  --ef-backdrop: #1a1030;
+  --ef-danger: #ef6a6a;
+
+  /* surfaces: moonlit glass + the one gold hairline */
+  --ef-surface: linear-gradient(170deg, rgb(26 15 48 / 0.86), rgb(7 4 15 / 0.9));
+  --ef-surface-olive: linear-gradient(170deg, rgb(48 50 30 / 0.86), rgb(18 19 10 / 0.9));
+  /*
+   * The same glass, held up to the light. Used where the artwork under the words
+   * is the point — the opening sequence, where the couple are looking at the
+   * forest they are about to walk into, not reading a document. Roughly half the
+   * opacity, with the blur raised to carry the contrast the ink loses.
+   */
+  --ef-surface-sheer: linear-gradient(170deg, rgb(24 14 45 / 0.48), rgb(6 3 13 / 0.58));
+  --ef-hairline: rgb(233 201 106 / 0.3);
+  --ef-lift: 0 16px 38px rgb(0 0 0 / 0.45);
+  --ef-lift-sm: 0 8px 20px rgb(0 0 0 / 0.38);
+  --ef-glow: 0 0 22px rgb(233 201 106 / 0.35);
+
+  /* shape + rhythm */
+  --ef-radius: 22px;
+  --ef-radius-sm: 12px;
+  --ef-space-1: 0.25rem;
+  --ef-space-2: 0.5rem;
+  --ef-space-3: 0.75rem;
+  --ef-space-4: 1rem;
+  --ef-space-5: 1.5rem;
+  --ef-space-6: 2rem;
+
+  /*
+   * Two Hebrew faces, chosen by rendering real Hebrew at 320px rather than a
+   * Latin preview. Frank Ruhl Libre — the classic Hebrew book serif, with the
+   * calligraphic stroke contrast that makes a page feel like a story — carries
+   * headings and every character's voice. Assistant, a warm humanist sans,
+   * carries body copy, numerals and small UI, where the serif's fine strokes
+   * would thin out over busy artwork.
+   */
+  --ef-font: 'Assistant', 'Heebo', system-ui, sans-serif;
+  --ef-font-display: 'Frank Ruhl Libre', 'Assistant', Georgia, serif;
+
+  /* fluid type: comfortable at 320px, never needs zooming */
+  --ef-text-xs: clamp(0.75rem, 0.71rem + 0.4vw, 0.85rem);
+  --ef-text-sm: clamp(0.8125rem, 0.75rem + 0.6vw, 0.9375rem);
+  --ef-text-base: clamp(1rem, 0.94rem + 0.55vw, 1.125rem);
+  --ef-text-lg: clamp(1.125rem, 1rem + 1vw, 1.375rem);
+  --ef-text-xl: clamp(1.5rem, 1.1rem + 2.4vw, 2.25rem);
+
+  /* minimum comfortable touch target */
+  --ef-tap: 44px;
+  /*
+   * The action dock. Fixed to the tallest control it can hold, so swapping a
+   * quiet control for a primary one — start a timer, count a kiss —
+   * never moves the button under the couple's thumb.
+   */
+  --ef-dock: 52px;
+
+  --ef-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ef-dur: 260ms;
+  /* Screen changes and one-shot reveals; never long enough to block a tap. */
+  --ef-dur-screen: 240ms;
+
+  color: var(--ef-ink);
+  font-family: var(--ef-font);
+  font-size: var(--ef-text-base);
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gameRoot {
+    --ef-dur: 1ms;
+    --ef-dur-screen: 1ms;
+  }
+}
+
+/* Screen-reader-only text. Scoped class, never a global utility. */
+.visuallyHidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

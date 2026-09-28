@@ -1,0 +1,47 @@
+/*
+ * One question of the gnome's rapid-fire round.
+ *
+ * Two elements and no third: a counter and the question. The riddle layout this
+ * replaces also carried a revealed-answer card, which is gone along with the
+ * riddles — nothing is disclosed here, so nothing has to arrive.
+ */
+.wrap { display: flex; flex-direction: column; gap: var(--ef-space-3); inline-size: 100%; }
+
+/*
+ * Pinned to the start edge rather than centred: the gnome sits in the middle of
+ * his frame and a centred pill landed on him.
+ *
+ * The counter earns its place on this station more than it did on the last one.
+ * Three riddles are over before anyone wonders how many there are; ten questions
+ * are not, and "שאלה 7 מתוך 10" is the difference between a round that is
+ * visibly nearly done and one that just keeps going.
+ */
+.index {
+  align-self: flex-start;
+  font-size: var(--ef-text-sm);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--ef-accent);
+  background: var(--ef-surface);
+  border: 1px solid var(--ef-hairline);
+  border-radius: 999px;
+  padding: var(--ef-space-1) var(--ef-space-4);
+  backdrop-filter: blur(6px);
+  /* Leads the bubble in by a beat, so a new question announces its number first. */
+  animation: indexIn 420ms var(--ef-ease) both;
+}
+
+/* Short viewports: the badge compresses before the question does. */
+@media (max-height: 34rem) {
+  .wrap { gap: var(--ef-space-2); }
+  .index { font-size: var(--ef-text-xs); padding: 0 var(--ef-space-3); }
+}
+
+@keyframes indexIn {
+  from { opacity: 0; transform: translateY(-6px) scale(0.94); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .index { animation: none; }
+}
