@@ -1,40 +1,46 @@
 .page {
+  position: relative;
   inline-size: 100%;
   block-size: 100dvh;
   min-block-size: 100dvh;
   overflow: hidden;
-  display: grid;
-  grid-template-rows: auto minmax(0, 1fr);
   background: #0c1611;
 }
 
 .toolbar {
-  position: relative;
+  position: absolute;
   z-index: 50;
-  min-block-size: 52px;
-  display: flex;
-  align-items: center;
-  padding-inline: max(0.5rem, env(safe-area-inset-left)) max(0.5rem, env(safe-area-inset-right));
-  border-block-end: 1px solid rgb(238 194 122 / 0.3);
-  background: #111f18;
+  inset-block-start: calc(0.5rem + env(safe-area-inset-top, 0px));
+  inset-inline-end: calc(3.5rem + env(safe-area-inset-left, 0px));
 }
 
 .backLink {
-  min-block-size: 44px;
+  position: relative;
+  min-block-size: 36px;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding-inline: 1rem;
-  border: 1px solid rgb(238 194 122 / 0.45);
+  gap: 0.35rem;
+  padding-inline: 0.7rem;
+  border: 1px solid rgb(255 255 255 / 0.3);
   border-radius: 999px;
-  color: #fdf6ea;
-  font-weight: 700;
+  background: rgb(8 4 16 / 0.68);
+  color: rgb(255 255 255 / 0.86);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.25);
+  font-size: 0.75rem;
+  font-weight: 600;
   text-decoration: none;
+  backdrop-filter: blur(6px);
+}
+
+.backLink::before {
+  position: absolute;
+  inset: -4px;
+  content: "";
 }
 
 .backLink:hover {
-  border-color: #eec27a;
-  background: rgb(238 194 122 / 0.12);
+  border-color: rgb(255 255 255 / 0.55);
+  background: rgb(8 4 16 / 0.84);
 }
 
 .backLink:focus-visible {
@@ -43,13 +49,13 @@
 }
 
 .stage {
+  block-size: 100%;
   min-block-size: 0;
   overflow: hidden;
   --ef-stage-height: 100%;
 }
 
 @media (forced-colors: active) {
-  .toolbar,
   .backLink {
     border-color: CanvasText;
   }
