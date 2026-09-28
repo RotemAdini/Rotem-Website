@@ -1,3 +1,4 @@
+import GamesPromoPopup from "@/components/GamesPromoPopup";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FEATURES } from "@/lib/features";
@@ -63,11 +64,12 @@ export default async function HomePage() {
       image: (await getLatestRecipeImageForCategory(category.slug, recipeCardImage))?.image ?? null,
     })),
   );
-  const highlightRecipes = await getHomeHighlightRecipes(recipeCardImage, 5);
+  const highlightRecipes = await getHomeHighlightRecipes(recipeCardImage, 6);
   const homeDates = (await getListedDateIdeas()).filter((item) => dateCardImage(item)).slice(0, 3);
 
   return (
     <main>
+      <GamesPromoPopup />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript(homeJsonLd) }} />
       <section className="hero hero-home">
         <div className="hero-copy">
@@ -97,10 +99,7 @@ export default async function HomePage() {
               <span className="quick-icon">🧁</span>
               <span>ללא תנור</span>
             </Link>
-            <Link href="/recipes?quick=easy" className="quick-link">
-              <span className="quick-icon">◇</span>
-              <span>קל ומהיר</span>
-            </Link>
+
             <Link href="/dates" className="quick-link">
               <span className="quick-icon">♡</span>
               <span>רעיונות לדייט</span>

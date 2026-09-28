@@ -313,7 +313,7 @@ async function FullRecipeDetail({ recipe }: { recipe: SanityRecipe }) {
           <div className="section-head">
             <div>
               <span className="section-kicker">אולי תאהבו גם</span>
-              <h2>עוד מתכונים מתוקים ♡</h2>
+              <h2>עוד מתכונים ♡</h2>
             </div>
             <Link href="/recipes" className="small-pill">
               לכל המתכונים
@@ -395,7 +395,7 @@ async function SeriesStandInDetail({ recipe }: { recipe: SanityRecipe }) {
           <div className="section-head">
             <div>
               <span className="section-kicker">אולי תאהבו גם</span>
-              <h2>עוד מתכונים מתוקים ♡</h2>
+              <h2>עוד מתכונים ♡</h2>
             </div>
             <Link href="/recipes" className="small-pill">
               לכל המתכונים

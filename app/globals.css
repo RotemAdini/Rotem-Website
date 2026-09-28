@@ -48,10 +48,10 @@ img{display:block;max-width:100%} a{color:inherit;text-decoration:none} button,i
 .hero-image{grid-area:image;min-height:530px;position:relative;background:linear-gradient(145deg,#fde9e5,#fff6f2)}
 .hero-image-soft{-webkit-mask-image:linear-gradient(to right,#000 0%,#000 62%,rgba(0,0,0,.8) 78%,transparent 100%);mask-image:linear-gradient(to right,#000 0%,#000 62%,rgba(0,0,0,.8) 78%,transparent 100%)}
 .hero-home:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 0 41%,rgba(255,249,245,.2) 49%,#fff9f5 61%);pointer-events:none;z-index:2}.decor{position:absolute;color:#efa2a0;pointer-events:none}.decor-heart{right:47%;top:29%;font-size:34px;z-index:4;transform:rotate(-13deg)}
-.quick-links{width:min(720px,100%);margin-top:28px;padding:16px 20px;border:1px solid rgba(232,214,207,.88);border-radius:27px;background:rgba(255,255,255,.78);box-shadow:var(--shadow);display:grid;grid-template-columns:repeat(5,1fr);gap:9px}.quick-link{display:grid;justify-items:center;gap:6px;font-size:13px;font-weight:600}.quick-icon{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:#fff9f5;border:1px solid var(--line);font-size:20px}.quick-link:hover .quick-icon{transform:translateY(-2px);box-shadow:0 6px 16px rgba(140,86,78,.08)}
-.categories-wrap{padding:18px 0 16px}.categories-shell{display:grid;grid-template-columns:38px 1fr 38px;align-items:center;gap:8px;border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.78);box-shadow:0 7px 24px rgba(91,55,49,.04);padding:12px}
+.quick-links{width:min(500px,100%);margin-top:28px;padding:16px 20px;border:1px solid rgba(232,214,207,.88);border-radius:27px;background:rgba(255,255,255,.78);box-shadow:var(--shadow);display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.quick-link{display:grid;justify-items:center;gap:6px;font-size:13px;font-weight:600}.quick-icon{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:#fff9f5;border:1px solid var(--line);font-size:20px}.quick-link:hover .quick-icon{transform:translateY(-2px);box-shadow:0 6px 16px rgba(140,86,78,.08)}
+.categories-wrap{padding:18px 0 16px}.categories-shell{display:grid;grid-template-columns:38px minmax(0,auto) 38px;width:fit-content;max-width:100%;margin-inline:auto;align-items:center;gap:8px;border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.78);box-shadow:0 7px 24px rgba(91,55,49,.04);padding:12px}
 .categories{min-height:104px;display:flex;gap:18px;align-items:center;overflow-x:auto;scrollbar-width:none}.categories::-webkit-scrollbar{display:none}.category{min-width:132px;display:grid;justify-items:center;gap:7px;font-size:13px;font-weight:600}.category img{width:74px;height:74px;object-fit:cover;border-radius:50%;border:4px solid #fff;box-shadow:0 5px 15px rgba(64,48,43,.1);transition:.18s}.category-placeholder{width:74px;height:74px;border-radius:50%;border:4px solid #fff;box-shadow:0 5px 15px rgba(64,48,43,.1);background:linear-gradient(145deg,#fde9e5,#fff6f2)}.category:hover img{transform:scale(1.05)}.category-arrow{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:26px}
-.home-feature-grid{display:grid;grid-template-columns:minmax(0,2.2fr) minmax(320px,.9fr);gap:22px;padding-top:4px}.recipes-panel,.dates-panel{padding:24px}.recipe-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}.recipe-card{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:16px;background:#fff;box-shadow:0 7px 20px rgba(76,50,46,.055);transition:.18s}.recipe-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(76,50,46,.1)}.recipe-card img{width:100%;height:165px;object-fit:cover}.recipe-body{padding:12px}.recipe-body h3{margin:0 0 9px;font-size:15px;line-height:1.25}.recipe-meta{color:var(--muted);font-size:11px;display:flex;justify-content:space-between;gap:7px}.fav-btn{position:absolute;z-index:5;top:10px;right:10px;width:31px;height:31px;border-radius:50%;border:1px solid rgba(225,190,187,.9);background:rgba(255,255,255,.92);color:var(--pink);font-size:19px;display:grid;place-items:center}.fav-btn.active,.mini-heart.active,.fav-btn[aria-pressed="true"],.mini-heart[aria-pressed="true"]{background:var(--pink-strong);color:#fff}/* Stretches the title link over the whole card so the entire surface stays
+.home-feature-grid{display:grid;grid-template-columns:minmax(0,2.2fr) minmax(320px,.9fr);gap:22px;padding-top:4px}.recipes-panel,.dates-panel{padding:24px}.recipe-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px}.recipe-card{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:16px;background:#fff;box-shadow:0 7px 20px rgba(76,50,46,.055);transition:.18s}.recipe-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(76,50,46,.1)}.recipe-card img{width:100%;height:165px;object-fit:cover}.recipe-body{padding:12px}.recipe-body h3{margin:0 0 9px;font-size:15px;line-height:1.25}.recipe-meta{color:var(--muted);font-size:11px;display:flex;justify-content:space-between;gap:7px}.fav-btn{position:absolute;z-index:5;top:10px;right:10px;width:31px;height:31px;border-radius:50%;border:1px solid rgba(225,190,187,.9);background:rgba(255,255,255,.92);color:var(--pink);font-size:19px;display:grid;place-items:center}.fav-btn.active,.mini-heart.active,.fav-btn[aria-pressed="true"],.mini-heart[aria-pressed="true"]{background:var(--pink-strong);color:#fff}/* Stretches the title link over the whole card so the entire surface stays
    clickable, without wrapping the card in an <a> (which would have to
    contain the favourite button — invalid, and it merged the two accessible
    names). The overlay sits at z-index 2; .fav-btn/.mini-heart sit at 5, so
@@ -106,7 +106,7 @@ img{display:block;max-width:100%} a{color:inherit;text-decoration:none} button,i
 @media(max-width:1220px){.header-inner{grid-template-columns:180px 1fr 230px}.main-nav{gap:20px}.guest-pill{display:none}.home-feature-grid{grid-template-columns:1fr 320px}.recipe-grid{grid-template-columns:repeat(3,1fr)}.recipes-page-grid{grid-template-columns:repeat(3,1fr)}.dates-grid,.shop-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:980px){
   .container{width:min(100% - 28px,1480px)}.header-inner{grid-template-columns:1fr auto;min-height:68px}.main-nav{max-height:calc(100vh - 83px);max-height:calc(100dvh - 83px);overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;position:fixed;top:69px;right:14px;left:14px;display:none;flex-direction:column;gap:0;background:#fffdfb;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:8px}.main-nav.open{display:flex}.main-nav a{width:100%;padding:12px 14px;border-radius:10px}.main-nav a:after{display:none}.main-nav a:hover{background:#fff5f2}.header-actions{grid-column:2}.menu-btn{display:grid}
-  .hero-home{grid-template-columns:1fr;grid-template-areas:"copy" "image"}.hero-copy{padding:38px 22px 24px;min-width:0}.hero-home:before{display:none}.hero-image{min-height:340px}.hero-image-soft{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 24%);mask-image:linear-gradient(to bottom,transparent 0,#000 24%)}.decor-heart{display:none}.quick-links{grid-template-columns:repeat(5,minmax(95px,1fr));overflow-x:auto}
+  .hero-home{grid-template-columns:1fr;grid-template-areas:"copy" "image"}.hero-copy{padding:38px 22px 24px;min-width:0}.hero-home:before{display:none}.hero-image{min-height:340px}.hero-image-soft{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 24%);mask-image:linear-gradient(to bottom,transparent 0,#000 24%)}.decor-heart{display:none}.quick-links{grid-template-columns:repeat(4,minmax(0,1fr));overflow-x:visible}
   .home-feature-grid,.soft-promos,.page-hero-grid,.recipe-detail-hero,.recipe-content-grid,.product-detail,.about-hero,.contact-page,.auth-shell{grid-template-columns:1fr}.home-feature-grid{display:grid}.soft-promos{grid-template-columns:1fr}.newsletter{grid-template-columns:1fr}.filter-layout{grid-template-columns:1fr}.filters-panel{position:static}.discovery-filter{grid-template-columns:1fr 1fr}.page-hero-art{height:230px}.recipe-main-image img{height:430px}.product-story{grid-template-columns:1fr}.gifts-shop-grid{grid-template-columns:repeat(2,1fr)}.footer-inner{grid-template-columns:repeat(2,1fr)}.auth-visual{padding:35px}.auth-card{padding:35px}
 }
 @media(max-width:640px){
@@ -115,7 +115,7 @@ img{display:block;max-width:100%} a{color:inherit;text-decoration:none} button,i
      happened to come first — so reordering the row for RTL focus order would
      have hidden the wrong control. The menu repeats this link as
      .nav-utility, so nothing is lost at this width. */
-  .brand-name{font-size:22px}.header-actions .search-link{display:none}.hero-copy h1,.page-hero h1,.about-copy h1,.contact-copy h1,.product-info h1,.recipe-intro h1{font-size:39px}.hero-buttons{width:100%;max-width:100%;flex-wrap:wrap;min-width:0}.hero-buttons .btn{flex:1 1 100%;min-width:0}.quick-links{padding:13px;grid-template-columns:repeat(5,98px)}.recipe-main-image>img{height:min(300px,48vh)}
+  .brand-name{font-size:22px}.header-actions .search-link{display:none}.hero-copy h1,.page-hero h1,.about-copy h1,.contact-copy h1,.product-info h1,.recipe-intro h1{font-size:39px}.hero-buttons{width:100%;max-width:100%;flex-wrap:wrap;min-width:0}.hero-buttons .btn{flex:1 1 100%;min-width:0}.quick-links{width:100%;padding:13px 8px;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}.recipe-main-image>img{height:min(300px,48vh)}
   .categories-shell{grid-template-columns:30px 1fr 30px}.category-arrow{width:30px;height:30px}.category{min-width:100px}.category img,.category-placeholder{width:64px;height:64px}.recipes-panel,.dates-panel{padding:16px}.recipe-grid,.recipes-page-grid{grid-template-columns:repeat(2,1fr)}.recipe-card img,.recipes-page-grid .recipe-card img{height:145px}.recipe-meta{flex-direction:column}.section-head{align-items:flex-start}.small-pill{display:none}
   .soft-promo{grid-template-columns:1fr .65fr;min-height:190px}.soft-promo img{min-height:190px}.soft-promo-copy{padding:18px}.newsletter{padding:18px}.newsletter-form{border-radius:16px;display:grid}.newsletter-form input{padding:11px}.insta-strip{grid-template-columns:repeat(5,85px);overflow-x:auto}
   .results-toolbar{align-items:flex-start;flex-direction:column}.sort-select{width:100%}.recipe-stats{grid-template-columns:repeat(2,1fr)}.recipe-content-grid{gap:15px}.ingredients-card,.instructions-card{padding:17px}.dates-grid,.shop-grid,.gifts-shop-grid{grid-template-columns:1fr}.discovery-filter{grid-template-columns:1fr}.shop-intro,.gift-toolbar{align-items:flex-start;flex-direction:column}.filter-stack{width:100%;flex-direction:column;align-items:stretch}.filter-stack select{width:100%}.how-grid,.values-grid{grid-template-columns:1fr}.game-box{width:220px;height:290px}.sample-card{width:165px;font-size:12px}.product-points{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}.footer-inner{grid-template-columns:1fr;gap:24px}.auth-visual h1{font-size:39px}.saved-preview{grid-template-columns:1fr 1fr 1fr}.auth-card{padding:24px}
@@ -415,4 +415,148 @@ html[data-high-contrast="true"]{--bg:#fff;--panel:#fff;--panel2:#fff;--text:#111
   html{scroll-behavior:auto}
   .skeleton{animation:none;background-position:0 0}
   .btn:hover,.recipe-card:hover,.date-card:hover,.quick-link:hover .quick-icon,.category:hover img,.shop-card:hover,.soft-promo:hover{transform:none}
+}
+/* Social brand icons */
+.social-row{display:flex;align-items:center;gap:14px}
+.social-row a{
+  width:30px;
+  height:30px;
+  padding:0;
+  display:grid;
+  place-items:center;
+  color:var(--pink-strong);
+  background:transparent;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  text-decoration:none;
+}
+.social-row a:hover{
+  color:var(--pink);
+  transform:translateY(-2px);
+}
+.social-row a:focus-visible{
+  outline:2px solid currentColor;
+  outline-offset:4px;
+  border-radius:4px;
+}
+.social-icon{
+  width:24px;
+  height:24px;
+  display:block;
+}/* Homepage games promo popup */
+.games-promo-backdrop{
+  position:fixed;
+  inset:0;
+  z-index:10000;
+  display:grid;
+  place-items:center;
+  padding:20px;
+  background:rgba(49,31,35,.38);
+  backdrop-filter:blur(5px);
+}
+.games-promo-dialog{
+  position:relative;
+  width:min(440px,100%);
+  padding:34px 32px 28px;
+  border:1px solid var(--line);
+  border-radius:28px;
+  background:#fffaf8;
+  box-shadow:0 24px 70px rgba(73,43,48,.22);
+  text-align:center;
+}
+.games-promo-close{
+  position:absolute;
+  top:12px;
+  left:14px;
+  width:38px;
+  height:38px;
+  border:0;
+  border-radius:50%;
+  background:transparent;
+  color:var(--muted);
+  font-size:30px;
+  line-height:1;
+  cursor:pointer;
+}
+.games-promo-close:hover{
+  background:#fff0ed;
+  color:var(--pink-strong);
+}
+.games-promo-art{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+  margin:4px 0 16px;
+  color:var(--pink-strong);
+  font-size:25px;
+}
+.games-promo-art span:nth-child(2){
+  width:58px;
+  height:58px;
+  display:grid;
+  place-items:center;
+  border-radius:20px;
+  background:#fff0ed;
+  font-size:27px;
+  transform:rotate(-4deg);
+}
+.games-promo-dialog h2{
+  margin:8px 0 10px;
+  font-size:30px;
+  line-height:1.15;
+}
+.games-promo-dialog p{
+  max-width:340px;
+  margin:0 auto 22px;
+  color:var(--muted);
+  line-height:1.65;
+}
+.games-promo-cta{
+  width:100%;
+  justify-content:center;
+}
+.games-promo-later{
+  margin-top:13px;
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  font:inherit;
+  font-size:13px;
+  text-decoration:underline;
+  text-underline-offset:3px;
+  cursor:pointer;
+}
+.games-promo-close:focus-visible,
+.games-promo-later:focus-visible{
+  outline:2px solid var(--pink-strong);
+  outline-offset:3px;
+}
+@media(max-width:640px){
+  .games-promo-backdrop{
+    padding:14px;
+  }
+  .games-promo-dialog{
+    padding:30px 20px 24px;
+    border-radius:23px;
+  }
+  .games-promo-dialog h2{
+    font-size:26px;
+  }
+}
+@media(prefers-reduced-motion:no-preference){
+  .games-promo-dialog{
+    animation:gamesPromoIn .24s ease-out both;
+  }
+  @keyframes gamesPromoIn{
+    from{
+      opacity:0;
+      transform:translateY(14px) scale(.98);
+    }
+    to{
+      opacity:1;
+      transform:none;
+    }
+  }
 }

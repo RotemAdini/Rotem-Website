@@ -27,7 +27,11 @@ export default function Footer() {
               lang="en"
               aria-label="Instagram (נפתח בחלון חדש)"
             >
-              <span aria-hidden="true">◎</span>
+              <svg className="social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" strokeWidth="2" />
+                <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" strokeWidth="2" />
+                <circle cx="17.5" cy="6.5" r="1.15" fill="currentColor" />
+              </svg>
             </a>
             <a
               href="https://www.facebook.com/share/16WJDMpdpV/?mibextid=wwXIfr"
@@ -36,7 +40,9 @@ export default function Footer() {
               lang="en"
               aria-label="Facebook (נפתח בחלון חדש)"
             >
-              <span aria-hidden="true">f</span>
+              <svg className="social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path fill="currentColor" d="M14 8h3V4h-3c-3 0-5 2-5 5v3H6v4h3v8h4v-8h3l1-4h-4V9c0-.6.4-1 1-1Z" />
+              </svg>
             </a>
             <a
               href="https://www.tiktok.com/@rotem_adini?_t=ZS-8xCVScFHbYF&_r=1"
@@ -45,7 +51,9 @@ export default function Footer() {
               lang="en"
               aria-label="TikTok (נפתח בחלון חדש)"
             >
-              <span aria-hidden="true">♪</span>
+              <svg className="social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path fill="currentColor" d="M15 3c.4 2.2 1.8 3.7 4 4.2V10c-1.5 0-2.8-.4-4-1.2v6.4A5.2 5.2 0 1 1 10.5 10v3a2.3 2.3 0 1 0 1.5 2.2V3h3Z" />
+              </svg>
             </a>
             <a
               href="https://www.youtube.com/@rotemadini"
@@ -54,7 +62,10 @@ export default function Footer() {
               lang="en"
               aria-label="YouTube (נפתח בחלון חדש)"
             >
-              <span aria-hidden="true">▶</span>
+              <svg className="social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <rect x="2.5" y="5.5" width="19" height="13" rx="4" fill="currentColor" />
+                <path d="M10 9v6l5-3-5-3Z" fill="white" />
+              </svg>
             </a>
           </nav>
         </div>

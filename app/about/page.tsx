@@ -23,6 +23,9 @@ export default function AboutPage() {
             <Link className="btn btn-primary" href="/recipes">
               למתכונים
             </Link>
+            <Link className="btn btn-secondary" href="/games">
+              למשחקים
+            </Link>
             <Link className="btn btn-secondary" href="/contact">
               דברו איתי
             </Link>
