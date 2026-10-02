@@ -119,6 +119,10 @@ const retiredRoutes = ["/checkout", "/game", "/play"].map((source) => ({
 }));
 
 const nextConfig: NextConfig = {
+  // No `X-Powered-By: Next.js` on every response: it advertises the stack and
+  // version family to anyone probing, and nothing on the site needs it.
+  poweredByHeader: false,
+
   async redirects() {
     // Both types are gated on `listed` now. For recipes this is new: the
     // flag used to mean "duplicate of another post" and an unlisted recipe

@@ -112,8 +112,10 @@
    הוסיפו `https://<דומיין>/auth/callback` ל-Redirect URLs.
 4. **Google Cloud Console** → OAuth client: הוסיפו את כתובת ה-callback של
    Supabase ל-Authorized redirect URIs.
-5. **Sanity** → API → CORS Origins: הוסיפו `https://<דומיין>`. אין צורך
-   ב-credentials — הקריאות ציבוריות ומתבצעות בזמן build.
+5. **Sanity** → API → CORS Origins: הוסיפו `https://<דומיין>` עם **Allow
+   credentials** מסומן. קריאות התוכן של האתר עצמו מתבצעות בשרת ולא צריכות
+   CORS, אבל ה-Studio המוטמע ב-`/studio` רץ בדפדפן ומתחבר עם עוגיית
+   ההתחברות של Sanity — בלי credentials הוא לא ייטען.
 6. הפעילו Force HTTPS ב-Netlify.
 7. אחרי כמה ימים יציבים: בטלו את ההערה של בלוק ה-HSTS ב-`netlify.toml`,
    מתחילים ב-`max-age=300` ומעלים ל-`31536000` רק אחרי ששום דבר לא נשבר.

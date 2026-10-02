@@ -22,8 +22,8 @@ import "@/styles/games/game-fidelity.css";
 export async function generateMetadata(): Promise<Metadata> {
   const game = await getGameMetadataBySlug("bundle");
   return pageMetadata({
-    title: game?.seoTitle?.trim() || "החבילה המלאה — שלושת המשחקים ב-₪110 | רותם עדיני",
-    description: game?.seoDescription?.trim() || "החבילה המלאה: היער הקסום, מירוץ האהבה ומשחק הזיכרון הגדול — שלושת המשחקים יחד ב-₪110 במקום ₪144. תשלום חד-פעמי, גישה לכל החיים. הרכישה המקוונת נפתחת בקרוב.",
+    title: game?.seoTitle?.trim() || "החבילה המלאה — שלושת המשחקים הזוגיים | רותם עדיני",
+    description: game?.seoDescription?.trim() || "החבילה המלאה: היער הקסום, מירוץ האהבה ומשחק הזיכרון הגדול — שלושת המשחקים הזוגיים יחד. תשלום חד-פעמי, גישה לכל החיים.",
     path: "/games/bundle",
     // The product photo, so a link shared to WhatsApp or Instagram shows
     // the game rather than a bare URL.

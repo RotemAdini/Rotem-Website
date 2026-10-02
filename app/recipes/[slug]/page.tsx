@@ -161,9 +161,10 @@ function recipeJsonLd(recipe: SanityRecipe) {
         inLanguage: "he-IL",
         author: { "@type": "Person", name: SITE_NAME, url: `${SITE_URL}/` },
         ...(image ? { image: [absoluteUrl(image)] } : {}),
-        ...(recipe.seoDescription?.trim() || recipe.notes?.trim()
-          ? { description: recipe.seoDescription?.trim() || recipe.notes?.trim() }
-          : {}),
+        // The same summary the meta description uses. `notes` is the
+        // "שימו לב" tip box, not a description of the dish — see
+        // fallbackDescription().
+        description: recipe.seoDescription?.trim() || fallbackDescription(recipe),
         ...(published ? { datePublished: new Date(published).toISOString().slice(0, 10) } : {}),
         ...(recipe.prepTimeMinutes ? { totalTime: `PT${recipe.prepTimeMinutes}M` } : {}),
         ...(recipe.siteCategory ? { recipeCategory: recipe.siteCategory } : {}),

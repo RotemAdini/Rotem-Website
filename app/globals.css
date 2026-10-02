@@ -240,7 +240,7 @@ html[data-high-contrast="true"]{--bg:#fff;--panel:#fff;--panel2:#fff;--text:#111
    unrendered fields still fills this one — and already aria-hidden and
    tabIndex={-1} in the markup, so nothing reaches it by keyboard or screen
    reader. */
-.contact-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.contact-hp{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 
 .field-hint{margin:0;font-size:12px;color:var(--muted)}
 

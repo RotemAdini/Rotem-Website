@@ -60,20 +60,15 @@ export const SITE_URL = resolveSiteUrl();
  *
  * A recipe or a date idea supplies its own photo, and a game page supplies
  * its product shot from Sanity. Everything else — the homepage, the four hub
- * pages, /about, /faq, /contact and the three legal pages — currently shares
- * a link to nothing, so a share to WhatsApp or Facebook renders as a bare
- * URL with no image.
+ * pages, /about, /faq, /contact and the three legal pages — uses this one.
  *
- * It is `null` rather than a path on purpose: naming a file that does not
- * exist would publish a broken og:image to every one of those pages, which
- * is worse than none. Rotem is preparing the artwork separately.
+ * The file is public/og-default.jpg. Keep the path pointing at a file that
+ * exists: a missing file would publish a broken og:image to every one of
+ * those pages, which is worse than none — set this back to `null` rather
+ * than leave it dangling.
  *
- * To switch it on, put the file at public/og-default.jpg and change this to
- *
- *   const DEFAULT_OG_IMAGE: string | null = "/og-default.jpg";
- *
- * Nothing else has to change: every page builds its metadata through
- * pageMetadata(), so all of them pick it up at once. Recommended artwork is
+ * Every page builds its metadata through pageMetadata(), so replacing the
+ * artwork needs no other change. Recommended artwork is
  * 1200×630 (the size Facebook, WhatsApp, LinkedIn and X all crop from), JPEG
  * or PNG, under 1 MB, with any text kept well inside the middle two-thirds —
  * the edges are cropped on some clients.
@@ -151,7 +146,12 @@ export function pageMetadata(input: PageMetadataInput): Metadata {
  * The payload is built on the server from this site's own Sanity content and
  * serialised with JSON.stringify, and `<` is escaped so a stray "</script>"
  * inside a recipe title cannot close the tag early.
+ *
+ * The replacement is the six characters backslash-u-0-0-3-c, hence the
+ * doubled backslash: a single one is a JavaScript escape for "<" itself and
+ * turns the replace into a no-op. A JSON parser reads the escape back as "<",
+ * so the data is unchanged.
  */
 export function jsonLdScript(data: Record<string, unknown>): string {
-  return JSON.stringify(data).replace(/</g, "\u003c");
+  return JSON.stringify(data).replace(/</g, "\\u003c");
 }
