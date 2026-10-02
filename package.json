@@ -10,7 +10,7 @@
     "start": "next start",
     "lint": "eslint",
     "test:auth": "node --test --experimental-test-module-mocks --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --disable-warning=ExperimentalWarning --import ./tests/node-ts-resolver.mjs tests/supabase-middleware.test.ts tests/favorites-resolve.test.ts tests/favorites-sync.test.ts tests/contact-form.test.ts",
-    "test:access": "node --test --experimental-test-module-mocks --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --disable-warning=ExperimentalWarning --import ./tests/node-ts-resolver.mjs tests/forest-access.test.ts tests/forest-authorization-guard.test.ts tests/forest-feedback-route.test.ts tests/game-catalog-access.test.ts",
+    "test:access": "node --test --experimental-test-module-mocks --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --disable-warning=ExperimentalWarning --import ./tests/node-ts-resolver.mjs tests/forest-access.test.ts tests/forest-authorization-guard.test.ts tests/forest-feedback-route.test.ts tests/game-catalog-access.test.ts tests/dashboard-owned-games.test.ts",
     "migration:manifest": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/build-migration-manifest.ts",
     "migration:manifest:check": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/build-migration-manifest.ts --check",
     "migration:import:dry": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --env-file-if-exists=.env.local scripts/import-to-sanity.ts --dry-run",

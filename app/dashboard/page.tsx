@@ -4,6 +4,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import SignOutButton from "@/components/SignOutButton";
+import { getOwnedGameLibrary } from "@/lib/entitlements/owned-library";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { getSupabaseUser } from "@/lib/supabase/server";
 import { describeUser } from "@/lib/supabase/user";
@@ -29,7 +30,10 @@ export const metadata: Metadata = pageMetadata({
  * device, and anything saved as a guest in this browser is merged in on first
  * sign-in. This panel links to /favorites rather than repeating the grid.
  *
- * The purchases panels are still placeholders — there is no payment provider
+ * "המשחקים שלי" lists the games this account holds an active entitlement for,
+ * read on the server through RLS. A play button appears only for a game whose
+ * play route is integrated; that route re-authorizes on every request. The
+ * order-history panel is still a placeholder — no payment provider is
  * connected yet, so there is nothing to list.
  */
 export default async function DashboardPage() {
@@ -39,6 +43,7 @@ export default async function DashboardPage() {
   if (!user) redirect("/account?next=%2Fdashboard");
 
   const profile = describeUser(user);
+  const library = await getOwnedGameLibrary();
 
   return (
     <main className="page-main dashboard-page">
@@ -103,14 +108,57 @@ export default async function DashboardPage() {
                 <h2>גישה למשחקים שרכשת</h2>
               </div>
             </div>
-            <div className="empty-state">
-              <span>🎲</span>
-              <h3>עוד לא רכשת משחק</h3>
-              <p>אחרי רכישה דרך אחד מעמודי המשחקים, הגישה שלך תופיע כאן.</p>
-              <Link className="btn btn-primary compact" href="/games">
-                לקטלוג המשחקים
-              </Link>
-            </div>
+            {library.status === "unavailable" ? (
+              <div className="empty-state" role="status">
+                <span aria-hidden="true">🎲</span>
+                <h3>לא הצלחנו לטעון את המשחקים כרגע</h3>
+                <p>נסו לרענן את העמוד בעוד כמה רגעים.</p>
+              </div>
+            ) : library.games.length === 0 ? (
+              <div className="empty-state">
+                <span aria-hidden="true">🎲</span>
+                <h3>עוד לא רכשת משחק</h3>
+                <p>אחרי רכישה דרך אחד מעמודי המשחקים, הגישה שלך תופיע כאן.</p>
+                <Link className="btn btn-primary compact" href="/games">
+                  לקטלוג המשחקים
+                </Link>
+              </div>
+            ) : (
+              <ul className="owned-games-list">
+                {library.games.map((game) => (
+                  <li key={game.contentId} className="owned-game">
+                    {game.image ? (
+                      <img className="owned-game-cover" src={game.image} alt="" width={120} height={150} />
+                    ) : (
+                      <div className="owned-game-cover" aria-hidden="true">
+                        🎲
+                      </div>
+                    )}
+                    <div>
+                      <h3>{game.title}</h3>
+                      {game.tagline && <p>{game.tagline}</p>}
+                      {/* Plain <a>: game pages expect a full page load (see GameShopCard). */}
+                      <div className="owned-game-actions">
+                        {game.playHref && (
+                          <a
+                            className="btn btn-primary compact"
+                            href={game.playHref}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`לשחק ב${game.title} — נפתח בחלון חדש`}
+                          >
+                            לשחק עכשיו
+                          </a>
+                        )}
+                        <a className="btn btn-secondary compact" href={game.detailsHref}>
+                          לעמוד המשחק
+                        </a>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
           </section>
 
           <section className="panel dashboard-section" id="orders">

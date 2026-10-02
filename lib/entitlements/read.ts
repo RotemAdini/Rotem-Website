@@ -29,8 +29,8 @@ import { entitlementRowsAllowAccess } from "./access-policy";
  * keeps the game playable. A refund sets revoked_at rather than deleting, so
  * the history survives while access stops.
  *
- * Nothing here is wired into a page yet. /my-games and the /play guards are a
- * later task; this is the layer they will call.
+ * Callers: the play-route guards (require-game-access.ts), the /games catalog
+ * badges (catalog-access.ts) and the dashboard library (owned-library.ts).
  */
 
 /**
@@ -86,7 +86,7 @@ export async function ownsGame(gameContentId: string): Promise<boolean> {
 
 /**
  * The signed-in user's owned games as full catalog entries, in the catalog's
- * own order — what /my-games will render.
+ * own order — what the dashboard's "המשחקים שלי" renders.
  *
  * The entitlement rows carry contentIds and nothing else; every title, price
  * and image still comes from Sanity. An entitlement whose game no longer exists

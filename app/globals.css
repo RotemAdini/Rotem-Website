@@ -343,6 +343,12 @@ html[data-high-contrast="true"]{--bg:#fff;--panel:#fff;--panel2:#fff;--text:#111
 .discovery-reset .text-button{font-size:13px;text-decoration:underline}
 .empty-state .btn{margin-top:12px}
 
+/* /dashboard — the owned-games library. */
+.owned-games-list{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:16px}
+img.owned-game-cover{display:block;object-fit:cover}
+.owned-game-actions{display:flex;flex-wrap:wrap;gap:8px}
+@media(max-width:480px){.owned-game{grid-template-columns:88px 1fr;gap:14px}.owned-game-cover{width:88px;height:110px}}
+
 /* ===== /games — game shop ===== */
 /* Single games sit two-up on phones (recipes-grid density) and three-up
    on wider screens; the bundle gets its own full-width premium shelf. */
