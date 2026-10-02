@@ -51,7 +51,16 @@ export default function GamesBoard({
     return full > bundle.price ? { full, saves: full - bundle.price } : null;
   }, [games]);
 
+  // Covers of every single game, fanned out on the bundle's own shelf.
+  const bundleCovers = useMemo(
+    () => games.filter((game) => !isBundle(game) && game.image).map((game) => game.image as string),
+    [games],
+  );
+
   const visible = games.filter((game) => filter === "all" || game.kind === filter || isBundle(game));
+  // Singles fill the two-up grid; the bundle gets a full-width shelf below it.
+  const singles = visible.filter((game) => !isBundle(game));
+  const bundles = visible.filter(isBundle);
 
   return (
     <>
@@ -78,14 +87,22 @@ export default function GamesBoard({
         </div>
       </section>
 
-      <section className="container shop-grid" id="games-list">
-        {visible.map((game) => (
+      <section className="container game-shop" id="games-list">
+        {singles.length > 0 && (
+          <div className="game-shop-grid">
+            {singles.map((game) => (
+              <GameShopCard key={game.slug} game={game} owned={ownedGameSlugs.has(game.slug)} />
+            ))}
+          </div>
+        )}
+        {bundles.map((game) => (
           <GameShopCard
             key={game.slug}
             game={game}
-            compareAtPrice={isBundle(game) ? savings?.full : undefined}
-            savesAmount={isBundle(game) ? savings?.saves : undefined}
-            owned={!isBundle(game) && ownedGameSlugs.has(game.slug)}
+            compareAtPrice={savings?.full}
+            savesAmount={savings?.saves}
+            owned={false}
+            bundleCovers={bundleCovers}
           />
         ))}
       </section>
