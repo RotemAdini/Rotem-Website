@@ -103,6 +103,22 @@ export type AnalyticsEvent =
   /** A reader pressed the control that opens a game. Fires on the click, not
    *  on arrival, so the drop-off between intent and load is visible. */
   | { name: "game_play_click"; params: { game_id: GameId; source: "landing" | "catalog" | "dashboard" } }
+  /** A game card's link to its sales page was clicked ("לפרטים", the cover or
+   *  the title). `element` says which, so the button can be compared with the
+   *  picture. The bundle is a product without a GameId, hence the literal. */
+  | {
+      name: "game_details_click";
+      params: { game_id: GameId | "bundle"; source: "catalog"; element: "button" | "image" | "title" };
+    }
+  /**
+   * A buying CTA on a game's sales page was clicked — every "#purchase" link
+   * ("לרכישת המשחק", "התחילו עכשיו", the sticky bar…).
+   *
+   * This is intent, not a checkout: it fires whether or not a payment
+   * provider is connected, and it is deliberately NOT `checkout_start`, which
+   * is reserved for the moment a real checkout session is created.
+   */
+  | { name: "purchase_cta_click"; params: { game_id: GameId | "bundle"; source: "landing" } }
 
   /* -------------------------------------------------------------- search */
   /**
@@ -123,8 +139,14 @@ export type AnalyticsEvent =
   | { name: "favorite_remove"; params: { content_kind: ContentKind; slug?: string } }
 
   /* ----------------------------------------------------------------- auth */
+  /** The Google sign-in button was pressed. Paired with `login` /
+   *  `login_failure`, it shows how many sign-ins are abandoned at Google. */
+  | { name: "login_start"; params: { method: "google" } }
   /** Sign-in completed. `method` is the provider, never the account. */
   | { name: "login"; params: { method: "google" } }
+  /** Sign-in came back with an error. No reason is recorded: the error text
+   *  arrives in the URL and is not the site's own vocabulary. */
+  | { name: "login_failure"; params: { method: "google" } }
   | { name: "logout"; params: Record<string, never> }
 
   /* -------------------------------------------------------------- contact */

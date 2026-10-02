@@ -2,7 +2,9 @@
 
 import {
   FORBIDDEN_PARAM_KEYS,
+  gameIdFromSlug,
   normaliseGameId,
+  type GameId,
   type AnalyticsEvent,
   type AnalyticsEventName,
 } from "./events";
@@ -243,6 +245,164 @@ export function listenForGameEvents(): () => void {
 
   window.addEventListener(ANALYTICS_EVENT_BRIDGE, handler);
   return () => window.removeEventListener(ANALYTICS_EVENT_BRIDGE, handler);
+}
+
+/* ------------------------------------------------------- site interactions */
+
+/**
+ * Clicks and form submits the site measures, observed with one delegated
+ * listener rather than an onClick on each control.
+ *
+ * Two reasons it is delegated. GameShopCard and the sign-in / sign-out forms
+ * are rendered without client-side handlers on purpose (plain <a> tags for
+ * full page loads, plain <form>s posting to Server Actions), and an onClick
+ * would mean turning them into something else purely for measurement. And
+ * the game sales pages are injected HTML that cannot call trackEvent at all.
+ *
+ * What is recognised:
+ *
+ *   [data-analytics="game_details_click"]   GameShopCard links to a sales page,
+ *     with data-analytics-game (slug) and data-analytics-element
+ *   any link to a game's play route        game_play_click; `source` is read
+ *                                           from the page the click happened on
+ *   a[href="#purchase"] on /games/<slug>    purchase_cta_click
+ *   form[data-analytics-login] submit       login_start, and arms the
+ *                                           completion check — see
+ *                                           consumePendingLogin()
+ *   form[data-analytics-logout] submit      logout
+ *
+ * Every value read from the DOM is checked against a closed list before it
+ * reaches trackEvent, exactly like the game bridge above.
+ */
+
+/** Play routes, keyed by path. Only the Forest is playable on-site today. */
+const PLAY_PATHS: Record<string, GameId> = {
+  "/games/forest-game/play": "enchanted-forest",
+};
+
+const DETAILS_ELEMENTS = ["button", "image", "title"] as const;
+
+/** A site slug as the commerce-style events accept it: a game, or the bundle. */
+function productIdFromSlug(slug: string | null | undefined): GameId | "bundle" | null {
+  if (!slug) return null;
+  if (slug === "bundle") return "bundle";
+  return gameIdFromSlug(slug);
+}
+
+/** Where a play click came from, judged by the page it happened on. */
+function playSource(pathname: string): "landing" | "catalog" | "dashboard" | null {
+  if (pathname === "/games") return "catalog";
+  if (pathname === "/dashboard") return "dashboard";
+  if (/^\/games\/[^/]+\/?$/.test(pathname)) return "landing";
+  return null;
+}
+
+/** sessionStorage key that survives the round trip through Google. */
+const PENDING_LOGIN_KEY = "rotem-analytics-login-pending";
+/** A sign-in that has not come back within this long was abandoned. */
+const PENDING_LOGIN_MAX_AGE_MS = 15 * 60 * 1000;
+
+function handleClick(event: MouseEvent): void {
+  const target = event.target;
+  if (!(target instanceof Element)) return;
+  const link = target.closest("a[href]");
+  if (!(link instanceof HTMLAnchorElement)) return;
+
+  if (link.dataset.analytics === "game_details_click") {
+    const gameId = productIdFromSlug(link.dataset.analyticsGame);
+    const element = DETAILS_ELEMENTS.find((value) => value === link.dataset.analyticsElement);
+    if (gameId && element) trackEvent("game_details_click", { game_id: gameId, source: "catalog", element });
+    return;
+  }
+
+  let url: URL;
+  try {
+    url = new URL(link.href, window.location.href);
+  } catch {
+    return;
+  }
+  if (url.origin !== window.location.origin) return;
+
+  const playGame = PLAY_PATHS[url.pathname.replace(/\/$/, "")];
+  if (playGame) {
+    const source = playSource(window.location.pathname);
+    if (source) trackEvent("game_play_click", { game_id: playGame, source });
+    return;
+  }
+
+  if (link.getAttribute("href") === "#purchase") {
+    const match = /^\/games\/([^/]+)\/?$/.exec(window.location.pathname);
+    const gameId = productIdFromSlug(match?.[1]);
+    if (gameId) trackEvent("purchase_cta_click", { game_id: gameId, source: "landing" });
+  }
+}
+
+function handleSubmit(event: SubmitEvent): void {
+  const form = event.target;
+  if (!(form instanceof HTMLFormElement)) return;
+
+  if (form.dataset.analyticsLogin === "google") {
+    trackEvent("login_start", { method: "google" });
+    try {
+      window.sessionStorage.setItem(PENDING_LOGIN_KEY, String(Date.now()));
+    } catch {
+      /* storage blocked: the completion simply goes unmeasured */
+    }
+    return;
+  }
+
+  if (form.dataset.analyticsLogout !== undefined) trackEvent("logout", {});
+}
+
+/** Registers the click and submit listeners. Called once, from the analytics
+ * provider component. */
+export function listenForInteractionEvents(): () => void {
+  // Capture phase, so a handler that stops propagation further down cannot
+  // hide a click from measurement. Nothing here prevents or alters anything.
+  document.addEventListener("click", handleClick, true);
+  document.addEventListener("submit", handleSubmit, true);
+  return () => {
+    document.removeEventListener("click", handleClick, true);
+    document.removeEventListener("submit", handleSubmit, true);
+  };
+}
+
+/**
+ * Resolves a sign-in started by login_start, once the browser is back.
+ *
+ * Sign-in leaves the site for Google and returns through /auth/callback,
+ * which redirects to the requested page on success and to /account?error=…
+ * on failure. Neither redirect can run client code, so the outcome is read
+ * on arrival: an error parameter on /account is a failure, a session is a
+ * success, and neither — the visitor came back with the browser's Back
+ * button — clears the marker without recording anything.
+ *
+ * `hasSession` is supplied by the caller so this module stays free of any
+ * auth client. It is a measurement hint only and never an access decision.
+ */
+export async function consumePendingLogin(hasSession: () => Promise<boolean>): Promise<void> {
+  try {
+    if (typeof window === "undefined") return;
+    let startedAt: number;
+    try {
+      const raw = window.sessionStorage.getItem(PENDING_LOGIN_KEY);
+      if (!raw) return;
+      window.sessionStorage.removeItem(PENDING_LOGIN_KEY);
+      startedAt = Number(raw);
+    } catch {
+      return;
+    }
+    if (!Number.isFinite(startedAt) || Date.now() - startedAt > PENDING_LOGIN_MAX_AGE_MS) return;
+
+    const failed = window.location.pathname === "/account" && new URLSearchParams(window.location.search).has("error");
+    if (failed) {
+      trackEvent("login_failure", { method: "google" });
+      return;
+    }
+    if (await hasSession()) trackEvent("login", { method: "google" });
+  } catch (error) {
+    warn(`login completion check failed: ${String(error)}`);
+  }
 }
 
 /* --------------------------------------------------------------- provider */

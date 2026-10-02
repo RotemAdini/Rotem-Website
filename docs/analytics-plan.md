@@ -60,6 +60,8 @@ localStorage.setItem("rotem-analytics-debug", "1")
 | `date_view` | צפייה בעמוד רעיון לדייט | `slug` |
 | `game_landing_view` | צפייה בעמוד מכירה של משחק | `game_id` |
 | `game_play_click` | לחיצה על הפקד שפותח משחק | `game_id`, `source` |
+| `game_details_click` | לחיצה על כרטיס משחק בקטלוג (״לפרטים״, התמונה או הכותרת) | `game_id` (או `bundle`), `source`, `element` |
+| `purchase_cta_click` | לחיצה על כפתור רכישה (`#purchase`) בעמוד מכירה — כוונה, לא קופה | `game_id` (או `bundle`), `source` |
 
 ### חיפוש
 
@@ -81,7 +83,9 @@ localStorage.setItem("rotem-analytics-debug", "1")
 | אירוע | מתי | פרמטרים |
 |---|---|---|
 | `favorite_add` / `favorite_remove` | לחיצה על הלב | `content_kind`, `slug?` |
+| `login_start` | לחיצה על ״המשך עם Google״ | `method: "google"` |
 | `login` | התחברות הושלמה | `method: "google"` |
+| `login_failure` | ההתחברות חזרה עם שגיאה | `method: "google"` — בלי טקסט השגיאה |
 | `logout` | התנתקות | — |
 | `contact_submit_success` | ההודעה נמסרה לספק הדוא״ל | — |
 | `contact_submit_failure` | השליחה לא הצליחה | `reason` |
@@ -306,7 +310,10 @@ window.dispatchEvent(new CustomEvent("rotem:analytics", {
 | צפיות עמוד | ✅ מחובר, שותק |
 | גשר המשחקים | ✅ מאזין, שותק |
 | `recipe_view` / `date_view` | ⬜ לא מחובר — עמודי התוכן הם server components; צריך רכיב לקוח קטן, ובינתיים צפיית העמוד מכסה אותם |
-| `game_landing_view` / `game_play_click` | ⬜ לא מחובר — `GameShopCard` הוא server component, וחיבור היה מחייב להפוך אותו ל-client component. שינוי מבני לטובת מדידה, ולכן מתועד ולא בוצע |
-| `login` / `logout` | ⬜ לא מחובר — ההתחברות עוברת ב-redirect של OAuth ולא בלחיצה שאפשר לתלות בה אירוע. צריך לשלוח מ-`app/auth/callback` |
-| אירועי מסחר | ⬜ מוגדרים בלבד — ממתינים ל-Grow |
+| `game_details_click` | ✅ מחובר, שותק — מאזין קליקים מרוכז (`listenForInteractionEvents`) קורא `data-analytics` מ-`GameShopCard`; בלי onClick ובלי שינוי מבני |
+| `game_play_click` | ✅ מחובר, שותק — כל קישור לנתיב משחק (`/games/forest-game/play`) מזוהה לפי ה-href; `source` נגזר מהעמוד (`/games`, `/dashboard`, עמוד מכירה) |
+| `purchase_cta_click` | ✅ מחובר, שותק — כל קישור `#purchase` בעמודי `/games/<slug>`, בלי לגעת ב-HTML של העמודים |
+| `game_landing_view` | ⬜ לא מחובר — צפיית העמוד מכסה אותו בינתיים |
+| `login_start` / `login` / `login_failure` / `logout` | ✅ מחובר, שותק — `login_start` ו-`logout` בשליחת הטופס (`data-analytics-login` / `data-analytics-logout`). התוצאה נקראת בחזרה מ-Google: סימון ב-`sessionStorage` (לא עוגייה), `/account?error` = כישלון, session קיים = הצלחה, אחרת (חזרה ב-Back) — נמחק בלי אירוע. `app/auth/callback` לא שונה |
+| `checkout_start` / `purchase_complete` / `refund` | ⬜ מוגדרים בלבד — ממתינים ל-Grow. `checkout_start` יישלח כשנוצר session תשלום אמיתי; `purchase_complete` מהשרת בלבד (§7). עד אז `purchase_cta_click` מודד את הכוונה |
 | אירועי משחק | ⬜ הגשר מוכן — ממתינים לשילוב המשחקים |

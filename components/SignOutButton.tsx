@@ -4,7 +4,8 @@ import { signOut } from "@/lib/supabase/auth-actions";
  * sign-in button: it works without client JavaScript. */
 export default function SignOutButton({ className = "btn btn-secondary", label = "יציאה מהחשבון" }: { className?: string; label?: string }) {
   return (
-    <form action={signOut}>
+    // data-analytics-logout: see listenForInteractionEvents() in lib/analytics.
+    <form action={signOut} data-analytics-logout="">
       <button className={className} type="submit">
         {label}
       </button>

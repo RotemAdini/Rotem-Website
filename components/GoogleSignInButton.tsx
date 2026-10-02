@@ -9,7 +9,9 @@ import { signInWithGoogle } from "@/lib/supabase/auth-actions";
  */
 export default function GoogleSignInButton({ next = "/dashboard", label = "המשך עם Google" }: { next?: string; label?: string }) {
   return (
-    <form action={signInWithGoogle}>
+    // data-analytics-login: login_start and the completion check, see
+    // listenForInteractionEvents() in lib/analytics. Inert with no provider.
+    <form action={signInWithGoogle} data-analytics-login="google">
       <input type="hidden" name="next" value={next} />
       <button className="btn btn-primary full google-signin" type="submit">
         <GoogleMark />
